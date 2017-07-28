@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114736662164450560}
   - component: {fileID: 114384628065762634}
   - component: {fileID: 120885250459197078}
+  - component: {fileID: 114707397102811990}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player 1
@@ -144,6 +145,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -178,6 +181,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33343580517776590
 MeshFilter:
@@ -271,6 +275,38 @@ MonoBehaviour:
   cameraAngle: 45
   cameraDistance: 10
   mouseOffsetScale: 0.5
+--- !u!114 &114707397102811990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 161
+    i1: 220
+    i2: 52
+    i3: 135
+    i4: 38
+    i5: 207
+    i6: 158
+    i7: 84
+    i8: 58
+    i9: 56
+    i10: 157
+    i11: 162
+    i12: 217
+    i13: 114
+    i14: 17
+    i15: 215
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114736662164450560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,6 +372,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -356,30 +393,15 @@ LineRenderer:
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
-      key0:
-        serializedVersion: 2
-        rgba: 4278190335
-      key1:
-        serializedVersion: 2
-        rgba: 16777215
-      key2:
-        serializedVersion: 2
-        rgba: 0
-      key3:
-        serializedVersion: 2
-        rgba: 0
-      key4:
-        serializedVersion: 2
-        rgba: 0
-      key5:
-        serializedVersion: 2
-        rgba: 0
-      key6:
-        serializedVersion: 2
-        rgba: 0
-      key7:
-        serializedVersion: 2
-        rgba: 0
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
       ctime2: 0
@@ -404,6 +426,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
   m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!124 &124914731369588556
 Behaviour:
   m_ObjectHideFlags: 1
