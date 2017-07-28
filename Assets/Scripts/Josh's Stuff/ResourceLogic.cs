@@ -29,6 +29,7 @@ public class ResourceLogic : MonoBehaviour
         {
             // Lerp to the player
             Vector3 lerpPos = Vector3.Lerp(transform.position, trackingPlayer.transform.position, Time.deltaTime * TrackSpeed);
+            lerpPos.y = transform.position.y;
             transform.position = lerpPos;
 
             // Lerp the scale of the object when it reaches the player
