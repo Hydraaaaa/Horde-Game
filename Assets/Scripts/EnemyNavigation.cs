@@ -10,6 +10,8 @@ public class EnemyNavigation : MonoBehaviour
     public Vector3 TargetPos = Vector3.zero;
     public GameObject EndPos;
 
+    public NavMeshPath path;
+
     public bool followPlayer = false;
     public GameObject player;
     public float turningSpeed = 1.0f;
@@ -17,14 +19,15 @@ public class EnemyNavigation : MonoBehaviour
 
     void Start()
     {
+        path = new NavMeshPath();
         // Set the zombies target to the end of the map
         TargetPos = EndPos.transform.position;
 
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
-        agent.ResetPath();
+        agent.CalculatePath(TargetPos, path);
 
-        player = GameObject.FindGameObjectWithTag("Player 1");
+        //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
     void Update()
@@ -36,19 +39,30 @@ public class EnemyNavigation : MonoBehaviour
         if (!agent.hasPath)
         {
             TargetPos = EndPos.transform.position;
+            agent.SetDestination(TargetPos);
         }
 
         if (player != null)
         {
+
             // If the AI loses sight of the player
             if (!Physics.Linecast(this.transform.position, player.transform.position))
             {
                 // Tell the AI to travel where the player was
                 TargetPos = player.transform.position;
 
+                // agent.SetDestination(TargetPos);
+
                 // then remove the player so it dosent keep tracking to them
                 player = null;
             }
+            else
+            {
+                TargetPos = player.transform.position;
+                agent.SetDestination(TargetPos);
+
+            }
+
         }
 
         // If the agent has a path to follow
@@ -68,12 +82,16 @@ public class EnemyNavigation : MonoBehaviour
             {
                 player = col.gameObject;
                 followPlayer = true;
+                TargetPos = col.transform.position;
+                agent.SetDestination(TargetPos);
             }
             else if (Vector3.Distance(this.transform.position, player.transform.position) > 
                     Vector3.Distance(this.transform.position, col.transform.position))
             {
                 player = col.gameObject;
                 followPlayer = true;
+                TargetPos = col.transform.position;
+                agent.SetDestination(TargetPos);
             }
         }
     }

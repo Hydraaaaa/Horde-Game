@@ -43,6 +43,7 @@ public class ResourceLogic : MonoBehaviour
                 tempV.z <= 0)
             {
                 // Give the resources and delete the object
+                if (trackingPlayer.GetComponent<BarrierPlayersideLogic>().ResourceCap >= trackingPlayer.GetComponent<BarrierPlayersideLogic>().Resources + ResourceGain)
                 trackingPlayer.GetComponent<BarrierPlayersideLogic>().Resources += ResourceGain;
                 DestroyImmediate(this.gameObject);
             }
