@@ -81,7 +81,7 @@ public class Rifle : MonoBehaviour
                 tracerLine.SetPosition(1, hit.point);
             }
             else
-                tracerLine.SetPosition(1, transform.position + transform.forward * 30);
+                tracerLine.SetPosition(1, transform.position + aimDir * 30);
         }
     }
 }
