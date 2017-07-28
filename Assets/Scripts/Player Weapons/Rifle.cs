@@ -39,6 +39,7 @@ public class Rifle : MonoBehaviour
         Ray aimRay = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         laser.SetPosition(0, transform.position);
+        Physics.queriesHitTriggers = false;
         if (Physics.Raycast(aimRay, out hit, laserLength))
         {
             laser.SetPosition(1, hit.point);

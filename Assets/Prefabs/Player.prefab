@@ -26,11 +26,11 @@ GameObject:
   - component: {fileID: 114930504213256702}
   - component: {fileID: 114868626609527388}
   - component: {fileID: 114118442132592400}
-  - component: {fileID: 114189548489343634}
   - component: {fileID: 114736662164450560}
+  - component: {fileID: 114384628065762634}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231569685718394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.4, y: 1.05, z: -8.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4598528004956802}
@@ -180,10 +180,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
+  tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
   cooldown: 0.05
   ammunition: 30
+  accuracy: 0
   damage: 10
---- !u!114 &114189548489343634
+  laserLength: 0
+--- !u!114 &114384628065762634
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -191,30 +194,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1231569685718394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb0e81166c07a64eaeff5d758a97695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 161
-    i1: 220
-    i2: 52
-    i3: 135
-    i4: 38
-    i5: 207
-    i6: 158
-    i7: 84
-    i8: 58
-    i9: 56
-    i10: 157
-    i11: 162
-    i12: 217
-    i13: 114
-    i14: 17
-    i15: 215
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  Resources: 0
+  ResourceCap: 0
 --- !u!114 &114475094746040502
 MonoBehaviour:
   m_ObjectHideFlags: 1
