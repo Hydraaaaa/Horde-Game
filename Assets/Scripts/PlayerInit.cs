@@ -6,8 +6,8 @@ public class PlayerInit : MonoBehaviour
 {
 	void Start ()
     {
-        Transform camera = transform.GetChild(0);
-        camera.SetParent(null);
+        transform.GetChild(0).SetParent(null);
+        transform.GetChild(0).SetParent(null);
 
         Destroy(this);
 	}

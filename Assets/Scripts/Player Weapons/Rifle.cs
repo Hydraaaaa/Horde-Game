@@ -40,7 +40,10 @@ public class Rifle : MonoBehaviour
         RaycastHit hit;
         laser.SetPosition(0, transform.position);
         Physics.queriesHitTriggers = false;
-        if (Physics.Raycast(aimRay, out hit, laserLength))
+
+        int mask = ~LayerMask.NameToLayer("CursorRaycast");
+
+        if (Physics.Raycast(aimRay, out hit, laserLength, mask))
         {
             laser.SetPosition(1, hit.point);
             float distancePercent = (hit.point - transform.position).magnitude / laserLength;
@@ -72,7 +75,9 @@ public class Rifle : MonoBehaviour
             LineRenderer tracerLine = newTracer.GetComponent<LineRenderer>();
             tracerLine.SetPosition(0, transform.position);
 
-            if (Physics.Raycast(shootRay, out hit))
+            int mask = ~LayerMask.NameToLayer("CursorRaycast");
+
+            if (Physics.Raycast(shootRay, out hit, mask))
             {
                 Instantiate(testObj, hit.point, transform.rotation);
                 if (hit.transform.CompareTag("Enemy"))

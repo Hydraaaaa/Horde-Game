@@ -22,7 +22,10 @@ public class PlayerAttack : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        Debug.Log(LayerMask.NameToLayer("CursorRaycast"));
+        int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, mask))
         {
             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
