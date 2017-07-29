@@ -41,7 +41,7 @@ public class Rifle : MonoBehaviour
         laser.SetPosition(0, transform.position);
         Physics.queriesHitTriggers = false;
 
-        int mask = ~LayerMask.NameToLayer("CursorRaycast");
+        int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
         if (Physics.Raycast(aimRay, out hit, laserLength, mask))
         {
@@ -75,9 +75,9 @@ public class Rifle : MonoBehaviour
             LineRenderer tracerLine = newTracer.GetComponent<LineRenderer>();
             tracerLine.SetPosition(0, transform.position);
 
-            int mask = ~LayerMask.NameToLayer("CursorRaycast");
+            int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
-            if (Physics.Raycast(shootRay, out hit, mask))
+            if (Physics.Raycast(shootRay, out hit, 100, mask))
             {
                 Instantiate(testObj, hit.point, transform.rotation);
                 if (hit.transform.CompareTag("Enemy"))

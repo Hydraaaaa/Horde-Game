@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114736662164450560}
   - component: {fileID: 114384628065762634}
   - component: {fileID: 120885250459197078}
+  - component: {fileID: 114324603414148398}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player 1
@@ -243,6 +244,38 @@ MonoBehaviour:
   accuracy: 0.05
   damage: 10
   laserLength: 30
+--- !u!114 &114324603414148398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 161
+    i1: 220
+    i2: 52
+    i3: 135
+    i4: 38
+    i5: 207
+    i6: 158
+    i7: 84
+    i8: 58
+    i9: 56
+    i10: 157
+    i11: 162
+    i12: 217
+    i13: 114
+    i14: 17
+    i15: 215
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114384628065762634
 MonoBehaviour:
   m_ObjectHideFlags: 1
