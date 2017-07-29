@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public GameObject camera;
     public float moveSpeed;
@@ -18,22 +19,25 @@ public class PlayerMovement : MonoBehaviour
 	
 	void Update()
     {
-        Vector3 movement = Vector3.zero;
+        if (isLocalPlayer)
+        {
+            Vector3 movement = Vector3.zero;
 
-        Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
+            Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
 
-        if (Input.GetKey(KeyCode.W))
-            movement += forward * moveSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.S))
-            movement -= forward * moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.W))
+                movement += forward * moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.S))
+                movement -= forward * moveSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.A))
-            movement -= camera.transform.right * moveSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.D))
-            movement += camera.transform.right * moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.A))
+                movement -= camera.transform.right * moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.D))
+                movement += camera.transform.right * moveSpeed * Time.deltaTime;
 
-        controller.Move(movement);
+            controller.Move(movement);
 
-        camera.GetComponent<CameraMovement>().UpdatePosition();
+            camera.GetComponent<CameraMovement>().UpdatePosition();
+        }
     }
 }
