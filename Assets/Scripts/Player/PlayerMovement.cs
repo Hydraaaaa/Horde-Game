@@ -11,7 +11,7 @@ public class PlayerMovement : NetworkBehaviour
 
     CharacterController controller;
 
-    [SyncVar]
+    //[SyncVar]
     Vector3 direction;
 
 
@@ -38,7 +38,7 @@ public class PlayerMovement : NetworkBehaviour
             if (Input.GetKey(KeyCode.D))
                 direction += camera.transform.right * moveSpeed * Time.deltaTime;
 
-            CmdSyncMovement(direction);
+            //CmdSyncMovement(direction);
         }
 
         controller.Move(direction);
@@ -47,9 +47,9 @@ public class PlayerMovement : NetworkBehaviour
             camera.GetComponent<CameraMovement>().UpdatePosition();
     }
 
-    [Command]
-    void CmdSyncMovement(Vector3 dir)
-    {
-        direction = dir;
-    }
+    //[Command]
+    //void CmdSyncMovement(Vector3 dir)
+    //{
+    //    direction = dir;
+    //}
 }
