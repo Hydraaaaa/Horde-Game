@@ -24,6 +24,9 @@ public class Rifle : NetworkBehaviour
 
     LineRenderer laser;
 
+    [SyncVar]
+    Vector3 laserEndPoint;
+
     void Start()
     {
         currentAmmunition = ammunition;
@@ -41,26 +44,30 @@ public class Rifle : NetworkBehaviour
 
             Ray aimRay = new Ray(transform.position, transform.forward);
             RaycastHit hit;
-            laser.SetPosition(0, transform.position);
             Physics.queriesHitTriggers = false;
 
             int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
             if (Physics.Raycast(aimRay, out hit, laserLength, mask))
-            {
-                laser.SetPosition(1, hit.point);
-                float distancePercent = (hit.point - transform.position).magnitude / laserLength;
-                Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
-                laser.endColor = endColor;
-            }
+                laserEndPoint = hit.point;
             else
-            {
-                laser.SetPosition(1, transform.position + transform.forward * laserLength);
+                laserEndPoint = transform.position + transform.forward * laserLength;
 
-                Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 0);
-                laser.endColor = endColor;
-            }
+            CmdSyncLaserEndPoint(laserEndPoint);
         }
+
+        laser.SetPosition(0, transform.position);
+        laser.SetPosition(1, laserEndPoint);
+
+        float distancePercent = (laserEndPoint - transform.position).magnitude / laserLength;
+        Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
+        laser.endColor = endColor;
+    }
+
+    [Command]
+    void CmdSyncLaserEndPoint(Vector3 endpoint)
+    {
+        laserEndPoint = endpoint;
     }
 
     public void Attack()
