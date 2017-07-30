@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33858629155505098}
   - component: {fileID: 23575264959201554}
   - component: {fileID: 114353447605997238}
+  - component: {fileID: 114769031575862230}
   m_Layer: 0
   m_Name: TestObj
   m_TagString: Untagged
@@ -94,3 +95,35 @@ MonoBehaviour:
   startingLife: 0.5
   life: 0
   fade: 1
+--- !u!114 &114769031575862230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150254131932368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 208
+    i1: 210
+    i2: 95
+    i3: 29
+    i4: 210
+    i5: 111
+    i6: 178
+    i7: 196
+    i8: 120
+    i9: 50
+    i10: 142
+    i11: 227
+    i12: 31
+    i13: 64
+    i14: 71
+    i15: 63
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

@@ -83,7 +83,7 @@ public class Rifle : NetworkBehaviour
 
             if (Physics.Raycast(shootRay, out hit, 100, mask))
             {
-                Instantiate(testObj, hit.point, transform.rotation);
+                CmdShoot(hit.point);
                 if (hit.transform.CompareTag("Enemy"))
                     hit.transform.GetComponent<Health>().Damage(damage);
 
@@ -92,5 +92,11 @@ public class Rifle : NetworkBehaviour
             else
                 tracerLine.SetPosition(1, transform.position + aimDir * 30);
         }
+    }
+
+    [Command]
+    void CmdShoot(Vector3 destinationPos)
+    {
+        NetworkServer.Spawn(Instantiate(testObj, destinationPos, transform.rotation) as GameObject);
     }
 }
