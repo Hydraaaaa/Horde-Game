@@ -80,6 +80,9 @@ public class EnemyNavigation : MonoBehaviour
 
     void PlayerNotNull()
     {
+        int layermask = 1 << 10;
+        layermask = ~layermask;
+
         if (!player.activeSelf)
         {
             // Tell the AI to travel where the player was so it can track to last known position
@@ -90,7 +93,7 @@ public class EnemyNavigation : MonoBehaviour
             player = null;
         }
         // If the AI loses sight of the player
-        else if (Physics.Linecast(this.transform.position, player.transform.position, 1 << 10, QueryTriggerInteraction.Ignore))
+        else if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
             // Tell the AI to travel where the player was so it can track to last known position
             TargetPos = player.transform.position;
