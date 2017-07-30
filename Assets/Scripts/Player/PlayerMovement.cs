@@ -11,8 +11,11 @@ public class PlayerMovement : NetworkBehaviour
 
     CharacterController controller;
 
+    [SyncVar]
+    Vector3 direction;
 
-	void Start()
+
+    void Start()
     {
         controller = GetComponent<CharacterController>();
 	}
@@ -21,23 +24,32 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            Vector3 movement = Vector3.zero;
+            direction = Vector3.zero;
 
             Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
 
             if (Input.GetKey(KeyCode.W))
-                movement += forward * moveSpeed * Time.deltaTime;
+                direction += forward * moveSpeed * Time.deltaTime;
             if (Input.GetKey(KeyCode.S))
-                movement -= forward * moveSpeed * Time.deltaTime;
+                direction -= forward * moveSpeed * Time.deltaTime;
 
             if (Input.GetKey(KeyCode.A))
-                movement -= camera.transform.right * moveSpeed * Time.deltaTime;
+                direction -= camera.transform.right * moveSpeed * Time.deltaTime;
             if (Input.GetKey(KeyCode.D))
-                movement += camera.transform.right * moveSpeed * Time.deltaTime;
+                direction += camera.transform.right * moveSpeed * Time.deltaTime;
 
-            controller.Move(movement);
-
-            camera.GetComponent<CameraMovement>().UpdatePosition();
+            CmdSyncMovement(direction);
         }
+
+        controller.Move(direction);
+
+        if (isLocalPlayer)
+            camera.GetComponent<CameraMovement>().UpdatePosition();
+    }
+
+    [Command]
+    void CmdSyncMovement(Vector3 dir)
+    {
+        direction = dir;
     }
 }
