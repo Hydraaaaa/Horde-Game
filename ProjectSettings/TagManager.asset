@@ -9,6 +9,7 @@ TagManager:
   - Game Manager
   - Enemy Spawner
   - End Position
+  - Barricade
   layers:
   - Default
   - TransparentFX

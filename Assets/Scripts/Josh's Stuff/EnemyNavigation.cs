@@ -35,6 +35,7 @@ public class EnemyNavigation : MonoBehaviour
 
     public GameObject player;
     public GameObject survivor;
+    public GameObject barricade;
 
     public float turningSpeed = 1.0f;
     public float acceleration = 1.0f;
@@ -43,7 +44,7 @@ public class EnemyNavigation : MonoBehaviour
     {
         path = new NavMeshPath();
         // Set the zombies target to the end of the map
-        //TargetPos = EndPos.transform.position;
+        TargetPos = EndPos.transform.position;
 
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
@@ -168,7 +169,16 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForBarricade(Collider col)
     {
+        if (barricade == null)
+        {
+            barricade = col.gameObject;
+            player = null;
+            survivor = null;
+            followPlayer = false;
+            TargetPos = col.transform.position;
+            agent.SetDestination(TargetPos);
 
+        }
     }
 
     void CheckForTerrain(Collider col)
@@ -186,9 +196,6 @@ public class EnemyNavigation : MonoBehaviour
         int layermask = ~(1 << 11);
 
         if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
-        {
-        }
-        else
         {
             Debug.Log("Can see player");
             // If this player is closer than the other player in the scene
