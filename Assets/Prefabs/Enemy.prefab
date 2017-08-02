@@ -105,24 +105,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530999098926334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8543304e09f4ce47878a5a83d866fd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 91029c5a194a678408046a4c44841376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TypeTags:
     BarricadeTag: 
     SurvivorTag: 
-    PlayerTag: Player 1
+    PlayerTag: 
     DefensesTag: 
     TerrainTag: 
-  Priority: 000000000100000003000000020000000400000005000000
+  Priority: 
   TargetPos: {x: 0, y: 0, z: 0}
   EndPos: {fileID: 0}
   followPlayer: 0
   followSurvivor: 0
   player: {fileID: 0}
   survivor: {fileID: 0}
-  turningSpeed: 6
-  acceleration: 4
+  turningSpeed: 1
+  acceleration: 1
 --- !u!135 &135552592746051830
 SphereCollider:
   m_ObjectHideFlags: 1
