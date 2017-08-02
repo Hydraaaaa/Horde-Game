@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114533576843797748}
   - component: {fileID: 195806913120032400}
   - component: {fileID: 114630836022762974}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Civilian
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectManager: {fileID: 0}
+  speed: 1
 --- !u!136 &136681278203351614
 CapsuleCollider:
   m_ObjectHideFlags: 1

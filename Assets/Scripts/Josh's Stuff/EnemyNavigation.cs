@@ -40,7 +40,7 @@ public class EnemyNavigation : MonoBehaviour
     public float turningSpeed = 1.0f;
     public float acceleration = 1.0f;
 
-    void Awake()
+    void Start()
     {
         path = new NavMeshPath();
         // Set the zombies target to the end of the map
@@ -193,7 +193,7 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        int layermask = ~(1 << 11);
+        int layermask = ~(1 << 9);
 
         if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
