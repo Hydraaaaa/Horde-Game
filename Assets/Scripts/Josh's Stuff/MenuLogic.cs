@@ -81,4 +81,14 @@ public class MenuLogic : MonoBehaviour
             }
         }
     }
+
+    void SceneOne()
+    {
+
+    }
+
+    void SceneTwo()
+    {
+
+    }
 }
