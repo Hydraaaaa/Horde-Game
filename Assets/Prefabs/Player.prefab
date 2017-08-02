@@ -178,7 +178,7 @@ MonoBehaviour:
   - Horizontal2
   - Vertical2
   moveSpeed: 3
-  useController: 0
+  useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}
