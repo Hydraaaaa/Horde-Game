@@ -13,14 +13,12 @@ public class Rifle : NetworkBehaviour
     public float cooldown;
     float currentCooldown;
 
-    [Tooltip("Not implemented yet")]
-    public int ammunition;
-    int currentAmmunition;
-
     public float accuracy;
     public int damage;
 
     public float laserLength;
+
+    public float range;
 
     LineRenderer laser;
 
@@ -29,7 +27,6 @@ public class Rifle : NetworkBehaviour
 
     void Start()
     {
-        currentAmmunition = ammunition;
         currentCooldown = 0;
 
         laser = GetComponent<LineRenderer>();
@@ -75,35 +72,49 @@ public class Rifle : NetworkBehaviour
         if (currentCooldown <= 0)
         {
             currentCooldown = cooldown;
-            currentAmmunition--;
 
             Vector3 aimDir = transform.forward + Random.insideUnitSphere * accuracy;
 
             Ray shootRay = new Ray(transform.position, aimDir);
             RaycastHit hit;
 
-            GameObject newTracer = Instantiate(tracer);
-            LineRenderer tracerLine = newTracer.GetComponent<LineRenderer>();
-            tracerLine.SetPosition(0, transform.position);
 
             int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
-            if (Physics.Raycast(shootRay, out hit, 100, mask))
+            if (Physics.Raycast(shootRay, out hit, range, mask))
             {
-                CmdShoot(hit.point);
+                CmdShootHit(hit.point);
                 if (hit.transform.CompareTag("Enemy"))
                     hit.transform.GetComponent<Health>().Damage(damage);
-
-                tracerLine.SetPosition(1, hit.point);
             }
             else
-                tracerLine.SetPosition(1, transform.position + aimDir * 30);
+                CmdShootMiss(aimDir);
         }
     }
 
     [Command]
-    void CmdShoot(Vector3 destinationPos)
+    void CmdShootHit(Vector3 destinationPos)
     {
+        GameObject newTracer = Instantiate(tracer);
+        Tracer tracerScript = newTracer.GetComponent<Tracer>();
+        tracerScript.startPos = transform.position;
+        tracerScript.endPos = destinationPos;
+        Debug.Log(destinationPos);
+
+        NetworkServer.Spawn(newTracer);
+
         NetworkServer.Spawn(Instantiate(testObj, destinationPos, transform.rotation) as GameObject);
+    }
+
+    [Command]
+    void CmdShootMiss(Vector3 direction)
+    {
+        GameObject newTracer = Instantiate(tracer);
+        Tracer tracerScript = newTracer.GetComponent<Tracer>();
+        tracerScript.startPos = transform.position;
+        tracerScript.endPos = transform.position + direction * range;
+        Debug.Log(direction * range);
+
+        NetworkServer.Spawn(newTracer);
     }
 }

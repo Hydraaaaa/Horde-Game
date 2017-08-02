@@ -24,8 +24,7 @@ public class PlayerAttack : NetworkBehaviour
         if (isLocalPlayer)
         {
             RaycastHit hit;
-
-            Debug.Log(LayerMask.NameToLayer("CursorRaycast"));
+            
             int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))

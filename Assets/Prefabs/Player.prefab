@@ -159,10 +159,10 @@ MonoBehaviour:
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
   tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
   cooldown: 0.05
-  ammunition: 30
   accuracy: 0.05
   damage: 10
   laserLength: 30
+  range: 30
 --- !u!114 &114298366444450048
 MonoBehaviour:
   m_ObjectHideFlags: 1
