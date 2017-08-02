@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerInit : MonoBehaviour
 {
-    public GameObject cameraPrefab;
+    public GameObject aimRaycastBoxPrefab;
 
 	void Start ()
     {
-        //GameObject camera = Instantiate(cameraPrefab);
-        //camera.GetComponent<CameraMovement>().player = gameObject;
-        //GetComponent<PlayerMovement>().camera = camera;
-
-        transform.GetChild(0).SetParent(null);
+        GameObject aimRaycastBox = Instantiate(aimRaycastBoxPrefab);
+        aimRaycastBox.GetComponent<SetPosition>().target = gameObject;
 
         Destroy(this);
 	}

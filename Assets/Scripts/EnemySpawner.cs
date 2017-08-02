@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject enemy;
+    [HideInInspector] public GameObjectManager gameObjectManager;
+    public GameObject spawnPrefab;
 
-    public float interval;
-    float currentInterval;
-    void Start()
+    public float cooldown;
+    float currentCooldown;
+    public int amount;
+
+	void Start ()
     {
-        currentInterval = interval;
-    }
-
+        if (GetComponent<Renderer>() != null)
+            GetComponent<Renderer>().enabled = false;
+	}
+	
 	void Update ()
     {
-        currentInterval -= Time.deltaTime;
-        if (currentInterval <= 0)
+        currentCooldown -= Time.deltaTime;
+
+        if (currentCooldown <= 0)
         {
-            currentInterval = interval;
-            GameObject newEnemy = Instantiate(enemy, transform.position, transform.rotation);
-            newEnemy.GetComponent<EnemyNavigation>().player = player;
+            currentCooldown = cooldown;
+
+            for (int i = 0; i < amount; i++)
+            {
+                Vector3 spawnPos = new Vector3
+                (
+                    transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
+                    transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
+                    transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
+                );
+                GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
+                newlySpawned.GetComponent<EnemyNavigation>().EndPos = gameObjectManager.endPos;
+            }
         }
 	}
 }

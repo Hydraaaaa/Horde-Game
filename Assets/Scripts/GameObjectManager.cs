@@ -9,6 +9,7 @@ public class GameObjectManager : MonoBehaviour
     public GameObject playerPrefab;
 
     public GameObject camera;
+    public GameObject endPos;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
     public List<GameObject> enemySpawners;
@@ -24,6 +25,9 @@ public class GameObjectManager : MonoBehaviour
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
         SpawnCamera();
         SpawnPlayers();
+        GetEnemySpawners();
+        endPos = GameObject.FindGameObjectWithTag("End Position");
+        Debug.Log(endPos);
     }
 
     public void SpawnCamera()
@@ -57,5 +61,14 @@ public class GameObjectManager : MonoBehaviour
         else
             Debug.Log("No player starts found");
 
+    }
+
+    public void GetEnemySpawners()
+    {
+        enemySpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy Spawner"));
+        foreach (GameObject enemySpawner in enemySpawners)
+        {
+            enemySpawner.GetComponent<EnemySpawner>().gameObjectManager = this;
+        }
     }
 }

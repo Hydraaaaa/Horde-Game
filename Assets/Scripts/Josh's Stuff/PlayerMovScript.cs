@@ -34,7 +34,6 @@ public class PlayerMovScript : MonoBehaviour
         playerAttack = GetComponent<Rifle>().Attack;
 
         // Turning off legacy controls
-        GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerAttack>().enabled = false;
     }
     void Awake()
@@ -55,8 +54,7 @@ public class PlayerMovScript : MonoBehaviour
         {
             // Mouse
             RaycastHit hit;
-
-            Debug.Log(LayerMask.NameToLayer("CursorRaycast"));
+            
             int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
@@ -71,17 +69,17 @@ public class PlayerMovScript : MonoBehaviour
             // Keyboard
             direction = Vector3.zero;
             Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
-
+            
             if (Input.GetKey(KeyCode.W))
                 direction += forward * moveSpeed * Time.deltaTime;
             if (Input.GetKey(KeyCode.S))
                 direction -= forward * moveSpeed * Time.deltaTime;
-
+            
             if (Input.GetKey(KeyCode.A))
                 direction -= Camera.main.transform.right * moveSpeed * Time.deltaTime;
             if (Input.GetKey(KeyCode.D))
                 direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
-
+            
             controller.Move(direction);
         }
     }

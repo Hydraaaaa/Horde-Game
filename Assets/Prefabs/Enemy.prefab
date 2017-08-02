@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 195535670909209728}
   - component: {fileID: 114116348195285130}
   - component: {fileID: 135552592746051830}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 83740deb7c6356e419c66b6cc14d7059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,18 +111,18 @@ MonoBehaviour:
   TypeTags:
     BarricadeTag: 
     SurvivorTag: 
-    PlayerTag: 
+    PlayerTag: Player
     DefensesTag: 
     TerrainTag: 
-  Priority: 
+  Priority: 01000000
   TargetPos: {x: 0, y: 0, z: 0}
   EndPos: {fileID: 0}
   followPlayer: 0
   followSurvivor: 0
   player: {fileID: 0}
   survivor: {fileID: 0}
-  turningSpeed: 1
-  acceleration: 1
+  turningSpeed: 3
+  acceleration: 4
 --- !u!135 &135552592746051830
 SphereCollider:
   m_ObjectHideFlags: 1

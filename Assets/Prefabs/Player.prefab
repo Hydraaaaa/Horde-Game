@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 136068906050621124}
   - component: {fileID: 23152511505506586}
   - component: {fileID: 143391138108412064}
-  - component: {fileID: 114930504213256702}
   - component: {fileID: 114868626609527388}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114736662164450560}
@@ -31,43 +30,13 @@ GameObject:
   - component: {fileID: 114887641942699286}
   - component: {fileID: 114344224025554006}
   - component: {fileID: 114190491810406482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
-  m_TagString: Player 1
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1574391721098188
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4005130757415016}
-  - component: {fileID: 65635307665256664}
-  - component: {fileID: 114108878205914632}
-  m_Layer: 8
-  m_Name: AimRaycastBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4005130757415016
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1574391721098188}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4053672064050070}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4053672064050070
 Transform:
   m_ObjectHideFlags: 1
@@ -77,8 +46,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4005130757415016}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,31 +88,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231569685718394}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65635307665256664
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1574391721098188}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 100, y: 1, z: 100}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114108878205914632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1574391721098188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f581197c3b3444285c709da2ce3591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1231569685718394}
-  offset: {x: 0, y: -0.5, z: 0}
 --- !u!114 &114118442132592400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474e9992ca3b01c4d91ff4838cf583eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPrefab: {fileID: 1306768904595550, guid: 65a7340beb755a84e8cbf3ee377ccc6b,
+  aimRaycastBoxPrefab: {fileID: 1100672212091832, guid: bd537a150d7682b4db741bdde980199a,
     type: 2}
 --- !u!114 &114868626609527388
 MonoBehaviour:
@@ -235,24 +178,11 @@ MonoBehaviour:
   - Horizontal2
   - Vertical2
   moveSpeed: 3
-  useController: 1
+  useController: 0
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}
   screenCenter: {x: 0, y: 0}
---- !u!114 &114930504213256702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237ce8db6e9dde94592fb593ab501890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  moveSpeed: 10
 --- !u!120 &120885250459197078
 LineRenderer:
   m_ObjectHideFlags: 1

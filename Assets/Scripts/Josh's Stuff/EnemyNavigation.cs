@@ -39,11 +39,11 @@ public class EnemyNavigation : MonoBehaviour
     public float turningSpeed = 1.0f;
     public float acceleration = 1.0f;
 
-    void Start()
+    void Awake()
     {
         path = new NavMeshPath();
         // Set the zombies target to the end of the map
-        TargetPos = EndPos.transform.position;
+        //TargetPos = EndPos.transform.position;
 
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
@@ -60,7 +60,7 @@ public class EnemyNavigation : MonoBehaviour
         // If the agent dosent have a path to follow
         if (!agent.hasPath)
         {
-            TargetPos = EndPos.transform.position;
+            //TargetPos = EndPos.transform.position;
             agent.SetDestination(TargetPos);
         }
 
@@ -183,10 +183,14 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        int layermask = 1 << 10;
-        layermask = ~layermask;
-        if (!Physics.Linecast(this.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        int layermask = ~(1 << 11);
+
+        if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
+        }
+        else
+        {
+            Debug.Log("Can see player");
             // If this player is closer than the other player in the scene
             if (player == null)
             {
