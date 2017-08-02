@@ -58,6 +58,18 @@ public class EnemyNavigation : MonoBehaviour
         agent.angularSpeed = turningSpeed;
         agent.acceleration = acceleration;
 
+
+        Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
+
+        if (dir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir),
+                Time.deltaTime * turningSpeed
+            );
+        }
+
         // If the agent dosent have a path to follow
         if (!agent.hasPath)
         {
@@ -117,7 +129,7 @@ public class EnemyNavigation : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         bool checkedAndFound = false;
 
@@ -197,7 +209,7 @@ public class EnemyNavigation : MonoBehaviour
 
         if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log("Can see player");
+            //Debug.Log("Can see player");
             // If this player is closer than the other player in the scene
             if (player == null)
             {
