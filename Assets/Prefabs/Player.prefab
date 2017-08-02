@@ -27,9 +27,8 @@ GameObject:
   - component: {fileID: 114868626609527388}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114736662164450560}
-  - component: {fileID: 114384628065762634}
   - component: {fileID: 120885250459197078}
-  - component: {fileID: 114324603414148398}
+  - component: {fileID: 114887641942699286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player 1
@@ -162,51 +161,6 @@ MonoBehaviour:
   damage: 10
   laserLength: 30
   range: 30
---- !u!114 &114324603414148398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 161
-    i1: 220
-    i2: 52
-    i3: 135
-    i4: 38
-    i5: 207
-    i6: 158
-    i7: 84
-    i8: 58
-    i9: 56
-    i10: 157
-    i11: 162
-    i12: 217
-    i13: 114
-    i14: 17
-    i15: 215
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114384628065762634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb0e81166c07a64eaeff5d758a97695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Resources: 0
-  ResourceCap: 0
 --- !u!114 &114736662164450560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,6 +185,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d02df1f7e9f994fbee5ed65010d0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114887641942699286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5a19f593ac46e418248da4da9a89b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBeginning: Joy
+  playerNumber: 1
+  buttonEndings:
+  - Start
+  axisEndings:
+  - Horizontal
+  - Vertical
+  - Shoot
+  - Horizontal2
+  - Vertical2
+  moveSpeed: 3
+  useController: 1
+  controller: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  lookDir: {x: 0, y: 0, z: 0}
+  screenCenter: {x: 0, y: 0}
 --- !u!114 &114930504213256702
 MonoBehaviour:
   m_ObjectHideFlags: 1

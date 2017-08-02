@@ -8,7 +8,8 @@ public class PlayerMovScript : MonoBehaviour
 
     public Attack playerAttack;
 
-    public string playerBeginning = "Joy1";
+    public string playerBeginning = "Joy";
+    public int playerNumber = 1;
 
     public string[] buttonEndings = { "Start" };
     public string[] axisEndings = { "Horizontal", "Vertical", "Shoot", "Horizontal2", "Vertical2" };
@@ -26,6 +27,8 @@ public class PlayerMovScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        playerBeginning = playerBeginning + playerNumber.ToString();
+
         // Getting player controller
         controller = GetComponent<CharacterController>();
         playerAttack = GetComponent<Rifle>().Attack;
