@@ -103,16 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922092967369daf449a811b9b6c984b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  players: []
-  HorizontalSplit: 1
-  screenResX: 0
-  screenResY: 0
-  halfScreen: 0
-  quaterScreen: 0
-  cameraDistance: 0
-  minimumCamDistance: 10
+  gameObjectManager: {fileID: 0}
+  minDistance: 10
+  maxDistance: 30
+  zoomOutMultiplier: 1.5
 --- !u!124 &124641068277966428
 Behaviour:
   m_ObjectHideFlags: 1
