@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [HideInInspector] public GameObjectManager gameObjectManager;
+    [HideInInspector]
+    public GameObjectManager gameObjectManager;
     public GameObject spawnPrefab;
 
     public float cooldown;
@@ -34,7 +35,9 @@ public class EnemySpawner : MonoBehaviour
                     transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
                 );
                 GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
-                newlySpawned.GetComponent<EnemyNavigation>().EndPos = gameObjectManager.endPos;
+
+                if (newlySpawned.GetComponent<EnemyNavigation>() != null)
+                    newlySpawned.GetComponent<EnemyNavigation>().EndPos = gameObjectManager.endPos;
             }
         }
 	}

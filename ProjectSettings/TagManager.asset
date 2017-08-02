@@ -9,6 +9,7 @@ TagManager:
   - Game Manager
   - Enemy Spawner
   - End Position
+  - Civilian Spawner
   layers:
   - Default
   - TransparentFX

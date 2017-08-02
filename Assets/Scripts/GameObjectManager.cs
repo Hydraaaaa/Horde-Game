@@ -26,6 +26,7 @@ public class GameObjectManager : MonoBehaviour
         SpawnCamera();
         SpawnPlayers();
         GetEnemySpawners();
+        GetCivilianSpawners();
         endPos = GameObject.FindGameObjectWithTag("End Position");
         Debug.Log(endPos);
     }
@@ -69,6 +70,15 @@ public class GameObjectManager : MonoBehaviour
         foreach (GameObject enemySpawner in enemySpawners)
         {
             enemySpawner.GetComponent<EnemySpawner>().gameObjectManager = this;
+        }
+    }
+
+    public void GetCivilianSpawners()
+    {
+        List<GameObject> civilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
+        foreach (GameObject civilianSpawner in civilianSpawners)
+        {
+            civilianSpawner.GetComponent<CivilianSpawner>().gameObjectManager = this;
         }
     }
 }
