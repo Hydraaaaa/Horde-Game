@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 120885250459197078}
   - component: {fileID: 114887641942699286}
   - component: {fileID: 114344224025554006}
+  - component: {fileID: 114190491810406482}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player 1
@@ -162,6 +163,19 @@ MonoBehaviour:
   damage: 10
   laserLength: 30
   range: 30
+--- !u!114 &114190491810406482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a036a5efd55f344874f4b9065e7697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
 --- !u!114 &114344224025554006
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -84,9 +84,6 @@ public class PlayerMovScript : MonoBehaviour
 
             controller.Move(direction);
         }
-
-        Camera.main.GetComponent<CameraMovement>().UpdatePosition();
-
     }
 
     void CheckKeys()

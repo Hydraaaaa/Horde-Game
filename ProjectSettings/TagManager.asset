@@ -7,8 +7,8 @@ TagManager:
   - Enemy
   - Player 1
   - Player 2
-  - GameObjectManager
   - Player Start
+  - Game Manager
   layers:
   - Default
   - TransparentFX

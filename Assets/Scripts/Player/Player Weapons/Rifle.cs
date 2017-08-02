@@ -76,7 +76,7 @@ public class Rifle : MonoBehaviour
 
                 Instantiate(testObj, hit.point, transform.rotation);
 
-                if (hit.transform.CompareTag("Enemy"))
+                if (hit.transform.GetComponent<Health>() != null)
                     hit.transform.GetComponent<Health>().Damage(damage);
             }
             else

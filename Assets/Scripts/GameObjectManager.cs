@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameObjectManager : MonoBehaviour
 {
+    public GameObject cameraPrefab;
     public GameObject playerPrefab;
 
+    public GameObject camera;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
 
@@ -18,7 +20,14 @@ public class GameObjectManager : MonoBehaviour
     public void Initialize(Scene scene, LoadSceneMode mode)
     {
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
+        SpawnCamera();
         SpawnPlayers();
+    }
+
+    public void SpawnCamera()
+    {
+        camera = Instantiate(cameraPrefab);
+        camera.GetComponent<CameraLogic>().gameObjectManager = this;
     }
 
     public void SpawnPlayers()
@@ -26,6 +35,8 @@ public class GameObjectManager : MonoBehaviour
         int playerCount = GetComponent<GameManager>().playerCount;
 
         players = new List<GameObject>();
+
+        CameraLogic cameraScript = camera.GetComponent<CameraLogic>();
 
         if (playerStarts.Count != 0)
         {
@@ -37,6 +48,7 @@ public class GameObjectManager : MonoBehaviour
                                                         playerStarts[playerStartIndex].transform.position,
                                                         playerStarts[playerStartIndex].transform.rotation);
 
+                playerInstance.GetComponent<PlayerMovScript>().playerNumber = i + 1;
                 players.Add(playerInstance);
             }
         }

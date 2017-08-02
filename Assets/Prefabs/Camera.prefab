@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 92228582335921444}
   - component: {fileID: 124641068277966428}
   - component: {fileID: 81571786399265676}
-  - component: {fileID: 114339236141951482}
+  - component: {fileID: 114566716894211140}
   m_Layer: 0
-  m_Name: Player Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306768904595550}
   m_Enabled: 1
---- !u!114 &114339236141951482
+--- !u!114 &114566716894211140
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -100,13 +100,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306768904595550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df04dbfecf18004497402534a5f7315, type: 3}
+  m_Script: {fileID: 11500000, guid: 922092967369daf449a811b9b6c984b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cameraAngle: 45
-  cameraDistance: 10
-  mouseOffsetScale: 0.5
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  players: []
+  HorizontalSplit: 1
+  screenResX: 0
+  screenResY: 0
+  halfScreen: 0
+  quaterScreen: 0
+  cameraDistance: 0
+  minimumCamDistance: 10
 --- !u!124 &124641068277966428
 Behaviour:
   m_ObjectHideFlags: 1

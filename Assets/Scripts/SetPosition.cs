@@ -9,6 +9,7 @@ public class SetPosition : MonoBehaviour
 	
 	void Update ()
     {
-        transform.position = target.transform.position + offset;
+        if (target != null)
+            transform.position = target.transform.position + offset;
 	}
 }

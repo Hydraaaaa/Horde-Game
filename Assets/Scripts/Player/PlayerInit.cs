@@ -8,9 +8,9 @@ public class PlayerInit : MonoBehaviour
 
 	void Start ()
     {
-        GameObject camera = Instantiate(cameraPrefab);
-        camera.GetComponent<CameraMovement>().player = gameObject;
-        GetComponent<PlayerMovement>().camera = camera;
+        //GameObject camera = Instantiate(cameraPrefab);
+        //camera.GetComponent<CameraMovement>().player = gameObject;
+        //GetComponent<PlayerMovement>().camera = camera;
 
         transform.GetChild(0).SetParent(null);
 

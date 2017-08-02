@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class CameraLogic : MonoBehaviour
 {
-    public Camera SingleScreenCam;
-
-    public GameObject player1;
-    public GameObject player2;
-
-
-    public bool HorizontalSplit = true;
-
-    public float screenResX;
-    public float screenResY;
-
-    public float halfScreen;
-    public float quaterScreen;
-    public float cameraDistance;
-    public float minimumCamDistance = 10;
-
-    // Use this for initialization
-    void Start ()
-    {
-        screenResX = Screen.currentResolution.width;
-        screenResY = Screen.currentResolution.height;
-
-        // the beginning of the second quater and end of the third quarter of the screen
-        halfScreen = screenResX / 2;
-        quaterScreen = halfScreen / 2;
-	}
+    public GameObjectManager gameObjectManager;
+    
+    public float minDistance = 10;
+    public float maxDistance = 100;
+    public float zoomOutMultiplier;
 	
-	// Update is called once per frame
 	void Update ()
     {
-        SingleScreenCam.transform.eulerAngles = new Vector3(45, 45, 0);
-        cameraDistance = minimumCamDistance + Vector3.Distance(player1.transform.position, player2.transform.position);
-        SingleScreenCam.transform.position = ((player1.transform.position + player2.transform.position) / 2) - (SingleScreenCam.transform.forward * cameraDistance);
+        transform.eulerAngles = new Vector3(45, 45, 0);
+        
+        Vector3 avgPos = Vector3.zero;
 
+        for (int i = 0; i < gameObjectManager.players.Count; i++)
+            avgPos += gameObjectManager.players[i].transform.position;
+
+        avgPos /= gameObjectManager.players.Count;
+
+        float longestDistance = 0;
+
+        for (int i = 0; i < gameObjectManager.players.Count; i++)
+        {
+            if (Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position) > longestDistance)
+                longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position);
+        }
+
+        float cameraDistance = Mathf.Clamp(longestDistance * zoomOutMultiplier, minDistance, maxDistance);
+
+        transform.position = avgPos - transform.forward * cameraDistance;
     }
 }

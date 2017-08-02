@@ -24,6 +24,12 @@ public class Health : MonoBehaviour
             health = maxHealth;
 
         if (health <= 0)
-            Destroy(gameObject);
+            Die();
+    }
+
+    public void Die()
+    {
+        GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
+        Destroy(gameObject);
     }
 }
