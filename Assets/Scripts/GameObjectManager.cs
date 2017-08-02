@@ -2,31 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct PlayerData
-{
-    public GameObject player;
-    public GameObject camera;
-}
-
 public class GameObjectManager : MonoBehaviour
 {
-    List<PlayerData> players;
-    List<GameObject> enemies;
+    public List<GameObject> playerStarts;
 
-    void Start ()
+    public GameObject playerPrefab;
+    public List<GameObject> players;
+
+    public void Initialize()
     {
-        players = new List<PlayerData>();
-        List<PlayerMovement> foundPlayers = new List<PlayerMovement>(FindObjectsOfType(typeof(PlayerMovement)) as PlayerMovement[]);
-        
-        foreach (PlayerMovement foundPlayer in foundPlayers)
+        playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
+        SpawnPlayers();
+    }
+
+    public void SpawnPlayers()
+    {
+        int playerCount = GetComponent<GameManager>().playerCount;
+
+        players = new List<GameObject>();
+
+        if (playerStarts.Count != 0)
         {
-            PlayerData foundPlayerData = new PlayerData();
+            for (int i = 0; i < playerCount; i++)
+            {
+                int playerStartIndex = i % playerStarts.Count;
 
-            foundPlayerData.player = foundPlayer.gameObject;
+                GameObject playerInstance = Instantiate(playerPrefab,
+                                                        playerStarts[playerStartIndex].transform.position,
+                                                        playerStarts[playerStartIndex].transform.rotation);
 
-            players.Add(foundPlayerData);
+                players.Add(playerInstance);
+            }
         }
+        else
+            Debug.Log("No player starts found");
 
-	}
+    }
 }
