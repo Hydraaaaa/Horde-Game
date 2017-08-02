@@ -25,7 +25,7 @@ public class BulkheadLogic : MonoBehaviour
         if (IsOpen)
         {
             topDoor.transform.localPosition = Vector3.Lerp(topDoor.transform.localPosition, new Vector3(-0.01990428f, 3.2f, 0), Time.deltaTime * speed);
-            bottomDoor.transform.localPosition = Vector3.Lerp(bottomDoor.transform.localPosition, new Vector3(0, -0.73f, 0), Time.deltaTime * speed);
+            bottomDoor.transform.localPosition = Vector3.Lerp(bottomDoor.transform.localPosition, new Vector3(-0.04789639f, -0.73f, 0), Time.deltaTime * speed);
         }
         else
         {
