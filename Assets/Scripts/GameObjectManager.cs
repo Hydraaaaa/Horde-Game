@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameObjectManager : MonoBehaviour
 {
-    public List<GameObject> playerStarts;
-
     public GameObject playerPrefab;
+
+    public List<GameObject> playerStarts;
     public List<GameObject> players;
 
-    public void Initialize()
+    void Start()
+    {
+        SceneManager.sceneLoaded += Initialize;
+    }
+
+    public void Initialize(Scene scene, LoadSceneMode mode)
     {
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
         SpawnPlayers();

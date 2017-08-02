@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scene/TestMenu.unity
   - enabled: 1
     path: Assets/Scene/TestScene.unity
+  - enabled: 1
+    path: Assets/Scene/Josh'sScene.unity
