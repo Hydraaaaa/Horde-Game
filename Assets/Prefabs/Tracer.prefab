@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 4264375928009094}
   - component: {fileID: 120301551843738986}
   - component: {fileID: 114473880496186904}
-  - component: {fileID: 114667218208332088}
-  - component: {fileID: 114510605821015228}
   m_Layer: 0
   m_Name: Tracer
   m_TagString: Untagged
@@ -57,51 +55,6 @@ MonoBehaviour:
   startingLife: 0.02
   life: 0
   fade: 0
---- !u!114 &114510605821015228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619596951552026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 239
-    i1: 178
-    i2: 40
-    i3: 126
-    i4: 69
-    i5: 68
-    i6: 197
-    i7: 116
-    i8: 105
-    i9: 73
-    i10: 88
-    i11: 37
-    i12: 48
-    i13: 3
-    i14: 105
-    i15: 29
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114667218208332088
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619596951552026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a057be51e9aa1724d973d17080f48e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 0, y: 0, z: 0}
 --- !u!120 &120301551843738986
 LineRenderer:
   m_ObjectHideFlags: 1

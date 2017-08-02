@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Rifle : NetworkBehaviour
+public class Rifle : MonoBehaviour
 {
     public GameObject testObj;
     public GameObject tracer;
@@ -21,8 +20,7 @@ public class Rifle : NetworkBehaviour
     public float range;
 
     LineRenderer laser;
-
-    [SyncVar]
+    
     Vector3 laserEndPoint;
 
     void Start()
@@ -34,24 +32,19 @@ public class Rifle : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer)
-        {
-            if (currentCooldown > 0)
-                currentCooldown -= Time.deltaTime;
+        if (currentCooldown > 0)
+            currentCooldown -= Time.deltaTime;
 
-            Ray aimRay = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            Physics.queriesHitTriggers = false;
+        Ray aimRay = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        Physics.queriesHitTriggers = false;
 
-            int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
+        int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
-            if (Physics.Raycast(aimRay, out hit, laserLength, mask))
-                laserEndPoint = hit.point;
-            else
-                laserEndPoint = transform.position + transform.forward * laserLength;
-
-            CmdSyncLaserEndPoint(laserEndPoint);
-        }
+        if (Physics.Raycast(aimRay, out hit, laserLength, mask))
+            laserEndPoint = hit.point;
+        else
+            laserEndPoint = transform.position + transform.forward * laserLength;
 
         laser.SetPosition(0, transform.position);
         laser.SetPosition(1, laserEndPoint);
@@ -60,13 +53,6 @@ public class Rifle : NetworkBehaviour
         Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
         laser.endColor = endColor;
     }
-
-    [Command]
-    void CmdSyncLaserEndPoint(Vector3 endpoint)
-    {
-        laserEndPoint = endpoint;
-    }
-
     public void Attack()
     {
         if (currentCooldown <= 0)
@@ -83,38 +69,23 @@ public class Rifle : NetworkBehaviour
 
             if (Physics.Raycast(shootRay, out hit, range, mask))
             {
-                CmdShootHit(hit.point);
+                GameObject newTracer = Instantiate(tracer);
+                LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
+                tracerRenderer.SetPosition(0, transform.position);
+                tracerRenderer.SetPosition(1, hit.point);
+
+                Instantiate(testObj, hit.point, transform.rotation);
+
                 if (hit.transform.CompareTag("Enemy"))
                     hit.transform.GetComponent<Health>().Damage(damage);
             }
             else
-                CmdShootMiss(aimDir);
+            {
+                GameObject newTracer = Instantiate(tracer);
+                LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
+                tracerRenderer.SetPosition(0, transform.position);
+                tracerRenderer.SetPosition(1, transform.position + aimDir * range);
+            }
         }
-    }
-
-    [Command]
-    void CmdShootHit(Vector3 destinationPos)
-    {
-        GameObject newTracer = Instantiate(tracer);
-        Tracer tracerScript = newTracer.GetComponent<Tracer>();
-        tracerScript.startPos = transform.position;
-        tracerScript.endPos = destinationPos;
-        Debug.Log(destinationPos);
-
-        NetworkServer.Spawn(newTracer);
-
-        NetworkServer.Spawn(Instantiate(testObj, destinationPos, transform.rotation) as GameObject);
-    }
-
-    [Command]
-    void CmdShootMiss(Vector3 direction)
-    {
-        GameObject newTracer = Instantiate(tracer);
-        Tracer tracerScript = newTracer.GetComponent<Tracer>();
-        tracerScript.startPos = transform.position;
-        tracerScript.endPos = transform.position + direction * range;
-        Debug.Log(direction * range);
-
-        NetworkServer.Spawn(newTracer);
     }
 }
