@@ -125,6 +125,14 @@ public class PlayerMovScript : MonoBehaviour
             {
                 lookScreenPos = GetComponent<CharacterController>().velocity;
             }
+
+            if (Input.GetAxis(stringCombo) >= 0.5)
+            {
+                if (axis == "Shoot")
+                {
+                    playerAttack();
+                }
+            }
         }
 
         foreach (string button in buttonEndings)
@@ -132,12 +140,7 @@ public class PlayerMovScript : MonoBehaviour
             string stringCombo = playerBeginning + button;
             if (Input.GetButton(stringCombo))
             {
-                if (button == "Shoot")
-                {
-                    playerAttack();
-                }
 
-                Debug.Log(stringCombo);
             }
         }
 
