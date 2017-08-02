@@ -11,6 +11,8 @@ public class GameObjectManager : MonoBehaviour
     public GameObject camera;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
+    public List<GameObject> enemySpawners;
+    public List<GameObject> enemies;
 
     void Start()
     {
