@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Resources: 0
-  ResourceCap: 0
+  ResourceCap: 250
 --- !u!114 &114736662164450560
 MonoBehaviour:
   m_ObjectHideFlags: 1
