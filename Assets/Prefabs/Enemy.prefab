@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4944638852246974}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: marine_MESH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4141846655350952}
   - component: {fileID: 33688804831983196}
   - component: {fileID: 23698975147347300}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: body_GEO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4813978084316352}
   - component: {fileID: 33027274271027106}
   - component: {fileID: 23860039209565196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: head_GEO
   m_TagString: Untagged
   m_Icon: {fileID: 0}

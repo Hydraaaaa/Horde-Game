@@ -107,6 +107,7 @@ MonoBehaviour:
   minDistance: 10
   maxDistance: 30
   zoomOutMultiplier: 1.5
+  lerpSpeed: 3
 --- !u!124 &124641068277966428
 Behaviour:
   m_ObjectHideFlags: 1
