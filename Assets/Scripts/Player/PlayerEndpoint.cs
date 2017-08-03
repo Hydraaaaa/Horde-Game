@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEndpoint : MonoBehaviour {
+public class PlayerEndpoint : MonoBehaviour
+{
+    public GameObjectManager manager;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void OnTriggerEnter(Collider other)
+    {
+        if (CompareTag("End Position"))
+        {
+            if (manager.timer <= 0)
+            {
+                manager.players.Remove(gameObject);
+                Destroy(gameObject);
+            }
+        }
+    }
 }

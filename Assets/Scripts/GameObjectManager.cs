@@ -7,6 +7,7 @@ public class GameObjectManager : MonoBehaviour
 {
     public GameObject cameraPrefab;
     public GameObject playerPrefab;
+    public GameObject HUDPrefab;
 
     public GameObject camera;
     public GameObject endPos;
@@ -38,6 +39,7 @@ public class GameObjectManager : MonoBehaviour
         SpawnPlayers();
         GetEnemySpawners();
         GetCivilianSpawners();
+        SpawnHUD();
         endPos = GameObject.FindGameObjectWithTag("End Position");
     }
 
@@ -90,5 +92,11 @@ public class GameObjectManager : MonoBehaviour
         {
             civilianSpawner.GetComponent<CivilianSpawner>().gameObjectManager = this;
         }
+    }
+
+    public void SpawnHUD()
+    {
+        GameObject HUD = Instantiate(HUDPrefab);
+        HUD.GetComponent<HUDScript>().manager = this;
     }
 }

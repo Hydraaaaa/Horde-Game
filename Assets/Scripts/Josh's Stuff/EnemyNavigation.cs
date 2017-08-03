@@ -121,8 +121,6 @@ public class EnemyNavigation : MonoBehaviour
 
     void PlayerNotNull()
     {
-        Debug.Log("PlayerNotNull()");
-
         // Grab the players layer
         int layermask = 1 << LayerMask.NameToLayer("Seethrough");
         layermask = ~layermask;
@@ -240,7 +238,7 @@ public class EnemyNavigation : MonoBehaviour
         }
         else
         {
-            TargetPos = player.transform.position;
+            TargetPos = barricade.transform.position;
             agent.SetDestination(TargetPos);
         }
     }
@@ -321,7 +319,6 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        Debug.Log("CheckForPlayer()");
         int layermask = 1 << 9;
         layermask = ~layermask;
 

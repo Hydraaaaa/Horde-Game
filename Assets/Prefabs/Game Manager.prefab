@@ -52,7 +52,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee32dc2d51063b48b1117cf1444c93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControllerMenuAxisSensitivity: 0.75
+  ControllerNextInputCheckTimeGap: 0.2
+  timeBetweenMovement: 0
+  Joysticks: []
+  p1Axis: {x: 0, y: 0}
+  p1Trigg: 0
   playerCount: 2
+  ButtonLocations:
+  - TestScene
+  - Josh'sScene
+  buttonNo: 0
+  atMenu: 1
+  arrow: {fileID: 0}
 --- !u!114 &114618383147156158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +80,12 @@ MonoBehaviour:
     type: 2}
   playerPrefab: {fileID: 1231569685718394, guid: a1dc348726cf9e543a389da2d97211d7,
     type: 2}
+  HUDPrefab: {fileID: 1808665065379356, guid: 793e877e2e9d1744797a087dff268682, type: 2}
   camera: {fileID: 0}
+  endPos: {fileID: 0}
   playerStarts: []
   players: []
+  enemySpawners: []
+  enemies: []
+  timer: 0
+  civiliansEscaped: 0
