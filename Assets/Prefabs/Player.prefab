@@ -234,9 +234,9 @@ MonoBehaviour:
   tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
   cooldown: 0.05
   accuracy: 0.05
-  damage: 10
+  damage: 20
   laserLength: 30
-  range: 30
+  range: 40
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1
