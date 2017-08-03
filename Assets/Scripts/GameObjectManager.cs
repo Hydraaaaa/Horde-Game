@@ -15,6 +15,8 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
 
+    public float timer;
+
     public int civiliansEscaped;
 
     void Start()
@@ -22,8 +24,15 @@ public class GameObjectManager : MonoBehaviour
         SceneManager.sceneLoaded += Initialize;
     }
 
+    void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     public void Initialize(Scene scene, LoadSceneMode mode)
     {
+        timer = 300;
+
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
         SpawnCamera();
         SpawnPlayers();
