@@ -104,6 +104,14 @@ public class EnemyNavigation : MonoBehaviour
             if (barricade != null)
                 BarricadeNotNull();
 
+            if (barricade == null &&
+                survivor == null &&
+                player == null)
+            {
+                TargetPos = EndPos.transform.position;
+                agent.SetDestination(TargetPos);
+            }
+
             // If the agent has a path to follow
             if (agent.hasPath)
             {
@@ -116,6 +124,24 @@ public class EnemyNavigation : MonoBehaviour
     {
         int layermask = 1 << 9;
         layermask = ~layermask;
+
+        // If the AI loses sight of the player
+        if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        {
+            // Tell the AI to travel where the player was so it can track to last known position
+            TargetPos = player.transform.position;
+
+            // then remove the player reference so it dosent keep tracking to them
+            followPlayer = false;
+            player = null;
+        }
+        // Else if the player is visible
+        else
+        {
+            // Set the target position of the AI to the position of the player
+            TargetPos = player.transform.position;
+            agent.SetDestination(TargetPos);
+        }
 
         // If the player is within attack range
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
@@ -153,25 +179,6 @@ public class EnemyNavigation : MonoBehaviour
             followPlayer = false;
             player = null;
         }
-
-        // If the AI loses sight of the player
-        if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
-        {
-            // Tell the AI to travel where the player was so it can track to last known position
-            TargetPos = player.transform.position;
-
-            // then remove the player reference so it dosent keep tracking to them
-            followPlayer = false;
-            player = null;
-        }
-        // Else if the player is visible
-        else
-        {
-            // Set the target position of the AI to the position of the player
-            TargetPos = player.transform.position;
-            agent.SetDestination(TargetPos);
-        }
-
     }
 
     void SurvivorNotNull()
