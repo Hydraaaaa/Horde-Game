@@ -144,7 +144,7 @@ public class EnemyNavigation : MonoBehaviour
         }
 
         // if the player object is turned off
-        if (player.activeSelf == false)
+        else if (player.activeSelf == false)
         {
             // Tell the AI to travel where the player was so it can track to last known position
             TargetPos = player.transform.position;
@@ -153,6 +153,7 @@ public class EnemyNavigation : MonoBehaviour
             followPlayer = false;
             player = null;
         }
+
         // If the AI loses sight of the player
         else if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {

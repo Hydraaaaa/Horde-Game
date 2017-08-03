@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceLogic : MonoBehaviour
 {
-    private GameObject trackingPlayer = null;
+    public GameObject trackingPlayer = null;
 
     public int ResourceGain = 0;
 
@@ -16,10 +16,12 @@ public class ResourceLogic : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
 
+    GameObjectManager manager;
+
     // Use this for initialization
     void Start ()
     {
-
+        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
     }
 	
 	// Update is called once per frame
@@ -61,16 +63,17 @@ public class ResourceLogic : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (trackingPlayer == null)
-        {
-            trackingPlayer = col.gameObject;
 
-            if (col.tag == "Player 1")
+        if (trackingPlayer == null && col.tag == "Player")
+        {
+            if (col.gameObject == manager.players[0])
             {
+                trackingPlayer = col.gameObject;
                 TrackingTo = 1;
             }
-            if (col.tag == "Player 2")
+            else if (col.gameObject == manager.players[1])
             {
+                trackingPlayer = col.gameObject;
                 TrackingTo = 2;
             }
         }

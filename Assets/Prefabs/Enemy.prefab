@@ -286,6 +286,7 @@ MonoBehaviour:
     DefensesTag: 
     TerrainTag: 
   Priority: 0200000001000000
+  agent: {fileID: 0}
   TargetPos: {x: 0, y: 0, z: 0}
   EndPos: {fileID: 0}
   followPlayer: 0
@@ -295,6 +296,9 @@ MonoBehaviour:
   barricade: {fileID: 0}
   turningSpeed: 3
   acceleration: 4
+  damage: 3
+  attackRange: 2
+  cooldown: 0.65
 --- !u!135 &135552592746051830
 SphereCollider:
   m_ObjectHideFlags: 1

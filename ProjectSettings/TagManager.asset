@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Player Start
+  - Barricade
+  - Game Manager
+  - End Position
+  - Enemy Spawner
+  - Civilian Spawner
   layers:
   - Default
   - TransparentFX
