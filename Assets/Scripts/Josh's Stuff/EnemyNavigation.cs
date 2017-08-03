@@ -209,6 +209,18 @@ public class EnemyNavigation : MonoBehaviour
         {
             Attack(survivor);
         }
+
+        if (survivor.GetComponent<Health>().health <= 0)
+        {
+            // Remove the barricade referance and start going to exit again
+            survivor = null;
+            TargetPos = EndPos.transform.position;
+        }
+        else
+        {
+            TargetPos = survivor.transform.position;
+            agent.SetDestination(TargetPos);
+        }
     }
 
     void BarricadeNotNull()
@@ -226,9 +238,14 @@ public class EnemyNavigation : MonoBehaviour
             barricade = null;
             TargetPos = EndPos.transform.position;
         }
+        else
+        {
+            TargetPos = player.transform.position;
+            agent.SetDestination(TargetPos);
+        }
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
         bool checkedAndFound = false;
 
@@ -252,10 +269,8 @@ public class EnemyNavigation : MonoBehaviour
                     }
                     break;
                 case Type.PLAYER:
-                    Debug.Log("case Type.PLAYER");
                     if (col.tag == TypeTags.PlayerTag)
                     {
-                        Debug.Log("col.tag == TypeTags.PlayerTag");
                         CheckForPlayer(col);
                         checkedAndFound = true;
                     }

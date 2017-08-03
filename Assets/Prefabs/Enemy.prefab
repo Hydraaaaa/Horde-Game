@@ -281,11 +281,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeTags:
     BarricadeTag: Barricade
-    SurvivorTag: 
+    SurvivorTag: Civilian
     PlayerTag: Player
     DefensesTag: 
     TerrainTag: 
-  Priority: 0200000001000000
+  Priority: 020000000000000001000000
   agent: {fileID: 0}
   TargetPos: {x: 0, y: 0, z: 0}
   EndPos: {fileID: 0}
