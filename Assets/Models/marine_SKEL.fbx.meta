@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: 56aebda17743f7949a3154e9b296e2e9
+timeCreated: 1501739890
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ankle_L
+    100002: ankle_R
+    100004: arm_L_IK
+    100006: arm_R_IK
+    100008: BIND_ankle_L_jnt
+    100010: BIND_ankle_R_jnt
+    100012: BIND_ball_L_jnt
+    100014: BIND_ball_R_jnt
+    100016: BIND_chest_jnt
+    100018: BIND_clav_L_END_jnt
+    100020: BIND_clav_L_jnt
+    100022: BIND_clav_R_END_jnt
+    100024: BIND_clav_R_jnt
+    100026: BIND_COG_jnt
+    100028: BIND_crown_jnt
+    100030: BIND_elbow_L_jnt
+    100032: BIND_elbow_R_jnt
+    100034: BIND_fingerBase_L_jnt
+    100036: BIND_fingerBase_R_jnt
+    100038: BIND_fingerMid_L_jnt
+    100040: BIND_fingerMid_R_jnt
+    100042: BIND_fingerTip_L_jnt
+    100044: BIND_fingerTip_R_jnt
+    100046: BIND_hand_L_jnt
+    100048: BIND_hand_R_jnt
+    100050: BIND_head_jnt
+    100052: BIND_hip_jnt
+    100054: BIND_knee_L_jnt
+    100056: BIND_knee_R_jnt
+    100058: BIND_leg_L_jnt
+    100060: BIND_leg_R_jnt
+    100062: BIND_neck_jnt
+    100064: BIND_ROOT_jnt
+    100066: BIND_shoulder_L_jnt
+    100068: BIND_shoulder_R_jnt
+    100070: BIND_thumbBase_L_jnt
+    100072: BIND_thumbBase_R_jnt
+    100074: BIND_thumbTip_L_jnt
+    100076: BIND_thumbTip_R_jnt
+    100078: BIND_toe_L_jnt
+    100080: BIND_toe_R_jnt
+    100082: BIND_waist_jnt
+    100084: BIND_wrist_L_jnt
+    100086: BIND_wrist_R_jnt
+    100088: body_GEO
+    100090: chest
+    100092: chest 1
+    100094: clav_L
+    100096: clav_L 1
+    100098: clav_R
+    100100: clav_R 1
+    100102: COG
+    100104: COG 1
+    100106: CTRL_ankle_L_jnt
+    100108: CTRL_ankle_R_jnt
+    100110: CTRL_ball_L_jnt
+    100112: CTRL_ball_R_jnt
+    100114: CTRL_chest_jnt
+    100116: CTRL_clav_L_END_jnt
+    100118: CTRL_clav_L_jnt
+    100120: CTRL_clav_R_END_jnt
+    100122: CTRL_clav_R_jnt
+    100124: CTRL_COG_jnt
+    100126: CTRL_crown_jnt
+    100128: CTRL_elbow_L_jnt
+    100130: CTRL_elbow_R_jnt
+    100132: CTRL_fingerBase_L_jnt
+    100134: CTRL_fingerBase_R_jnt
+    100136: CTRL_fingerMid_L_jnt
+    100138: CTRL_fingerMid_R_jnt
+    100140: CTRL_fingerTip_L_jnt
+    100142: CTRL_fingerTip_R_jnt
+    100144: CTRL_hand_L_jnt
+    100146: CTRL_hand_R_jnt
+    100148: CTRL_head_jnt
+    100150: CTRL_hip_jnt
+    100152: CTRL_knee_L_jnt
+    100154: CTRL_knee_R_jnt
+    100156: CTRL_leg_L_jnt
+    100158: CTRL_leg_R_jnt
+    100160: CTRL_neck_jnt
+    100162: CTRL_ROOT_jnt
+    100164: CTRL_shoulder_L_jnt
+    100166: CTRL_shoulder_R_jnt
+    100168: CTRL_thumbBase_L_jnt
+    100170: CTRL_thumbBase_R_jnt
+    100172: CTRL_thumbTip_L_jnt
+    100174: CTRL_thumbTip_R_jnt
+    100176: CTRL_toe_L_jnt
+    100178: CTRL_toe_R_jnt
+    100180: CTRL_waist_jnt
+    100182: CTRL_wrist_L_jnt
+    100184: CTRL_wrist_R_jnt
+    100186: foot_L
+    100188: foot_L 1
+    100190: foot_L 2
+    100192: foot_L_IK
+    100194: foot_R
+    100196: foot_R 1
+    100198: foot_R 2
+    100200: foot_R_IK
+    100202: hand_L
+    100204: hand_L 1
+    100206: hand_R
+    100208: hand_R 1
+    100210: head
+    100212: head 1
+    100214: head_GEO
+    100216: heelLift_L
+    100218: heelLift_R
+    100220: hip
+    100222: hip 1
+    100224: leg_L
+    100226: leg_L 1
+    100228: leg_L_IK
+    100230: leg_R
+    100232: leg_R 1
+    100234: leg_R_IK
+    100236: marine_GEO
+    100238: marine_GEO 1
+    100240: //RootNode
+    100242: neck
+    100244: neck 1
+    100246: ROOT
+    100248: ROOT 1
+    100250: toe_L_IK
+    100252: toe_R_IK
+    100254: toeTap_L
+    100256: toeTap_R
+    100258: waist
+    100260: waist 1
+    400000: ankle_L
+    400002: ankle_R
+    400004: arm_L_IK
+    400006: arm_R_IK
+    400008: BIND_ankle_L_jnt
+    400010: BIND_ankle_R_jnt
+    400012: BIND_ball_L_jnt
+    400014: BIND_ball_R_jnt
+    400016: BIND_chest_jnt
+    400018: BIND_clav_L_END_jnt
+    400020: BIND_clav_L_jnt
+    400022: BIND_clav_R_END_jnt
+    400024: BIND_clav_R_jnt
+    400026: BIND_COG_jnt
+    400028: BIND_crown_jnt
+    400030: BIND_elbow_L_jnt
+    400032: BIND_elbow_R_jnt
+    400034: BIND_fingerBase_L_jnt
+    400036: BIND_fingerBase_R_jnt
+    400038: BIND_fingerMid_L_jnt
+    400040: BIND_fingerMid_R_jnt
+    400042: BIND_fingerTip_L_jnt
+    400044: BIND_fingerTip_R_jnt
+    400046: BIND_hand_L_jnt
+    400048: BIND_hand_R_jnt
+    400050: BIND_head_jnt
+    400052: BIND_hip_jnt
+    400054: BIND_knee_L_jnt
+    400056: BIND_knee_R_jnt
+    400058: BIND_leg_L_jnt
+    400060: BIND_leg_R_jnt
+    400062: BIND_neck_jnt
+    400064: BIND_ROOT_jnt
+    400066: BIND_shoulder_L_jnt
+    400068: BIND_shoulder_R_jnt
+    400070: BIND_thumbBase_L_jnt
+    400072: BIND_thumbBase_R_jnt
+    400074: BIND_thumbTip_L_jnt
+    400076: BIND_thumbTip_R_jnt
+    400078: BIND_toe_L_jnt
+    400080: BIND_toe_R_jnt
+    400082: BIND_waist_jnt
+    400084: BIND_wrist_L_jnt
+    400086: BIND_wrist_R_jnt
+    400088: body_GEO
+    400090: chest
+    400092: chest 1
+    400094: clav_L
+    400096: clav_L 1
+    400098: clav_R
+    400100: clav_R 1
+    400102: COG
+    400104: COG 1
+    400106: CTRL_ankle_L_jnt
+    400108: CTRL_ankle_R_jnt
+    400110: CTRL_ball_L_jnt
+    400112: CTRL_ball_R_jnt
+    400114: CTRL_chest_jnt
+    400116: CTRL_clav_L_END_jnt
+    400118: CTRL_clav_L_jnt
+    400120: CTRL_clav_R_END_jnt
+    400122: CTRL_clav_R_jnt
+    400124: CTRL_COG_jnt
+    400126: CTRL_crown_jnt
+    400128: CTRL_elbow_L_jnt
+    400130: CTRL_elbow_R_jnt
+    400132: CTRL_fingerBase_L_jnt
+    400134: CTRL_fingerBase_R_jnt
+    400136: CTRL_fingerMid_L_jnt
+    400138: CTRL_fingerMid_R_jnt
+    400140: CTRL_fingerTip_L_jnt
+    400142: CTRL_fingerTip_R_jnt
+    400144: CTRL_hand_L_jnt
+    400146: CTRL_hand_R_jnt
+    400148: CTRL_head_jnt
+    400150: CTRL_hip_jnt
+    400152: CTRL_knee_L_jnt
+    400154: CTRL_knee_R_jnt
+    400156: CTRL_leg_L_jnt
+    400158: CTRL_leg_R_jnt
+    400160: CTRL_neck_jnt
+    400162: CTRL_ROOT_jnt
+    400164: CTRL_shoulder_L_jnt
+    400166: CTRL_shoulder_R_jnt
+    400168: CTRL_thumbBase_L_jnt
+    400170: CTRL_thumbBase_R_jnt
+    400172: CTRL_thumbTip_L_jnt
+    400174: CTRL_thumbTip_R_jnt
+    400176: CTRL_toe_L_jnt
+    400178: CTRL_toe_R_jnt
+    400180: CTRL_waist_jnt
+    400182: CTRL_wrist_L_jnt
+    400184: CTRL_wrist_R_jnt
+    400186: foot_L
+    400188: foot_L 1
+    400190: foot_L 2
+    400192: foot_L_IK
+    400194: foot_R
+    400196: foot_R 1
+    400198: foot_R 2
+    400200: foot_R_IK
+    400202: hand_L
+    400204: hand_L 1
+    400206: hand_R
+    400208: hand_R 1
+    400210: head
+    400212: head 1
+    400214: head_GEO
+    400216: heelLift_L
+    400218: heelLift_R
+    400220: hip
+    400222: hip 1
+    400224: leg_L
+    400226: leg_L 1
+    400228: leg_L_IK
+    400230: leg_R
+    400232: leg_R 1
+    400234: leg_R_IK
+    400236: marine_GEO
+    400238: marine_GEO 1
+    400240: //RootNode
+    400242: neck
+    400244: neck 1
+    400246: ROOT
+    400248: ROOT 1
+    400250: toe_L_IK
+    400252: toe_R_IK
+    400254: toeTap_L
+    400256: toeTap_R
+    400258: waist
+    400260: waist 1
+    4300000: head_GEO
+    4300002: body_GEO
+    9500000: //RootNode
+    13700000: body_GEO
+    13700002: head_GEO
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
