@@ -11,6 +11,9 @@ public class InactiveCivilian : MonoBehaviour
     Renderer renderer;
 
     public float range;
+    bool rescued;
+
+    float materialChange;
 
 	void Start ()
     {
@@ -19,22 +22,30 @@ public class InactiveCivilian : MonoBehaviour
 
         renderer = GetComponent<Renderer>();
         renderer.material = inactiveMaterial;
+
+        materialChange = 0;
 	}
 	
 	void Update ()
     {
-        for (int i = 0; i < navigationScript.gameObjectManager.players.Count; i++)
-        {
-            int mask = ~(1 << 9);
-            if (Vector3.Distance(transform.position, navigationScript.gameObjectManager.players[i].transform.position) <= range)
+        if (!rescued)
+            for (int i = 0; i < navigationScript.gameObjectManager.players.Count; i++)
             {
-                if (!Physics.Linecast(transform.position, navigationScript.gameObjectManager.players[i].transform.position, mask))
+                int mask = ~(1 << 9);
+                if (Vector3.Distance(transform.position, navigationScript.gameObjectManager.players[i].transform.position) <= range)
                 {
-                    Debug.Log("Freed");
-                    renderer.material = activeMaterial;
-                    navigationScript.enabled = true;
+                    if (!Physics.Linecast(transform.position, navigationScript.gameObjectManager.players[i].transform.position, mask))
+                    {
+                        navigationScript.enabled = true;
+                        rescued = true;
+                    }
                 }
             }
+
+        if (rescued)
+        {
+            materialChange += Time.deltaTime;
+            renderer.material.Lerp(inactiveMaterial, activeMaterial, materialChange);
         }
 	}
 }

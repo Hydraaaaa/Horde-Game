@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectManager: {fileID: 0}
-  speed: 1
+  speed: 1.2
 --- !u!136 &136681278203351614
 CapsuleCollider:
   m_ObjectHideFlags: 1
