@@ -155,7 +155,7 @@ public class EnemyNavigation : MonoBehaviour
         }
 
         // If the AI loses sight of the player
-        else if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
             // Tell the AI to travel where the player was so it can track to last known position
             TargetPos = player.transform.position;
