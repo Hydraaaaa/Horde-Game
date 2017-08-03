@@ -30,7 +30,6 @@ public class GameObjectManager : MonoBehaviour
         GetEnemySpawners();
         GetCivilianSpawners();
         endPos = GameObject.FindGameObjectWithTag("End Position");
-        Debug.Log(endPos);
     }
 
     public void SpawnCamera()

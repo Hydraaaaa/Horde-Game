@@ -57,7 +57,6 @@ public class EnemyNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
 
-
         //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
@@ -122,27 +121,47 @@ public class EnemyNavigation : MonoBehaviour
 
     void PlayerNotNull()
     {
-        int layermask = 1 << 9;
+        Debug.Log("PlayerNotNull()");
+
+        // Grab the players layer
+        int layermask = 1 << LayerMask.NameToLayer("Seethrough");
         layermask = ~layermask;
 
-        // If the AI loses sight of the player
-        if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
-        {
-            // Tell the AI to travel where the player was so it can track to last known position
-            TargetPos = player.transform.position;
+        Color colo = Color.red;
 
+        //// If the AI loses sight of the player
+        //if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        //{
+        //    // Tell the AI to travel where the player was so it can track to last known position
+        //    TargetPos = player.transform.position;
+
+        //    // then remove the player reference so it dosent keep tracking to them
+        //    followPlayer = false;
+        //    player = null;
+
+        //    colo = Color.green;
+        //}
+        //// Else if the player is visible
+        //else
+        //{
+        //    Debug.DrawLine(transform.position, player.transform.position, new Color(1, 0, 0));
+        //    // Set the target position of the AI to the position of the player
+        //    TargetPos = player.transform.position;
+        //    agent.SetDestination(TargetPos);
+        //}
+
+        if (Vector3.Distance(transform.position, player.transform.position) > GetComponent<SphereCollider>().radius * 3)
+        {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
         }
-        // Else if the player is visible
         else
         {
             // Set the target position of the AI to the position of the player
             TargetPos = player.transform.position;
             agent.SetDestination(TargetPos);
         }
-
         // If the player is within attack range
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
         {
@@ -179,6 +198,8 @@ public class EnemyNavigation : MonoBehaviour
             followPlayer = false;
             player = null;
         }
+
+        Debug.DrawLine(transform.position, player.transform.position, colo);
     }
 
     void SurvivorNotNull()
@@ -231,8 +252,10 @@ public class EnemyNavigation : MonoBehaviour
                     }
                     break;
                 case Type.PLAYER:
+                    Debug.Log("case Type.PLAYER");
                     if (col.tag == TypeTags.PlayerTag)
                     {
+                        Debug.Log("col.tag == TypeTags.PlayerTag");
                         CheckForPlayer(col);
                         checkedAndFound = true;
                     }
@@ -283,6 +306,7 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
+        Debug.Log("CheckForPlayer()");
         int layermask = 1 << 9;
         layermask = ~layermask;
 

@@ -80,3 +80,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ef668615ce27948ab2ace9c9a812d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayers: 0
+  transparency: 0.4
