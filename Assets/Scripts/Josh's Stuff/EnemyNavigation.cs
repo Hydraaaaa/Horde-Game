@@ -23,7 +23,7 @@ public class EnemyNavigation : MonoBehaviour
     public Type[] Priority = new Type[5];
 
 
-    private NavMeshAgent agent;
+    public  NavMeshAgent agent;
 
     public Vector3 TargetPos = Vector3.zero;
     public GameObject EndPos;
@@ -57,6 +57,7 @@ public class EnemyNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
 
+
         //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
@@ -66,45 +67,48 @@ public class EnemyNavigation : MonoBehaviour
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
 
-        // Setting speed and turning speed
-        agent.angularSpeed = turningSpeed;
-        agent.acceleration = acceleration;
-
-        // Rotating towards movement direction
-        Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
-
-        if (dir != Vector3.zero)
+        if (agent != null)
         {
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(dir),
-                Time.deltaTime * turningSpeed
-            );
-        }
+            // Setting speed and turning speed
+            agent.angularSpeed = turningSpeed;
+            agent.acceleration = acceleration;
 
-        // If the agent dosent have a path to follow
-        if (!agent.hasPath)
-        {
-            //TargetPos = EndPos.transform.position;
-            agent.SetDestination(TargetPos);
-        }
+            // Rotating towards movement direction
+            Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
 
-        // If the agent is following a player
-        if (player != null)
-            PlayerNotNull();
+            if (dir != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(dir),
+                    Time.deltaTime * turningSpeed
+                );
+            }
 
-        // If the agent is following a Survivor
-        if (survivor != null)
-            SurvivorNotNull();
+            // If the agent dosent have a path to follow
+            if (!agent.hasPath)
+            {
+                //TargetPos = EndPos.transform.position;
+                agent.SetDestination(TargetPos);
+            }
 
-        // If the agent is following a Barricade
-        if (barricade != null)
-            BarricadeNotNull();
+            // If the agent is following a player
+            if (player != null)
+                PlayerNotNull();
 
-        // If the agent has a path to follow
-        if (agent.hasPath)
-        {
-            agent.SetDestination(TargetPos);
+            // If the agent is following a Survivor
+            if (survivor != null)
+                SurvivorNotNull();
+
+            // If the agent is following a Barricade
+            if (barricade != null)
+                BarricadeNotNull();
+
+            // If the agent has a path to follow
+            if (agent.hasPath)
+            {
+                agent.SetDestination(TargetPos);
+            }
         }
     }
 
@@ -116,7 +120,27 @@ public class EnemyNavigation : MonoBehaviour
         // If the player is within attack range
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
         {
-            Attack(player);
+            if (player.GetComponent<Health>().health > 0)
+            {
+                Attack(player);
+
+                if (player.GetComponent<Health>().health <= 0)
+                {
+                    // then remove the player reference so it dosent keep tracking to them
+                    followPlayer = false;
+                    player = null;
+                    TargetPos = EndPos.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
+            }
+            else
+            {
+                // then remove the player reference so it dosent keep tracking to them
+                followPlayer = false;
+                player = null;
+                TargetPos = EndPos.transform.position;
+                agent.SetDestination(TargetPos);
+            }
         }
 
         // if the player object is turned off
@@ -128,7 +152,6 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
-            TargetPos = EndPos.transform.position;
         }
         // If the AI loses sight of the player
         else if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
@@ -139,7 +162,6 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
-            TargetPos = EndPos.transform.position;
         }
         // Else if the player is visible
         else
