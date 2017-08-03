@@ -15,6 +15,7 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> players;
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
+    public List<GameObject> barricades;
 
     public float timer;
 
@@ -33,12 +34,14 @@ public class GameObjectManager : MonoBehaviour
     public void Initialize(Scene scene, LoadSceneMode mode)
     {
         timer = 300;
+        civiliansEscaped = 0;
 
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
         SpawnCamera();
         SpawnPlayers();
         GetEnemySpawners();
         GetCivilianSpawners();
+        GetBarricades();
         SpawnHUD();
         endPos = GameObject.FindGameObjectWithTag("End Position");
     }
@@ -92,6 +95,11 @@ public class GameObjectManager : MonoBehaviour
         {
             civilianSpawner.GetComponent<CivilianSpawner>().gameObjectManager = this;
         }
+    }
+
+    void GetBarricades()
+    {
+        barricades = new List<GameObject>(GameObject.FindGameObjectsWithTag("Barricade"));
     }
 
     public void SpawnHUD()
