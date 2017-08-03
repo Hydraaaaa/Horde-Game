@@ -125,8 +125,6 @@ public class EnemyNavigation : MonoBehaviour
         int layermask = 1 << LayerMask.NameToLayer("Seethrough");
         layermask = ~layermask;
 
-        Color colo = Color.red;
-
         //// If the AI loses sight of the player
         //if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
         //{
@@ -196,8 +194,6 @@ public class EnemyNavigation : MonoBehaviour
             followPlayer = false;
             player = null;
         }
-
-        Debug.DrawLine(transform.position, player.transform.position, colo);
     }
 
     void SurvivorNotNull()
