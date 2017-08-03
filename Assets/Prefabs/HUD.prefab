@@ -178,7 +178,8 @@ MonoBehaviour:
   manager: {fileID: 0}
   timer: {fileID: 114446140714553312}
   civiliansSaved: {fileID: 114806563963111002}
-  barricadeHealthBarPrefab: {fileID: 0}
+  barricadeHealthBarPrefab: {fileID: 1337276935834144, guid: 92798abd1cedcb84cb04cc00fee287fc,
+    type: 2}
 --- !u!114 &114806563963111002
 MonoBehaviour:
   m_ObjectHideFlags: 1
