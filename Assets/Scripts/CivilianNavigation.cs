@@ -1,26 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class CivilianNavigation : MonoBehaviour
 {
     public GameObjectManager gameObjectManager;
-    UnityEngine.AI.NavMeshAgent agent;
+    NavMeshAgent agent;
 
     public float speed;
+    bool escaped;
+
+    Renderer renderer;
+    float alpha;
 
 	void Start ()
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
+        escaped = false;
+
+        renderer = GetComponent<Renderer>();
+        alpha = 1;
 	}
 	
 	void Update ()
     {
-        if (gameObjectManager != null)
+        if (gameObjectManager != null && !escaped)
         {
             agent.SetDestination(gameObjectManager.endPos.transform.position);
         }
+
+        if (escaped)
+        {
+            alpha -= Time.deltaTime;
+            Color newColor = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alpha);
+            GetComponent<Renderer>().material.color = newColor;
+
+            if (alpha <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("End Position"))
+        {
+            GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<Health>().enabled = false;
+            escaped = true;
+            gameObjectManager.civiliansEscaped++;
+        }
+    }
 }

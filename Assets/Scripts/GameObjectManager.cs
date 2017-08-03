@@ -15,6 +15,8 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
 
+    public int civiliansEscaped;
+
     void Start()
     {
         SceneManager.sceneLoaded += Initialize;

@@ -13,24 +13,27 @@ public class CameraLogic : MonoBehaviour
 	void Update ()
     {
         transform.eulerAngles = new Vector3(45, 45, 0);
-        
-        Vector3 avgPos = Vector3.zero;
 
-        for (int i = 0; i < gameObjectManager.players.Count; i++)
-            avgPos += gameObjectManager.players[i].transform.position;
-
-        avgPos /= gameObjectManager.players.Count;
-
-        float longestDistance = 0;
-
-        for (int i = 0; i < gameObjectManager.players.Count; i++)
+        if (gameObjectManager.players.Count > 0)
         {
-            if (Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position) > longestDistance)
-                longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position);
+            Vector3 avgPos = Vector3.zero;
+
+            for (int i = 0; i < gameObjectManager.players.Count; i++)
+                avgPos += gameObjectManager.players[i].transform.position;
+
+            avgPos /= gameObjectManager.players.Count;
+
+            float longestDistance = 0;
+
+            for (int i = 0; i < gameObjectManager.players.Count; i++)
+            {
+                if (Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position) > longestDistance)
+                    longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position);
+            }
+
+            float cameraDistance = Mathf.Clamp(longestDistance * zoomOutMultiplier, minDistance, maxDistance);
+
+            transform.position = avgPos - transform.forward * cameraDistance;
         }
-
-        float cameraDistance = Mathf.Clamp(longestDistance * zoomOutMultiplier, minDistance, maxDistance);
-
-        transform.position = avgPos - transform.forward * cameraDistance;
     }
 }
