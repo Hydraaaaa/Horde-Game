@@ -74,12 +74,10 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetAxis("Joy1Horizontal") >= ControllerMenuAxisSensitivity)
             {
-                Debug.Log("Right");
                 timeBetweenMovement = 0;
             }
             else if (Input.GetAxis("Joy1Horizontal") <= -ControllerMenuAxisSensitivity)
             {
-                Debug.Log("Left");
                 timeBetweenMovement = 0;
             }
         }
@@ -88,7 +86,6 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetAxis("Joy1Vertical") <= ControllerMenuAxisSensitivity)
             {
-                Debug.Log("Up");
                 timeBetweenMovement = 0;
 
                 buttonNo--;
@@ -97,7 +94,6 @@ public class GameManager : MonoBehaviour
             }
             else if (Input.GetAxis("Joy1Vertical") >= -ControllerMenuAxisSensitivity)
             {
-                Debug.Log("Down");
                 timeBetweenMovement = 0;
 
                 buttonNo++;

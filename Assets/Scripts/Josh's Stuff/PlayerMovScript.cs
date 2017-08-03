@@ -139,9 +139,11 @@ public class PlayerMovScript : MonoBehaviour
             }
         }
 
-        lookDir = transform.forward = new Vector3(lookScreenPos.x, 0, lookScreenPos.y);
-        transform.eulerAngles = transform.eulerAngles + new Vector3(0, 45, 0);
-
+        if (new Vector3(lookScreenPos.x, 0, lookScreenPos.y) != Vector3.zero)
+        {
+            lookDir = transform.forward = new Vector3(lookScreenPos.x, 0, lookScreenPos.y);
+            transform.eulerAngles = transform.eulerAngles + new Vector3(0, 45, 0);
+        }
         controller.Move(direction);
     }
 }

@@ -40,6 +40,13 @@ public class EnemyNavigation : MonoBehaviour
     public float turningSpeed = 1.0f;
     public float acceleration = 1.0f;
 
+    public int damage;
+    public float attackRange;
+
+    [Tooltip("Time in seconds between shots")]
+    public float cooldown;
+    float currentCooldown;
+
     void Start()
     {
         path = new NavMeshPath();
@@ -55,10 +62,15 @@ public class EnemyNavigation : MonoBehaviour
 
     void Update()
     {
+        // Attack Cooldown
+        if (currentCooldown > 0)
+            currentCooldown -= Time.deltaTime;
+
+        // Setting speed and turning speed
         agent.angularSpeed = turningSpeed;
         agent.acceleration = acceleration;
 
-
+        // Rotating towards movement direction
         Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
 
         if (dir != Vector3.zero)
@@ -81,8 +93,13 @@ public class EnemyNavigation : MonoBehaviour
         if (player != null)
             PlayerNotNull();
 
+        // If the agent is following a Survivor
         if (survivor != null)
             SurvivorNotNull();
+
+        // If the agent is following a Barricade
+        if (barricade != null)
+            BarricadeNotNull();
 
         // If the agent has a path to follow
         if (agent.hasPath)
@@ -93,10 +110,17 @@ public class EnemyNavigation : MonoBehaviour
 
     void PlayerNotNull()
     {
-        int layermask = 1 << 10;
+        int layermask = 1 << 9;
         layermask = ~layermask;
 
-        if (!player.activeSelf)
+        // If the player is within attack range
+        if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+        {
+            Attack(player);
+        }
+
+        // if the player object is turned off
+        if (player.activeSelf == false)
         {
             // Tell the AI to travel where the player was so it can track to last known position
             TargetPos = player.transform.position;
@@ -104,6 +128,7 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
+            TargetPos = EndPos.transform.position;
         }
         // If the AI loses sight of the player
         else if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
@@ -114,6 +139,7 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
+            TargetPos = EndPos.transform.position;
         }
         // Else if the player is visible
         else
@@ -122,11 +148,33 @@ public class EnemyNavigation : MonoBehaviour
             TargetPos = player.transform.position;
             agent.SetDestination(TargetPos);
         }
+
     }
 
     void SurvivorNotNull()
     {
+        // If the player is within attack range
+        if (Vector3.Distance(transform.position, survivor.transform.position) < attackRange)
+        {
+            Attack(survivor);
+        }
+    }
 
+    void BarricadeNotNull()
+    {
+        // If the player is within attack range
+        if (Vector3.Distance(transform.position, barricade.transform.position) < attackRange)
+        {
+            Attack(barricade);
+        }
+
+        // If the barricade is dead
+        if (barricade.GetComponent<Health>().health <= 0)
+        {
+            // Remove the barricade referance and start going to exit again
+            barricade = null;
+            TargetPos = EndPos.transform.position;
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -205,7 +253,8 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        int layermask = ~(1 << 9);
+        int layermask = 1 << 9;
+        layermask = ~layermask;
 
         if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
@@ -231,8 +280,9 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForSurvivor(Collider col)
     {
-        int layermask = 1 << 10;
+        int layermask = 1 << 9;
         layermask = ~layermask;
+
         // Can they see a Survivor && is the survivor in range
         if (!Physics.Linecast(this.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
@@ -260,6 +310,15 @@ public class EnemyNavigation : MonoBehaviour
                 TargetPos = col.transform.position;
                 agent.SetDestination(TargetPos);
             }
+        }
+    }
+
+    void Attack(GameObject obj)
+    {
+        if (currentCooldown <= 0)
+        {
+            currentCooldown = cooldown;
+            obj.GetComponent<Health>().Damage(damage);
         }
     }
 }

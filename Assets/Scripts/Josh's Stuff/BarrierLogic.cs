@@ -31,7 +31,6 @@ public class BarrierLogic : MonoBehaviour
         public ResourceCost Cost;
     }
 
-    public int Health = 0;
     public int Cost = 0;
     public int Level = 0;
 
@@ -40,14 +39,12 @@ public class BarrierLogic : MonoBehaviour
     public KeyCode interOne;
     public KeyCode interTwo;
 
-    private GameObject player1;
-    private GameObject player2;
+    private GameObjectManager manager;
 
 	// Use this for initialization
 	void Start ()
     {
-        player1 = GameObject.FindGameObjectWithTag("Player 1");
-        player2 = GameObject.FindGameObjectWithTag("Player 2");
+        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
     }
 	
 	// Update is called once per frame
@@ -58,21 +55,35 @@ public class BarrierLogic : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        // If player 1 interacts
-        if (col.tag == "Player 1")
+        if (col.tag == "Player")
         {
-            if (Input.GetKeyDown(interOne))
+            if (manager != null && manager.players.Count > 0)
             {
-                UpgradeBarrier(player1.GetComponent<BarrierPlayersideLogic>());
-            }
-        }
+                // If player 1 interacts
+                if (col == manager.players[0])
+                {
+                    if (Input.GetKeyDown(interOne))
+                    {
+                        UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                    }
+                    else if (Input.GetButton("Joy1XButton"))
+                    {
+                        UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                    }
+                }
 
-        // If player 2 interacts
-        if (col.tag == "Player 2")
-        {
-            if (Input.GetKeyDown(interTwo))
-            {
-                UpgradeBarrier(player2.GetComponent<BarrierPlayersideLogic>());
+                // If player 2 interacts
+                if (col == manager.players[1])
+                {
+                    if (Input.GetKeyDown(interTwo))
+                    {
+                        UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                    }
+                    else if (Input.GetButton("Joy2XButton"))
+                    {
+                        UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                    }
+                }
             }
         }
     }
@@ -88,23 +99,28 @@ public class BarrierLogic : MonoBehaviour
             {
                 case 0:
                     Cost = Information.Cost.Level1;
-                    Health = Information.Health.Level1;
+                    GetComponent<Health>().health = Information.Health.Level1;
+                    GetComponent<Health>().maxHealth = Information.Health.Level1;
                     break;
                 case 1:
                     Cost = Information.Cost.Level2;
-                    Health = Information.Health.Level2;
+                    GetComponent<Health>().health = Information.Health.Level2;
+                    GetComponent<Health>().maxHealth = Information.Health.Level2;
                     break;
                 case 2:
                     Cost = Information.Cost.Level3;
-                    Health = Information.Health.Level3;
+                    GetComponent<Health>().health = Information.Health.Level3;
+                    GetComponent<Health>().maxHealth = Information.Health.Level3;
                     break;
                 case 3:
                     Cost = Information.Cost.Level4;
-                    Health = Information.Health.Level4;
+                    GetComponent<Health>().health = Information.Health.Level4;
+                    GetComponent<Health>().maxHealth = Information.Health.Level4;
                     break;
                 case 4:
                     Cost = Information.Cost.Level5;
-                    Health = Information.Health.Level5;
+                    GetComponent<Health>().health = Information.Health.Level5;
+                    GetComponent<Health>().maxHealth = Information.Health.Level5;
                     break;
             }
         }

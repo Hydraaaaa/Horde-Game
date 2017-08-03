@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BulkheadLogic : MonoBehaviour
 {
@@ -17,9 +18,17 @@ public class BulkheadLogic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (GetComponent<Health>().health <= 0)
+        {
+            IsOpen = true;
+            GetComponent<NavMeshObstacle>().enabled = false;
+        }
+
 		if (Input.GetKeyDown(KeyCode.Space))
         {
             IsOpen = !IsOpen;
+            GetComponent<NavMeshObstacle>().enabled = !GetComponent<NavMeshObstacle>().enabled;
+
         }
 
         if (IsOpen)
