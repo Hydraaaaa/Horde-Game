@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public string[] ButtonLocations = { "TestScene", "Josh'sScene" };
     public int buttonNo;
 
+    public bool atMenu = true;
     public Text arrow;
 
 	void Start ()
@@ -30,38 +31,42 @@ public class GameManager : MonoBehaviour
 	
 	void Update ()
     {
-        // Left Thumbstick
-        if (timeBetweenMovement < ControllerNextInputCheckTimeGap)
+        if (atMenu)
         {
-            timeBetweenMovement += Time.deltaTime;
-        }
-        else if (timeBetweenMovement >= ControllerNextInputCheckTimeGap)
-        {
-            CheckAxis();
-        }
-
-        // Right Trigger
-        if (!Input.GetButton("Joy1AButton"))
-        {
-            hasShot = false;
-        }
-
-        if (Input.GetButton("Joy1AButton") && !hasShot)
-        {
-            Debug.Log("Bang!");
-            SceneManager.LoadScene(ButtonLocations[buttonNo]);
-            hasShot = true;
-        }
-
-        if (arrow != null)
-        {
-            if (buttonNo == 0)
+            // Left Thumbstick
+            if (timeBetweenMovement < ControllerNextInputCheckTimeGap)
             {
-                arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 30, arrow.transform.position.z));
+                timeBetweenMovement += Time.deltaTime;
             }
-            if (buttonNo == 1)
+            else if (timeBetweenMovement >= ControllerNextInputCheckTimeGap)
             {
-                arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 0, arrow.transform.position.z));
+                CheckAxis();
+            }
+
+            // Right Trigger
+            if (!Input.GetButton("Joy1AButton"))
+            {
+                hasShot = false;
+            }
+
+            if (Input.GetButton("Joy1AButton") && !hasShot)
+            {
+                Debug.Log("Bang!");
+                SceneManager.LoadScene(ButtonLocations[buttonNo]);
+                hasShot = true;
+                atMenu = false;
+            }
+
+            if (arrow != null)
+            {
+                if (buttonNo == 0)
+                {
+                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 30, arrow.transform.position.z));
+                }
+                if (buttonNo == 1)
+                {
+                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 0, arrow.transform.position.z));
+                }
             }
         }
     }
