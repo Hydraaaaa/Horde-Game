@@ -18,8 +18,8 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
     public List<GameObject> barricades;
+    public List<GameObject> vitalBarricades;
     public List<GameObject> civilians;
-    GameObject exitBarricade;
     
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
@@ -126,6 +126,12 @@ public class GameObjectManager : MonoBehaviour
     void GetBarricades()
     {
         barricades = new List<GameObject>(GameObject.FindGameObjectsWithTag("Barricade"));
+        vitalBarricades = new List<GameObject>();
+        foreach (GameObject barricade in barricades)
+        {
+            if (barricade.GetComponent<BarrierLogic>().vital)
+                vitalBarricades.Add(barricade);
+        }
     }
 
     void GetCivilians()
@@ -147,8 +153,11 @@ public class GameObjectManager : MonoBehaviour
         if (civiliansEscaped < initialCivilians * (civiliansRequired / 100))
             return false;
 
-        if (exitBarricade == null)
-            return false;
+        foreach (GameObject barricade in vitalBarricades)
+        {
+            if (barricade == null)
+                return false;
+        }
 
         return true;
     }
@@ -156,13 +165,10 @@ public class GameObjectManager : MonoBehaviour
     public void GameOver()
     {
         if (GetWin())
-        {
             Instantiate(WinGUIPrefab);
-            // Surely theres more
-        }
         else
-        {
             Instantiate(LoseGUIPrefab);
-        }
+
+        playing = false;
     }
 }
