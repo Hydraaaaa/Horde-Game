@@ -24,6 +24,7 @@ public class GameObjectManager : MonoBehaviour
     
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
+    [Tooltip("Time in seconds until certain bulkhead doors open")]
     public float time;
 
     [HideInInspector] public float timer;

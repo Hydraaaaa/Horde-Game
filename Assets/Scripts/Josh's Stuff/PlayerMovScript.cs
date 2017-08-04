@@ -24,9 +24,12 @@ public class PlayerMovScript : MonoBehaviour
 
     public Vector2 screenCenter;
 
+    float playerHeight;
+
     // Use this for initialization
     void Start ()
     {
+        playerHeight = transform.position.y;
         playerBeginning = playerBeginning + playerNumber.ToString();
 
         // Getting player controller
@@ -44,7 +47,7 @@ public class PlayerMovScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
         if (useController)
