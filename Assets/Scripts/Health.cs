@@ -6,10 +6,15 @@ public class Health : MonoBehaviour
 {
     public int maxHealth;
     public int health;
+    delegate void NoHealth();
+    NoHealth OnDie;
 
-    void Start()
+    void Awake()
     {
-
+        if (transform.CompareTag("Player"))
+            OnDie = PlayerDie;
+        else
+            OnDie = Die;
     }
 
     void Update()
@@ -24,10 +29,15 @@ public class Health : MonoBehaviour
             health = maxHealth;
 
         if (health <= 0)
-            Die();
+            OnDie();
     }
 
     public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void PlayerDie()
     {
         GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
         Destroy(gameObject);
