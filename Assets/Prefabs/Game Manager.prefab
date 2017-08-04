@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112002458870338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.797989, y: 6.965019, z: -2.0892944}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllerMenuAxisSensitivity: 0.75
-  ControllerNextInputCheckTimeGap: 0.2
+  ControllerNextInputCheckTimeGap: 0.1
   timeBetweenMovement: 0
   Joysticks: []
   p1Axis: {x: 0, y: 0}
@@ -81,11 +81,20 @@ MonoBehaviour:
   playerPrefab: {fileID: 1231569685718394, guid: a1dc348726cf9e543a389da2d97211d7,
     type: 2}
   HUDPrefab: {fileID: 1808665065379356, guid: 793e877e2e9d1744797a087dff268682, type: 2}
+  WinGUIPrefab: {fileID: 1324020835486538, guid: f3ec51e84e98c8140922726e39464857,
+    type: 2}
+  LoseGUIPrefab: {fileID: 1110093772081564, guid: d396972a3d26c0f49aa2167ace395b1b,
+    type: 2}
   camera: {fileID: 0}
   endPos: {fileID: 0}
   playerStarts: []
   players: []
   enemySpawners: []
   enemies: []
+  barricades: []
+  civilians: []
+  civiliansRequired: 75
   timer: 0
+  initialCivilians: 0
   civiliansEscaped: 0
+  playersEscaped: 0

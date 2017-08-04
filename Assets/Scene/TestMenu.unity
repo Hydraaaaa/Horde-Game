@@ -492,15 +492,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.797989
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.965019
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.0892944
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalRotation.x
@@ -522,25 +522,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1112002458870338, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
-      propertyPath: m_Name
-      value: Game Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: playerCount
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
       propertyPath: arrow
       value: 
       objectReference: {fileID: 1532000383}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: ControllerNextInputCheckTimeGap
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
   m_IsPrefabParent: 0

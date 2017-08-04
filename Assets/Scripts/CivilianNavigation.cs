@@ -40,6 +40,7 @@ public class CivilianNavigation : MonoBehaviour
 
             if (alpha <= 0)
             {
+                gameObjectManager.civilians.Remove(gameObject);
                 Destroy(gameObject);
             }
         }

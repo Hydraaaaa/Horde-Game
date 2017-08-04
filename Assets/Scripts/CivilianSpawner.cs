@@ -21,6 +21,7 @@ public class CivilianSpawner : MonoBehaviour
                 transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
             );
             GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
+            gameObjectManager.civilians.Add(newlySpawned);
 
             if (newlySpawned.GetComponent<CivilianNavigation>() != null)
                 newlySpawned.GetComponent<CivilianNavigation>().gameObjectManager = gameObjectManager;
