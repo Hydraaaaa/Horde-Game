@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: 4c4aa2dc28e3ce943b8d365b4c4fb147
+timeCreated: 1501825600
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: BIND_ankle_L_jnt
+    100002: BIND_ankle_R_jnt
+    100004: BIND_ball_L_jnt
+    100006: BIND_ball_R_jnt
+    100008: BIND_chest_jnt
+    100010: BIND_clav_L_END_jnt
+    100012: BIND_clav_L_jnt
+    100014: BIND_clav_R_END_jnt
+    100016: BIND_clav_R_jnt
+    100018: BIND_COG_jnt
+    100020: BIND_crown_jnt
+    100022: BIND_elbow_L_jnt
+    100024: BIND_elbow_R_jnt
+    100026: BIND_fingerBase_L_jnt
+    100028: BIND_fingerBase_R_jnt
+    100030: BIND_fingerMid_L_jnt
+    100032: BIND_fingerMid_R_jnt
+    100034: BIND_fingerTip_L_jnt
+    100036: BIND_fingerTip_R_jnt
+    100038: BIND_hand_L_jnt
+    100040: BIND_hand_R_jnt
+    100042: BIND_head_jnt
+    100044: BIND_hip_jnt
+    100046: BIND_knee_L_jnt
+    100048: BIND_knee_R_jnt
+    100050: BIND_leg_L_jnt
+    100052: BIND_leg_R_jnt
+    100054: BIND_neck_jnt
+    100056: BIND_ROOT_jnt
+    100058: BIND_shoulder_L_jnt
+    100060: BIND_shoulder_R_jnt
+    100062: BIND_thumbBase_L_jnt
+    100064: BIND_thumbBase_R_jnt
+    100066: BIND_thumbTip_L_jnt
+    100068: BIND_thumbTip_R_jnt
+    100070: BIND_toe_L_jnt
+    100072: BIND_toe_R_jnt
+    100074: BIND_waist_jnt
+    100076: BIND_wrist_L_jnt
+    100078: BIND_wrist_R_jnt
+    100080: body_GEO
+    100082: head_GEO
+    100084: //RootNode
+    100086: marine_GEO
+    400000: BIND_ankle_L_jnt
+    400002: BIND_ankle_R_jnt
+    400004: BIND_ball_L_jnt
+    400006: BIND_ball_R_jnt
+    400008: BIND_chest_jnt
+    400010: BIND_clav_L_END_jnt
+    400012: BIND_clav_L_jnt
+    400014: BIND_clav_R_END_jnt
+    400016: BIND_clav_R_jnt
+    400018: BIND_COG_jnt
+    400020: BIND_crown_jnt
+    400022: BIND_elbow_L_jnt
+    400024: BIND_elbow_R_jnt
+    400026: BIND_fingerBase_L_jnt
+    400028: BIND_fingerBase_R_jnt
+    400030: BIND_fingerMid_L_jnt
+    400032: BIND_fingerMid_R_jnt
+    400034: BIND_fingerTip_L_jnt
+    400036: BIND_fingerTip_R_jnt
+    400038: BIND_hand_L_jnt
+    400040: BIND_hand_R_jnt
+    400042: BIND_head_jnt
+    400044: BIND_hip_jnt
+    400046: BIND_knee_L_jnt
+    400048: BIND_knee_R_jnt
+    400050: BIND_leg_L_jnt
+    400052: BIND_leg_R_jnt
+    400054: BIND_neck_jnt
+    400056: BIND_ROOT_jnt
+    400058: BIND_shoulder_L_jnt
+    400060: BIND_shoulder_R_jnt
+    400062: BIND_thumbBase_L_jnt
+    400064: BIND_thumbBase_R_jnt
+    400066: BIND_thumbTip_L_jnt
+    400068: BIND_thumbTip_R_jnt
+    400070: BIND_toe_L_jnt
+    400072: BIND_toe_R_jnt
+    400074: BIND_waist_jnt
+    400076: BIND_wrist_L_jnt
+    400078: BIND_wrist_R_jnt
+    400080: body_GEO
+    400082: head_GEO
+    400084: //RootNode
+    400086: marine_GEO
+    4300000: head_GEO
+    4300002: body_GEO
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: body_GEO
+    13700002: head_GEO
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: BIND_ROOT_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_L_jnt/BIND_knee_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_L_jnt/BIND_knee_L_jnt/BIND_ankle_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_L_jnt/BIND_knee_L_jnt/BIND_ankle_L_jnt/BIND_ball_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_L_jnt/BIND_knee_L_jnt/BIND_ankle_L_jnt/BIND_ball_L_jnt/BIND_toe_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_R_jnt/BIND_knee_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_R_jnt/BIND_knee_R_jnt/BIND_ankle_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_R_jnt/BIND_knee_R_jnt/BIND_ankle_R_jnt/BIND_ball_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_hip_jnt/BIND_leg_R_jnt/BIND_knee_R_jnt/BIND_ankle_R_jnt/BIND_ball_R_jnt/BIND_toe_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt/BIND_fingerBase_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt/BIND_fingerBase_L_jnt/BIND_fingerMid_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt/BIND_fingerBase_L_jnt/BIND_fingerMid_L_jnt/BIND_fingerTip_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt/BIND_thumbBase_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_L_jnt/BIND_clav_L_END_jnt/BIND_shoulder_L_jnt/BIND_elbow_L_jnt/BIND_wrist_L_jnt/BIND_hand_L_jnt/BIND_thumbBase_L_jnt/BIND_thumbTip_L_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt/BIND_fingerBase_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt/BIND_fingerBase_R_jnt/BIND_fingerMid_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt/BIND_fingerBase_R_jnt/BIND_fingerMid_R_jnt/BIND_fingerTip_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt/BIND_thumbBase_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_clav_R_jnt/BIND_clav_R_END_jnt/BIND_shoulder_R_jnt/BIND_elbow_R_jnt/BIND_wrist_R_jnt/BIND_hand_R_jnt/BIND_thumbBase_R_jnt/BIND_thumbTip_R_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_neck_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_neck_jnt/BIND_head_jnt
+        weight: 1
+      - path: BIND_ROOT_jnt/BIND_COG_jnt/BIND_waist_jnt/BIND_chest_jnt/BIND_neck_jnt/BIND_head_jnt/BIND_crown_jnt
+        weight: 1
+      - path: marine_GEO
+        weight: 1
+      - path: marine_GEO/body_GEO
+        weight: 1
+      - path: marine_GEO/head_GEO
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
