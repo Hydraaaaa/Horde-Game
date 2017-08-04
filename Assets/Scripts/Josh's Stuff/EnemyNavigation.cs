@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-
 public class EnemyNavigation : MonoBehaviour
 {
     public enum Type { SURVIVOR, PLAYER, BARRICADE, DEFENSES, TERRAIN, NULL };

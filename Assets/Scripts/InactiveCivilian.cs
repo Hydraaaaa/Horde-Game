@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class InactiveCivilian : MonoBehaviour
 {
-    public Material inactiveMaterial;
     public Material activeMaterial;
 
     CivilianNavigation navigationScript;
-    Renderer renderer;
 
     public float range;
     bool rescued;
@@ -19,9 +17,6 @@ public class InactiveCivilian : MonoBehaviour
     {
         navigationScript = GetComponent<CivilianNavigation>();
         navigationScript.enabled = false;
-
-        renderer = GetComponent<Renderer>();
-        renderer.material = inactiveMaterial;
 
         materialChange = 0;
 	}
@@ -43,9 +38,21 @@ public class InactiveCivilian : MonoBehaviour
             }
 
         if (rescued)
+            SetMaterial(transform);
+    }
+
+    void SetMaterial(Transform obj)
+    {
+        foreach (Transform child in obj.transform)
+        {
+            SetMaterial(child);
+        }
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
         {
             materialChange += Time.deltaTime;
-            renderer.material.Lerp(inactiveMaterial, activeMaterial, materialChange);
+            renderer.material.Lerp(renderer.material, activeMaterial, materialChange);
         }
-	}
+    }
 }

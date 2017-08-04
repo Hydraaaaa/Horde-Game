@@ -15,7 +15,7 @@ public class CivilianNavigation : MonoBehaviour
     Renderer renderer;
     float alpha;
 
-	void Start ()
+    void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
@@ -27,6 +27,17 @@ public class CivilianNavigation : MonoBehaviour
 	
 	void Update ()
     {
+        Vector3 dir = GetComponent<NavMeshAgent>().velocity;
+
+        if (dir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir),
+                Time.deltaTime
+            );
+        }
+
         if (gameObjectManager != null && !escaped)
         {
             agent.SetDestination(gameObjectManager.endPos.transform.position);
