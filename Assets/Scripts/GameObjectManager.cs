@@ -61,14 +61,13 @@ public class GameObjectManager : MonoBehaviour
         endPos = GameObject.FindGameObjectWithTag("End Position");
         GameObject.FindGameObjectWithTag("End Position").GetComponent<Endpoint>().manager = this;
 
-        GetInitialCivilians();
+        StartCoroutine(GetInitialCivilians());
 
         playing = true;
     }
     IEnumerator GetInitialCivilians()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("GetInitialCivilians");
         initialCivilians = civilians.Count;
     }
 
