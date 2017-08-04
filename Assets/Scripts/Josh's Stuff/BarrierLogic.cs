@@ -41,6 +41,8 @@ public class BarrierLogic : MonoBehaviour
 
     private GameObjectManager manager;
 
+    public bool vital;
+
 	// Use this for initialization
 	void Start ()
     {
