@@ -82,8 +82,6 @@ public class TurretScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-
-
         if (Interacting != true)
         {
             ActivePiece.SetActive(false);

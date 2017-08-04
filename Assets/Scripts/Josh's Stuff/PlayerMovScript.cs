@@ -7,6 +7,7 @@ public class PlayerMovScript : MonoBehaviour
     public delegate void Attack();
 
     public Attack playerAttack;
+    public Animator anim;
 
     public string playerBeginning = "Joy";
     public int playerNumber = 1;
@@ -29,11 +30,11 @@ public class PlayerMovScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        playerHeight = transform.position.y;
         playerBeginning = playerBeginning + playerNumber.ToString();
 
         // Getting player controller
         controller = GetComponent<CharacterController>();
+        playerHeight = transform.position.y + controller.stepOffset;
         playerAttack = GetComponent<Rifle>().Attack;
 
         // Turning off legacy controls
@@ -149,5 +150,8 @@ public class PlayerMovScript : MonoBehaviour
             transform.eulerAngles = transform.eulerAngles + new Vector3(0, 45, 0);
         }
         controller.Move(direction);
+
+        anim.SetFloat("Horizontal", Input.GetAxisRaw("Joy" + playerNumber + "Horizontal"));
+        anim.SetFloat("Vertical", Input.GetAxisRaw("Joy" + playerNumber + "Vertical"));
     }
 }

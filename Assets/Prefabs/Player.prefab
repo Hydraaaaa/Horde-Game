@@ -1373,8 +1373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a036a5efd55f344874f4b9065e7697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
-  health: 10000
+  maxHealth: 100
+  health: 100
 --- !u!114 &114344224025554006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1423,6 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5a19f593ac46e418248da4da9a89b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 95389423796211580}
   playerBeginning: Joy
   playerNumber: 1
   buttonEndings:
@@ -1434,7 +1435,7 @@ MonoBehaviour:
   - Horizontal2
   - Vertical2
   moveSpeed: 3
-  useController: 0
+  useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}

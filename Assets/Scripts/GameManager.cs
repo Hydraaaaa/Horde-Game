@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetButton("Joy1AButton") && !hasShot)
             {
                 Debug.Log("Bang!");
-                SceneManager.LoadScene(ButtonLocations[buttonNo]);
+                LoadScene(ButtonLocations[buttonNo]);
                 hasShot = true;
                 atMenu = false;
             }
