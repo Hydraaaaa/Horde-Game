@@ -62,7 +62,7 @@ public class BarrierLogic : MonoBehaviour
             if (manager != null && manager.players.Count > 0)
             {
                 // If player 1 interacts
-                if (col == manager.players[0])
+                if (col.gameObject == manager.players[0])
                 {
                     if (Input.GetKeyDown(interOne))
                     {
@@ -75,7 +75,7 @@ public class BarrierLogic : MonoBehaviour
                 }
 
                 // If player 2 interacts
-                if (col == manager.players[1])
+                if (col.gameObject == manager.players[1])
                 {
                     if (Input.GetKeyDown(interTwo))
                     {

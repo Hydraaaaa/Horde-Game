@@ -550,13 +550,13 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
-    m_Name: Joy1XButton
+    m_Name: Joy2XButton
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick 1 button 2
+    altPositiveButton: joystick 2 button 2
     gravity: 0
     dead: 0
     sensitivity: 1000
@@ -564,15 +564,15 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
-    m_Name: Joy1AButton
+    m_Name: Joy2AButton
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick 1 button 0
+    altPositiveButton: joystick 2 button 0
     gravity: 0
     dead: 0
     sensitivity: 1000
@@ -580,15 +580,15 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
-    m_Name: Joy1YButton
+    m_Name: Joy2YButton
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick 1 button 3
+    altPositiveButton: joystick 2 button 3
     gravity: 0
     dead: 0
     sensitivity: 1000
@@ -596,15 +596,15 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
-    m_Name: Joy1BButton
+    m_Name: Joy2BButton
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick 1 button 1
+    altPositiveButton: joystick 2 button 1
     gravity: 0
     dead: 0
     sensitivity: 1000
@@ -612,7 +612,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Joy1BButton
     descriptiveName: 
