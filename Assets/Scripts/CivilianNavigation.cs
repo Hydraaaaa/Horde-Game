@@ -10,19 +10,11 @@ public class CivilianNavigation : MonoBehaviour
     NavMeshAgent agent;
 
     public float speed;
-    bool escaped;
-
-    Renderer renderer;
-    float alpha;
 
     void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
-        escaped = false;
-
-        renderer = GetComponent<Renderer>();
-        alpha = 1;
 	}
 	
 	void Update ()
@@ -38,24 +30,11 @@ public class CivilianNavigation : MonoBehaviour
             );
         }
 
-        if (gameObjectManager != null && !escaped)
+        if (gameObjectManager != null)
         {
             agent.SetDestination(gameObjectManager.endPos.transform.position);
         }
-
-        if (escaped)
-        {
-            alpha -= Time.deltaTime;
-            Color newColor = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alpha);
-            GetComponent<Renderer>().material.color = newColor;
-
-            if (alpha <= 0)
-            {
-                gameObjectManager.civilians.Remove(gameObject);
-                Destroy(gameObject);
-            }
-        }
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -63,8 +42,10 @@ public class CivilianNavigation : MonoBehaviour
         {
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Health>().enabled = false;
-            escaped = true;
             gameObjectManager.civiliansEscaped++;
+
+            gameObjectManager.civilians.Remove(gameObject);
+            Destroy(gameObject);
         }
     }
 }
