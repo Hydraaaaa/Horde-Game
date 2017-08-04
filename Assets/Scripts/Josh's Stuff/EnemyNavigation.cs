@@ -318,24 +318,28 @@ public class EnemyNavigation : MonoBehaviour
         int layermask = 1 << 9;
         layermask = ~layermask;
 
-        if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        if (survivor == null && barricade == null)
         {
-            //Debug.Log("Can see player");
-            // If this player is closer than the other player in the scene
-            if (player == null)
+
+            if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
             {
-                player = col.gameObject;
-                followPlayer = true;
-                TargetPos = col.transform.position;
-                agent.SetDestination(TargetPos);
-            }
-            else if (Vector3.Distance(this.transform.position, player.transform.position) >
-                    Vector3.Distance(this.transform.position, col.transform.position))
-            {
-                player = col.gameObject;
-                followPlayer = true;
-                TargetPos = col.transform.position;
-                agent.SetDestination(TargetPos);
+                //Debug.Log("Can see player");
+                // If this player is closer than the other player in the scene
+                if (player == null)
+                {
+                    player = col.gameObject;
+                    followPlayer = true;
+                    TargetPos = col.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
+                else if (Vector3.Distance(this.transform.position, player.transform.position) >
+                        Vector3.Distance(this.transform.position, col.transform.position))
+                {
+                    player = col.gameObject;
+                    followPlayer = true;
+                    TargetPos = col.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
             }
         }
     }
