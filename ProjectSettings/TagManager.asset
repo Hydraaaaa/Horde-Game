@@ -11,6 +11,8 @@ TagManager:
   - End Position
   - Enemy Spawner
   - Civilian Spawner
+  - Civilian
+  - CivilianDestination
   layers:
   - Default
   - TransparentFX

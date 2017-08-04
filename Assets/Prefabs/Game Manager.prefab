@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633097215938290}
   - component: {fileID: 114225659590822462}
-  - component: {fileID: 114618383147156158}
+  - component: {fileID: 114788100348366930}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Game Manager
@@ -52,6 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee32dc2d51063b48b1117cf1444c93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraPrefab: {fileID: 1306768904595550, guid: 65a7340beb755a84e8cbf3ee377ccc6b,
+    type: 2}
+  playerPrefab: {fileID: 1231569685718394, guid: a1dc348726cf9e543a389da2d97211d7,
+    type: 2}
+  HUDPrefab: {fileID: 1808665065379356, guid: 793e877e2e9d1744797a087dff268682, type: 2}
+  WinGUIPrefab: {fileID: 1324020835486538, guid: f3ec51e84e98c8140922726e39464857,
+    type: 2}
+  LoseGUIPrefab: {fileID: 1110093772081564, guid: d396972a3d26c0f49aa2167ace395b1b,
+    type: 2}
   ControllerMenuAxisSensitivity: 0.75
   ControllerNextInputCheckTimeGap: 0.1
   timeBetweenMovement: 0
@@ -65,13 +74,13 @@ MonoBehaviour:
   buttonNo: 0
   atMenu: 1
   arrow: {fileID: 0}
---- !u!114 &114618383147156158
+--- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112002458870338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2ffe8c2bcebc5445a72b61f3f0aeab3, type: 3}
   m_Name: 
@@ -87,14 +96,18 @@ MonoBehaviour:
     type: 2}
   camera: {fileID: 0}
   endPos: {fileID: 0}
+  civilianDestination: {fileID: 0}
   playerStarts: []
   players: []
   enemySpawners: []
   enemies: []
   barricades: []
+  vitalBarricades: []
   civilians: []
-  civiliansRequired: 75
+  civiliansRequired: 0
+  time: 0
   timer: 0
   initialCivilians: 0
   civiliansEscaped: 0
   playersEscaped: 0
+  playing: 0

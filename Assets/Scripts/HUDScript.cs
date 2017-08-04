@@ -27,7 +27,10 @@ public class HUDScript : MonoBehaviour
 	
 	void Update ()
     {
-        timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":" + Mathf.FloorToInt(manager.timer % 60).ToString();
+        if (manager.timer > 0)
+            timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":" + Mathf.FloorToInt(manager.timer % 60).ToString();
+        else
+            timer.text = "Escape";
         civiliansSaved.text = manager.civiliansEscaped.ToString() + " ";
 
         for (int i = barricades.Count - 1; i >= 0; i--)

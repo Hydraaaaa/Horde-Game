@@ -32,13 +32,13 @@ public class CivilianNavigation : MonoBehaviour
 
         if (gameObjectManager != null)
         {
-            agent.SetDestination(gameObjectManager.endPos.transform.position);
+            agent.SetDestination(gameObjectManager.civilianDestination.transform.position);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("End Position"))
+        if (other.CompareTag("CivilianDestination"))
         {
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Health>().enabled = false;

@@ -44,6 +44,7 @@ public class PlayerMovScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
         if (useController)

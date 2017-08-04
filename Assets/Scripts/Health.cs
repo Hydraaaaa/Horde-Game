@@ -6,8 +6,8 @@ public class Health : MonoBehaviour
 {
     public int maxHealth;
     public int health;
-    delegate void NoHealth();
-    NoHealth OnDie;
+    public delegate void NoHealth();
+    public NoHealth OnDie;
 
     void Awake()
     {

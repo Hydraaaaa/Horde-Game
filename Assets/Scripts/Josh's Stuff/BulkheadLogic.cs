@@ -11,19 +11,14 @@ public class BulkheadLogic : MonoBehaviour
     public GameObject bottomDoor;
     
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        GetComponent<Health>().OnDie = Open;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (GetComponent<Health>().health <= 0)
-        {
-            IsOpen = true;
-            GetComponent<NavMeshObstacle>().enabled = false;
-        }
-
 		if (Input.GetKeyDown(KeyCode.Space))
         {
             IsOpen = !IsOpen;
@@ -40,6 +35,16 @@ public class BulkheadLogic : MonoBehaviour
         {
             topDoor.transform.localPosition = Vector3.Lerp(topDoor.transform.localPosition, new Vector3(-0.01990428f, 1.972778f, 0), Time.deltaTime * speed);
             bottomDoor.transform.localPosition = Vector3.Lerp(bottomDoor.transform.localPosition, new Vector3(-0.04789639f, 0.7159657f, 0), Time.deltaTime * speed);
+        }
+    }
+
+    public void Open()
+    {
+        IsOpen = true;
+        GetComponent<NavMeshObstacle>().enabled = false;
+        foreach (BoxCollider col in GetComponents<BoxCollider>())
+        {
+            col.enabled = false;
         }
     }
 }

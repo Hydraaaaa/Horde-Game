@@ -13,6 +13,7 @@ public class GameObjectManager : MonoBehaviour
 
     [HideInInspector] public GameObject camera;
     [HideInInspector] public GameObject endPos;
+    [HideInInspector] public GameObject civilianDestination;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
     public List<GameObject> enemySpawners;
@@ -23,31 +24,26 @@ public class GameObjectManager : MonoBehaviour
     
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
+    public float time;
 
     [HideInInspector] public float timer;
-    public int initialCivilians;
-    public int civiliansEscaped;
-    public int playersEscaped;
+    [HideInInspector] public int initialCivilians;
+    [HideInInspector] public int civiliansEscaped;
+    [HideInInspector] public int playersEscaped;
 
     [HideInInspector] public bool playing;
 
-    void Start()
+    void Awake()
     {
-        SceneManager.sceneLoaded += Initialize;
         playing = false;
     }
 
-    void Update()
+    void OnEnable()
     {
-        timer -= Time.deltaTime;
+        civiliansRequired = 75.0f;
+        time = 10;
 
-        if (players.Count == 0 && playing)
-            GameOver();
-    }
-
-    public void Initialize(Scene scene, LoadSceneMode mode)
-    {
-        timer = 10;
+        timer = time;
         civiliansEscaped = 0;
 
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
@@ -58,12 +54,28 @@ public class GameObjectManager : MonoBehaviour
         GetBarricades();
         GetCivilians();
         SpawnHUD();
-        endPos = GameObject.FindGameObjectWithTag("End Position");
-        GameObject.FindGameObjectWithTag("End Position").GetComponent<Endpoint>().manager = this;
+        GetCivilianDestination();
+        GetEndPos();
 
         StartCoroutine(GetInitialCivilians());
 
         playing = true;
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            foreach (GameObject barricade in vitalBarricades)
+            {
+                barricade.GetComponent<BulkheadLogic>().Open();
+            }
+        }
+
+        if (players.Count == 0 && playing)
+            GameOver();
     }
     IEnumerator GetInitialCivilians()
     {
@@ -136,6 +148,17 @@ public class GameObjectManager : MonoBehaviour
     void GetCivilians()
     {
         civilians = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian"));
+    }
+
+    void GetEndPos()
+    {
+        endPos = GameObject.FindGameObjectWithTag("End Position");
+        GameObject.FindGameObjectWithTag("End Position").GetComponent<Endpoint>().manager = this;
+    }
+
+    void GetCivilianDestination()
+    {
+        civilianDestination = GameObject.FindGameObjectWithTag("CivilianDestination");
     }
 
     public void SpawnHUD()

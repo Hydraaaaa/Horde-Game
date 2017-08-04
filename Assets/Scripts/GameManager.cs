@@ -24,6 +24,19 @@ public class GameManager : MonoBehaviour
     public bool atMenu = true;
     public Text arrow;
 
+    void Awake()
+    {
+        List<GameObject> managers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Game Manager"));
+        if (managers.Count > 1)
+        {
+            foreach (GameObject manager in managers)
+            {
+                if (manager != gameObject)
+                    Destroy(manager);
+            }
+        }
+    }
+
 	void Start ()
     {
         DontDestroyOnLoad(gameObject);
@@ -69,6 +82,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        
     }
 
     void CheckAxis()
@@ -111,5 +125,14 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName = "TestScene")
     {
         SceneManager.LoadScene(sceneName);
+        StartCoroutine(SpawnObjectManager());
+    }
+
+    IEnumerator SpawnObjectManager()
+    {
+        while (SceneManager.GetActiveScene().name == "TestMenu")
+            yield return new WaitForSeconds(Time.deltaTime);
+
+        GetComponent<GameObjectManager>().enabled = true;
     }
 }
