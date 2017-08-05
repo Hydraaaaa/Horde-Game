@@ -1336,7 +1336,7 @@ Animator:
   m_GameObject: {fileID: 1226461423244704}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-  m_Controller: {fileID: 9100000, guid: d212bbf7e71e0ca49b4407b1e3e2c48f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 46578523135ae1d4e8002a8dbe6d0ad7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1434,12 +1434,13 @@ MonoBehaviour:
   - Shoot
   - Horizontal2
   - Vertical2
-  moveSpeed: 3
+  moveSpeed: 4
   useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}
   screenCenter: {x: 0, y: 0}
+  localVelocity: {x: 0, y: 0, z: 0}
 --- !u!120 &120885250459197078
 LineRenderer:
   m_ObjectHideFlags: 1

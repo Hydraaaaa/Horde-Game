@@ -26,6 +26,7 @@ public class PlayerMovScript : MonoBehaviour
     public Vector2 screenCenter;
 
     float playerHeight;
+    public Vector3 localVelocity;
 
     // Use this for initialization
     void Start ()
@@ -48,7 +49,33 @@ public class PlayerMovScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        localVelocity = transform.InverseTransformDirection(GetComponent<CharacterController>().velocity);
+        // Debug.Log(transform.InverseTransformDirection(GetComponent<CharacterController>().velocity));
+
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
+        anim.SetFloat("Horizontal", localVelocity.x);
+        anim.SetFloat("Vertical", localVelocity.z);
+
+        bool horBigger = false;
+        bool verBigger = false;
+
+        if (Mathf.Abs(localVelocity.x) == 0 &&
+            Mathf.Abs(localVelocity.y) == 0)
+        {
+
+        }
+        else if (Mathf.Abs(localVelocity.x) > Mathf.Abs(localVelocity.z))
+        {
+            horBigger = true;
+        }
+        else
+        {
+            verBigger = true;
+        }
+
+        anim.SetBool("HorizontalBigger", horBigger);
+        anim.SetBool("VerticalBigger", verBigger);
+
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
         if (useController)
@@ -150,8 +177,5 @@ public class PlayerMovScript : MonoBehaviour
             transform.eulerAngles = transform.eulerAngles + new Vector3(0, 45, 0);
         }
         controller.Move(direction);
-
-        anim.SetFloat("Horizontal", Input.GetAxisRaw("Joy" + playerNumber + "Horizontal"));
-        anim.SetFloat("Vertical", Input.GetAxisRaw("Joy" + playerNumber + "Vertical"));
     }
 }
