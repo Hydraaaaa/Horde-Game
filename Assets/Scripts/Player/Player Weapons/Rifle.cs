@@ -53,6 +53,7 @@ public class Rifle : MonoBehaviour
         Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
         laser.endColor = endColor;
     }
+
     public void Attack()
     {
         if (currentCooldown <= 0)
@@ -77,7 +78,13 @@ public class Rifle : MonoBehaviour
                 Instantiate(testObj, hit.point, transform.rotation);
 
                 if (hit.transform.GetComponent<Health>() != null)
+                {
                     hit.transform.GetComponent<Health>().Damage(damage);
+
+                    // If the attacked target is an enemy
+                    if (hit.transform.GetComponent<Health>().Enemy && this.tag == "Player")
+                        hit.transform.GetComponent<Health>().Attacker = this.gameObject;
+                }
             }
             else
             {

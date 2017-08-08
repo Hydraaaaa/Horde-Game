@@ -892,7 +892,7 @@ Prefab:
     - target: {fileID: 114937802504153570, guid: 3623c2bdabe6d4043982752dbb36c2bf,
         type: 2}
       propertyPath: cooldown
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3623c2bdabe6d4043982752dbb36c2bf, type: 2}
@@ -2834,7 +2834,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5f756ace946e2ba42a28d0adac02dcc7, type: 2}
+  - {fileID: 2100000, guid: 46752e9680145f645bcf685f95f0772e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

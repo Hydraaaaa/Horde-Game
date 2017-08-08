@@ -124,6 +124,7 @@ public class PlayerMovScript : MonoBehaviour
         Vector2 lookScreenPos = screenCenter;
         Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
 
+        // Check all axis movements
         foreach (string axis in axisEndings)
         {
             string stringCombo = playerBeginning + axis;
@@ -148,10 +149,8 @@ public class PlayerMovScript : MonoBehaviour
                     lookScreenPos = new Vector2(lookScreenPos.x, -Input.GetAxis(stringCombo));
                 }
             }
-            else
-            {
-                lookScreenPos = GetComponent<CharacterController>().velocity;
-            }
+
+            // lookScreenPos = GetComponent<CharacterController>().velocity;
 
             if (Input.GetAxis(stringCombo) >= 0.5)
             {
@@ -162,6 +161,7 @@ public class PlayerMovScript : MonoBehaviour
             }
         }
 
+        // Check all button inputs
         foreach (string button in buttonEndings)
         {
             string stringCombo = playerBeginning + button;
@@ -171,6 +171,9 @@ public class PlayerMovScript : MonoBehaviour
             }
         }
 
+        // lookScreenPos = GetComponent<CharacterController>().velocity;
+        
+        // If there is input on the thumbsticks
         if (new Vector3(lookScreenPos.x, 0, lookScreenPos.y) != Vector3.zero)
         {
             lookDir = transform.forward = new Vector3(lookScreenPos.x, 0, lookScreenPos.y);

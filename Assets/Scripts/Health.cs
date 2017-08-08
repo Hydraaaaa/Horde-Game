@@ -9,6 +9,9 @@ public class Health : MonoBehaviour
     public delegate void NoHealth();
     public NoHealth OnDie;
 
+    public bool Enemy = false;
+    public GameObject Attacker = null;
+
     void Awake()
     {
         if (transform.CompareTag("Player"))

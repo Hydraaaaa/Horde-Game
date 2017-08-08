@@ -530,7 +530,17 @@ Prefab:
     - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
       propertyPath: playerCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: timeBetweenMovement
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: ControllerNextInputCheckTimeGap
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}

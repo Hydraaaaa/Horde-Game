@@ -109,6 +109,7 @@ public class GameObjectManager : MonoBehaviour
                                                         playerStarts[playerStartIndex].transform.rotation);
 
                 playerInstance.GetComponent<PlayerMovScript>().playerNumber = i + 1;
+                playerInstance.GetComponent<PlayerInfoScript>().PlayerNo = i + 1;
                 players.Add(playerInstance);
             }
         }

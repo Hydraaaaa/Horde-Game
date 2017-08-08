@@ -74,12 +74,14 @@ public class EnemyNavigation : MonoBehaviour
             // Rotating towards movement direction
             Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
 
+            // If the agent is moving
             if (dir != Vector3.zero)
             {
+                // Rotate in the direction of the velocity
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     Quaternion.LookRotation(dir),
-                    Time.deltaTime * turningSpeed
+                    Time.deltaTime * (turningSpeed * 2)
                 );
             }
 
@@ -89,25 +91,31 @@ public class EnemyNavigation : MonoBehaviour
                 //TargetPos = EndPos.transform.position;
                 agent.SetDestination(TargetPos);
             }
-
-            // If the agent is following a player
-            if (player != null)
-                PlayerNotNull();
-
-            // If the agent is following a Survivor
-            if (survivor != null)
-                SurvivorNotNull();
-
-            // If the agent is following a Barricade
-            if (barricade != null)
-                BarricadeNotNull();
-
-            if (barricade == null &&
-                survivor == null &&
-                player == null)
+            // If the agent isnt under attack
+            if (GetComponent<Health>().Attacker == null)
             {
-                TargetPos = EndPos.transform.position;
-                agent.SetDestination(TargetPos);
+                // If the agent is following a player
+                if (player != null)
+                    PlayerNotNull();
+
+                // If the agent is following a Survivor
+                else if (survivor != null)
+                        SurvivorNotNull();
+
+                // If the agent is following a Barricade
+                else if (barricade != null)
+                        BarricadeNotNull();
+
+                // If the agent isnt following anything
+                else
+                {
+                    TargetPos = EndPos.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
+            }
+            else
+            {
+                BeingAttacked();
             }
 
             // If the agent has a path to follow
@@ -118,33 +126,43 @@ public class EnemyNavigation : MonoBehaviour
         }
     }
 
+    void BeingAttacked()
+    {
+        // If the Attacker is within attack range
+        if (Vector3.Distance(transform.position, GetComponent<Health>().Attacker.transform.position) < attackRange)
+        {
+            if (GetComponent<Health>().Attacker.GetComponent<Health>().health > 0)
+            {
+                Attack(player);
+
+                if (GetComponent<Health>().Attacker.GetComponent<Health>().health <= 0)
+                {
+                    // then remove the player reference so it dosent keep tracking to them
+                    followPlayer = false;
+                    player = null;
+                    TargetPos = EndPos.transform.position;
+                    agent.SetDestination(TargetPos);
+                    GetComponent<Health>().Attacker = null;
+                }
+            }
+            else
+            {
+                // then remove the player reference so it dosent keep tracking to them
+                followPlayer = false;
+                player = null;
+                TargetPos = EndPos.transform.position;
+                agent.SetDestination(TargetPos);
+                GetComponent<Health>().Attacker = null;
+            }
+        }
+        // Target pos becomes the attackers position
+        TargetPos = GetComponent<Health>().Attacker.transform.position;
+        agent.SetDestination(TargetPos);
+    }
+
     void PlayerNotNull()
     {
-        // Grab the players layer
-        int layermask = 1 << LayerMask.NameToLayer("Seethrough");
-        layermask = ~layermask;
-
-        //// If the AI loses sight of the player
-        //if (Physics.Linecast(this.transform.position, player.transform.position, layermask, QueryTriggerInteraction.Ignore))
-        //{
-        //    // Tell the AI to travel where the player was so it can track to last known position
-        //    TargetPos = player.transform.position;
-
-        //    // then remove the player reference so it dosent keep tracking to them
-        //    followPlayer = false;
-        //    player = null;
-
-        //    colo = Color.green;
-        //}
-        //// Else if the player is visible
-        //else
-        //{
-        //    Debug.DrawLine(transform.position, player.transform.position, new Color(1, 0, 0));
-        //    // Set the target position of the AI to the position of the player
-        //    TargetPos = player.transform.position;
-        //    agent.SetDestination(TargetPos);
-        //}
-
+        // If player is out of range
         if (Vector3.Distance(transform.position, player.transform.position) > GetComponent<SphereCollider>().radius * 3)
         {
             // then remove the player reference so it dosent keep tracking to them
@@ -240,51 +258,28 @@ public class EnemyNavigation : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        bool checkedAndFound = false;
-
-        // Check the tag against an enum of types
-        for (int i = 0; i < Priority.Length; i++)
+        // If they ran into another enemy, dont bother continuing
+        if (col.tag == "Enemy")
         {
-            switch (Priority[i])
-            {
-                case Type.BARRICADE:
-                    if (col.tag == TypeTags.BarricadeTag)
-                    {
-                        CheckForBarricade(col);
-                        checkedAndFound = true;
-                    }
-                    break;
-                case Type.DEFENSES:
-                    if (col.tag == TypeTags.DefensesTag)
-                    {
-                        CheckForDefenses(col);
-                        checkedAndFound = true;
-                    }
-                    break;
-                case Type.PLAYER:
-                    if (col.tag == TypeTags.PlayerTag)
-                    {
-                        CheckForPlayer(col);
-                        checkedAndFound = true;
-                    }
-                    break;
-                case Type.SURVIVOR:
-                    if (col.tag == TypeTags.SurvivorTag)
-                    {
-                        CheckForSurvivor(col);
-                        checkedAndFound = true;
-                    }
-                    break;
-                case Type.TERRAIN:
-                    if (col.tag == TypeTags.TerrainTag)
-                    {
-                        CheckForTerrain(col);
-                        checkedAndFound = true;
-                    }
-                    break;
-            }
-            if (checkedAndFound)
-                break;
+            return;
+        }
+        // If they found a barricade
+        if (col.tag == TypeTags.BarricadeTag)
+        {
+            CheckForBarricade(col);
+            return;
+        }
+        // IF they found a player
+        if (col.tag == TypeTags.PlayerTag)
+        {
+            CheckForPlayer(col);
+            return;
+        }
+        // If they found a survivor
+        if (col.tag == TypeTags.SurvivorTag)
+        {
+            CheckForSurvivor(col);
+            return;
         }
     }
 
@@ -300,16 +295,6 @@ public class EnemyNavigation : MonoBehaviour
             agent.SetDestination(TargetPos);
 
         }
-    }
-
-    void CheckForTerrain(Collider col)
-    {
-
-    }
-
-    void CheckForDefenses(Collider col)
-    {
-
     }
 
     void CheckForPlayer(Collider col)
