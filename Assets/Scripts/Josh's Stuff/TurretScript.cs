@@ -109,7 +109,8 @@ public class TurretScript : MonoBehaviour
         {
             Debug.DrawLine(transform.position, col.transform.position, Color.red);
 
-            int layermask = 1 << LayerMask.NameToLayer("Seethrough");
+            int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+            layermask = 1 << LayerMask.NameToLayer("Enemy");
             layermask = ~layermask;
 
             // If the player is in view of the control panel
@@ -147,7 +148,7 @@ public class TurretScript : MonoBehaviour
                             UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
                         }
 
-                        if (Input.GetButton("Joy1YButton"))
+                        if (Input.GetButtonDown("Joy1YButton"))
                         {
                             if (Interacting == false)
                             {
@@ -158,7 +159,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
-                        if (Input.GetButton("Joy1XButton"))
+                        if (Input.GetButtonDown("Joy1XButton"))
                         {
                             if (Interacting == false)
                             {
@@ -169,7 +170,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
                             }
                         }
-                        if (Input.GetButton("Joy1AButton"))
+                        if (Input.GetButtonDown("Joy1AButton"))
                         {
                             if (Interacting == false)
                             {
@@ -180,7 +181,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
                             }
                         }
-                        if (Input.GetButton("Joy1BButton"))
+                        if (Input.GetButtonDown("Joy1BButton"))
                         {
                             Interacting = false;
                         }
@@ -202,7 +203,7 @@ public class TurretScript : MonoBehaviour
                             UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 2);
                         }
 
-                        if (Input.GetButton("Joy2YButton"))
+                        if (Input.GetButtonDown("Joy2YButton"))
                         {
                             if (Interacting == false)
                             {
@@ -213,7 +214,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
-                        if (Input.GetButton("Joy2XButton"))
+                        if (Input.GetButtonDown("Joy2XButton"))
                         {
                             if (Interacting == false)
                             {
@@ -224,7 +225,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
                             }
                         }
-                        if (Input.GetButton("Joy2AButton"))
+                        if (Input.GetButtonDown("Joy2AButton"))
                         {
                             if (Interacting == false)
                             {
@@ -235,7 +236,7 @@ public class TurretScript : MonoBehaviour
                                 UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
                             }
                         }
-                        if (Input.GetButton("Joy2BButton"))
+                        if (Input.GetButtonDown("Joy2BButton"))
                         {
                             Interacting = false;
                         }

@@ -110,7 +110,8 @@ public class TurretAIScript : MonoBehaviour
             if (Target == null)
             {
                 // If the turret has line of sight
-                int layermask = 1 << LayerMask.NameToLayer("Seethrough");
+                int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+                layermask = 1 << LayerMask.NameToLayer("Enemy");
                 layermask = ~layermask;
 
                 if (!Physics.Linecast(VerticalRotator.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
@@ -122,7 +123,8 @@ public class TurretAIScript : MonoBehaviour
             else
             {
                 // If the turret has line of sight
-                int layermask = 1 << LayerMask.NameToLayer("Seethrough");
+                int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+                layermask = 1 << LayerMask.NameToLayer("Enemy");
                 layermask = ~layermask;
 
                 if (!Physics.Linecast(VerticalRotator.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))

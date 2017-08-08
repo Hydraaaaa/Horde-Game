@@ -55,7 +55,7 @@ public class EnemyNavigation : MonoBehaviour
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
-
+        
         //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
@@ -299,7 +299,8 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        int layermask = 1 << 9;
+        int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+        layermask = 1 << LayerMask.NameToLayer("Enemy");
         layermask = ~layermask;
 
         if (survivor == null && barricade == null)
@@ -330,11 +331,12 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForSurvivor(Collider col)
     {
-        int layermask = 1 << 9;
+        int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+        layermask = 1 << LayerMask.NameToLayer("Enemy");
         layermask = ~layermask;
 
         // Can they see a Survivor && is the survivor in range
-        if (!Physics.Linecast(this.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+        if (Physics.Linecast(this.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
         {
             // If the agent isnt following a survivor already
             if (survivor == null)
@@ -351,6 +353,7 @@ public class EnemyNavigation : MonoBehaviour
                 TargetPos = col.transform.position;
                 agent.SetDestination(TargetPos);
             }
+
             // If there is another survivor within range of the agent
             else if (Vector3.Distance(this.transform.position, survivor.transform.position) >
                     Vector3.Distance(this.transform.position, col.transform.position))

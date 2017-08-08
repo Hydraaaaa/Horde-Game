@@ -43,17 +43,40 @@ public class BarrierLogic : MonoBehaviour
 
     public bool vital;
 
+    public float IntervalLengthInSeconds = 60;
+    public float currentIntervalTime;
+    public int DamageIncreasePerInterval = 5;
+    public int CurrentDamagePerTick = 0;
+    
 	// Use this for initialization
 	void Start ()
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
+        currentIntervalTime = IntervalLengthInSeconds;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
-		
-	}
+        if (currentIntervalTime > 0)
+            currentIntervalTime -= Time.deltaTime;
+        else
+        {
+            currentIntervalTime = IntervalLengthInSeconds;
+            CurrentDamagePerTick += DamageIncreasePerInterval;
+        }
+
+        GetComponent<Health>().Damage(CurrentDamagePerTick);
+
+        if (GetComponent<Health>().health <= 0)
+        {
+            manager.enemySpawners[0].SetActive(true);
+        }
+        else
+        {
+            manager.enemySpawners[0].SetActive(false);
+        }
+    }
 
     void OnTriggerStay(Collider col)
     {

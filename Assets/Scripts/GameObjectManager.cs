@@ -110,6 +110,16 @@ public class GameObjectManager : MonoBehaviour
 
                 playerInstance.GetComponent<PlayerMovScript>().playerNumber = i + 1;
                 playerInstance.GetComponent<PlayerInfoScript>().PlayerNo = i + 1;
+
+                if (i == 0)
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 0, 1);
+                if (i == 1)
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 0, 1, 1);
+                if (i == 2)
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 1, 1);
+                if (i == 3)
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 1, 1, 1);
+
                 players.Add(playerInstance);
             }
         }
