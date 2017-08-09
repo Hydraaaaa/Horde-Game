@@ -9,15 +9,17 @@ public class PlayerInfoScript : MonoBehaviour
 
     public Text ScrapCount;
     public Text HealthCount;
+    public Image HealthSlider;
 
     public Health playerHP;
     public BarrierPlayersideLogic playerScrap;
-
+    public float fillAmount;
     // Use this for initialization
 	void Start ()
     {
         ScrapCount = GameObject.Find("ScrapCount" + PlayerNo.ToString()).GetComponent<Text>();
         HealthCount = GameObject.Find("HealthCount" + PlayerNo.ToString()).GetComponent<Text>();
+        HealthSlider = GameObject.Find("HPBar" + PlayerNo.ToString()).GetComponent<Image>();
 
         playerHP = GetComponent<Health>();
         playerScrap = GetComponent<BarrierPlayersideLogic>();
@@ -28,5 +30,8 @@ public class PlayerInfoScript : MonoBehaviour
     {
         HealthCount.text = playerHP.health.ToString();
         ScrapCount.text = playerScrap.Resources.ToString();
+
+        fillAmount = ((float)playerHP.health / (float)playerHP.maxHealth);
+        HealthSlider.fillAmount = fillAmount;
 	}
 }

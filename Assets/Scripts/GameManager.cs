@@ -18,11 +18,14 @@ public class GameManager : MonoBehaviour
 
     public int playerCount;
 
-    public string[] ButtonLocations = { "TestScene", "Josh'sScene" };
+    public string[] ButtonLocations = { "Josh'sScene" };
     public int buttonNo;
 
     public bool atMenu = true;
-    public Text arrow;
+    public Image arrow;
+
+    public GameObject MainHUD;
+    public GameObject ControlsHUD;
 
     void Awake()
     {
@@ -39,6 +42,9 @@ public class GameManager : MonoBehaviour
 
 	void Start ()
     {
+        MainHUD.SetActive(true);
+        ControlsHUD.SetActive(false);
+
         DontDestroyOnLoad(gameObject);
 	}
 	
@@ -64,21 +70,36 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetButton("Joy1AButton") && !hasShot)
             {
-                Debug.Log("Bang!");
-                LoadScene(ButtonLocations[buttonNo]);
+                if (buttonNo == 0)
+                {
+                    LoadScene("Josh'sScene");
+                    atMenu = false;
+                }
+                if (buttonNo == 1)
+                {
+                    ToggleControlsHUD();
+                }
+                if (buttonNo == 2)
+                {
+                    QuitScene();
+                }
+
                 hasShot = true;
-                atMenu = false;
             }
 
             if (arrow != null)
             {
                 if (buttonNo == 0)
                 {
-                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 30, arrow.transform.position.z));
+                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -39.5f, arrow.transform.position.z));
                 }
-                if (buttonNo == 1)
+                else if (buttonNo == 1)
                 {
-                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, 0, arrow.transform.position.z));
+                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -100, arrow.transform.position.z));
+                }
+                else if (buttonNo == 2)
+                {
+                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -161.1f, arrow.transform.position.z));
                 }
             }
         }
@@ -87,37 +108,29 @@ public class GameManager : MonoBehaviour
 
     void CheckAxis()
     {
-        p1Axis = new Vector2(Input.GetAxis("Joy1Horizontal"), Input.GetAxis("Joy1Vertical"));
-        p1Trigg = (Input.GetAxis("Joy1Shoot"));
-        if (Input.GetAxis("Joy1Horizontal") != 0)
+        if (MainHUD.active)
         {
-            if (Input.GetAxis("Joy1Horizontal") >= ControllerMenuAxisSensitivity)
+            p1Axis = new Vector2(Input.GetAxis("Joy1Horizontal"), Input.GetAxis("Joy1Vertical"));
+            p1Trigg = (Input.GetAxis("Joy1Shoot"));
+            if (Input.GetAxis("Joy1Vertical") >= 0.90 ||
+                Input.GetAxis("Joy1Vertical") <= -0.90)
             {
-                timeBetweenMovement = 0;
-            }
-            else if (Input.GetAxis("Joy1Horizontal") <= -ControllerMenuAxisSensitivity)
-            {
-                timeBetweenMovement = 0;
-            }
-        }
-        if (Input.GetAxis("Joy1Vertical") >= 0.65 ||
-            Input.GetAxis("Joy1Vertical") <= -0.65)
-        {
-            if (Input.GetAxis("Joy1Vertical") <= ControllerMenuAxisSensitivity)
-            {
-                timeBetweenMovement = 0;
+                if (Input.GetAxis("Joy1Vertical") <= ControllerMenuAxisSensitivity)
+                {
+                    timeBetweenMovement = 0;
 
-                buttonNo--;
-                if (buttonNo < 0)
-                    buttonNo = 0;
-            }
-            else if (Input.GetAxis("Joy1Vertical") >= -ControllerMenuAxisSensitivity)
-            {
-                timeBetweenMovement = 0;
+                    buttonNo--;
+                    if (buttonNo < 0)
+                        buttonNo = 0;
+                }
+                else if (Input.GetAxis("Joy1Vertical") >= -ControllerMenuAxisSensitivity)
+                {
+                    timeBetweenMovement = 0;
 
-                buttonNo++;
-                if (buttonNo > 1)
-                    buttonNo = 1;
+                    buttonNo++;
+                    if (buttonNo > 2)
+                        buttonNo = 2;
+                }
             }
         }
     }
@@ -126,6 +139,17 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         StartCoroutine(SpawnObjectManager());
+    }
+
+    public void ToggleControlsHUD()
+    {
+        MainHUD.SetActive(!MainHUD.active);
+        ControlsHUD.SetActive(!ControlsHUD.active);
+    }
+
+    public void QuitScene()
+    {
+        Application.Quit();
     }
 
     IEnumerator SpawnObjectManager()

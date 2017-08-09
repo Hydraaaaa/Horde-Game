@@ -296,7 +296,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1444431432277810}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -327,7 +327,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1159225143154486}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -358,7 +358,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1497069604001116}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -389,7 +389,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1955760895325826}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -420,7 +420,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1149090560028122}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -451,7 +451,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1877768757252428}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -554,7 +554,7 @@ MonoBehaviour:
   attackInterval: 0.1
   curAttackInterval: 0
   turretRef: {fileID: 0}
-  TurretNo: 1
+  TurretNo: 2
   timeLeft: 0
 --- !u!114 &114208753565126400
 MonoBehaviour:

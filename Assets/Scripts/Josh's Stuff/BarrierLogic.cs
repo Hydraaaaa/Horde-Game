@@ -35,10 +35,6 @@ public class BarrierLogic : MonoBehaviour
     public int Level = 0;
 
     public LevelInformation Information;
-
-    public KeyCode interOne;
-    public KeyCode interTwo;
-
     private GameObjectManager manager;
 
     public bool vital;
@@ -66,15 +62,20 @@ public class BarrierLogic : MonoBehaviour
             CurrentDamagePerTick += DamageIncreasePerInterval;
         }
 
-        GetComponent<Health>().Damage(CurrentDamagePerTick);
+        if (GetComponent<Health>() != null)
+        {
+            GetComponent<Health>().Damage(CurrentDamagePerTick);
 
-        if (GetComponent<Health>().health <= 0)
-        {
-            manager.enemySpawners[0].SetActive(true);
-        }
-        else
-        {
-            manager.enemySpawners[0].SetActive(false);
+            if (GetComponent<Health>().health <= 0)
+            {
+                if (manager.enemySpawners[0] != null)
+                    manager.enemySpawners[0].SetActive(true);
+            }
+            else
+            {
+                if (manager.enemySpawners[0] != null)
+                    manager.enemySpawners[0].SetActive(false);
+            }
         }
     }
 
@@ -82,29 +83,27 @@ public class BarrierLogic : MonoBehaviour
     {
         if (col.tag == "Player")
         {
+            // If there is atleased one player
             if (manager != null && manager.players.Count > 0)
-            {
+            {                
                 // If player 1 interacts
                 if (col.gameObject == manager.players[0])
-                {
-                    if (Input.GetKeyDown(interOne))
-                    {
-                        UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
-                    }
-                    else if (Input.GetButton("Joy1XButton"))
+                { 
+                    if (Input.GetButton("Joy1XButton"))
                     {
                         UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
                     }
                 }
 
+            }
+            
+            // If there is more than one player
+            if (manager != null && manager.players.Count > 1)
+            {
                 // If player 2 interacts
                 if (col.gameObject == manager.players[1])
                 {
-                    if (Input.GetKeyDown(interTwo))
-                    {
-                        UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
-                    }
-                    else if (Input.GetButton("Joy2XButton"))
+                    if (Input.GetButton("Joy2XButton"))
                     {
                         UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
                     }

@@ -37,14 +37,6 @@ public class TurretAIScript : MonoBehaviour
         timeLeft = turretRef.TurInformation[TurretNo - 1].curActiveTime;
         VerticalRotator.GetComponent<Rifle>().damage = turretRef.TurInformation[TurretNo - 1].DPS;
 
-        if (turretRef.TurInformation[TurretNo - 1].Level > 1)
-        {
-            for (int i = 0; i < VerticalRotator.transform.childCount; i++)
-            {
-                VerticalRotator.transform.GetChild(i).GetComponent<Material>().color = Color.red;
-            }
-        }
-
         if (turretRef.TurInformation[TurretNo - 1].active)
         {
             VerticalRotator.GetComponent<LineRenderer>().startColor = new Color(0, 1, 0, 1);

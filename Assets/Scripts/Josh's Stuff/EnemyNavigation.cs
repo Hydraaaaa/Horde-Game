@@ -155,9 +155,13 @@ public class EnemyNavigation : MonoBehaviour
                 GetComponent<Health>().Attacker = null;
             }
         }
-        // Target pos becomes the attackers position
-        TargetPos = GetComponent<Health>().Attacker.transform.position;
-        agent.SetDestination(TargetPos);
+
+        if (GetComponent<Health>().Attacker != null)
+        {
+            // Target pos becomes the attackers position
+            TargetPos = GetComponent<Health>().Attacker.transform.position;
+            agent.SetDestination(TargetPos);
+        }
     }
 
     void PlayerNotNull()
@@ -306,7 +310,7 @@ public class EnemyNavigation : MonoBehaviour
         if (survivor == null && barricade == null)
         {
 
-            if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+            if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
             {
                 //Debug.Log("Can see player");
                 // If this player is closer than the other player in the scene

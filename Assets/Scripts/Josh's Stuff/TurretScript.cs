@@ -55,6 +55,7 @@ public class TurretScript : MonoBehaviour
 
     public GameObject GamepadTransform;
     public GameObject UIPiece;
+    public GameObject UIPieceThumbstick;
     private GameObject ActivePiece;
     private GameObject InactivePiece;
 
@@ -76,6 +77,7 @@ public class TurretScript : MonoBehaviour
         UIPiece = UIPiece.transform.GetChild(0).gameObject;
         ActivePiece = UIPiece.transform.GetChild(0).gameObject;
         InactivePiece = UIPiece.transform.GetChild(1).gameObject;
+        UIPieceThumbstick = ActivePiece.transform.GetChild(2).transform.GetChild(1).gameObject;
 
         ActivePiece.SetActive(false);
         InactivePiece.SetActive(false);
@@ -85,7 +87,15 @@ public class TurretScript : MonoBehaviour
     void Update ()
     {
         if (Camera.main != null)
+        {
             UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
+
+            if (RepairPage)
+                UIPieceThumbstick.transform.rotation = Quaternion.Euler(0, 0, 0);
+            else
+                UIPieceThumbstick.transform.rotation = Quaternion.Euler(180, 0, 0);
+        }
+
 
         for (int i = 0; i < TurInformation.Length; i++)
         {
@@ -137,15 +147,24 @@ public class TurretScript : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.Alpha1))
                         {
-                            UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
+                            if (RepairPage)
+                                RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
+                            else
+                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
                         }
                         if (Input.GetKeyDown(KeyCode.Alpha2))
                         {
-                            UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
+                            if (RepairPage)
+                                RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
+                            else
+                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
                         }
                         if (Input.GetKeyDown(KeyCode.Alpha3))
                         {
-                            UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
+                            if (RepairPage)
+                                RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
+                            else
+                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
                         }
 
                         if (Input.GetButtonDown("Joy1YButton"))
@@ -156,7 +175,10 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
+                                else
+                                    UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
                         if (Input.GetButtonDown("Joy1XButton"))
@@ -167,7 +189,10 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
+                                else
+                                    UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
                             }
                         }
                         if (Input.GetButtonDown("Joy1AButton"))
@@ -178,31 +203,36 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
+                                else
+                                    UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
                             }
                         }
                         if (Input.GetButtonDown("Joy1BButton"))
                         {
                             Interacting = false;
                         }
+
+                        // if the dpad is being pressed vertically
+                        if (Mathf.Abs(Input.GetAxis("Joy1DVertical")) > 0.75f)
+                        {
+                            // If pressed up
+                            if (Input.GetAxis("Joy1DVertical") > 0.75f)
+                            {
+                                RepairPage = true;
+                            }
+                            // If pressed down
+                            else
+                            {
+                                RepairPage = false;
+                            }
+                        }
                     }
 
                     // If player 2 interacts
                     else if (col.gameObject == manager.players[1])
                     {
-                        if (Input.GetKeyDown(KeyCode.Alpha1))
-                        {
-                            UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha2))
-                        {
-                            UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 1);
-                        }
-                        if (Input.GetKeyDown(KeyCode.Alpha3))
-                        {
-                            UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 2);
-                        }
-
                         if (Input.GetButtonDown("Joy2YButton"))
                         {
                             if (Interacting == false)
@@ -211,7 +241,10 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                else
+                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
                         if (Input.GetButtonDown("Joy2XButton"))
@@ -222,7 +255,10 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 1);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                else
+                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
                         if (Input.GetButtonDown("Joy2AButton"))
@@ -233,7 +269,10 @@ public class TurretScript : MonoBehaviour
                             }
                             else
                             {
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);
+                                if (RepairPage)
+                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                else
+                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
                             }
                         }
                         if (Input.GetButtonDown("Joy2BButton"))
@@ -250,6 +289,7 @@ public class TurretScript : MonoBehaviour
                 // Hide the UI pieces
                 ActivePiece.SetActive(false);
                 InactivePiece.SetActive(false);
+                Interacting = false;
             }
         }
     }
@@ -348,6 +388,18 @@ public class TurretScript : MonoBehaviour
         else
         {
             Debug.Log("Already At Max Level");
+        }
+    }
+
+    public void RepairBarrier(BarrierPlayersideLogic playerRes, int turretNumber)
+    {
+        if (playerRes.Resources >= (TurInformation[turretNumber].Cost / 2))
+        {
+            playerRes.Resources = playerRes.Resources - (TurInformation[turretNumber].Cost / 2);
+
+            // Set Current Lifetime back to max lifetime
+            TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
+            Debug.Log("Upgraded to lvl 1");
         }
     }
 }

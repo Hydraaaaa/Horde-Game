@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameObjectManager : MonoBehaviour
@@ -77,7 +78,21 @@ public class GameObjectManager : MonoBehaviour
 
         if (players.Count == 0 && playing)
             GameOver();
+
+        if (players.Count > 0)
+        if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
+        {
+            GameObject.Find("HPBar" + 1).GetComponent<Image>().fillAmount = 0;
+            GameObject.Find("HealthCount" + 1).GetComponent<Text>().text = "0";
+        }
+        if (players.Count > 1)
+        if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
+        {
+            GameObject.Find("HPBar" + 2).GetComponent<Image>().fillAmount = 0;
+            GameObject.Find("HealthCount" + 2).GetComponent<Text>().text = "0";
+        }
     }
+
     IEnumerator GetInitialCivilians()
     {
         yield return new WaitForSeconds(1);
