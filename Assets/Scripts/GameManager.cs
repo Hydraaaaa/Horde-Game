@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName = "TestScene")
     {
+        atMenu = false;
         SceneManager.LoadScene(sceneName);
         StartCoroutine(SpawnObjectManager());
     }
