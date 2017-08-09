@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 4053672064050070}
   - component: {fileID: 136068906050621124}
   - component: {fileID: 143391138108412064}
-  - component: {fileID: 114868626609527388}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114736662164450560}
   - component: {fileID: 120885250459197078}
@@ -1359,8 +1358,11 @@ MonoBehaviour:
   PlayerNo: -1
   ScrapCount: {fileID: 0}
   HealthCount: {fileID: 0}
+  HealthSlider: {fileID: 0}
+  EnergySlider: {fileID: 0}
   playerHP: {fileID: 0}
   playerScrap: {fileID: 0}
+  playerEnergy: {fileID: 0}
 --- !u!114 &114118442132592400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1379,6 +1381,7 @@ MonoBehaviour:
   damage: 20
   laserLength: 30
   range: 40
+  energyCost: 0.4
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1420,17 +1423,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimRaycastBoxPrefab: {fileID: 1100672212091832, guid: bd537a150d7682b4db741bdde980199a,
     type: 2}
---- !u!114 &114868626609527388
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d02df1f7e9f994fbee5ed65010d0dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114887641942699286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1460,6 +1452,8 @@ MonoBehaviour:
   lookDir: {x: 0, y: 0, z: 0}
   screenCenter: {x: 0, y: 0}
   localVelocity: {x: 0, y: 0, z: 0}
+  maxEnergy: 10
+  energy: 0
 --- !u!120 &120885250459197078
 LineRenderer:
   m_ObjectHideFlags: 1

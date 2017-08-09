@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Rifle : MonoBehaviour
+public class TurretRifle : MonoBehaviour
 {
     public GameObject testObj;
     public GameObject tracer;
@@ -19,10 +19,8 @@ public class Rifle : MonoBehaviour
 
     public float range;
 
-    public float energyCost;
-
     LineRenderer laser;
-    
+
     Vector3 laserEndPoint;
 
     void Start()
@@ -56,12 +54,11 @@ public class Rifle : MonoBehaviour
         laser.endColor = endColor;
     }
 
-    public void Attack(ref float energy)
+    public void Attack()
     {
-        if (currentCooldown <= 0 && energy > energyCost)
+        if (currentCooldown <= 0)
         {
             currentCooldown = cooldown;
-            energy -= energyCost;
 
             Vector3 aimDir = transform.forward + Random.insideUnitSphere * accuracy;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovScript : MonoBehaviour
 {
-    public delegate void Attack();
+    public delegate void Attack(ref float energy);
 
     public Attack playerAttack;
     public Animator anim;
@@ -28,6 +28,9 @@ public class PlayerMovScript : MonoBehaviour
     float playerHeight;
     public Vector3 localVelocity;
 
+    public float maxEnergy;
+    [HideInInspector] public float energy;
+
     // Use this for initialization
     void Start ()
     {
@@ -38,8 +41,7 @@ public class PlayerMovScript : MonoBehaviour
         playerHeight = transform.position.y + controller.stepOffset;
         playerAttack = GetComponent<Rifle>().Attack;
 
-        // Turning off legacy controls
-        GetComponent<PlayerAttack>().enabled = false;
+        energy = maxEnergy;
     }
     void Awake()
     {
@@ -95,7 +97,7 @@ public class PlayerMovScript : MonoBehaviour
             }
 
             if (Input.GetMouseButton(0) && playerAttack != null)
-                playerAttack();
+                playerAttack(ref energy);
 
 
             // Keyboard
@@ -113,6 +115,10 @@ public class PlayerMovScript : MonoBehaviour
                 direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
             
             controller.Move(direction);
+
+            energy += Time.deltaTime;
+            if (energy > maxEnergy)
+                energy = maxEnergy;
         }
     }
 
@@ -156,7 +162,7 @@ public class PlayerMovScript : MonoBehaviour
             {
                 if (axis == "Shoot")
                 {
-                    playerAttack();
+                    playerAttack(ref energy);
                 }
             }
         }

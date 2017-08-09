@@ -28,7 +28,7 @@ public class TurretAIScript : MonoBehaviour
     void Start ()
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
-        turretAttack = VerticalRotator.GetComponent<Rifle>().Attack;
+        turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
     }
 	
 	// Update is called once per frame
