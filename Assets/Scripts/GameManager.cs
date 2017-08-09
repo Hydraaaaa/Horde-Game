@@ -62,44 +62,47 @@ public class GameManager : MonoBehaviour
                 CheckAxis();
             }
 
-            // Right Trigger
-            if (!Input.GetButton("Joy1AButton"))
+            if (MainHUD.active)
             {
-                hasShot = false;
-            }
-
-            if (Input.GetButton("Joy1AButton") && !hasShot)
-            {
-                if (buttonNo == 0)
+                // Right Trigger
+                if (!Input.GetButton("Joy1AButton"))
                 {
-                    LoadScene("Josh'sScene");
-                    atMenu = false;
-                }
-                if (buttonNo == 1)
-                {
-                    ToggleControlsHUD();
-                }
-                if (buttonNo == 2)
-                {
-                    QuitScene();
+                    hasShot = false;
                 }
 
-                hasShot = true;
-            }
+                if (Input.GetButton("Joy1AButton") && !hasShot)
+                {
+                    if (buttonNo == 0)
+                    {
+                        LoadScene("Josh'sScene");
+                        atMenu = false;
+                    }
+                    if (buttonNo == 1)
+                    {
+                        ToggleControlsHUD();
+                    }
+                    if (buttonNo == 2)
+                    {
+                        QuitScene();
+                    }
 
-            if (arrow != null)
-            {
-                if (buttonNo == 0)
-                {
-                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -39.5f, arrow.transform.position.z));
+                    hasShot = true;
                 }
-                else if (buttonNo == 1)
+
+                if (arrow != null)
                 {
-                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -100, arrow.transform.position.z));
-                }
-                else if (buttonNo == 2)
-                {
-                    arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -161.1f, arrow.transform.position.z));
+                    if (buttonNo == 0)
+                    {
+                        arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -39.5f, arrow.transform.position.z));
+                    }
+                    else if (buttonNo == 1)
+                    {
+                        arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -100, arrow.transform.position.z));
+                    }
+                    else if (buttonNo == 2)
+                    {
+                        arrow.rectTransform.transform.localPosition = (new Vector3(arrow.transform.localPosition.x, -161.1f, arrow.transform.position.z));
+                    }
                 }
             }
         }
@@ -131,6 +134,13 @@ public class GameManager : MonoBehaviour
                     if (buttonNo > 2)
                         buttonNo = 2;
                 }
+            }
+        }
+        else
+        {
+            if (Input.GetButton("Joy1BButton"))
+            {
+                ToggleControlsHUD();
             }
         }
     }
