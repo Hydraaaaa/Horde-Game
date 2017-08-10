@@ -54,12 +54,15 @@ public class BarrierLogic : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (currentIntervalTime > 0)
-            currentIntervalTime -= Time.deltaTime;
-        else
+        if (!vital)
         {
-            currentIntervalTime = IntervalLengthInSeconds;
-            CurrentDamagePerTick += DamageIncreasePerInterval;
+            if (currentIntervalTime > 0)
+                currentIntervalTime -= Time.deltaTime;
+            else
+            {
+                currentIntervalTime = IntervalLengthInSeconds;
+                CurrentDamagePerTick += DamageIncreasePerInterval;
+            }
         }
 
         if (GetComponent<Health>() != null)
@@ -68,12 +71,12 @@ public class BarrierLogic : MonoBehaviour
 
             if (GetComponent<Health>().health <= 0)
             {
-                if (manager.enemySpawners[0] != null)
+                if (manager.enemySpawners.Count > 0)
                     manager.enemySpawners[0].SetActive(true);
             }
             else
             {
-                if (manager.enemySpawners[0] != null)
+                if (manager.enemySpawners.Count > 0)
                     manager.enemySpawners[0].SetActive(false);
             }
         }
