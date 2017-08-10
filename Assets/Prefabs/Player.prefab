@@ -1381,7 +1381,7 @@ MonoBehaviour:
   damage: 20
   laserLength: 30
   range: 40
-  energyCost: 0.4
+  energyCost: 0.2
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -157,7 +157,11 @@ public class GameObjectManager : MonoBehaviour
         List<GameObject> civilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
         foreach (GameObject civilianSpawner in civilianSpawners)
         {
-            civilianSpawner.GetComponent<CivilianSpawner>().gameObjectManager = this;
+            if (civilianSpawner.GetComponent<CivilianSpawner>() != null)
+                civilianSpawner.GetComponent<CivilianSpawner>().manager = this;
+
+            if (civilianSpawner.GetComponent<CivilianSource>() != null)
+                civilianSpawner.GetComponent<CivilianSource>().manager = this;
         }
     }
 
