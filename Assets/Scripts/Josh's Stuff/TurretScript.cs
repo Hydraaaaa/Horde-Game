@@ -322,9 +322,9 @@ public class TurretScript : MonoBehaviour
                             else
                             {
                                 if (RepairPage)
-                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 1);
                                 else
-                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 1);
                             }
                         }
                         if (Input.GetButtonDown("Joy2AButton"))
@@ -336,9 +336,9 @@ public class TurretScript : MonoBehaviour
                             else
                             {
                                 if (RepairPage)
-                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                    RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 2);
                                 else
-                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 0);
+                                    UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>(), 2);
                             }
                         }
                         if (Input.GetButtonDown("Joy2BButton"))
