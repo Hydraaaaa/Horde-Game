@@ -877,6 +877,16 @@ Prefab:
       propertyPath: vital
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114040933762649710, guid: f821762d29b49d74884bb9bacaeec0b2,
+        type: 2}
+      propertyPath: DamageIncreasePerInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114040933762649710, guid: f821762d29b49d74884bb9bacaeec0b2,
+        type: 2}
+      propertyPath: CurrentDamagePerTick
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f821762d29b49d74884bb9bacaeec0b2, type: 2}
   m_IsPrefabParent: 0

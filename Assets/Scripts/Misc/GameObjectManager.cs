@@ -44,9 +44,6 @@ public class GameObjectManager : MonoBehaviour
 
     void OnEnable()
     {
-        civiliansRequired = 75.0f;
-        time = 10;
-
         timer = time;
         civiliansEscaped = 0;
 

@@ -1146,6 +1146,16 @@ Prefab:
       propertyPath: ControllerMenuAxisSensitivity
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: time
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: civiliansRequired
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
   m_IsPrefabParent: 0

@@ -52,18 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee32dc2d51063b48b1117cf1444c93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPrefab: {fileID: 1306768904595550, guid: 65a7340beb755a84e8cbf3ee377ccc6b,
-    type: 2}
-  playerPrefab: {fileID: 1231569685718394, guid: a1dc348726cf9e543a389da2d97211d7,
-    type: 2}
-  HUDPrefab: {fileID: 1808665065379356, guid: 793e877e2e9d1744797a087dff268682, type: 2}
-  WinGUIPrefab: {fileID: 1324020835486538, guid: f3ec51e84e98c8140922726e39464857,
-    type: 2}
-  LoseGUIPrefab: {fileID: 1110093772081564, guid: d396972a3d26c0f49aa2167ace395b1b,
-    type: 2}
-  ControllerMenuAxisSensitivity: 0.75
-  ControllerNextInputCheckTimeGap: 0.1
-  timeBetweenMovement: 0
+  ControllerMenuAxisSensitivity: 0.8
+  ControllerNextInputCheckTimeGap: 0.2
+  timeBetweenMovement: 1
   Joysticks: []
   p1Axis: {x: 0, y: 0}
   p1Trigg: 0
@@ -74,6 +65,8 @@ MonoBehaviour:
   buttonNo: 0
   atMenu: 1
   arrow: {fileID: 0}
+  MainHUD: {fileID: 0}
+  ControlsHUD: {fileID: 0}
 --- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,11 +94,13 @@ MonoBehaviour:
   players: []
   enemySpawners: []
   enemies: []
+  civilianSpawners: []
+  civilians: []
   barricades: []
   vitalBarricades: []
-  civilians: []
-  civiliansRequired: 0
-  time: 0
+  turrets: []
+  civiliansRequired: 75
+  time: 120
   timer: 0
   initialCivilians: 0
   civiliansEscaped: 0
