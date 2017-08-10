@@ -12,8 +12,11 @@ ModelImporter:
     400002: gun_jnt
     400004: //RootNode
     2300000: gun_geo
+    2300002: //RootNode
     3300000: gun_geo
+    3300002: //RootNode
     4300000: gun_geo
+    4300002: gun
     9500000: //RootNode
   materials:
     importMaterials: 1

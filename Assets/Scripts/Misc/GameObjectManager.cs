@@ -19,6 +19,7 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> players;
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
+    public List<GameObject> civilianSpawners;
     public List<GameObject> civilians;
     public List<GameObject> barricades;
     public List<GameObject> vitalBarricades;
@@ -99,6 +100,11 @@ public class GameObjectManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         initialCivilians = civilians.Count;
+        foreach (GameObject spawner in civilianSpawners)
+        {
+            if (spawner.GetComponent<CivilianSource>() != null)
+                initialCivilians += spawner.GetComponent<CivilianSource>().civilians;
+        }
     }
 
     public void SpawnCamera()
@@ -156,14 +162,17 @@ public class GameObjectManager : MonoBehaviour
 
     public void GetCivilianSpawners()
     {
-        List<GameObject> civilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
-        foreach (GameObject civilianSpawner in civilianSpawners)
+        List<GameObject> localCivilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
+        foreach (GameObject civilianSpawner in localCivilianSpawners)
         {
             if (civilianSpawner.GetComponent<CivilianSpawner>() != null)
                 civilianSpawner.GetComponent<CivilianSpawner>().manager = this;
 
             if (civilianSpawner.GetComponent<CivilianSource>() != null)
+            {
                 civilianSpawner.GetComponent<CivilianSource>().manager = this;
+                civilianSpawners.Add(civilianSpawner);
+            }
         }
     }
 

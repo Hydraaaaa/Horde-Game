@@ -621,6 +621,8 @@ MonoBehaviour:
   civiliansSaved: {fileID: 114806563963111002}
   barricadeHealthBarPrefab: {fileID: 1949755700816658, guid: 92798abd1cedcb84cb04cc00fee287fc,
     type: 2}
+  turretTimeBarPrefab: {fileID: 1949755700816658, guid: 92798abd1cedcb84cb04cc00fee287fc,
+    type: 2}
 --- !u!114 &114806563963111002
 MonoBehaviour:
   m_ObjectHideFlags: 1

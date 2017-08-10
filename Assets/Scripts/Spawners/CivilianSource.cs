@@ -8,7 +8,7 @@ public class CivilianSource : MonoBehaviour
     public GameObjectManager manager;
 
     public int civilians;
-    int currentCivilians;
+    [HideInInspector] public int currentCivilians;
     
     public float spawnInterval;
     float spawnTimer;
