@@ -748,11 +748,6 @@ Prefab:
       propertyPath: turretRef
       value: 
       objectReference: {fileID: 532982798}
-    - target: {fileID: 114090895798200790, guid: 8bc7201fce88a0647b62de6f074af54d,
-        type: 2}
-      propertyPath: TurretNo
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1096834931197976, guid: 8bc7201fce88a0647b62de6f074af54d, type: 2}
       propertyPath: m_Name
       value: Turret 1

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4976734692653332}
   - component: {fileID: 120341191148474614}
-  - component: {fileID: 114208753565126400}
+  - component: {fileID: 114534889606610174}
   m_Layer: 9
   m_Name: Vertical
   m_TagString: Untagged
@@ -264,7 +264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1096834931197976}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.97, y: 0.05, z: -19.03}
+  m_LocalPosition: {x: -5.66, y: 0.05, z: -16.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4381273550540998}
@@ -554,9 +554,9 @@ MonoBehaviour:
   attackInterval: 0.1
   curAttackInterval: 0
   turretRef: {fileID: 0}
-  TurretNo: 2
+  TurretNo: 1
   timeLeft: 0
---- !u!114 &114208753565126400
+--- !u!114 &114534889606610174
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1003410536081136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5868896416ec95468ab84585d6f9563, type: 3}
+  m_Script: {fileID: 11500000, guid: 900a350c4db602e4f8e2519a1d1a00bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
@@ -572,8 +572,8 @@ MonoBehaviour:
   cooldown: 0.05
   accuracy: 0
   damage: 15
-  laserLength: 30
-  range: 100
+  laserLength: 20
+  range: 20
 --- !u!120 &120341191148474614
 LineRenderer:
   m_ObjectHideFlags: 1
