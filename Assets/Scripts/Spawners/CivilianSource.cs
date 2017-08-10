@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class CivilianSource : MonoBehaviour
 {
+    public GameObject civilianPrefab;
+    public GameObjectManager manager;
+
     public int civilians;
     int currentCivilians;
     
     public float spawnInterval;
     float spawnTimer;
 
-    bool active;
+    public bool active;
 
 	void Start ()
     {
+        currentCivilians = civilians;
         spawnTimer = 0;
-        active = false;
+        active = true;
 	}
 	
 	void Update ()
     {
-        spawnTimer -= Time.deltaTime;
+        if (active && manager != null)
+        {
+            spawnTimer -= Time.deltaTime;
+
+            if (spawnTimer <= 0 && currentCivilians > 0)
+            {
+                spawnTimer = spawnInterval;
+                currentCivilians--;
+
+                GameObject newlySpawned = Instantiate(civilianPrefab, transform.position, transform.rotation);
+                if (newlySpawned.GetComponent<CivilianNavigation>() != null)
+                    newlySpawned.GetComponent<CivilianNavigation>().manager = manager;
+            }
+        }
     }
 
     public void SetSpawning(bool spawn)

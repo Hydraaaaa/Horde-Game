@@ -35,7 +35,7 @@ public class TurretAIScript : MonoBehaviour
 	void Update ()
     {
         timeLeft = turretRef.TurInformation[TurretNo - 1].curActiveTime;
-        VerticalRotator.GetComponent<Rifle>().damage = turretRef.TurInformation[TurretNo - 1].DPS;
+        VerticalRotator.GetComponent<TurretRifle>().damage = turretRef.TurInformation[TurretNo - 1].DPS;
 
         if (turretRef.TurInformation[TurretNo - 1].active)
         {

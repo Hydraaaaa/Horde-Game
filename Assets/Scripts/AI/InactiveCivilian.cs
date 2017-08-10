@@ -24,12 +24,12 @@ public class InactiveCivilian : MonoBehaviour
 	void Update ()
     {
         if (!rescued)
-            for (int i = 0; i < navigationScript.gameObjectManager.players.Count; i++)
+            for (int i = 0; i < navigationScript.manager.players.Count; i++)
             {
                 int mask = ~(1 << 9);
-                if (Vector3.Distance(transform.position, navigationScript.gameObjectManager.players[i].transform.position) <= range)
+                if (Vector3.Distance(transform.position, navigationScript.manager.players[i].transform.position) <= range)
                 {
-                    if (!Physics.Linecast(transform.position, navigationScript.gameObjectManager.players[i].transform.position, mask))
+                    if (!Physics.Linecast(transform.position, navigationScript.manager.players[i].transform.position, mask))
                     {
                         navigationScript.enabled = true;
                         rescued = true;

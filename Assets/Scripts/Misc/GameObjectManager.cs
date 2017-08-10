@@ -127,9 +127,9 @@ public class GameObjectManager : MonoBehaviour
                 playerInstance.GetComponent<PlayerInfoScript>().PlayerNo = i + 1;
 
                 if (i == 0)
-                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 0, 1);
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.08f, 0.68f, 0.74f, 1);
                 if (i == 1)
-                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 0, 1, 1);
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.74f, 0.08f, 0.36f, 1);
                 if (i == 2)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 1, 1);
                 if (i == 3)
@@ -157,7 +157,11 @@ public class GameObjectManager : MonoBehaviour
         List<GameObject> civilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
         foreach (GameObject civilianSpawner in civilianSpawners)
         {
-            civilianSpawner.GetComponent<CivilianSpawner>().gameObjectManager = this;
+            if (civilianSpawner.GetComponent<CivilianSpawner>() != null)
+                civilianSpawner.GetComponent<CivilianSpawner>().manager = this;
+
+            if (civilianSpawner.GetComponent<CivilianSource>() != null)
+                civilianSpawner.GetComponent<CivilianSource>().manager = this;
         }
     }
 

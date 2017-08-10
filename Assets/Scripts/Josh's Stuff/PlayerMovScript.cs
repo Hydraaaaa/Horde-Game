@@ -115,11 +115,11 @@ public class PlayerMovScript : MonoBehaviour
                 direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
             
             controller.Move(direction);
-
-            energy += Time.deltaTime;
-            if (energy > maxEnergy)
-                energy = maxEnergy;
         }
+
+        energy += Time.deltaTime;
+        if (energy > maxEnergy)
+            energy = maxEnergy;
     }
 
     void CheckKeys()
