@@ -53,6 +53,8 @@ public class TurretScript : MonoBehaviour
         public bool active;
     }
 
+    public List<GameObject> playersInRange;
+
     public GameObject GamepadTransform;
     public GameObject UIPiece;
     public TurretRef UIPieceInfo;
@@ -91,6 +93,12 @@ public class TurretScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        foreach (GameObject player in playersInRange)
+        {
+            if (player == null)
+                playersInRange.Remove(player);
+        }
+
         if (Camera.main != null)
         {
             if (InactivePiece.active)
@@ -175,6 +183,12 @@ public class TurretScript : MonoBehaviour
                 TurInformation[i].active = false;
             }
         }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Player"))
+            playersInRange.Add(col.gameObject);
     }
 
     void OnTriggerStay(Collider col)
@@ -362,8 +376,9 @@ public class TurretScript : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
+            playersInRange.Remove(col.gameObject);
             ActivePiece.SetActive(false);
             InactivePiece.SetActive(false);
             Interacting = false;
