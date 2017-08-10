@@ -8,10 +8,10 @@ public class CivilianSource : MonoBehaviour
     public GameObjectManager manager;
 
     public int civilians;
-    public int currentCivilians;
+    int currentCivilians;
     
     public float spawnInterval;
-    public float spawnTimer;
+    float spawnTimer;
 
     public bool active;
 
