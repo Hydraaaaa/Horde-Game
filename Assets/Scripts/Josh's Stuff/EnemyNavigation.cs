@@ -372,10 +372,13 @@ public class EnemyNavigation : MonoBehaviour
 
     void Attack(GameObject obj)
     {
-        if (currentCooldown <= 0)
+        if (obj != null)
         {
-            currentCooldown = cooldown;
-            obj.GetComponent<Health>().Damage(damage);
+            if (currentCooldown <= 0)
+            {
+                currentCooldown = cooldown;
+                obj.GetComponent<Health>().Damage(damage);
+            }
         }
     }
 }
