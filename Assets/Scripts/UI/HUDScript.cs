@@ -25,6 +25,7 @@ public class HUDScript : MonoBehaviour
         {
             GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab) as GameObject;
             newHealthBar.transform.parent = transform;
+            newHealthBar.transform.SetAsFirstSibling();
             barricadeHealthBars.Add(newHealthBar);
         }
 
@@ -34,6 +35,7 @@ public class HUDScript : MonoBehaviour
         {
             GameObject newTimeBar = Instantiate(turretTimeBarPrefab) as GameObject;
             newTimeBar.transform.parent = transform;
+            newTimeBar.transform.SetAsFirstSibling();
             turretTimeBars.Add(newTimeBar);
         }
     }
