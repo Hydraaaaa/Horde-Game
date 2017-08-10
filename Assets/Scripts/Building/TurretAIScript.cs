@@ -24,15 +24,18 @@ public class TurretAIScript : MonoBehaviour
     public int TurretNo;
     public float timeLeft;
 
+    public Renderer mat;
+
     // Use this for initialization
     void Start ()
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
+        damage = turretRef.TurInformation[TurretNo - 1].DPS;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         timeLeft = turretRef.TurInformation[TurretNo - 1].curActiveTime;
         VerticalRotator.GetComponent<TurretRifle>().damage = turretRef.TurInformation[TurretNo - 1].DPS;
@@ -101,6 +104,8 @@ public class TurretAIScript : MonoBehaviour
             // If there is no target currently
             if (Target == null)
             {
+                targetsDistance = 0;
+
                 // If the turret has line of sight
                 int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
                 layermask = 1 << LayerMask.NameToLayer("Enemy");

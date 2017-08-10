@@ -88,6 +88,20 @@ public class TurretScript : MonoBehaviour
 
         ActivePiece.SetActive(false);
         InactivePiece.SetActive(false);
+
+        // Set Level
+        TurInformation[0].Level++;
+        TurInformation[0].Cost = LevInformation.Cost.Level1;
+        TurInformation[0].DPS = LevInformation.Damage.Level1;
+
+        TurInformation[1].Level++;
+        TurInformation[1].Cost = LevInformation.Cost.Level1;
+        TurInformation[1].DPS = LevInformation.Damage.Level1;
+
+        TurInformation[2].Level++;
+        TurInformation[2].Cost = LevInformation.Cost.Level1;
+        TurInformation[2].DPS = LevInformation.Damage.Level1;
+
     }
 
     // Update is called once per frame
@@ -110,6 +124,18 @@ public class TurretScript : MonoBehaviour
             UIPieceInfo.Turret3.transform.position = Camera.main.WorldToScreenPoint(Turrets[2].transform.position);
             UIPieceInfo.Turret4.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
 
+            if (RepairPage)
+            {
+                UIPieceInfo.Cost1.text = ("Cost: " + (TurInformation[0].Cost / 2).ToString());
+                UIPieceInfo.Cost2.text = ("Cost: " + (TurInformation[1].Cost / 2).ToString());
+                UIPieceInfo.Cost3.text = ("Cost: " + (TurInformation[2].Cost / 2).ToString());
+            }
+            else
+            {
+                UIPieceInfo.Cost1.text = ("Cost: " + TurInformation[0].Cost.ToString());
+                UIPieceInfo.Cost2.text = ("Cost: " + TurInformation[1].Cost.ToString());
+                UIPieceInfo.Cost3.text = ("Cost: " + TurInformation[2].Cost.ToString());
+            }
 
             if (RepairPage)
             {
@@ -423,7 +449,12 @@ public class TurretScript : MonoBehaviour
                         Debug.Log("Upgraded to lvl 1");
 
                         // UI Upgrades
-                        UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level1.ToString());
+                        if (turretNumber == 0)
+                            UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level1.ToString());
+                        if (turretNumber == 1)
+                            UIPieceInfo.Cost2.text = ("Cost: " + LevInformation.Cost.Level1.ToString());
+                        if (turretNumber == 2)
+                            UIPieceInfo.Cost3.text = ("Cost: " + LevInformation.Cost.Level1.ToString());
                         break;
                     case 1:
                         // Set Level
@@ -437,6 +468,14 @@ public class TurretScript : MonoBehaviour
                         // Set Current Lifetime
                         TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
                         Debug.Log("Upgraded to lvl 2");
+
+                        // UI Upgrades
+                        if (turretNumber == 0)
+                            UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level2.ToString());
+                        if (turretNumber == 1)
+                            UIPieceInfo.Cost2.text = ("Cost: " + LevInformation.Cost.Level2.ToString());
+                        if (turretNumber == 2)
+                            UIPieceInfo.Cost3.text = ("Cost: " + LevInformation.Cost.Level2.ToString());
                         break;
                     case 2:
                         // Set Level
@@ -450,6 +489,14 @@ public class TurretScript : MonoBehaviour
                         // Set Current Lifetime
                         TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
                         Debug.Log("Upgraded to lvl 3");
+
+                        // UI Upgrades
+                        if (turretNumber == 0)
+                            UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level3.ToString());
+                        if (turretNumber == 1)
+                            UIPieceInfo.Cost2.text = ("Cost: " + LevInformation.Cost.Level3.ToString());
+                        if (turretNumber == 2)
+                            UIPieceInfo.Cost3.text = ("Cost: " + LevInformation.Cost.Level3.ToString());
                         break;
                     case 3:
                         // Set Level
@@ -463,6 +510,14 @@ public class TurretScript : MonoBehaviour
                         // Set Current Lifetime
                         TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
                         Debug.Log("Upgraded to lvl 4");
+
+                        // UI Upgrades
+                        if (turretNumber == 0)
+                            UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level4.ToString());
+                        if (turretNumber == 1)
+                            UIPieceInfo.Cost2.text = ("Cost: " + LevInformation.Cost.Level4.ToString());
+                        if (turretNumber == 2)
+                            UIPieceInfo.Cost3.text = ("Cost: " + LevInformation.Cost.Level4.ToString());
                         break;
                     case 4:
                         // Set Level
@@ -476,6 +531,14 @@ public class TurretScript : MonoBehaviour
                         // Set Current Lifetime
                         TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
                         Debug.Log("Upgraded to lvl 5");
+
+                        // UI Upgrades
+                        if (turretNumber == 0)
+                            UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level5.ToString());
+                        if (turretNumber == 1)
+                            UIPieceInfo.Cost2.text = ("Cost: " + LevInformation.Cost.Level5.ToString());
+                        if (turretNumber == 2)
+                            UIPieceInfo.Cost3.text = ("Cost: " + LevInformation.Cost.Level5.ToString());
                         break;
                 }
             }
