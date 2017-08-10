@@ -394,13 +394,14 @@ MonoBehaviour:
       Level3: 150
       Level4: 175
       Level5: 200
-  interOne: 0
-  interTwo: 0
   vital: 0
   IntervalLengthInSeconds: 60
   currentIntervalTime: 0
   DamageIncreasePerInterval: 1
   CurrentDamagePerTick: 1
+  UI: {fileID: 1024821754244118, guid: 79e4846c511a3864686b217137e8d942, type: 2}
+  CostRepair: {fileID: 0}
+  CostUpgrade: {fileID: 0}
 --- !u!114 &114159083682789568
 MonoBehaviour:
   m_ObjectHideFlags: 1

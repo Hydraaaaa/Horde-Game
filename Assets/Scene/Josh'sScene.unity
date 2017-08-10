@@ -4336,11 +4336,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: Turrets.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4457180644351082, guid: e79fd3be4e2fb154e9ae1a7f4eff0882, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.15
@@ -4388,56 +4383,6 @@ Prefab:
       propertyPath: Turrets.Array.data[2]
       value: 
       objectReference: {fileID: 858245498}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Damage.Level1
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Damage.Level2
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Damage.Level3
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Damage.Level4
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Damage.Level5
-      value: 96
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Cost.Level1
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Cost.Level2
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Cost.Level3
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Cost.Level4
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114716925069531550, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
-        type: 2}
-      propertyPath: LevInformation.Cost.Level5
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e79fd3be4e2fb154e9ae1a7f4eff0882, type: 2}
   m_IsPrefabParent: 0

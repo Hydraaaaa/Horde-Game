@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308441900328032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.49, y: 1.489, z: -20.14}
+  m_LocalPosition: {x: -1.15, y: 1.489, z: -23.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4688071203875698}
@@ -123,23 +123,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GamepadTransform: {fileID: 1160805278838900}
   UIPiece: {fileID: 1241931428065022, guid: 3def6cfa77665ee4b969295637d58fa3, type: 2}
-  MaxLevel: 2
+  UIPieceInfo: {fileID: 0}
+  UIPieceThumbstick: {fileID: 0}
+  MaxLevel: 5
   LevInformation:
     Damage:
-      Level1: 5
-      Level2: 7
-      Level3: 10
-      Level4: 13
-      Level5: 15
+      Level1: 4
+      Level2: 8
+      Level3: 16
+      Level4: 32
+      Level5: 64
     Cost:
-      Level1: 10
-      Level2: 20
-      Level3: 30
-      Level4: 40
-      Level5: 50
+      Level1: 50
+      Level2: 75
+      Level3: 100
+      Level4: 125
+      Level5: 150
     lifetime:
-      Level1: 20
-      Level2: 40
+      Level1: 15
+      Level2: 30
       Level3: 60
       Level4: 90
       Level5: 120
@@ -162,6 +164,10 @@ MonoBehaviour:
     activeTime: 0
     curActiveTime: 0
     active: 0
+  Turrets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Interacting: 0
   RepairPage: 1
   viewRange: 4
