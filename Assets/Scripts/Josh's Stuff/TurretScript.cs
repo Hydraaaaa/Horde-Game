@@ -82,7 +82,7 @@ public class TurretScript : MonoBehaviour
         UIPiece = UIPiece.transform.GetChild(0).gameObject;
         ActivePiece = UIPiece.transform.GetChild(0).gameObject;
         InactivePiece = UIPiece.transform.GetChild(1).gameObject;
-        UIPieceThumbstick = ActivePiece.transform.GetChild(0).transform.GetChild(1).gameObject;
+        UIPieceThumbstick = ActivePiece.transform.GetChild(3).transform.GetChild(2).transform.GetChild(1).gameObject;
 
         ActivePiece.SetActive(false);
         InactivePiece.SetActive(false);
@@ -366,6 +366,7 @@ public class TurretScript : MonoBehaviour
         {
             ActivePiece.SetActive(false);
             InactivePiece.SetActive(false);
+            Interacting = false;
         }
     }
 
