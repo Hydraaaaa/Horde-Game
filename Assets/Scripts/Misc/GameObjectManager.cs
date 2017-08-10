@@ -127,9 +127,9 @@ public class GameObjectManager : MonoBehaviour
                 playerInstance.GetComponent<PlayerInfoScript>().PlayerNo = i + 1;
 
                 if (i == 0)
-                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 0, 1);
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.08f, 0.68f, 0.74f, 1);
                 if (i == 1)
-                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 0, 1, 1);
+                    playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.74f, 0.08f, 0.36f, 1);
                 if (i == 2)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 1, 1);
                 if (i == 3)
