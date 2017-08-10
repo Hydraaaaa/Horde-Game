@@ -45,8 +45,12 @@ public class HUDScript : MonoBehaviour
 
         for (int i = 0; i < manager.barricades.Count; i++)
         {
+            if (manager.barricades[i].GetComponent<Health>().health <= 0)
+                barricadeHealthBars[i].SetActive(false);
+            else
+                barricadeHealthBars[i].SetActive(true);
             barricadeHealthBars[i].transform.position = Camera.main.WorldToScreenPoint(manager.barricades[i].transform.position);
-            barricadeHealthBars[i].GetComponent<Image>().fillAmount = manager.barricades[i].GetComponent<Health>().health / (float)manager.barricades[i].GetComponent<Health>().maxHealth;
+            barricadeHealthBars[i].transform.GetChild(1).GetComponent<Image>().fillAmount = manager.barricades[i].GetComponent<Health>().health / (float)manager.barricades[i].GetComponent<Health>().maxHealth;
         }
 	}
 }
