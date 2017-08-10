@@ -19,9 +19,10 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> players;
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
+    public List<GameObject> civilians;
     public List<GameObject> barricades;
     public List<GameObject> vitalBarricades;
-    public List<GameObject> civilians;
+    public List<GameObject> turrets;
     
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
@@ -53,9 +54,10 @@ public class GameObjectManager : MonoBehaviour
         SpawnPlayers();
         GetEnemySpawners();
         GetCivilianSpawners();
-        GetBarricades();
         GetCivilians();
+        GetBarricades();
         SpawnHUD();
+        GetTurrets();
         GetCivilianDestination();
         GetEndPos();
 
@@ -196,6 +198,11 @@ public class GameObjectManager : MonoBehaviour
     {
         GameObject HUD = Instantiate(HUDPrefab);
         HUD.GetComponent<HUDScript>().manager = this;
+    }
+
+    public void GetTurrets()
+    {
+        turrets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Turret"));
     }
 
     public bool GetWin()

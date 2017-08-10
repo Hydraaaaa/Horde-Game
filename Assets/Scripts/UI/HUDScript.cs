@@ -13,7 +13,11 @@ public class HUDScript : MonoBehaviour
     List<GameObject> barricades;
     List<GameObject> barricadeHealthBars;
 
-	void Start ()
+    public GameObject turretTimeBarPrefab;
+    List<GameObject> turrets;
+    List<GameObject> turretTimeBars;
+
+    void Start ()
     {
         barricades = manager.barricades;
         barricadeHealthBars = new List<GameObject>();
@@ -22,6 +26,15 @@ public class HUDScript : MonoBehaviour
             GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab) as GameObject;
             newHealthBar.transform.parent = transform;
             barricadeHealthBars.Add(newHealthBar);
+        }
+
+        turrets = manager.turrets;
+        turretTimeBars = new List<GameObject>();
+        foreach (GameObject turret in turrets)
+        {
+            GameObject newTimeBar = Instantiate(turretTimeBarPrefab) as GameObject;
+            newTimeBar.transform.parent = transform;
+            turretTimeBars.Add(newTimeBar);
         }
     }
 	
@@ -52,5 +65,16 @@ public class HUDScript : MonoBehaviour
             barricadeHealthBars[i].transform.position = Camera.main.WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBars[i].transform.GetChild(1).GetComponent<Image>().fillAmount = manager.barricades[i].GetComponent<Health>().health / (float)manager.barricades[i].GetComponent<Health>().maxHealth;
         }
-	}
+
+        for (int i = 0; i < manager.turrets.Count; i++)
+        {
+            TurretAIScript turretScript = manager.turrets[i].GetComponent<TurretAIScript>();
+            if (turretScript.timeLeft <= 0)
+                turretTimeBars[i].SetActive(false);
+            else
+                turretTimeBars[i].SetActive(true);
+            turretTimeBars[i].transform.position = Camera.main.WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBars[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
+        }
+    }
 }
