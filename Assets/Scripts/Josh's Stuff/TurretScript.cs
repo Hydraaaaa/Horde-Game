@@ -93,9 +93,6 @@ public class TurretScript : MonoBehaviour
     {
         if (Camera.main != null)
         {
-            ActivePiece.SetActive(false);
-            InactivePiece.SetActive(false);
-
             if (InactivePiece.active)
             {
                 UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
