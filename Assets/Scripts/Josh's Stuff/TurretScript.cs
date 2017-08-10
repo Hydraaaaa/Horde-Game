@@ -55,6 +55,8 @@ public class TurretScript : MonoBehaviour
 
     public GameObject GamepadTransform;
     public GameObject UIPiece;
+    public TurretRef UIPieceInfo;
+
     public GameObject UIPieceThumbstick;
     private GameObject ActivePiece;
     private GameObject InactivePiece;
@@ -62,6 +64,8 @@ public class TurretScript : MonoBehaviour
     public int MaxLevel = 2;
     public LevelInformation LevInformation;
     public TurretInformation[] TurInformation = new TurretInformation[3];
+
+    public GameObject[] Turrets;
 
     private GameObjectManager manager;
 
@@ -74,10 +78,11 @@ public class TurretScript : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         UIPiece = Instantiate(UIPiece) as GameObject;
+        UIPieceInfo = UIPiece.GetComponent<TurretRef>();
         UIPiece = UIPiece.transform.GetChild(0).gameObject;
         ActivePiece = UIPiece.transform.GetChild(0).gameObject;
         InactivePiece = UIPiece.transform.GetChild(1).gameObject;
-        UIPieceThumbstick = ActivePiece.transform.GetChild(2).transform.GetChild(1).gameObject;
+        UIPieceThumbstick = ActivePiece.transform.GetChild(0).transform.GetChild(1).gameObject;
 
         ActivePiece.SetActive(false);
         InactivePiece.SetActive(false);
@@ -88,12 +93,26 @@ public class TurretScript : MonoBehaviour
     {
         if (Camera.main != null)
         {
-            UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
+            if (InactivePiece.active)
+            {
+                UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
+            }
+            UIPieceInfo.Turret1.transform.position = Camera.main.WorldToScreenPoint(Turrets[0].transform.position);
+            UIPieceInfo.Turret2.transform.position = Camera.main.WorldToScreenPoint(Turrets[1].transform.position);
+            UIPieceInfo.Turret3.transform.position = Camera.main.WorldToScreenPoint(Turrets[2].transform.position);
+            UIPieceInfo.Turret4.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
+
 
             if (RepairPage)
+            {
                 UIPieceThumbstick.transform.rotation = Quaternion.Euler(0, 0, 0);
+                UIPieceInfo.Repairing = true;
+            }
             else
+            {
                 UIPieceThumbstick.transform.rotation = Quaternion.Euler(180, 0, 0);
+                UIPieceInfo.Repairing = false;
+            }
         }
 
 
@@ -103,6 +122,53 @@ public class TurretScript : MonoBehaviour
             {
                 TurInformation[i].curActiveTime -= Time.deltaTime;
                 TurInformation[i].active = true;
+
+                string yes = "Active";
+                string no = "Inactive";
+
+                switch (i)
+                {
+                    case 0:
+                        if (TurInformation[i].active)
+                        {
+                            UIPieceInfo.Active1.text = yes;
+                        }
+                        else
+                        {
+                            UIPieceInfo.Active1.text = no;
+                        }
+                        break;
+                    case 1:
+                        if (TurInformation[i].active)
+                        {
+                            UIPieceInfo.Active1.text = yes;
+                        }
+                        else
+                        {
+                            UIPieceInfo.Active1.text = no;
+                        }
+                        break;
+                    case 2:
+                        if (TurInformation[i].active)
+                        {
+                            UIPieceInfo.Active1.text = yes;
+                        }
+                        else
+                        {
+                            UIPieceInfo.Active1.text = no;
+                        }
+                        break;
+                    case 3:
+                        if (TurInformation[i].active)
+                        {
+                            UIPieceInfo.Active1.text = yes;
+                        }
+                        else
+                        {
+                            UIPieceInfo.Active1.text = no;
+                        }
+                        break;
+                }
             }
             else
             {
@@ -325,6 +391,9 @@ public class TurretScript : MonoBehaviour
                         // Set Current Lifetime
                         TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
                         Debug.Log("Upgraded to lvl 1");
+
+                        // UI Upgrades
+                        UIPieceInfo.Cost1.text = ("Cost: " + LevInformation.Cost.Level1.ToString());
                         break;
                     case 1:
                         // Set Level
