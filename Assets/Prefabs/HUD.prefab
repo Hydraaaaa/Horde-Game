@@ -361,7 +361,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
 --- !u!114 &114051064702535608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
 --- !u!222 &222057991953259666
 CanvasRenderer:
   m_ObjectHideFlags: 1
