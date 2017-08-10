@@ -359,6 +359,20 @@ public class TurretScript : MonoBehaviour
                         {
                             Interacting = false;
                         }
+                        // if the dpad is being pressed vertically
+                        if (Mathf.Abs(Input.GetAxis("Joy2DVertical")) > 0.75f)
+                        {
+                            // If pressed up
+                            if (Input.GetAxis("Joy2DVertical") > 0.75f)
+                            {
+                                RepairPage = true;
+                            }
+                            // If pressed down
+                            else
+                            {
+                                RepairPage = false;
+                            }
+                        }
                     }
                 }
             }
