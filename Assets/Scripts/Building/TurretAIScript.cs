@@ -43,7 +43,6 @@ public class TurretAIScript : MonoBehaviour
         if (turretRef.TurInformation[TurretNo - 1].active)
         {
             VerticalRotator.GetComponent<LineRenderer>().startColor = new Color(0, 1, 0, 1);
-            VerticalRotator.GetComponent<LineRenderer>().endColor = new Color(0, 1, 0, 0);
 
             if (Target != null)
             {
@@ -81,7 +80,6 @@ public class TurretAIScript : MonoBehaviour
         else
         {
             VerticalRotator.GetComponent<LineRenderer>().startColor = new Color(0.5f, 0, 0, 1);
-            VerticalRotator.GetComponent<LineRenderer>().endColor = new Color(0.5f, 0, 0, 0);
         }
     }
 
