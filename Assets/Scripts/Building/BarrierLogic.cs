@@ -58,6 +58,8 @@ public class BarrierLogic : MonoBehaviour
         UI = UI.transform.GetChild(0).gameObject;
         CostRepair = UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
         CostUpgrade = UI.transform.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+
+        Cost = Information.Cost.Level1;
     }
 
     // Update is called once per frame
@@ -77,7 +79,7 @@ public class BarrierLogic : MonoBehaviour
         {
             dist1 = Vector3.Distance(transform.position, manager.players[0].transform.position);
 
-            if (dist1 < 3)
+            if (dist1 < 2)
             {
                 UI.SetActive(true);
             }
@@ -86,7 +88,7 @@ public class BarrierLogic : MonoBehaviour
         {
             dist1 = Vector3.Distance(transform.position, manager.players[0].transform.position);
 
-            if (dist1 < 3)
+            if (dist1 < 2)
             {
                 UI.SetActive(true);
             }
