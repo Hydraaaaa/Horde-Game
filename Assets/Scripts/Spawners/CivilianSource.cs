@@ -8,22 +8,23 @@ public class CivilianSource : MonoBehaviour
     public GameObjectManager manager;
 
     public int civilians;
-    int currentCivilians;
+    public int currentCivilians;
     
     public float spawnInterval;
-    float spawnTimer;
+    public float spawnTimer;
 
-    bool active;
+    public bool active;
 
 	void Start ()
     {
+        currentCivilians = civilians;
         spawnTimer = 0;
-        active = false;
+        active = true;
 	}
 	
 	void Update ()
     {
-        if (active)
+        if (active && manager != null)
         {
             spawnTimer -= Time.deltaTime;
 
