@@ -8,6 +8,7 @@ public class HUDScript : MonoBehaviour
     [HideInInspector] public GameObjectManager manager;
     public Text timer;
     public Text civiliansSaved;
+    public Text notEnoughCivilians;
 
     public GameObject barricadeHealthBarPrefab;
     List<GameObject> barricades;
@@ -42,15 +43,25 @@ public class HUDScript : MonoBehaviour
 	
 	void Update ()
     {
-        if (manager.timer > 0)
+        if (manager.timer > 60)
         {
             if (manager.timer % 60 < 10)
                 timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":0" + Mathf.FloorToInt(manager.timer % 60).ToString();
             else
                 timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":" + Mathf.FloorToInt(manager.timer % 60).ToString();
         }
+        else if (manager.timer > 0)
+        {
+            timer.text = Mathf.FloorToInt(manager.timer).ToString();
+        }
         else
-            timer.text = "Escape";
+            timer.text = "Door Open";
+
+        if (manager.civiliansEscaped < (manager.civiliansRequired / 100.0f) * manager.initialCivilians)
+            notEnoughCivilians.enabled = true;
+        else
+            notEnoughCivilians.enabled = false;
+
         civiliansSaved.text = manager.civiliansEscaped.ToString() + " ";
 
         for (int i = barricades.Count - 1; i >= 0; i--)

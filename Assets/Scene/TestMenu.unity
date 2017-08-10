@@ -1118,21 +1118,6 @@ Prefab:
       objectReference: {fileID: 1797263021}
     - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
-      propertyPath: playerCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: timeBetweenMovement
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: ControllerNextInputCheckTimeGap
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
       propertyPath: MainHUD
       value: 
       objectReference: {fileID: 1054786478}
@@ -1141,21 +1126,6 @@ Prefab:
       propertyPath: ControlsHUD
       value: 
       objectReference: {fileID: 334091381}
-    - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: ControllerMenuAxisSensitivity
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: time
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: civiliansRequired
-      value: 75
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
   m_IsPrefabParent: 0
