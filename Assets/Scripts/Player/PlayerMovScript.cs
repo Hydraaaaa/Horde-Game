@@ -48,13 +48,19 @@ public class PlayerMovScript : MonoBehaviour
         playerAttack = null;
     }
 
+    void LateUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
+    }
+
     // Update is called once per frame
     void Update ()
     {
+        // transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
+
         localVelocity = transform.InverseTransformDirection(GetComponent<CharacterController>().velocity);
         // Debug.Log(transform.InverseTransformDirection(GetComponent<CharacterController>().velocity));
 
-        transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         anim.SetFloat("Horizontal", localVelocity.x);
         anim.SetFloat("Vertical", localVelocity.z);
 

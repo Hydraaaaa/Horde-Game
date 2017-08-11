@@ -1399,7 +1399,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   turningSpeed: 4
   acceleration: 4
-  damage: 5
+  damage: 10
   attackRange: 2
   cooldown: 0.65
 --- !u!135 &135552592746051830
