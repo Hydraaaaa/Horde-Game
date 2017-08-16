@@ -275,11 +275,7 @@ public class TurretScript : MonoBehaviour
 
                         if (Input.GetButtonDown("Joy1YButton"))
                         {
-                            if (Interacting == false)
-                            {
-                                Interacting = true;
-                            }
-                            else
+                            if (Interacting == true)
                             {
                                 if (RepairPage)
                                     RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 0);
@@ -303,11 +299,7 @@ public class TurretScript : MonoBehaviour
                         }
                         if (Input.GetButtonDown("Joy1AButton"))
                         {
-                            if (Interacting == false)
-                            {
-                                Interacting = true;
-                            }
-                            else
+                            if (Interacting == true)
                             {
                                 if (RepairPage)
                                     RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>(), 2);

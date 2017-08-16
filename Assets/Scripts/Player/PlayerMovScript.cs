@@ -16,6 +16,8 @@ public class PlayerMovScript : MonoBehaviour
     public string[] axisEndings = { "Horizontal", "Vertical", "Shoot", "Horizontal2", "Vertical2" };
 
     public float moveSpeed = 3;
+    public float moveSpeedShooting = 2;
+    public bool Shooting = false;
 
     public bool useController = true;
 
@@ -30,6 +32,7 @@ public class PlayerMovScript : MonoBehaviour
 
     public float maxEnergy;
     [HideInInspector] public float energy;
+    public float EnergyPerTick;
 
     // Use this for initialization
     void Start ()
@@ -51,6 +54,7 @@ public class PlayerMovScript : MonoBehaviour
     void LateUpdate()
     {
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
+        Shooting = false;
     }
 
     // Update is called once per frame
@@ -123,7 +127,7 @@ public class PlayerMovScript : MonoBehaviour
             controller.Move(direction);
         }
 
-        energy += Time.deltaTime;
+        energy += EnergyPerTick;
         if (energy > maxEnergy)
             energy = maxEnergy;
     }
@@ -136,6 +140,20 @@ public class PlayerMovScript : MonoBehaviour
         Vector2 lookScreenPos = screenCenter;
         Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
 
+        foreach (string axis in axisEndings)
+        {
+            string stringCombo = playerBeginning + axis;
+
+            if (Input.GetAxis(stringCombo) >= 0.5)
+            {
+                if (axis == "Shoot")
+                {
+                    playerAttack(ref energy);
+                    Shooting = true;
+                }
+            }
+        }
+
         // Check all axis movements
         foreach (string axis in axisEndings)
         {
@@ -144,9 +162,19 @@ public class PlayerMovScript : MonoBehaviour
                 Input.GetAxis(stringCombo) < -0.2f)
             {
                 if (axis == "Horizontal")
-                    direction += (Camera.main.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                {
+                    if (Shooting)
+                        direction += (Camera.main.transform.right) * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
+                    else
+                        direction += (Camera.main.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                }
                 else if (axis == "Vertical")
-                    direction -= forward * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                {
+                    if (Shooting)
+                        direction -= forward * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
+                    else
+                        direction -= forward * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                }
             }
 
             if (Input.GetAxis(stringCombo) > 0.005 ||
@@ -163,14 +191,6 @@ public class PlayerMovScript : MonoBehaviour
             }
 
             // lookScreenPos = GetComponent<CharacterController>().velocity;
-
-            if (Input.GetAxis(stringCombo) >= 0.5)
-            {
-                if (axis == "Shoot")
-                {
-                    playerAttack(ref energy);
-                }
-            }
         }
 
         // Check all button inputs

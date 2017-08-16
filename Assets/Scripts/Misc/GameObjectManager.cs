@@ -13,6 +13,9 @@ public class GameObjectManager : MonoBehaviour
     public GameObject LoseGUIPrefab;
 
     [HideInInspector] public GameObject camera;
+    public GameObject camera1;
+    public GameObject camera2;
+
     [HideInInspector] public GameObject endPos;
     [HideInInspector] public GameObject civilianDestination;
     public List<GameObject> playerStarts;
@@ -36,7 +39,7 @@ public class GameObjectManager : MonoBehaviour
     [HideInInspector] public int playersEscaped;
 
     [HideInInspector] public bool playing;
-
+    public bool trySplitScreen = false;
     void Awake()
     {
         playing = false;
@@ -108,6 +111,12 @@ public class GameObjectManager : MonoBehaviour
     {
         camera = Instantiate(cameraPrefab);
         camera.GetComponent<CameraLogic>().gameObjectManager = this;
+
+        if (trySplitScreen)
+        {
+            camera1 = Instantiate(camera1);
+            camera2 = Instantiate(camera2);
+        }
     }
 
     public void SpawnPlayers()
@@ -116,7 +125,7 @@ public class GameObjectManager : MonoBehaviour
 
         players = new List<GameObject>();
 
-        CameraLogic cameraScript = camera.GetComponent<CameraLogic>();
+        // CameraLogic cameraScript = camera.GetComponent<CameraLogic>();
 
         if (playerStarts.Count != 0)
         {
@@ -146,6 +155,12 @@ public class GameObjectManager : MonoBehaviour
         else
             Debug.Log("No player starts found");
 
+        if (trySplitScreen)
+        {
+            camera1.GetComponent<CameraMovement>().player = players[0];
+            camera2.GetComponent<CameraMovement>().player = players[1];
+
+        }
     }
 
     public void GetEnemySpawners()

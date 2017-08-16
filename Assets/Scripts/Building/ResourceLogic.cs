@@ -57,7 +57,7 @@ public class ResourceLogic : MonoBehaviour
         {
             transform.Rotate(rotationSpeed, 0, 0);
             p1.transform.Rotate(rotationSpeed, rotationSpeed, rotationSpeed);
-            p2.transform.Rotate(-rotationSpeed, -rotationSpeed, -rotationSpeed);
+            p2.transform.Rotate(-(rotationSpeed / 2), -(rotationSpeed / 2), -(rotationSpeed / 2));
         }
     }
 

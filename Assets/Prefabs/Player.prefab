@@ -1376,12 +1376,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
   tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
-  cooldown: 0.05
-  accuracy: 0.05
-  damage: 20
+  cooldown: 0.1
+  accuracy: 0.02
+  damage: 5
   laserLength: 30
   range: 40
-  energyCost: 0.18
+  energyCost: 2
+  gunshot: {fileID: 0}
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1446,14 +1447,17 @@ MonoBehaviour:
   - Horizontal2
   - Vertical2
   moveSpeed: 4
+  moveSpeedShooting: 2.5
+  Shooting: 0
   useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}
   screenCenter: {x: 0, y: 0}
   localVelocity: {x: 0, y: 0, z: 0}
-  maxEnergy: 10
+  maxEnergy: 24
   energy: 0
+  EnergyPerTick: 0.25
 --- !u!120 &120885250459197078
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1490,7 +1494,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.04
     widthCurve:
       serializedVersion: 2
       m_Curve:

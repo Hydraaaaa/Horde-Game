@@ -25,9 +25,13 @@ public class Rifle : MonoBehaviour
     
     Vector3 laserEndPoint;
 
+    public AudioSource gunshot;
+
     void Start()
     {
         currentCooldown = 0;
+
+//        gunshot = Instantiate(gunshot);
 
         laser = GetComponent<LineRenderer>();
     }
@@ -54,6 +58,7 @@ public class Rifle : MonoBehaviour
         float distancePercent = (laserEndPoint - transform.position).magnitude / laserLength;
         Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
         laser.endColor = endColor;
+        laser.SetWidth(0.02f, 0.02f);
     }
 
     public void Attack(ref float energy)
@@ -96,6 +101,9 @@ public class Rifle : MonoBehaviour
                 tracerRenderer.SetPosition(0, transform.position);
                 tracerRenderer.SetPosition(1, transform.position + aimDir * range);
             }
+
+            if (gunshot != null)
+                gunshot.Play();
         }
     }
 }

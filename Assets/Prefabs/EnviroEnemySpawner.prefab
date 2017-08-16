@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23036432676260964}
   - component: {fileID: 114937802504153570}
   m_Layer: 0
-  m_Name: Enemy Spawner
-  m_TagString: Enemy Spawner
+  m_Name: EnviroEnemySpawner
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
     type: 2}
   cooldown: 1
   amount: 4
-  tickTime: 40
+  tickTime: 0
   curTickTime: 0
-  increasePerTick: 1
+  increasePerTick: 0
+  EnviroSpawner: 1

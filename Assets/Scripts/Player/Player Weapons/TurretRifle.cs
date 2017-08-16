@@ -23,11 +23,16 @@ public class TurretRifle : MonoBehaviour
 
     Vector3 laserEndPoint;
 
+    public AudioSource gunshot;
+
     void Start()
     {
         currentCooldown = 0;
 
         laser = GetComponent<LineRenderer>();
+
+        if (gunshot != null)
+            gunshot = Instantiate(gunshot);
     }
 
     void Update()
@@ -93,6 +98,8 @@ public class TurretRifle : MonoBehaviour
                 tracerRenderer.SetPosition(0, transform.position);
                 tracerRenderer.SetPosition(1, transform.position + aimDir * range);
             }
+            if (gunshot != null)
+                gunshot.Play();
         }
     }
 }

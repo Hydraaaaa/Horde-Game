@@ -1367,8 +1367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a036a5efd55f344874f4b9065e7697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
+  maxHealth: 25
+  health: 25
   Enemy: 1
   Attacker: {fileID: 0}
 --- !u!114 &114116348195285130
@@ -1382,6 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91029c5a194a678408046a4c44841376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 95198621000310372}
   TypeTags:
     BarricadeTag: Barricade
     SurvivorTag: Civilian
@@ -1401,7 +1402,9 @@ MonoBehaviour:
   acceleration: 4
   damage: 10
   attackRange: 2
+  currentDist: 0
   cooldown: 0.65
+  EnvironmentZombie: 0
 --- !u!135 &135552592746051830
 SphereCollider:
   m_ObjectHideFlags: 1

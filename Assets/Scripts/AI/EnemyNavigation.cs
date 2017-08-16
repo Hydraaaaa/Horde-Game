@@ -8,6 +8,8 @@ public class EnemyNavigation : MonoBehaviour
 {
     public enum Type { SURVIVOR, PLAYER, BARRICADE, DEFENSES, TERRAIN, NULL };
 
+    public Animator anim;
+
     [Serializable]
     public struct ObjTags
     {
@@ -41,26 +43,47 @@ public class EnemyNavigation : MonoBehaviour
 
     public int damage;
     public float attackRange;
+    public float currentDist;
 
     [Tooltip("Time in seconds between shots")]
     public float cooldown;
     float currentCooldown;
 
+    public bool EnvironmentZombie = false;
+
     void Start()
     {
         path = new NavMeshPath();
-        // Set the zombies target to the end of the map
-        TargetPos = EndPos.transform.position;
 
+        if (EnvironmentZombie)
+        {
+            EndPos = gameObject;
+            TargetPos = EndPos.transform.position;
+        }
+        else
+        {
+            // Set the zombies target to the end of the map
+            TargetPos = EndPos.transform.position;
+        }
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
-        
+
         //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
     void Update()
     {
+        if (Mathf.Abs(GetComponent<NavMeshAgent>().velocity.x) > 0 &&
+            Mathf.Abs(GetComponent<NavMeshAgent>().velocity.z) > 0)
+        {
+            anim.SetBool("Moving", true);
+        }
+        else
+        {
+            anim.SetBool("Moving", false);
+        }
+
         // Attack Cooldown
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
@@ -122,6 +145,7 @@ public class EnemyNavigation : MonoBehaviour
             if (agent.hasPath)
             {
                 agent.SetDestination(TargetPos);
+                currentDist = Vector3.Distance(transform.position, TargetPos);
             }
         }
     }

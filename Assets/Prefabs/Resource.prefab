@@ -311,7 +311,7 @@ MonoBehaviour:
   TrackingTo: -1
   TrackSpeed: 5
   ScaleSpeed: 0.1
-  rotationSpeed: 0.5
+  rotationSpeed: 1
   p1: {fileID: 1091844985548122}
   p2: {fileID: 1365559613391802}
 --- !u!135 &135417946827634884
