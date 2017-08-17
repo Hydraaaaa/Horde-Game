@@ -46,6 +46,9 @@ public class BarrierLogic : MonoBehaviour
     public int CurrentDamagePerTick = 0;
 
     public GameObject UI;
+    public GameObject P1UI;
+    public GameObject P2UI;
+
     public Text CostRepair;
     public Text CostUpgrade;
 
@@ -54,23 +57,52 @@ public class BarrierLogic : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         currentIntervalTime = IntervalLengthInSeconds;
+
+        GameObject UIOrigin = UI;
         UI = Instantiate(UI);
+        UI = UI.transform.GetChild(0).gameObject;
         UI = UI.transform.GetChild(0).gameObject;
         CostRepair = UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
         CostUpgrade = UI.transform.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
-
         Cost = Information.Cost.Level1;
+
+        // Make player 1's ui piece
+        P1UI = Instantiate(UIOrigin);
+        
+        P1UI.layer = LayerMask.NameToLayer("P1UI");
+        P1UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        P1UI.GetComponent<Canvas>().planeDistance = 1;
+        P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
+
+
+        // Make player 2's ui piece
+        P2UI = Instantiate(UIOrigin);
+        P2UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        P2UI.GetComponent<Canvas>().planeDistance = 1;
+        P2UI.layer = LayerMask.NameToLayer("P2UI");
+        P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
+
     }
 
     // Update is called once per frame
     void Update ()
     {
         float dist1 = 0;
+        P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
+        P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
             UI.SetActive(false);
-            UI.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+            P1UI.SetActive(false);
+            P2UI.SetActive(false);
+
+            UI.transform.position = manager.camera.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            P1UI.transform.GetChild(0).transform.localPosition = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            P2UI.transform.GetChild(0).transform.localPosition = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            Debug.DrawLine(transform.position, P1UI.transform.GetChild(0).transform.localPosition);
+            Debug.DrawLine(transform.position, P2UI.transform.GetChild(0).transform.localPosition);
+
             CostRepair.text = ("Cost: " + (Cost / 2).ToString());
             CostUpgrade.text = ("Cost: " + Cost.ToString());
         }
@@ -82,15 +114,19 @@ public class BarrierLogic : MonoBehaviour
             if (dist1 < 2)
             {
                 UI.SetActive(true);
+                P1UI.SetActive(true);
+                P2UI.SetActive(true);
             }
         }
         if (manager.players.Count > 1)
         {
-            dist1 = Vector3.Distance(transform.position, manager.players[0].transform.position);
+            dist1 = Vector3.Distance(transform.position, manager.players[1].transform.position);
 
             if (dist1 < 2)
             {
                 UI.SetActive(true);
+                P1UI.SetActive(true);
+                P2UI.SetActive(true);
             }
         }
 

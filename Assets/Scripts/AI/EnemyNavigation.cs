@@ -196,6 +196,7 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
+            return;
         }
         else
         {
@@ -217,6 +218,7 @@ public class EnemyNavigation : MonoBehaviour
                     player = null;
                     TargetPos = EndPos.transform.position;
                     agent.SetDestination(TargetPos);
+                    return;
                 }
             }
             else
@@ -226,6 +228,7 @@ public class EnemyNavigation : MonoBehaviour
                 player = null;
                 TargetPos = EndPos.transform.position;
                 agent.SetDestination(TargetPos);
+                return;
             }
         }
 
@@ -238,6 +241,7 @@ public class EnemyNavigation : MonoBehaviour
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
             player = null;
+            return;
         }
     }
 

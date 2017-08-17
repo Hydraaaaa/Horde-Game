@@ -79,6 +79,14 @@ public class GameObjectManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i] == null)
+            {
+                enemies.RemoveAt(i);
+            }
+        }
+
         if (players.Count == 0 && playing)
             GameOver();
 

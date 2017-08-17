@@ -18,7 +18,10 @@ public class EnemySpawner : MonoBehaviour
 
     public bool EnviroSpawner = false;
     bool EnviroInitSpawnDone = false;
-	void Start ()
+    public int MaxZombies = 100;
+
+
+    void Start ()
     {
         if (GetComponent<Renderer>() != null)
             GetComponent<Renderer>().enabled = false;
@@ -30,32 +33,36 @@ public class EnemySpawner : MonoBehaviour
         {
             if (gameObjectManager != null)
             {
-                currentCooldown -= Time.deltaTime;
-
-                if (currentCooldown <= 0)
+                if (gameObjectManager.enemies.Count < MaxZombies)
                 {
-                    currentCooldown = cooldown;
+                    currentCooldown -= Time.deltaTime;
 
-                    for (int i = 0; i < amount; i++)
+                    if (currentCooldown <= 0)
                     {
-                        Vector3 spawnPos = new Vector3
-                        (
-                            transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
-                            transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
-                            transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
-                        );
-                        GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
+                        currentCooldown = cooldown;
 
-                        if (newlySpawned.GetComponent<EnemyNavigation>() != null)
-                            newlySpawned.GetComponent<EnemyNavigation>().EndPos = gameObjectManager.endPos;
+                        for (int i = 0; i < amount; i++)
+                        {
+                            Vector3 spawnPos = new Vector3
+                            (
+                                transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
+                                transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
+                                transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
+                            );
+                            GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
+                            gameObjectManager.enemies.Add(newlySpawned);
+
+                            if (newlySpawned.GetComponent<EnemyNavigation>() != null)
+                                newlySpawned.GetComponent<EnemyNavigation>().EndPos = gameObjectManager.endPos;
+                        }
                     }
-                }
 
-                curTickTime += Time.deltaTime;
-                if (curTickTime > tickTime)
-                {
-                    curTickTime = 0;
-                    amount += increasePerTick;
+                    curTickTime += Time.deltaTime;
+                    if (curTickTime > tickTime)
+                    {
+                        curTickTime = 0;
+                        amount += increasePerTick;
+                    }
                 }
             }
         }

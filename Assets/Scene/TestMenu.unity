@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -41,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -66,13 +67,27 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_RuntimeCPUUsage: 25
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -89,6 +104,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &22333587
@@ -567,7 +584,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4830235655177876, guid: c3e35b7937652b843871b82d73b20e17, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 81042723808070466, guid: c3e35b7937652b843871b82d73b20e17,
         type: 2}
@@ -626,7 +643,7 @@ Prefab:
     - target: {fileID: 224093545188092000, guid: d396972a3d26c0f49aa2167ace395b1b,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 224093545188092000, guid: d396972a3d26c0f49aa2167ace395b1b,
         type: 2}
@@ -1108,7 +1125,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4075779563342930, guid: 65a7340beb755a84e8cbf3ee377ccc6b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1306768904595550, guid: 65a7340beb755a84e8cbf3ee377ccc6b, type: 2}
       propertyPath: m_IsActive
@@ -1315,7 +1332,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114225659590822462, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
@@ -1395,7 +1412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4066333136861504, guid: f8c58cf5d78e7c24a8de4a071242e4b8, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 81067487067966600, guid: f8c58cf5d78e7c24a8de4a071242e4b8,
         type: 2}
@@ -1446,7 +1463,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4025299067286520, guid: e6fc55753d6f2d342b33cc786ddb6ca7, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6fc55753d6f2d342b33cc786ddb6ca7, type: 2}
@@ -1564,7 +1581,7 @@ Prefab:
     - target: {fileID: 224475884903253484, guid: 793e877e2e9d1744797a087dff268682,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224475884903253484, guid: 793e877e2e9d1744797a087dff268682,
         type: 2}
@@ -1668,7 +1685,7 @@ Prefab:
     - target: {fileID: 224872992768173068, guid: 3def6cfa77665ee4b969295637d58fa3,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224872992768173068, guid: 3def6cfa77665ee4b969295637d58fa3,
         type: 2}
@@ -1925,7 +1942,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1825198337}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -1934,6 +1951,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1951,7 +1969,7 @@ RectTransform:
   - {fileID: 334091382}
   - {fileID: 1054786479}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2018,7 +2036,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1889157988
 GameObject:
@@ -2090,6 +2108,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -2107,52 +2127,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1929432431
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.1917443
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.4416332
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.7848396
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400240, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 809af3c0e47aaf84488b5e191249676f, type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-  m_IsPrefabParent: 0
 --- !u!1 &2109694351
 GameObject:
   m_ObjectHideFlags: 0
