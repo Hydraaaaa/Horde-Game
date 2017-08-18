@@ -52,8 +52,13 @@ public class BarrierLogic : MonoBehaviour
     public Text CostRepair;
     public Text CostUpgrade;
 
-	// Use this for initialization
-	void Start ()
+    public Text CostRepair1;
+    public Text CostUpgrade1;
+    public Text CostRepair2;
+    public Text CostUpgrade2;
+
+    // Use this for initialization
+    void Start ()
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         currentIntervalTime = IntervalLengthInSeconds;
@@ -63,71 +68,72 @@ public class BarrierLogic : MonoBehaviour
         UI = UI.transform.GetChild(0).gameObject;
         UI = UI.transform.GetChild(0).gameObject;
         CostRepair = UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
-        CostUpgrade = UI.transform.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+        CostUpgrade = UI.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
         Cost = Information.Cost.Level1;
 
-        // Make player 1's ui piece
-        P1UI = Instantiate(UIOrigin);
-        
-        P1UI.layer = LayerMask.NameToLayer("P1UI");
-        P1UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
-        P1UI.GetComponent<Canvas>().planeDistance = 1;
-        P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
+        // Get X        UI                          X                       Text 2
+        CostRepair1 = P1UI.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
+        // Get Y        UI                          Y                       Text 2
+        CostUpgrade1 = P1UI.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+
+        // Get X        UI                          X                       Text 2
+        CostRepair2 = P2UI.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
+        // Get Y        UI                          Y                       Text 2
+        CostUpgrade2 = P2UI.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
 
 
-        // Make player 2's ui piece
-        P2UI = Instantiate(UIOrigin);
-        P2UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
-        P2UI.GetComponent<Canvas>().planeDistance = 1;
-        P2UI.layer = LayerMask.NameToLayer("P2UI");
-        P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
+        //CostRepair2 = P2UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
+        //CostUpgrade2 = P2UI.transform.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
 
+        //// Make player 1's ui piece
+        //P1UI = Instantiate(UIOrigin);
+
+        //P1UI.layer = LayerMask.NameToLayer("P1UI");
+        //P1UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        //P1UI.GetComponent<Canvas>().planeDistance = 1;
+        //P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
+
+
+        //// Make player 2's ui piece
+        //P2UI = Instantiate(UIOrigin);
+        //P2UI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        //P2UI.GetComponent<Canvas>().planeDistance = 1;
+        //P2UI.layer = LayerMask.NameToLayer("P2UI");
+        //P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
+
+        UI.SetActive(false);
+        P1UI.SetActive(false);
+        P2UI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update ()
     {
-        float dist1 = 0;
+        //float dist1 = 0;
         P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
         P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
-            UI.SetActive(false);
-            P1UI.SetActive(false);
-            P2UI.SetActive(false);
+            //UI.transform.position = manager.camera.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            //P1UI.transform.GetChild(0).transform.localPosition = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            //P2UI.transform.GetChild(0).transform.localPosition = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(transform.position);
 
-            UI.transform.position = manager.camera.GetComponent<Camera>().WorldToScreenPoint(transform.position);
-            P1UI.transform.GetChild(0).transform.localPosition = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(transform.position);
-            P2UI.transform.GetChild(0).transform.localPosition = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            //P1UI.transform.LookAt(manager.camera1.transform.position);
+            //P1UI.transform.Rotate(0, 180, 0);
+            //P2UI.transform.LookAt(manager.camera2.transform.position);
+            //P2UI.transform.Rotate(0, 180, 0);
+
             Debug.DrawLine(transform.position, P1UI.transform.GetChild(0).transform.localPosition);
             Debug.DrawLine(transform.position, P2UI.transform.GetChild(0).transform.localPosition);
 
             CostRepair.text = ("Cost: " + (Cost / 2).ToString());
             CostUpgrade.text = ("Cost: " + Cost.ToString());
-        }
 
-        if (manager.players.Count > 0)
-        {
-            dist1 = Vector3.Distance(transform.position, manager.players[0].transform.position);
-
-            if (dist1 < 2)
-            {
-                UI.SetActive(true);
-                P1UI.SetActive(true);
-                P2UI.SetActive(true);
-            }
-        }
-        if (manager.players.Count > 1)
-        {
-            dist1 = Vector3.Distance(transform.position, manager.players[1].transform.position);
-
-            if (dist1 < 2)
-            {
-                UI.SetActive(true);
-                P1UI.SetActive(true);
-                P2UI.SetActive(true);
-            }
+            CostRepair1.text = ("Cost: " + (Cost / 2).ToString());
+            CostUpgrade1.text = ("Cost: " + Cost.ToString());
+            CostRepair2.text = ("Cost: " + (Cost / 2).ToString());
+            CostUpgrade2.text = ("Cost: " + Cost.ToString());
         }
 
         if (!vital)
@@ -158,6 +164,23 @@ public class BarrierLogic : MonoBehaviour
         }
     }
 
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Player")
+        {
+            // If player 1 interacts
+            if (col.gameObject == manager.players[0])
+            {
+                P1UI.SetActive(false);
+            }
+            // If player 2 interacts
+            if (col.gameObject == manager.players[1])
+            {
+                P2UI.SetActive(false);
+            }
+        }
+    }
+
     void OnTriggerStay(Collider col)
     {
         if (col.tag == "Player")
@@ -167,12 +190,14 @@ public class BarrierLogic : MonoBehaviour
             {                
                 // If player 1 interacts
                 if (col.gameObject == manager.players[0])
-                { 
-                    if (Input.GetButton("Joy1XButton"))
+                {
+                    P1UI.SetActive(true);
+
+                    if (Input.GetButtonDown("Joy1XButton"))
                     {
                         RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
                     }
-                    if (Input.GetButton("Joy1YButton"))
+                    if (Input.GetButtonDown("Joy1YButton"))
                     {
                         UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
                     }
@@ -186,11 +211,13 @@ public class BarrierLogic : MonoBehaviour
                 // If player 2 interacts
                 if (col.gameObject == manager.players[1])
                 {
-                    if (Input.GetButton("Joy2XButton"))
+                    P2UI.SetActive(true);
+
+                    if (Input.GetButtonDown("Joy2XButton"))
                     {
                         RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
                     }
-                    if (Input.GetButton("Joy2YButton"))
+                    if (Input.GetButtonDown("Joy2YButton"))
                     {
                         UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
                     }

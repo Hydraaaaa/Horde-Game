@@ -1364,7 +1364,7 @@ Prefab:
     - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
       propertyPath: trySplitScreen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}

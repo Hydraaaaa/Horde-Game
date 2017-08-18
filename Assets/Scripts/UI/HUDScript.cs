@@ -25,8 +25,9 @@ public class HUDScript : MonoBehaviour
         foreach (GameObject barricade in barricades)
         {
             GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab) as GameObject;
-            newHealthBar.transform.parent = transform;
-            newHealthBar.transform.SetAsFirstSibling();
+            newHealthBar.transform.parent = barricade.transform;
+            newHealthBar.transform.localPosition = Vector3.zero;
+            //newHealthBar.transform.SetAsFirstSibling();
             barricadeHealthBars.Add(newHealthBar);
         }
 
@@ -43,6 +44,11 @@ public class HUDScript : MonoBehaviour
 	
 	void Update ()
     {
+        foreach (GameObject barricade in barricades)
+        {
+            barricade.transform.GetChild(5).transform.localPosition = Vector3.zero;
+        }
+
         if (manager.timer > 60)
         {
             if (manager.timer % 60 < 10)

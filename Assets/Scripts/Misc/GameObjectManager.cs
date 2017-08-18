@@ -117,13 +117,16 @@ public class GameObjectManager : MonoBehaviour
 
     public void SpawnCamera()
     {
-        camera = Instantiate(cameraPrefab);
-        camera.GetComponent<CameraLogic>().gameObjectManager = this;
 
         if (trySplitScreen)
         {
             camera1 = Instantiate(camera1);
             camera2 = Instantiate(camera2);
+        }
+        else
+        {
+            camera = Instantiate(cameraPrefab);
+            camera.GetComponent<CameraLogic>().gameObjectManager = this;
         }
     }
 
