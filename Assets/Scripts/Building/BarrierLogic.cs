@@ -153,12 +153,18 @@ public class BarrierLogic : MonoBehaviour
                 if (GetComponent<Health>().health <= 0)
                 {
                     if (manager.enemySpawners.Count > 0)
+                    {
                         manager.enemySpawners[0].SetActive(true);
+                        manager.enemySpawners[0].GetComponent<EnemySpawner>().enabled = true;
+                    }
                 }
                 else
                 {
                     if (manager.enemySpawners.Count > 0)
+                    {
                         manager.enemySpawners[0].SetActive(false);
+                        manager.enemySpawners[0].GetComponent<EnemySpawner>().enabled = false;
+                    }
                 }
             }
         }
