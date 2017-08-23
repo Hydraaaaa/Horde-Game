@@ -22,7 +22,8 @@ public class Rifle : MonoBehaviour
     public float energyCost;
 
     LineRenderer laser;
-    
+
+    public GameObject laserStartPoint;
     Vector3 laserEndPoint;
 
     public AudioSource gunshot;
@@ -52,7 +53,7 @@ public class Rifle : MonoBehaviour
         else
             laserEndPoint = transform.position + transform.forward * laserLength;
 
-        laser.SetPosition(0, transform.position);
+        laser.SetPosition(0, laserStartPoint.transform.position);
         laser.SetPosition(1, laserEndPoint);
 
         float distancePercent = (laserEndPoint - transform.position).magnitude / laserLength;
@@ -80,7 +81,7 @@ public class Rifle : MonoBehaviour
             {
                 GameObject newTracer = Instantiate(tracer);
                 LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
-                tracerRenderer.SetPosition(0, transform.position);
+                tracerRenderer.SetPosition(0, laserStartPoint.transform.position);
                 tracerRenderer.SetPosition(1, hit.point);
 
                 Instantiate(testObj, hit.point, transform.rotation);
@@ -98,7 +99,7 @@ public class Rifle : MonoBehaviour
             {
                 GameObject newTracer = Instantiate(tracer);
                 LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
-                tracerRenderer.SetPosition(0, transform.position);
+                tracerRenderer.SetPosition(0, laserStartPoint.transform.position);
                 tracerRenderer.SetPosition(1, transform.position + aimDir * range);
             }
 
