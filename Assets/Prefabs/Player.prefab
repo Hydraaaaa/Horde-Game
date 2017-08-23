@@ -1064,7 +1064,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231569685718394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4280531, y: 2.3361917, z: -23.823696}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4459451468522924}
@@ -1258,7 +1258,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1804009417822600}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.648, y: 0.065, z: 0.062}
+  m_LocalPosition: {x: 0.648, y: 0.138, z: 0.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4840910477290912}
@@ -2261,6 +2261,7 @@ MonoBehaviour:
   maxEnergy: 24
   energy: 0
   EnergyPerTick: 0.25
+  Gun: {fileID: 1804009417822600}
 --- !u!114 &114895826296244610
 MonoBehaviour:
   m_ObjectHideFlags: 1
