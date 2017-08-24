@@ -2218,13 +2218,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
   tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
-  cooldown: 0.8
-  accuracy: 0.03
-  damage: 3
-  pellets: 12
+  cooldown: 0.65
+  accuracy: 0.2
+  damage: 25
+  pellets: 5
   laserLength: 30
   range: 30
-  energyCost: 10
+  energyCost: 20
   laserStartPoint: {fileID: 1943170100614640}
   gunshot: {fileID: 0}
 --- !u!114 &114593241582930650

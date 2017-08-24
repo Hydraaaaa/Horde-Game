@@ -30,10 +30,8 @@ public class ItemSystem : MonoBehaviour
 
         LocalRifleScript = GetComponent<Rifle>();
         LocalShotgunScript = GetComponent<Shotgun>();
-    }
+        enabled = true;
 
-    void Awake()
-    {
         // Enable Starter Weapon
         TurnAllOff();
         LocalRifleScript.enabled = true;
@@ -56,6 +54,7 @@ public class ItemSystem : MonoBehaviour
                     case WeaponType.AR:
                         TurnAllOff();
                         LocalRifleScript.enabled = true;
+                        movement.playerAttack = LocalRifleScript.Attack;
                         RifleModel.SetActive(true);
                         CurrentWeapon = WeaponType.AR;
                         break;
@@ -64,6 +63,7 @@ public class ItemSystem : MonoBehaviour
                     case WeaponType.SG:
                         TurnAllOff();
                         LocalShotgunScript.enabled = true;
+                        movement.playerAttack = LocalShotgunScript.Attack;
                         ShotgunModel.SetActive(true);
                         CurrentWeapon = WeaponType.SG;
                         break;
@@ -86,6 +86,7 @@ public class ItemSystem : MonoBehaviour
                     case WeaponType.AR:
                         TurnAllOff();
                         LocalRifleScript.enabled = true;
+                        movement.playerAttack = LocalRifleScript.Attack;
                         RifleModel.SetActive(true);
                         CurrentWeapon = WeaponType.AR;
                         break;
@@ -94,6 +95,7 @@ public class ItemSystem : MonoBehaviour
                     case WeaponType.SG:
                         TurnAllOff();
                         LocalShotgunScript.enabled = true;
+                        movement.playerAttack = LocalShotgunScript.Attack;
                         ShotgunModel.SetActive(true);
                         CurrentWeapon = WeaponType.SG;
                         break;
