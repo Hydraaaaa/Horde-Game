@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 143391138108412064}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114504510429051004}
+  - component: {fileID: 114158662444876308}
   - component: {fileID: 114736662164450560}
   - component: {fileID: 120885250459197078}
   - component: {fileID: 114887641942699286}
@@ -303,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1263417937672338
 GameObject:
   m_ObjectHideFlags: 1
@@ -2132,6 +2133,26 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Ally Down
+--- !u!114 &114158662444876308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1309b99584f5614780904ac318ca944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenade: {fileID: 1323575115956990, guid: 8f1e9df4699867743a8e43ac98481f7b, type: 2}
+  cooldown: 2
+  accuracy: 0.1
+  force: 20
+  damage: 10
+  laserLength: 30
+  energyCost: 20
+  laserStartPoint: {fileID: 0}
+  gunshot: {fileID: 0}
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1
