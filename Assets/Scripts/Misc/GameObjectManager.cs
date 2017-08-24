@@ -41,7 +41,15 @@ public class GameObjectManager : MonoBehaviour
     [HideInInspector] public int playersEscaped;
 
     [HideInInspector] public bool playing;
+
     public bool trySplitScreen = false;
+
+    Image HPBar1;
+    Text healthCount1;
+
+    Image HPBar2;
+    Text healthCount2;
+
     void Awake()
     {
         playing = false;
@@ -63,6 +71,19 @@ public class GameObjectManager : MonoBehaviour
         GetTurrets();
         GetCivilianDestination();
         GetEndPos();
+
+        if (players.Count > 0)
+            if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
+            {
+                HPBar1 = GameObject.Find("HPBar" + 1).GetComponent<Image>();
+                healthCount1 = GameObject.Find("HealthCount" + 1).GetComponent<Text>();
+            }
+        if (players.Count > 1)
+            if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
+            {
+                HPBar2 = GameObject.Find("HPBar" + 2).GetComponent<Image>();
+                healthCount2 = GameObject.Find("HealthCount" + 2).GetComponent<Text>();
+            }
 
         StartCoroutine(GetInitialCivilians());
 
@@ -102,14 +123,14 @@ public class GameObjectManager : MonoBehaviour
         if (players.Count > 0)
         if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
         {
-            GameObject.Find("HPBar" + 1).GetComponent<Image>().fillAmount = 0;
-            GameObject.Find("HealthCount" + 1).GetComponent<Text>().text = "0";
+            HPBar1.fillAmount = 0;
+            healthCount1.text = "0";
         }
         if (players.Count > 1)
         if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
         {
-            GameObject.Find("HPBar" + 2).GetComponent<Image>().fillAmount = 0;
-            GameObject.Find("HealthCount" + 2).GetComponent<Text>().text = "0";
+            HPBar2.fillAmount = 0;
+            healthCount2.text = "0";
         }
     }
 
