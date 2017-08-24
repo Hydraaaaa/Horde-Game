@@ -44,7 +44,7 @@ public class ItemSystem : MonoBehaviour
         if (!SwappingWeapon)
         {
 
-            if (Input.GetAxis(AxisCombo + "DHorizontal") < -0.9f)
+            if (Input.GetAxis(AxisCombo + "DHorizontal") < -0.9f || (!movement.useController && Input.GetKeyDown(KeyCode.Alpha1)))
             {
                 Debug.Log("Left!");
                 SwappingWeapon = true;
@@ -76,7 +76,7 @@ public class ItemSystem : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxis(AxisCombo + "DHorizontal") > 0.9f)
+            if (Input.GetAxis(AxisCombo + "DHorizontal") > 0.9f || (!movement.useController && Input.GetKeyDown(KeyCode.Alpha2)))
             {
                 Debug.Log("Right!");
                 SwappingWeapon = true;

@@ -73,6 +73,7 @@ public class Shotgun : MonoBehaviour
             for (int i = 0; i < pellets; i++)
             {
                 Vector3 aimDir = laserStartPoint.transform.right + Random.insideUnitSphere * accuracy;
+                aimDir = new Vector3(aimDir.x, aimDir.y * 0.5f, aimDir.z);
 
                 Ray shootRay = new Ray(laserStartPoint.transform.position, aimDir);
                 RaycastHit hit;
