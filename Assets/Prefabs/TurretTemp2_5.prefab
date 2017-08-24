@@ -1466,7 +1466,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751818929478884}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0, z: -14.31}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4725880995058052}
@@ -3062,6 +3062,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900a350c4db602e4f8e2519a1d1a00bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GunPoints:
+  - {fileID: 4384031982356878}
+  - {fileID: 4179429411102168}
+  - {fileID: 4484468971714902}
+  - {fileID: 4645951289409214}
+  - {fileID: 4867103934920256}
+  - {fileID: 4550957131735138}
+  - {fileID: 4575766788121928}
+  - {fileID: 4082985469951602}
+  - {fileID: 4926304536414184}
+  - {fileID: 4869642973432670}
+  - {fileID: 4176163870759846}
+  - {fileID: 4413858826550810}
+  - {fileID: 4183651393947332}
+  - {fileID: 4940699141530796}
+  - {fileID: 4467951012691926}
+  - {fileID: 4499236508943794}
+  currentGun: 0
   testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
   tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
   cooldown: 0.05

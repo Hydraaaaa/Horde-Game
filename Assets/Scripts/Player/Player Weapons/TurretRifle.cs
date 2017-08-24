@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class TurretRifle : MonoBehaviour
 {
+    public Transform[] GunPoints;
+    public int currentGun;
+
     public GameObject testObj;
     public GameObject tracer;
 
@@ -77,7 +80,16 @@ public class TurretRifle : MonoBehaviour
             {
                 GameObject newTracer = Instantiate(tracer);
                 LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
-                tracerRenderer.SetPosition(0, transform.position);
+
+                if (currentGun >= GunPoints.Length)
+                {
+                    currentGun = 0;
+                }
+
+                tracerRenderer.SetPosition(0, GunPoints[currentGun].transform.position);
+
+                currentGun++;
+
                 tracerRenderer.SetPosition(1, hit.point);
 
                 Instantiate(testObj, hit.point, transform.rotation);
@@ -99,7 +111,10 @@ public class TurretRifle : MonoBehaviour
                 tracerRenderer.SetPosition(1, transform.position + aimDir * range);
             }
             if (gunshot != null)
+            {
+                Debug.Log("Bang!");
                 gunshot.Play();
+            }
         }
     }
 }

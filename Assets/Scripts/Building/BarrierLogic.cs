@@ -274,7 +274,7 @@ public class BarrierLogic : MonoBehaviour
 
     public void RepairBarrier(BarrierPlayersideLogic playerRes)
     {
-        Debug.Log("Repairing!");
+        Debug.Log("Repairing! " + Cost / 2);
 
         if (playerRes.Resources >= (Cost / 2))
         {

@@ -169,8 +169,9 @@ public class GameObjectManager : MonoBehaviour
         if (trySplitScreen)
         {
             camera1.GetComponent<CameraMovement>().player = players[0];
+            camera1.GetComponent<AudioListener>().enabled = true;
             camera2.GetComponent<CameraMovement>().player = players[1];
-
+            //camera2.GetComponent<AudioListener>().enabled = true;
         }
     }
 

@@ -29,6 +29,10 @@ public class TurretAIScript : MonoBehaviour
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
+    }
+
+    void Awake()
+    {
         damage = turretRef.TurInformation[TurretNo - 1].DPS;
     }
 
