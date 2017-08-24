@@ -34,7 +34,7 @@ public class PlayerMovScript : MonoBehaviour
     [HideInInspector] public float energy;
     public float EnergyPerTick;
 
-    public GameObject Gun;
+    public GameObject[] Guns;
 
     // Use this for initialization
     void Start ()
@@ -57,8 +57,12 @@ public class PlayerMovScript : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         Shooting = false;
-        Gun.transform.rotation = transform.rotation;
-        Gun.transform.Rotate(0, -90, 0);
+
+        for(int i = 0; i < Guns.Length; i++)
+        {
+            Guns[i].transform.rotation = transform.rotation;
+            Guns[i].transform.Rotate(0, -90, 0);
+        }
     }
 
     // Update is called once per frame
