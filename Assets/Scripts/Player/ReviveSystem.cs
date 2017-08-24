@@ -37,7 +37,7 @@ public class ReviveSystem : MonoBehaviour
         {
             if (col.GetComponent<Health>().NeedRes == true)
             {
-                if (Input.GetButton("Joy" + GetComponent<PlayerMovScript>().playerNumber + "XButton"))
+                if (Input.GetButton("Joy" + GetComponent<PlayerMovScript>().playerNumber + "XButton") || (!GetComponent<PlayerMovScript>().useController && Input.GetKey(KeyCode.E)))
                 {
                     curReviveTime += Time.deltaTime;
 
