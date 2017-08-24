@@ -87,7 +87,14 @@ public class GameObjectManager : MonoBehaviour
             }
         }
 
-        if (players.Count == 0 && playing)
+        int playerCount = 0;
+        foreach (GameObject player in players)
+        {
+            if (player != null && !player.GetComponent<Health>().NeedRes)
+                playerCount++;
+        }
+
+        if (playerCount == 0 && playing)
             GameOver();
 
         if (players.Count > 0)
@@ -117,13 +124,16 @@ public class GameObjectManager : MonoBehaviour
 
     public void SpawnCamera()
     {
-        camera = Instantiate(cameraPrefab);
-        camera.GetComponent<CameraLogic>().gameObjectManager = this;
 
         if (trySplitScreen)
         {
             camera1 = Instantiate(camera1);
             camera2 = Instantiate(camera2);
+        }
+        else
+        {
+            camera = Instantiate(cameraPrefab);
+            camera.GetComponent<CameraLogic>().gameObjectManager = this;
         }
     }
 
@@ -166,8 +176,9 @@ public class GameObjectManager : MonoBehaviour
         if (trySplitScreen)
         {
             camera1.GetComponent<CameraMovement>().player = players[0];
+            camera1.GetComponent<AudioListener>().enabled = true;
             camera2.GetComponent<CameraMovement>().player = players[1];
-
+            //camera2.GetComponent<AudioListener>().enabled = true;
         }
     }
 

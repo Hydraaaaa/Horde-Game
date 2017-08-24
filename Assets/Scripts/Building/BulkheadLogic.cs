@@ -32,13 +32,17 @@ public class BulkheadLogic : MonoBehaviour
         {
             topDoor.transform.localPosition = Vector3.Lerp(topDoor.transform.localPosition, new Vector3(-0.01990428f, 3.2f, 0), Time.deltaTime * speed);
             bottomDoor.transform.localPosition = Vector3.Lerp(bottomDoor.transform.localPosition, new Vector3(-0.04789639f, -0.73f, 0), Time.deltaTime * speed);
-            BulkheadCam.gameObject.SetActive(true);
+
+            if (!GetComponent<BarrierLogic>().vital)
+                BulkheadCam.gameObject.SetActive(true);
         }
         else
         {
             topDoor.transform.localPosition = Vector3.Lerp(topDoor.transform.localPosition, new Vector3(-0.01990428f, 1.972778f, 0), Time.deltaTime * speed);
             bottomDoor.transform.localPosition = Vector3.Lerp(bottomDoor.transform.localPosition, new Vector3(-0.04789639f, 0.7159657f, 0), Time.deltaTime * speed);
-            BulkheadCam.gameObject.SetActive(false);
+
+            if (!GetComponent<BarrierLogic>().vital)
+                BulkheadCam.gameObject.SetActive(false);
         }
     }
 

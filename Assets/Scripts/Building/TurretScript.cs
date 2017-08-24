@@ -57,11 +57,7 @@ public class TurretScript : MonoBehaviour
 
     public GameObject GamepadTransform;
     public GameObject UIPiece;
-    public TurretRef UIPieceInfo;
 
-    public GameObject UIPieceThumbstick;
-    private GameObject ActivePiece;
-    private GameObject InactivePiece;
 
     public int MaxLevel = 2;
     public LevelInformation LevInformation;
@@ -70,6 +66,25 @@ public class TurretScript : MonoBehaviour
     public GameObject[] Turrets;
 
     private GameObjectManager manager;
+    public GameObject P1UIPiece;
+    public GameObject P2UIPiece;
+
+    public TurretRef UIPieceInfo;
+    public TurretRef P1UIPieceInfo;
+    public TurretRef P2UIPieceInfo;
+    
+    private GameObject ActivePiece;
+    private GameObject InactivePiece;
+    public GameObject UIPieceThumbstick;
+
+    private GameObject ActivePiece1;
+    private GameObject InactivePiece1;
+    public GameObject UIPieceThumbstick1;
+
+    private GameObject ActivePiece2;
+    private GameObject InactivePiece2;
+    public GameObject UIPieceThumbstick2;
+    
 
     public bool Interacting = false;
     public bool RepairPage = true;
@@ -79,6 +94,7 @@ public class TurretScript : MonoBehaviour
     void Start ()
     {
         manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
+        
         UIPiece = Instantiate(UIPiece) as GameObject;
         UIPieceInfo = UIPiece.GetComponent<TurretRef>();
         UIPiece = UIPiece.transform.GetChild(0).gameObject;
@@ -88,6 +104,30 @@ public class TurretScript : MonoBehaviour
 
         ActivePiece.SetActive(false);
         InactivePiece.SetActive(false);
+
+        //                                  InteractUI           Active
+        ActivePiece1 = P1UIPiece.transform.GetChild(0).transform.GetChild(0).gameObject;
+        //                                  InteractUI           Active
+        ActivePiece2 = P2UIPiece.transform.GetChild(0).transform.GetChild(0).gameObject;
+
+        UIPieceThumbstick1 = ActivePiece1.transform.GetChild(3).transform.GetChild(2).transform.GetChild(1).gameObject;
+
+        UIPieceThumbstick2 = ActivePiece2.transform.GetChild(3).transform.GetChild(2).transform.GetChild(1).gameObject;
+
+
+        P1UIPieceInfo = P1UIPiece.GetComponent<TurretRef>();
+        P2UIPieceInfo = P2UIPiece.GetComponent<TurretRef>();
+
+        //                                  InteractUI           Inactive
+        InactivePiece1 = P1UIPiece.transform.GetChild(0).transform.GetChild(1).gameObject;
+        //                                  InteractUI           Inactive
+        InactivePiece2 = P2UIPiece.transform.GetChild(0).transform.GetChild(1).gameObject;
+
+
+        ActivePiece1.SetActive(false);
+        InactivePiece1.SetActive(false);
+        ActivePiece2.SetActive(false);
+        InactivePiece2.SetActive(false);
 
         // Set Level
         TurInformation[0].Level++;
@@ -102,6 +142,7 @@ public class TurretScript : MonoBehaviour
         TurInformation[2].Cost = LevInformation.Cost.Level1;
         TurInformation[2].DPS = LevInformation.Damage.Level1;
 
+
     }
 
     // Update is called once per frame
@@ -112,6 +153,13 @@ public class TurretScript : MonoBehaviour
             if (player == null)
                 playersInRange.Remove(player);
         }
+        for (int i = 0; i < playersInRange.Count; i++)
+        {
+            if (playersInRange[i] == null)
+            {
+                playersInRange.RemoveAt(i);
+            }
+        }
 
         if (Camera.main != null)
         {
@@ -119,6 +167,7 @@ public class TurretScript : MonoBehaviour
             {
                 UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
             }
+
             UIPieceInfo.Turret1.transform.position = Camera.main.WorldToScreenPoint(Turrets[0].transform.position);
             UIPieceInfo.Turret2.transform.position = Camera.main.WorldToScreenPoint(Turrets[1].transform.position);
             UIPieceInfo.Turret3.transform.position = Camera.main.WorldToScreenPoint(Turrets[2].transform.position);
@@ -129,23 +178,51 @@ public class TurretScript : MonoBehaviour
                 UIPieceInfo.Cost1.text = ("Cost: " + (TurInformation[0].Cost / 2).ToString());
                 UIPieceInfo.Cost2.text = ("Cost: " + (TurInformation[1].Cost / 2).ToString());
                 UIPieceInfo.Cost3.text = ("Cost: " + (TurInformation[2].Cost / 2).ToString());
+
+                P1UIPieceInfo.Cost1.text = ("Cost: " + (TurInformation[0].Cost / 2).ToString());
+                P1UIPieceInfo.Cost2.text = ("Cost: " + (TurInformation[1].Cost / 2).ToString());
+                P1UIPieceInfo.Cost3.text = ("Cost: " + (TurInformation[2].Cost / 2).ToString());
+
+                P2UIPieceInfo.Cost1.text = ("Cost: " + (TurInformation[0].Cost / 2).ToString());
+                P2UIPieceInfo.Cost2.text = ("Cost: " + (TurInformation[1].Cost / 2).ToString());
+                P2UIPieceInfo.Cost3.text = ("Cost: " + (TurInformation[2].Cost / 2).ToString());
             }
             else
             {
                 UIPieceInfo.Cost1.text = ("Cost: " + TurInformation[0].Cost.ToString());
                 UIPieceInfo.Cost2.text = ("Cost: " + TurInformation[1].Cost.ToString());
                 UIPieceInfo.Cost3.text = ("Cost: " + TurInformation[2].Cost.ToString());
+
+                P1UIPieceInfo.Cost1.text = ("Cost: " + TurInformation[0].Cost.ToString());
+                P1UIPieceInfo.Cost2.text = ("Cost: " + TurInformation[1].Cost.ToString());
+                P1UIPieceInfo.Cost3.text = ("Cost: " + TurInformation[2].Cost.ToString());
+
+                P2UIPieceInfo.Cost1.text = ("Cost: " + TurInformation[0].Cost.ToString());
+                P2UIPieceInfo.Cost2.text = ("Cost: " + TurInformation[1].Cost.ToString());
+                P2UIPieceInfo.Cost3.text = ("Cost: " + TurInformation[2].Cost.ToString());
             }
 
             if (RepairPage)
             {
                 UIPieceThumbstick.transform.rotation = Quaternion.Euler(0, 0, 0);
                 UIPieceInfo.Repairing = true;
+
+                UIPieceThumbstick1.transform.rotation = Quaternion.Euler(0 + 45, 0 + 45, 0);
+                P1UIPieceInfo.Repairing = true;
+
+                UIPieceThumbstick2.transform.rotation = Quaternion.Euler(0 + 45, 0 + 45, 0);
+                P2UIPieceInfo.Repairing = true;
             }
             else
             {
-                UIPieceThumbstick.transform.rotation = Quaternion.Euler(180, 0, 0);
+                UIPieceThumbstick1.transform.rotation = Quaternion.Euler(180, 0, 0);
                 UIPieceInfo.Repairing = false;
+
+                UIPieceThumbstick1.transform.rotation = Quaternion.Euler(180 + 45, 0 + 45, 0);
+                P1UIPieceInfo.Repairing = false;
+
+                UIPieceThumbstick2.transform.rotation = Quaternion.Euler(180 + 45, 0 + 45, 0);
+                P2UIPieceInfo.Repairing = false;
             }
         }
 
@@ -219,7 +296,6 @@ public class TurretScript : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-
         // If a player interacts with the trigger
         if (col.tag == "Player")
         {
@@ -235,14 +311,36 @@ public class TurretScript : MonoBehaviour
                 // If the player isnt ineracting yet, show the first panel
                 if (Interacting != true)
                 {
-                    ActivePiece.SetActive(false);
-                    InactivePiece.SetActive(true);
+                    //ActivePiece.SetActive(false);
+                    //InactivePiece.SetActive(true);
+
+                    if (col.gameObject == manager.players[0])
+                    {
+                        ActivePiece1.SetActive(false);
+                        InactivePiece1.SetActive(true);
+                    }
+                    if (col.gameObject == manager.players[1])
+                    {
+                        ActivePiece2.SetActive(false);
+                        InactivePiece2.SetActive(true);
+                    }
                 }
                 // Otherwise show the second panel
                 else
                 {
-                    ActivePiece.SetActive(true);
-                    InactivePiece.SetActive(false);
+                    //ActivePiece.SetActive(true);
+                    //InactivePiece.SetActive(false);
+
+                    if (col.gameObject == manager.players[0])
+                    {
+                        ActivePiece1.SetActive(true);
+                        InactivePiece1.SetActive(false);
+                    }
+                    if (col.gameObject == manager.players[1])
+                    {
+                        ActivePiece2.SetActive(true);
+                        InactivePiece2.SetActive(false);
+                    }
                 }
 
                 // If there is a referance to the manager and there is still players alive
@@ -401,6 +499,12 @@ public class TurretScript : MonoBehaviour
                 // Hide the UI pieces
                 ActivePiece.SetActive(false);
                 InactivePiece.SetActive(false);
+
+                ActivePiece1.SetActive(false);
+                InactivePiece1.SetActive(false);
+
+                ActivePiece2.SetActive(false);
+                InactivePiece2.SetActive(false);
                 Interacting = false;
             }
         }
@@ -408,12 +512,27 @@ public class TurretScript : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.tag == "Player")
         {
             playersInRange.Remove(col.gameObject);
             ActivePiece.SetActive(false);
             InactivePiece.SetActive(false);
-            Interacting = false;
+
+            if (col.gameObject == manager.players[0])
+            {
+                ActivePiece1.SetActive(false);
+                InactivePiece1.SetActive(false);
+            }
+            if (col.gameObject == manager.players[1])
+            {
+                ActivePiece2.SetActive(false);
+                InactivePiece2.SetActive(false);
+            }
+
+            if (playersInRange.Count <= 0)
+            {
+                Interacting = false;
+            }
         }
     }
 

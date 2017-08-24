@@ -207,6 +207,15 @@ public class EnemyNavigation : MonoBehaviour
         // If the player is within attack range
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
         {
+            // If the player needs to be revived
+            if (player.GetComponent<Health>().NeedRes == true)
+            {
+                // then remove the player reference so it dosent keep tracking to them
+                followPlayer = false;
+                player = null;
+                return;
+            }
+
             if (player.GetComponent<Health>().health > 0)
             {
                 Attack(player);
@@ -331,31 +340,33 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
-        layermask = 1 << LayerMask.NameToLayer("Enemy");
-        layermask = ~layermask;
-
-        if (survivor == null && barricade == null)
+        if (col.GetComponent<Health>().NeedRes != true)
         {
+            int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+            layermask = 1 << LayerMask.NameToLayer("Enemy");
+            layermask = ~layermask;
 
-            if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+            if (survivor == null && barricade == null)
             {
-                //Debug.Log("Can see player");
-                // If this player is closer than the other player in the scene
-                if (player == null)
+                if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
                 {
-                    player = col.gameObject;
-                    followPlayer = true;
-                    TargetPos = col.transform.position;
-                    agent.SetDestination(TargetPos);
-                }
-                else if (Vector3.Distance(this.transform.position, player.transform.position) >
-                        Vector3.Distance(this.transform.position, col.transform.position))
-                {
-                    player = col.gameObject;
-                    followPlayer = true;
-                    TargetPos = col.transform.position;
-                    agent.SetDestination(TargetPos);
+                    //Debug.Log("Can see player");
+                    // If this player is closer than the other player in the scene
+                    if (player == null)
+                    {
+                        player = col.gameObject;
+                        followPlayer = true;
+                        TargetPos = col.transform.position;
+                        agent.SetDestination(TargetPos);
+                    }
+                    else if (Vector3.Distance(this.transform.position, player.transform.position) >
+                            Vector3.Distance(this.transform.position, col.transform.position))
+                    {
+                        player = col.gameObject;
+                        followPlayer = true;
+                        TargetPos = col.transform.position;
+                        agent.SetDestination(TargetPos);
+                    }
                 }
             }
         }

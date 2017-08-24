@@ -1,0 +1,296 @@
+fileFormatVersion: 2
+guid: 23aee3c56af09e34e8fa426aa576bd76
+timeCreated: 1503208050
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: BottomHatch1
+    100002: BottomHatch2
+    100004: group1
+    100006: Gun1
+    100008: Gun1 1
+    100010: Gun2
+    100012: Gun2 1
+    100014: Gun3
+    100016: Gun3 1
+    100018: Gun4
+    100020: Gun4 1
+    100022: Horizontal
+    100024: LeftGuns
+    100026: LeftGuns1
+    100028: pCube10
+    100030: pCube10 1
+    100032: pCube10 2
+    100034: pCube10 3
+    100036: pCube10 4
+    100038: pCube10 5
+    100040: pCube10 6
+    100042: pCube10 7
+    100044: pCube11
+    100046: pCube6
+    100048: pCube7
+    100050: pCube8
+    100052: pCube9
+    100054: pCylinder12
+    100056: pCylinder13
+    100058: pCylinder14
+    100060: pCylinder2
+    100062: pPipe1
+    100064: pPipe1 1
+    100066: pPipe1 2
+    100068: pPipe1 3
+    100070: pPipe1 4
+    100072: pPipe1 5
+    100074: pPipe1 6
+    100076: pPipe1 7
+    100078: pPipe2
+    100080: pPipe2 1
+    100082: pPipe2 2
+    100084: pPipe2 3
+    100086: pPipe2 4
+    100088: pPipe2 5
+    100090: pPipe2 6
+    100092: pPipe2 7
+    100094: TopHatch1
+    100096: TopHatch2
+    100098: //RootNode
+    100100: Vertical
+    400000: BottomHatch1
+    400002: BottomHatch2
+    400004: group1
+    400006: Gun1
+    400008: Gun1 1
+    400010: Gun2
+    400012: Gun2 1
+    400014: Gun3
+    400016: Gun3 1
+    400018: Gun4
+    400020: Gun4 1
+    400022: Horizontal
+    400024: LeftGuns
+    400026: LeftGuns1
+    400028: pCube10
+    400030: pCube10 1
+    400032: pCube10 2
+    400034: pCube10 3
+    400036: pCube10 4
+    400038: pCube10 5
+    400040: pCube10 6
+    400042: pCube10 7
+    400044: pCube11
+    400046: pCube6
+    400048: pCube7
+    400050: pCube8
+    400052: pCube9
+    400054: pCylinder12
+    400056: pCylinder13
+    400058: pCylinder14
+    400060: pCylinder2
+    400062: pPipe1
+    400064: pPipe1 1
+    400066: pPipe1 2
+    400068: pPipe1 3
+    400070: pPipe1 4
+    400072: pPipe1 5
+    400074: pPipe1 6
+    400076: pPipe1 7
+    400078: pPipe2
+    400080: pPipe2 1
+    400082: pPipe2 2
+    400084: pPipe2 3
+    400086: pPipe2 4
+    400088: pPipe2 5
+    400090: pPipe2 6
+    400092: pPipe2 7
+    400094: TopHatch1
+    400096: TopHatch2
+    400098: //RootNode
+    400100: Vertical
+    2300000: BottomHatch1
+    2300002: BottomHatch2
+    2300004: pCube10
+    2300006: pCube10 1
+    2300008: pCube10 2
+    2300010: pCube10 3
+    2300012: pCube10 4
+    2300014: pCube10 5
+    2300016: pCube10 6
+    2300018: pCube10 7
+    2300020: pCube11
+    2300022: pCube6
+    2300024: pCube7
+    2300026: pCube8
+    2300028: pCube9
+    2300030: pCylinder12
+    2300032: pCylinder13
+    2300034: pCylinder14
+    2300036: pCylinder2
+    2300038: pPipe1
+    2300040: pPipe1 1
+    2300042: pPipe1 2
+    2300044: pPipe1 3
+    2300046: pPipe1 4
+    2300048: pPipe1 5
+    2300050: pPipe1 6
+    2300052: pPipe1 7
+    2300054: pPipe2
+    2300056: pPipe2 1
+    2300058: pPipe2 2
+    2300060: pPipe2 3
+    2300062: pPipe2 4
+    2300064: pPipe2 5
+    2300066: pPipe2 6
+    2300068: pPipe2 7
+    2300070: TopHatch1
+    2300072: TopHatch2
+    3300000: BottomHatch1
+    3300002: BottomHatch2
+    3300004: pCube10
+    3300006: pCube10 1
+    3300008: pCube10 2
+    3300010: pCube10 3
+    3300012: pCube10 4
+    3300014: pCube10 5
+    3300016: pCube10 6
+    3300018: pCube10 7
+    3300020: pCube11
+    3300022: pCube6
+    3300024: pCube7
+    3300026: pCube8
+    3300028: pCube9
+    3300030: pCylinder12
+    3300032: pCylinder13
+    3300034: pCylinder14
+    3300036: pCylinder2
+    3300038: pPipe1
+    3300040: pPipe1 1
+    3300042: pPipe1 2
+    3300044: pPipe1 3
+    3300046: pPipe1 4
+    3300048: pPipe1 5
+    3300050: pPipe1 6
+    3300052: pPipe1 7
+    3300054: pPipe2
+    3300056: pPipe2 1
+    3300058: pPipe2 2
+    3300060: pPipe2 3
+    3300062: pPipe2 4
+    3300064: pPipe2 5
+    3300066: pPipe2 6
+    3300068: pPipe2 7
+    3300070: TopHatch1
+    3300072: TopHatch2
+    4300000: pCylinder2
+    4300002: BottomHatch2
+    4300004: BottomHatch1
+    4300006: TopHatch1
+    4300008: TopHatch2
+    4300010: pPipe1
+    4300012: pCube10
+    4300014: pPipe2
+    4300016: pPipe1
+    4300018: pCube10
+    4300020: pPipe2
+    4300022: pPipe1
+    4300024: pCube10
+    4300026: pPipe2
+    4300028: pPipe1
+    4300030: pCube10
+    4300032: pPipe2
+    4300034: pPipe1
+    4300036: pCube10
+    4300038: pPipe2
+    4300040: pPipe1
+    4300042: pCube10
+    4300044: pPipe2
+    4300046: pPipe1
+    4300048: pCube10
+    4300050: pPipe2
+    4300052: pPipe1
+    4300054: pCube10
+    4300056: pPipe2
+    4300058: pCylinder13
+    4300060: pCylinder12
+    4300062: pCube9
+    4300064: pCube8
+    4300066: pCube7
+    4300068: pCube6
+    4300070: pCube11
+    4300072: pCylinder14
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

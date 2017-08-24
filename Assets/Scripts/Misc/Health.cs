@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     public NoHealth OnDie;
 
     public bool Enemy = false;
+    public bool Player = false;
+    public bool NeedRes = false;
     public GameObject Attacker = null;
 
     void Awake()
@@ -31,8 +33,19 @@ public class Health : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
 
-        if (health <= 0)
+        if (health <= 0 && Player == false)
+        {
             OnDie();
+        }
+        else if (health <= 0 && Player == true)
+        {
+            StartReviveSystem();
+        }
+    }
+
+    public void StartReviveSystem()
+    {
+        NeedRes = true;
     }
 
     public void Die()
