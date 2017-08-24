@@ -42,7 +42,7 @@ public class Rifle : MonoBehaviour
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
 
-        Ray aimRay = new Ray(transform.position, transform.forward);
+        Ray aimRay = new Ray(laserStartPoint.transform.position, laserStartPoint.transform.right);
         RaycastHit hit;
         Physics.queriesHitTriggers = false;
 
@@ -51,12 +51,12 @@ public class Rifle : MonoBehaviour
         if (Physics.Raycast(aimRay, out hit, laserLength, mask))
             laserEndPoint = hit.point;
         else
-            laserEndPoint = transform.position + transform.forward * laserLength;
+            laserEndPoint = laserStartPoint.transform.position + laserStartPoint.transform.right * laserLength;
 
         laser.SetPosition(0, laserStartPoint.transform.position);
         laser.SetPosition(1, laserEndPoint);
 
-        float distancePercent = (laserEndPoint - transform.position).magnitude / laserLength;
+        float distancePercent = (laserEndPoint - laserStartPoint.transform.position).magnitude / laserLength;
         Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
         laser.endColor = endColor;
         laser.SetWidth(0.02f, 0.02f);
@@ -69,9 +69,9 @@ public class Rifle : MonoBehaviour
             currentCooldown = cooldown;
             energy -= energyCost;
 
-            Vector3 aimDir = transform.forward + Random.insideUnitSphere * accuracy;
+            Vector3 aimDir = laserStartPoint.transform.right + Random.insideUnitSphere * accuracy;
 
-            Ray shootRay = new Ray(transform.position, aimDir);
+            Ray shootRay = new Ray(laserStartPoint.transform.position, aimDir);
             RaycastHit hit;
 
 
@@ -100,7 +100,7 @@ public class Rifle : MonoBehaviour
                 GameObject newTracer = Instantiate(tracer);
                 LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
                 tracerRenderer.SetPosition(0, laserStartPoint.transform.position);
-                tracerRenderer.SetPosition(1, transform.position + aimDir * range);
+                tracerRenderer.SetPosition(1, laserStartPoint.transform.position + aimDir * range);
             }
 
             if (gunshot != null)

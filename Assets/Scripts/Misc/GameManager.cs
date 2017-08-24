@@ -40,15 +40,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	void Start ()
+    void Start()
     {
         MainHUD.SetActive(true);
         ControlsHUD.SetActive(false);
 
         DontDestroyOnLoad(gameObject);
-	}
-	
-	void Update ()
+        SceneManager.sceneLoaded += SpawnObjectManager;
+    }
+
+    void Update()
     {
         if (atMenu)
         {
@@ -106,7 +107,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     void CheckAxis()
@@ -147,9 +148,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName = "TestScene")
     {
+
         atMenu = false;
         SceneManager.LoadScene(sceneName);
-        StartCoroutine(SpawnObjectManager());
     }
 
     public void ToggleControlsHUD()
@@ -163,11 +164,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator SpawnObjectManager()
+    void SpawnObjectManager(Scene scene, LoadSceneMode sceneMode)
     {
-        while (SceneManager.GetActiveScene().name == "TestMenu")
-            yield return new WaitForSeconds(Time.deltaTime);
+        Debug.Log("SpawnObjectManager");
+        if (SceneManager.GetActiveScene().name != "TestMenu")
+            GetComponent<GameObjectManager>().enabled = true;
+    }
 
-        GetComponent<GameObjectManager>().enabled = true;
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= SpawnObjectManager;
     }
 }
