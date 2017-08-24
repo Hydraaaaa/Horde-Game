@@ -10,44 +10,48 @@ public class HUDScript : MonoBehaviour
     public Text civiliansSaved;
     public Text notEnoughCivilians;
 
-    public GameObject barricadeHealthBarPrefab;
-    List<GameObject> barricades;
-    List<GameObject> barricadeHealthBars;
+    public GameObject p1Mask;
+    public GameObject p2Mask;
+
+    public GameObject barricadeHealthBarPrefab;    // Not Implemented
+    List<GameObject> barricadeHealthBarsP1;        // Not Implemented
+    List<GameObject> barricadeHealthBarsP2;        // Not Implemented
 
     public GameObject turretTimeBarPrefab;
-    List<GameObject> turrets;
-    List<GameObject> turretTimeBars;
+    List<GameObject> turretTimeBarsP1;
+    List<GameObject> turretTimeBarsP2;
 
     void Start ()
     {
-        barricades = manager.barricades;
-        barricadeHealthBars = new List<GameObject>();
-        foreach (GameObject barricade in barricades)
+        turretTimeBarsP1 = new List<GameObject>();
+        foreach (GameObject turret in manager.turrets)
         {
-            GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab) as GameObject;
-            newHealthBar.transform.parent = barricade.transform;
-            newHealthBar.transform.localPosition = Vector3.zero;
-            //newHealthBar.transform.SetAsFirstSibling();
-            barricadeHealthBars.Add(newHealthBar);
+            GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            newTimeBar.transform.localScale = Vector3.one;
+            newTimeBar.layer = LayerMask.NameToLayer("P1UI");
+            newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            newTimeBar.transform.SetParent(p1Mask.transform);
+            newTimeBar.transform.SetAsFirstSibling();
+            turretTimeBarsP1.Add(newTimeBar);
         }
 
-        turrets = manager.turrets;
-        turretTimeBars = new List<GameObject>();
-        foreach (GameObject turret in turrets)
+        turretTimeBarsP2 = new List<GameObject>();
+        foreach (GameObject turret in manager.turrets)
         {
-            GameObject newTimeBar = Instantiate(turretTimeBarPrefab) as GameObject;
-            newTimeBar.transform.parent = transform;
+            GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            newTimeBar.transform.localScale = Vector3.one;
+            newTimeBar.layer = LayerMask.NameToLayer("P2UI");
+            newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
+            newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
+            newTimeBar.transform.SetParent(p2Mask.transform);
             newTimeBar.transform.SetAsFirstSibling();
-            turretTimeBars.Add(newTimeBar);
+            turretTimeBarsP2.Add(newTimeBar);
         }
     }
 	
 	void Update ()
     {
-        foreach (GameObject barricade in barricades)
-        {
-            barricade.transform.GetChild(5).transform.localPosition = Vector3.zero;
-        }
 
         if (manager.timer > 60)
         {
@@ -70,35 +74,24 @@ public class HUDScript : MonoBehaviour
 
         civiliansSaved.text = manager.civiliansEscaped.ToString() + " ";
 
-        for (int i = barricades.Count - 1; i >= 0; i--)
-        {
-            if (barricades[i] == null)
-            {
-                barricades.RemoveAt(i);
-                Destroy(barricadeHealthBars[i]);
-                barricadeHealthBars.RemoveAt(i);
-            }
-        }
-
-        for (int i = 0; i < manager.barricades.Count; i++)
-        {
-            if (manager.barricades[i].GetComponent<Health>().health <= 0)
-                barricadeHealthBars[i].SetActive(false);
-            else
-                barricadeHealthBars[i].SetActive(true);
-            barricadeHealthBars[i].transform.position = Camera.main.WorldToScreenPoint(manager.barricades[i].transform.position);
-            barricadeHealthBars[i].transform.GetChild(1).GetComponent<Image>().fillAmount = manager.barricades[i].GetComponent<Health>().health / (float)manager.barricades[i].GetComponent<Health>().maxHealth;
-        }
-
         for (int i = 0; i < manager.turrets.Count; i++)
         {
             TurretAIScript turretScript = manager.turrets[i].GetComponent<TurretAIScript>();
             if (turretScript.timeLeft <= 0)
-                turretTimeBars[i].SetActive(false);
+            {
+                turretTimeBarsP1[i].SetActive(false);
+                turretTimeBarsP2[i].SetActive(false);
+            }
             else
-                turretTimeBars[i].SetActive(true);
-            turretTimeBars[i].transform.position = Camera.main.WorldToScreenPoint(manager.turrets[i].transform.position);
-            turretTimeBars[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
+            {
+                turretTimeBarsP1[i].SetActive(true);
+                turretTimeBarsP2[i].SetActive(true);
+            }
+            turretTimeBarsP1[i].transform.position = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
+            
+            turretTimeBarsP2[i].transform.position = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
         }
     }
 }

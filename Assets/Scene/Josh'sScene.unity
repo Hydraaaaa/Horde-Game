@@ -6974,6 +6974,11 @@ Prefab:
       propertyPath: Turrets.Array.data[2]
       value: 
       objectReference: {fileID: 1581260565}
+    - target: {fileID: 224349052211953188, guid: e79fd3be4e2fb154e9ae1a7f4eff0882,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e79fd3be4e2fb154e9ae1a7f4eff0882, type: 2}
   m_IsPrefabParent: 0
@@ -19364,6 +19369,10 @@ Prefab:
       propertyPath: TurretNo
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1751818929478884, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
+      propertyPath: m_TagString
+      value: Turret
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
   m_IsPrefabParent: 0
@@ -24343,6 +24352,10 @@ Prefab:
     - target: {fileID: 1751818929478884, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
       propertyPath: m_Name
       value: Turret2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751818929478884, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
+      propertyPath: m_TagString
+      value: Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
@@ -49355,6 +49368,10 @@ Prefab:
         type: 2}
       propertyPath: TurretNo
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751818929478884, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
+      propertyPath: m_TagString
+      value: Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b890b498d4c8ca94b9de9fef7b319919, type: 2}
