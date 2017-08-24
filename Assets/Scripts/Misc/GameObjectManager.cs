@@ -13,8 +13,10 @@ public class GameObjectManager : MonoBehaviour
     public GameObject LoseGUIPrefab;
 
     [HideInInspector] public GameObject camera;
-    public GameObject camera1;
-    public GameObject camera2;
+    public GameObject camera1prefab;
+    public GameObject camera2prefab;
+    [HideInInspector] public GameObject camera1;
+    [HideInInspector] public GameObject camera2;
 
     [HideInInspector] public GameObject endPos;
     [HideInInspector] public GameObject civilianDestination;
@@ -127,8 +129,8 @@ public class GameObjectManager : MonoBehaviour
 
         if (trySplitScreen)
         {
-            camera1 = Instantiate(camera1);
-            camera2 = Instantiate(camera2);
+            camera1 = Instantiate(camera1prefab);
+            camera2 = Instantiate(camera2prefab);
         }
         else
         {
