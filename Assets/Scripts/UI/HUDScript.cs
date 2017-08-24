@@ -23,24 +23,40 @@ public class HUDScript : MonoBehaviour
 
     void Start ()
     {
+        barricadeHealthBarsP1 = new List<GameObject>();
+        barricadeHealthBarsP2 = new List<GameObject>();
+        for (int i = 0; i < manager.barricades.Count; i++)
+        {
+            GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            newHealthBar.layer = LayerMask.NameToLayer("P1UI");
+            newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            newHealthBar.transform.SetParent(p1Mask.transform);
+            newHealthBar.transform.SetAsFirstSibling();
+            barricadeHealthBarsP1.Add(newHealthBar);
+
+            newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            newHealthBar.layer = LayerMask.NameToLayer("P2UI");
+            newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
+            newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
+            newHealthBar.transform.SetParent(p2Mask.transform);
+            newHealthBar.transform.SetAsFirstSibling();
+            barricadeHealthBarsP2.Add(newHealthBar);
+        }
+
         turretTimeBarsP1 = new List<GameObject>();
-        foreach (GameObject turret in manager.turrets)
+        turretTimeBarsP2 = new List<GameObject>();
+        for (int i = 0; i < manager.turrets.Count; i++)
         {
             GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
-            newTimeBar.transform.localScale = Vector3.one;
             newTimeBar.layer = LayerMask.NameToLayer("P1UI");
             newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
             newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
             newTimeBar.transform.SetParent(p1Mask.transform);
             newTimeBar.transform.SetAsFirstSibling();
             turretTimeBarsP1.Add(newTimeBar);
-        }
 
-        turretTimeBarsP2 = new List<GameObject>();
-        foreach (GameObject turret in manager.turrets)
-        {
-            GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
-            newTimeBar.transform.localScale = Vector3.one;
+            newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
             newTimeBar.layer = LayerMask.NameToLayer("P2UI");
             newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
             newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
@@ -73,6 +89,26 @@ public class HUDScript : MonoBehaviour
             notEnoughCivilians.enabled = false;
 
         civiliansSaved.text = manager.civiliansEscaped.ToString() + " ";
+
+        for (int i = 0; i < manager.barricades.Count; i++)
+        {
+            Health healthScript = manager.barricades[i].GetComponent<Health>();
+            if (healthScript.health <= 0)
+            {
+                barricadeHealthBarsP1[i].SetActive(false);
+                barricadeHealthBarsP2[i].SetActive(false);
+            }
+            else
+            {
+                barricadeHealthBarsP1[i].SetActive(true);
+                barricadeHealthBarsP2[i].SetActive(true);
+            }
+            barricadeHealthBarsP1[i].transform.position = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
+            
+            barricadeHealthBarsP2[i].transform.position = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
+        }
 
         for (int i = 0; i < manager.turrets.Count; i++)
         {
