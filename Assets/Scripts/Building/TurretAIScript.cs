@@ -20,6 +20,7 @@ public class TurretAIScript : MonoBehaviour
     public float attackInterval = 0.75f;
     public float curAttackInterval;
 
+    public GameObject[] TurretBarrels;
     public TurretScript turretRef;
     public int TurretNo;
     public float timeLeft;
@@ -34,11 +35,42 @@ public class TurretAIScript : MonoBehaviour
     void Awake()
     {
         damage = turretRef.TurInformation[TurretNo - 1].DPS;
+        TurretBarrels[0].SetActive(false);
+        TurretBarrels[1].SetActive(false);
+        TurretBarrels[2].SetActive(false);
+        TurretBarrels[3].SetActive(false);
+        TurretBarrels[4].SetActive(false);
+        TurretBarrels[5].SetActive(false);    
+        TurretBarrels[6].SetActive(false);
+        TurretBarrels[7].SetActive(false);
     }
 
     // Update is called once per frame
     void Update ()
     {
+        switch (turretRef.TurInformation[TurretNo - 1].Level)
+        {
+            case 1:
+                TurretBarrels[0].SetActive(true);
+                TurretBarrels[1].SetActive(true);
+                break;
+            case 2:
+                TurretBarrels[2].SetActive(true);
+                TurretBarrels[3].SetActive(true);
+                break;
+            case 3:
+                TurretBarrels[4].SetActive(true);
+                TurretBarrels[5].SetActive(true);
+                break;
+            case 4:
+                TurretBarrels[6].SetActive(true);
+                TurretBarrels[7].SetActive(true);
+                break;
+            default:
+                break;
+        }
+
+
         timeLeft = turretRef.TurInformation[TurretNo - 1].curActiveTime;
         VerticalRotator.GetComponent<TurretRifle>().damage = turretRef.TurInformation[TurretNo - 1].DPS;
 

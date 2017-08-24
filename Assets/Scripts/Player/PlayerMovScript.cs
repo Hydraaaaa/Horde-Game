@@ -94,41 +94,45 @@ public class PlayerMovScript : MonoBehaviour
 
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        if (useController)
+        if (!GetComponent<Health>().NeedRes)
         {
-            CheckKeys();
-        }
-        else
-        {
-            // Mouse
-            RaycastHit hit;
-            
-            int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
+            if (useController)
             {
-                transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                CheckKeys();
             }
+            else
+            {
+                // Mouse
+                RaycastHit hit;
 
-            if (Input.GetMouseButton(0) && playerAttack != null)
-                playerAttack(ref energy);
+                int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
+                {
+                    transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                }
+
+                if (Input.GetMouseButton(0) && playerAttack != null)
+                    playerAttack(ref energy);
 
 
-            // Keyboard
-            direction = Vector3.zero;
-            Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
-            
-            if (Input.GetKey(KeyCode.W))
-                direction += forward * moveSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.S))
-                direction -= forward * moveSpeed * Time.deltaTime;
-            
-            if (Input.GetKey(KeyCode.A))
-                direction -= Camera.main.transform.right * moveSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.D))
-                direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
-            
-            controller.Move(direction);
+                // Keyboard
+                direction = Vector3.zero;
+                Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
+
+                if (Input.GetKey(KeyCode.W))
+                    direction += forward * moveSpeed * Time.deltaTime;
+                if (Input.GetKey(KeyCode.S))
+                    direction -= forward * moveSpeed * Time.deltaTime;
+
+                if (Input.GetKey(KeyCode.A))
+                    direction -= Camera.main.transform.right * moveSpeed * Time.deltaTime;
+                if (Input.GetKey(KeyCode.D))
+                    direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
+
+                controller.Move(direction);
+            }
         }
 
         energy += EnergyPerTick;

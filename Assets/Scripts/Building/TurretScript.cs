@@ -672,7 +672,7 @@ public class TurretScript : MonoBehaviour
 
             // Set Current Lifetime back to max lifetime
             TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;
-            Debug.Log("Upgraded to lvl 1");
+            Debug.Log("Repaired the Barrier!");
         }
     }
 }

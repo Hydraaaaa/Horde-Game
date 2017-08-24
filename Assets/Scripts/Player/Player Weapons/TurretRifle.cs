@@ -85,6 +85,10 @@ public class TurretRifle : MonoBehaviour
                 {
                     currentGun = 0;
                 }
+                else if (GunPoints[currentGun] == null)
+                {
+                    currentGun = 0;
+                }
 
                 tracerRenderer.SetPosition(0, GunPoints[currentGun].transform.position);
 

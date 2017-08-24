@@ -3048,6 +3048,15 @@ MonoBehaviour:
   damage: 5
   attackInterval: 0.15
   curAttackInterval: 0
+  TurretBarrels:
+  - {fileID: 1458530300729678}
+  - {fileID: 1936098190448952}
+  - {fileID: 1734511251959376}
+  - {fileID: 1124823349364548}
+  - {fileID: 1562257938615908}
+  - {fileID: 1764540252703330}
+  - {fileID: 1842184860765526}
+  - {fileID: 1590244034032890}
   turretRef: {fileID: 0}
   TurretNo: 2
   timeLeft: 0
