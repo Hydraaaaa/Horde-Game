@@ -87,7 +87,14 @@ public class GameObjectManager : MonoBehaviour
             }
         }
 
-        if (players.Count == 0 && playing)
+        int playerCount = 0;
+        foreach (GameObject player in players)
+        {
+            if (player != null && !player.GetComponent<Health>().NeedRes)
+                playerCount++;
+        }
+
+        if (playerCount == 0 && playing)
             GameOver();
 
         if (players.Count > 0)
