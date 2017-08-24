@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 136068906050621124}
   - component: {fileID: 143391138108412064}
   - component: {fileID: 114118442132592400}
+  - component: {fileID: 114504510429051004}
   - component: {fileID: 114736662164450560}
   - component: {fileID: 120885250459197078}
   - component: {fileID: 114887641942699286}
@@ -283,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1263417937672338
 GameObject:
   m_ObjectHideFlags: 1
@@ -2203,6 +2204,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resources: 0
   ResourceCap: 250
+--- !u!114 &114504510429051004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0244693a419dc7a49b65c9d7c14ce02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
+  tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
+  cooldown: 0.8
+  accuracy: 0.03
+  damage: 3
+  pellets: 12
+  laserLength: 30
+  range: 30
+  energyCost: 10
+  laserStartPoint: {fileID: 1943170100614640}
+  gunshot: {fileID: 0}
 --- !u!114 &114593241582930650
 MonoBehaviour:
   m_ObjectHideFlags: 1
