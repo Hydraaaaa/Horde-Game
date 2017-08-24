@@ -168,7 +168,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("SpawnObjectManager");
         if (SceneManager.GetActiveScene().name != "TestMenu")
+        {
+            GetComponent<GameObjectManager>().enabled = false;
             GetComponent<GameObjectManager>().enabled = true;
+        }
     }
 
     void OnDestroy()

@@ -10,8 +10,8 @@ public class GameOverButton : MonoBehaviour
         SceneManager.LoadScene("TestMenu");
     }
 
-    public void Reload()
+    public void RestartScene()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

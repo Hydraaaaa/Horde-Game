@@ -35,13 +35,17 @@ public class Rifle : MonoBehaviour
 //        gunshot = Instantiate(gunshot);
 
         laser = GetComponent<LineRenderer>();
+        laser.SetWidth(0.02f, 0.02f);
     }
 
     void Update()
     {
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
+    }
 
+    void LateUpdate()
+    {
         Ray aimRay = new Ray(laserStartPoint.transform.position, laserStartPoint.transform.right);
         RaycastHit hit;
         Physics.queriesHitTriggers = false;
@@ -53,13 +57,12 @@ public class Rifle : MonoBehaviour
         else
             laserEndPoint = laserStartPoint.transform.position + laserStartPoint.transform.right * laserLength;
 
-        laser.SetPosition(0, laserStartPoint.transform.position);
-        laser.SetPosition(1, laserEndPoint);
-
         float distancePercent = (laserEndPoint - laserStartPoint.transform.position).magnitude / laserLength;
         Color endColor = new Color(laser.startColor.r, laser.startColor.g, laser.startColor.b, 1 - distancePercent);
         laser.endColor = endColor;
-        laser.SetWidth(0.02f, 0.02f);
+
+        laser.SetPosition(0, laserStartPoint.transform.position);
+        laser.SetPosition(1, laserEndPoint);
     }
 
     public void Attack(ref float energy)
