@@ -12,16 +12,11 @@ public class GameObjectManager : MonoBehaviour
     public GameObject WinGUIPrefab;
     public GameObject LoseGUIPrefab;
 
-    [HideInInspector] public GameObject camera;
-    public GameObject camera1prefab;
-    public GameObject camera2prefab;
-    [HideInInspector] public GameObject camera1;
-    [HideInInspector] public GameObject camera2;
-
     [HideInInspector] public GameObject endPos;
     [HideInInspector] public GameObject civilianDestination;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
+    public List<GameObject> cameras;
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
     public List<GameObject> civilianSpawners;
@@ -61,7 +56,6 @@ public class GameObjectManager : MonoBehaviour
         civiliansEscaped = 0;
 
         playerStarts = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player Start"));
-        SpawnCamera();
         SpawnPlayers();
         GetEnemySpawners();
         GetCivilianSpawners();
@@ -145,21 +139,6 @@ public class GameObjectManager : MonoBehaviour
         }
     }
 
-    public void SpawnCamera()
-    {
-
-        if (trySplitScreen)
-        {
-            camera1 = Instantiate(camera1prefab);
-            camera2 = Instantiate(camera2prefab);
-        }
-        else
-        {
-            camera = Instantiate(cameraPrefab);
-            camera.GetComponent<CameraLogic>().gameObjectManager = this;
-        }
-    }
-
     public void SpawnPlayers()
     {
         int playerCount = GetComponent<GameManager>().playerCount;
@@ -196,12 +175,22 @@ public class GameObjectManager : MonoBehaviour
         else
             Debug.Log("No player starts found");
 
-        if (trySplitScreen)
+        for (int i = 0; i < players.Count; i++)
         {
-            camera1.GetComponent<CameraMovement>().player = players[0];
-            camera1.GetComponent<AudioListener>().enabled = true;
-            camera2.GetComponent<CameraMovement>().player = players[1];
-            //camera2.GetComponent<AudioListener>().enabled = true;
+            GameObject camera = Instantiate(cameraPrefab);
+
+            camera.GetComponent<Camera>().rect = new Rect
+                                                 (
+                                                     i / (float)players.Count,
+                                                     0,
+                                                     1 / (float)players.Count,
+                                                     1
+                                                 );
+
+            camera.GetComponent<CameraMovement>().player = players[i];
+            players[i].GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
+
+            cameras.Add(camera);
         }
     }
 

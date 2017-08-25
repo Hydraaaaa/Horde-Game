@@ -103,10 +103,10 @@ public class HUDScript : MonoBehaviour
                 barricadeHealthBarsP1[i].SetActive(true);
                 barricadeHealthBarsP2[i].SetActive(true);
             }
-            barricadeHealthBarsP1[i].transform.position = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
             
-            barricadeHealthBarsP2[i].transform.position = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
         }
 
@@ -123,10 +123,10 @@ public class HUDScript : MonoBehaviour
                 turretTimeBarsP1[i].SetActive(true);
                 turretTimeBarsP2[i].SetActive(true);
             }
-            turretTimeBarsP1[i].transform.position = manager.camera1.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
             turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
             
-            turretTimeBarsP2[i].transform.position = manager.camera2.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
             turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
         }
     }

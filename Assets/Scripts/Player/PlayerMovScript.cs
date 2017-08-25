@@ -36,6 +36,8 @@ public class PlayerMovScript : MonoBehaviour
 
     public GameObject[] Guns;
 
+    [HideInInspector] public Camera camera;
+
     // Use this for initialization
     void Start ()
     {
@@ -112,7 +114,7 @@ public class PlayerMovScript : MonoBehaviour
 
                 int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
 
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
                 {
                     transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
                 }
@@ -123,7 +125,7 @@ public class PlayerMovScript : MonoBehaviour
 
                 // Keyboard
                 direction = Vector3.zero;
-                Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
+                Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
 
                 if (Input.GetKey(KeyCode.W))
                     direction += forward * moveSpeed * Time.deltaTime;
@@ -131,9 +133,9 @@ public class PlayerMovScript : MonoBehaviour
                     direction -= forward * moveSpeed * Time.deltaTime;
 
                 if (Input.GetKey(KeyCode.A))
-                    direction -= Camera.main.transform.right * moveSpeed * Time.deltaTime;
+                    direction -= camera.transform.right * moveSpeed * Time.deltaTime;
                 if (Input.GetKey(KeyCode.D))
-                    direction += Camera.main.transform.right * moveSpeed * Time.deltaTime;
+                    direction += camera.transform.right * moveSpeed * Time.deltaTime;
 
                 controller.Move(direction);
             }
@@ -150,7 +152,7 @@ public class PlayerMovScript : MonoBehaviour
         lookDir = Vector3.zero;
 
         Vector2 lookScreenPos = screenCenter;
-        Vector3 forward = Vector3.Cross(Camera.main.transform.right, Vector3.up);
+        Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
 
         foreach (string axis in axisEndings)
         {
@@ -176,9 +178,9 @@ public class PlayerMovScript : MonoBehaviour
                 if (axis == "Horizontal")
                 {
                     if (Shooting)
-                        direction += (Camera.main.transform.right) * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
+                        direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
                     else
-                        direction += (Camera.main.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                        direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
                 }
                 else if (axis == "Vertical")
                 {

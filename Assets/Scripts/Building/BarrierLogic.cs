@@ -110,8 +110,8 @@ public class BarrierLogic : MonoBehaviour
     void Update ()
     {
         //float dist1 = 0;
-        P1UI.GetComponent<Canvas>().worldCamera = manager.camera1.GetComponent<Camera>();
-        P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
+        P1UI.GetComponent<Canvas>().worldCamera = manager.cameras[0].GetComponent<Camera>();
+        P2UI.GetComponent<Canvas>().worldCamera = manager.cameras[1].GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
