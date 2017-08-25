@@ -17,5 +17,8 @@ public class Endpoint : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+
+        if (other.CompareTag("Enemy"))
+            manager.GameOver();
     }
 }
