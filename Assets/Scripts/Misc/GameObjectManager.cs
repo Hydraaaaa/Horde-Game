@@ -113,7 +113,9 @@ public class GameObjectManager : MonoBehaviour
         }
 
         if (playerCount == 0 && playing)
+        {
             GameOver();
+        }
 
         if (players.Count > 0)
             if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
@@ -266,21 +268,24 @@ public class GameObjectManager : MonoBehaviour
             totalCivilians += civilianSpawners[i].GetComponent<CivilianSource>().currentCivilians;
 
         if (totalCivilians < initialCivilians * (civiliansRequired / 100))
-            GameOver();
+        {
+            Debug.Log("Game Over: Too many civilians died, needed " + (initialCivilians * (civiliansRequired / 100)).ToString() + "/" + initialCivilians.ToString());
+            Lose();
+        }
     }
 
     public bool GetWin()
     {
         if (playersEscaped < 1)
+        {
+            Debug.Log("Game Over: No Alive/Escaped Players");
             return false;
+        }
 
         if (civiliansEscaped < initialCivilians * (civiliansRequired / 100))
-            return false;
-
-        foreach (GameObject barricade in vitalBarricades)
         {
-            if (barricade == null)
-                return false;
+            Debug.Log("Game Over: Not enough escaped civilians");
+            return false;
         }
 
         return true;
@@ -288,11 +293,20 @@ public class GameObjectManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (GetWin())
-            Instantiate(WinGUIPrefab);
-        else
-            Instantiate(LoseGUIPrefab);
+        if (playing)
+        {
+            if (GetWin())
+                Instantiate(WinGUIPrefab);
+            else
+                Instantiate(LoseGUIPrefab);
 
+            playing = false;
+        }
+    }
+
+    public void Lose()
+    {
+        Instantiate(LoseGUIPrefab);
         playing = false;
     }
 }
