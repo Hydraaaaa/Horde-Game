@@ -19,6 +19,9 @@ public class Endpoint : MonoBehaviour
         }
 
         if (other.CompareTag("Enemy"))
-            manager.GameOver();
+        {
+            Debug.Log("Game Over: Enemy reached end");
+            manager.Lose();
+        }
     }
 }
