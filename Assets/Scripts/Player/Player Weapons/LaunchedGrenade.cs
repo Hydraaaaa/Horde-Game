@@ -7,9 +7,11 @@ public class LaunchedGrenade : MonoBehaviour
     [Tooltip("Time until explosion")]
     public float time;
 
-    public float damage;
+    public int damage;
 
     public GameObject[] particleEffects;
+
+    List<GameObject> targets;
 
 	void Start ()
     {
@@ -27,6 +29,21 @@ public class LaunchedGrenade : MonoBehaviour
     {
         foreach (GameObject particleEffect in particleEffects)
             Instantiate(particleEffect, transform.position, Quaternion.identity);
+
+        foreach (GameObject target in targets)
+            target.GetComponent<Health>().Damage(damage);
+
         Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Health>())
+            targets.Add(other.gameObject);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        targets.Remove(other.gameObject);
     }
 }
