@@ -54,5 +54,6 @@ public class CivilianNavigation : MonoBehaviour
     {
         manager.civilians.Remove(gameObject);
         manager.CheckCivilianCount();
+        Destroy(gameObject);
     }
 }
