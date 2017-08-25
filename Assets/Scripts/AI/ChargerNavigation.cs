@@ -33,6 +33,7 @@ public class ChargerNavigation : MonoBehaviour
     public bool followPlayer = false;
     public bool followSurvivor = false;
     public bool charging = false;
+    public bool canCharge = false;
 
     public bool holdingPlayer = false;
 
@@ -47,7 +48,9 @@ public class ChargerNavigation : MonoBehaviour
     // Speeds
     public float turningSpeed = 4.0f;
     public float acceleration = 4.0f;
+    public float speed = 4.0f;
     public float chargeAcceleration = 7f;
+    public float chargeSpeed = 10f;
 
 
     // Damages
@@ -64,9 +67,11 @@ public class ChargerNavigation : MonoBehaviour
     // Cooldowns
     [Tooltip("Time in seconds between shots")]
     public float cooldown;
-    float currentCooldown;
+    public float currentCooldown;
+    public float chargeWindupTime = 1f;
+    public float currentChargeWindupTime;
     public float chargeCooldown = 20f;
-    float currentChargeCooldown;
+    public float currentChargeCooldown;
     public float chargeChancePercentage = 20;
 
     public bool EnvironmentZombie = false;
@@ -110,57 +115,73 @@ public class ChargerNavigation : MonoBehaviour
 
         if (agent != null)
         {
+            // If they're not charging the player
             if (!charging)
             {
+                anim.SetBool("Charging", false);
+
                 // Setting speed and turning speed
                 agent.angularSpeed = turningSpeed;
                 agent.acceleration = acceleration;
+                agent.speed = speed;
 
-                // Rotating towards movement direction
-                Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
-
-                // If the agent is moving
-                if (dir != Vector3.zero)
+                // if the charger can charge check and ...
+                if (canCharge)
                 {
-                    // Rotate in the direction of the velocity
-                    transform.rotation = Quaternion.Slerp(
-                        transform.rotation,
-                        Quaternion.LookRotation(dir),
-                        Time.deltaTime * (turningSpeed * 2)
-                    );
+                    if (UnityEngine.Random.Range(0, 101) >= chargeChancePercentage)
+                        StartCharge();
                 }
-
-                // If the agent dosent have a path to follow
-                if (!agent.hasPath)
+                
+                // If the charger didnt start charging yet
+                if (!charging)
                 {
-                    //TargetPos = EndPos.transform.position;
-                    agent.SetDestination(TargetPos);
-                }
-                // If the agent isnt under attack
-                if (GetComponent<Health>().Attacker == null)
-                {
-                    // If the agent is following a player
-                    if (player != null)
-                        PlayerNotNull();
 
-                    // If the agent is following a Survivor
-                    else if (survivor != null)
-                        SurvivorNotNull();
+                    // Rotating towards movement direction
+                    Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
 
-                    // If the agent is following a Barricade
-                    else if (barricade != null)
-                        BarricadeNotNull();
-
-                    // If the agent isnt following anything
-                    else
+                    // If the agent is moving
+                    if (dir != Vector3.zero)
                     {
-                        TargetPos = EndPos.transform.position;
+                        // Rotate in the direction of the velocity
+                        transform.rotation = Quaternion.Slerp(
+                            transform.rotation,
+                            Quaternion.LookRotation(dir),
+                            Time.deltaTime * (turningSpeed * 2)
+                        );
+                    }
+
+                    // If the agent dosent have a path to follow
+                    if (!agent.hasPath)
+                    {
+                        //TargetPos = EndPos.transform.position;
                         agent.SetDestination(TargetPos);
                     }
-                }
-                else
-                {
-                    BeingAttacked();
+                    // If the agent isnt under attack
+                    if (GetComponent<Health>().Attacker == null)
+                    {
+                        // If the agent is following a player
+                        if (player != null)
+                            PlayerNotNull();
+
+                        // If the agent is following a Survivor
+                        else if (survivor != null)
+                            SurvivorNotNull();
+
+                        // If the agent is following a Barricade
+                        else if (barricade != null)
+                            BarricadeNotNull();
+
+                        // If the agent isnt following anything
+                        else
+                        {
+                            TargetPos = EndPos.transform.position;
+                            agent.SetDestination(TargetPos);
+                        }
+                    }
+                    else
+                    {
+                        BeingAttacked();
+                    }
                 }
 
                 // If the agent has a path to follow
@@ -170,19 +191,87 @@ public class ChargerNavigation : MonoBehaviour
                     currentDist = Vector3.Distance(transform.position, TargetPos);
                 }
             }
+            // They're charging the player
             else
             {
-                // Setting speed and turning speed
-                agent.angularSpeed = 0.5f;
-                agent.acceleration = chargeAcceleration;
-
-                // If the agent has a path to follow
-                if (agent.hasPath)
-                {
-                    agent.SetDestination(TargetPos);
-                    currentDist = Vector3.Distance(transform.position, TargetPos);
-                }
+                Charging();
             }
+        }
+    }
+
+    void Charging()
+    {
+        anim.SetBool("Charging", true);
+        // Setting speed and turning speed
+        agent.angularSpeed = 0.5f;
+        agent.acceleration = chargeAcceleration;
+        agent.speed = chargeSpeed;
+        
+        // If the agent has a path to follow
+        if (agent.hasPath)
+        {
+            agent.SetDestination(TargetPos);
+            currentDist = Vector3.Distance(transform.position, TargetPos);
+        }
+
+        if (currentDist < 1.1f)
+        {
+            charging = false;
+        }
+    }
+
+    void StartCharge()
+    {
+        currentChargeCooldown = chargeCooldown;
+
+        agent.angularSpeed = 0.5f;
+        agent.acceleration = chargeAcceleration;
+        agent.speed = chargeSpeed;
+
+        // If the player needs to be revived
+        if (player.GetComponent<Health>().NeedRes == true)
+        {
+            // then remove the player reference so it dosent keep tracking to them
+            followPlayer = false;
+            player = null;
+            return;
+        }
+
+        // If the player is still alive
+        if (player.GetComponent<Health>().health > 0)
+        {
+            //int chance = UnityEngine.Random.Range(0, 101);
+            //if (chance <= chargeChancePercentage)
+            //{
+            //    charging = true;
+            //}
+
+            RaycastHit hit;
+            Vector3 direction = player.transform.position - transform.position;
+
+            // Find the closest point on the navmesh to charge to
+            
+            Physics.Raycast(transform.position, direction, out hit, chargeDistance, LayerMask.NameToLayer("SeeThrough"));
+            Debug.DrawLine(transform.position, hit.point);
+
+            NavMeshHit navHit;
+            NavMesh.SamplePosition(hit.point, out navHit, 1, NavMesh.AllAreas);
+            Debug.DrawLine(transform.position, navHit.position);
+            
+            TargetPos = hit.point;
+            agent.SetDestination(TargetPos);
+            charging = true;
+            canCharge = false;
+        }
+        // If the player is dead
+        else
+        {
+            // then remove the player reference so it dosent keep tracking to them
+            followPlayer = false;
+            player = null;
+            TargetPos = EndPos.transform.position;
+            agent.SetDestination(TargetPos);
+            return;
         }
     }
 
@@ -281,57 +370,15 @@ public class ChargerNavigation : MonoBehaviour
         }
 
         // If the player is within charge range
-        if (Vector3.Distance(transform.position, player.transform.position) < chargeRange)
+        if (Vector3.Distance(transform.position, player.transform.position) < chargeRange && !canCharge)
         {
             // If the charger is ready to charge
             if (currentChargeCooldown <= 0)
             {
-                currentChargeCooldown = chargeCooldown;
-
-                // If the player needs to be revived
-                if (player.GetComponent<Health>().NeedRes == true)
-                {
-                    // then remove the player reference so it dosent keep tracking to them
-                    followPlayer = false;
-                    player = null;
-                    return;
-                }
-
-                // If the player is still alive
-                if (player.GetComponent<Health>().health > 0)
-                {
-                    //int chance = UnityEngine.Random.Range(0, 101);
-                    //if (chance <= chargeChancePercentage)
-                    //{
-                    //    charging = true;
-                    //}
-
-                    RaycastHit hit;
-                    Vector3 direction = player.transform.position - transform.position;
-
-                    // Find the closest point on the navmesh to charge to
-                    Physics.Raycast(transform.position, direction, out hit, chargeDistance);
-
-                    NavMeshHit navHit;
-                    NavMesh.SamplePosition(hit.point, out navHit, 2, NavMesh.AllAreas);
-
-                    TargetPos = navHit.position;
-                    agent.SetDestination(TargetPos);
-                    charging = true;
-                }
-                // If the player is dead
-                else
-                {
-                    // then remove the player reference so it dosent keep tracking to them
-                    followPlayer = false;
-                    player = null;
-                    TargetPos = EndPos.transform.position;
-                    agent.SetDestination(TargetPos);
-                    return;
-                }
+                canCharge = true;
             }
             else
-            {
+            {                
                 currentChargeCooldown -= Time.deltaTime;
             }
         }
@@ -392,15 +439,17 @@ public class ChargerNavigation : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         if (charging)
-        // if the zombie charges into a player
-        if (col.gameObject.tag == "Player")
         {
-            col.gameObject.transform.position = HoldingPos.position;
-            col.gameObject.transform.rotation = HoldingPos.rotation;    
-            
+            // if the zombie charges into a player
+            if (col.gameObject.tag == "Player")
+            {
+                col.gameObject.transform.position = HoldingPos.position;
+                col.gameObject.transform.rotation = HoldingPos.rotation;
+                Debug.Log("Grabbed");
+
                 //
                 //
                 //
@@ -410,6 +459,31 @@ public class ChargerNavigation : MonoBehaviour
                 //
                 //
                 //       
+            }
+        }
+    }
+
+    void OnCollisionStay(Collision col)
+    {
+        if (charging)
+        {
+            // if the zombie charges into a player
+            if (col.gameObject.tag == "Player")
+            {
+                col.gameObject.transform.position = HoldingPos.position;
+                col.gameObject.transform.rotation = HoldingPos.rotation;
+                Debug.Log("Grabbed");
+
+                //
+                //
+                //
+                //
+                //      DONT WANT TO MESS WITH AI JUST BEFORE I LEAVE, NEED TO MAKE THE PLAYER GET GRABBED BY CHARGER
+                //
+                //
+                //
+                //       
+            }
         }
     }
 

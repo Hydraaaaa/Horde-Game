@@ -150,7 +150,7 @@ public class TurretAIScript : MonoBehaviour
 
                 if (!Physics.Linecast(VerticalRotator.transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
                 {
-                    Debug.Log("New Target(null before)");
+                    //Debug.Log("New Target(null before)");
                     Target = col.gameObject;
                 }
             }
@@ -167,7 +167,7 @@ public class TurretAIScript : MonoBehaviour
                     // If the new target is closer
                     if (Vector3.Distance(transform.position, col.transform.position) < Vector3.Distance(transform.position, Target.transform.position))
                     {
-                        Debug.Log("New Target(closer)");
+                       //Debug.Log("New Target(closer)");
 
                         Target = col.gameObject;
                     }

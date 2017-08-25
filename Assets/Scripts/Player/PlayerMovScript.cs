@@ -141,6 +141,8 @@ public class PlayerMovScript : MonoBehaviour
             }
         }
 
+        anim.SetBool("Shooting", Shooting);
+
         energy += EnergyPerTick;
         if (energy > maxEnergy)
             energy = maxEnergy;

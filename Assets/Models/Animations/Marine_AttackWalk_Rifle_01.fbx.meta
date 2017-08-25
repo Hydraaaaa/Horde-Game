@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 38409cb3934cf6340a8b4bf6d9173e78
-timeCreated: 1503551514
+guid: 335488db014c75b4c8e1267fb6793734
+timeCreated: 1503623404
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -127,14 +127,14 @@ ModelImporter:
     100238: leg_R
     100240: leg_R 1
     100242: leg_R_IK
-    100244: marine_GEO
-    100246: //RootNode
+    100244: //RootNode
+    100246: marine_GEO
     100248: neck
     100250: neck 1
-    100252: pCylinder1
-    100254: pCylinder2
-    100256: pCylinder3
-    100258: Rifle_01
+    100252: Rifle_02:pCylinder1
+    100254: Rifle_02:pCylinder2
+    100256: Rifle_02:pCylinder3
+    100258: Rifle_02:Rifle_01
     100260: ROOT
     100262: ROOT 1
     100264: toe_L_IK
@@ -269,14 +269,14 @@ ModelImporter:
     400238: leg_R
     400240: leg_R 1
     400242: leg_R_IK
-    400244: marine_GEO
-    400246: //RootNode
+    400244: //RootNode
+    400246: marine_GEO
     400248: neck
     400250: neck 1
-    400252: pCylinder1
-    400254: pCylinder2
-    400256: pCylinder3
-    400258: Rifle_01
+    400252: Rifle_02:pCylinder1
+    400254: Rifle_02:pCylinder2
+    400256: Rifle_02:pCylinder3
+    400258: Rifle_02:Rifle_01
     400260: ROOT
     400262: ROOT 1
     400264: toe_L_IK
@@ -289,20 +289,20 @@ ModelImporter:
     400278: wrist_L 1
     400280: wrist_R
     400282: wrist_R 1
-    2300000: pCylinder1
-    2300002: pCylinder2
-    2300004: pCylinder3
-    2300006: Rifle_01
-    3300000: pCylinder1
-    3300002: pCylinder2
-    3300004: pCylinder3
-    3300006: Rifle_01
+    2300000: Rifle_02:pCylinder1
+    2300002: Rifle_02:pCylinder2
+    2300004: Rifle_02:pCylinder3
+    2300006: Rifle_02:Rifle_01
+    3300000: Rifle_02:pCylinder1
+    3300002: Rifle_02:pCylinder2
+    3300004: Rifle_02:pCylinder3
+    3300006: Rifle_02:Rifle_01
     4300000: head_GEO
     4300002: body_GEO
-    4300004: Rifle_01
-    4300006: pCylinder3
-    4300008: pCylinder2
-    4300010: pCylinder1
+    4300004: Rifle_02:Rifle_01
+    4300006: Rifle_02:pCylinder3
+    4300008: Rifle_02:pCylinder2
+    4300010: Rifle_02:pCylinder1
     7400000: Take 001
     9500000: //RootNode
     13700000: body_GEO
@@ -335,7 +335,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
