@@ -21,6 +21,13 @@ public class HUDScript : MonoBehaviour
     List<GameObject> turretTimeBarsP1;
     List<GameObject> turretTimeBarsP2;
 
+    public GameObject controllerTurretGUI;
+    public GameObject PCTurretGUI;
+    GameObject turretGUIP1;
+    GameObject turretGUIP2;
+
+
+
     void Start ()
     {
         barricadeHealthBarsP1 = new List<GameObject>();
@@ -63,6 +70,23 @@ public class HUDScript : MonoBehaviour
             newTimeBar.transform.SetParent(p2Mask.transform);
             newTimeBar.transform.SetAsFirstSibling();
             turretTimeBarsP2.Add(newTimeBar);
+        }
+
+        if (manager.players[0].GetComponent<PlayerMovScript>().useController)
+            turretGUIP1 = Instantiate(controllerTurretGUI);
+        else
+            turretGUIP1 = Instantiate(PCTurretGUI);
+
+        turretGUIP1.transform.SetParent(p1Mask.transform);
+
+        if (manager.players.Count > 1)
+        {
+            if (manager.players[1].GetComponent<PlayerMovScript>().useController)
+                turretGUIP2 = Instantiate(controllerTurretGUI);
+            else
+                turretGUIP2 = Instantiate(PCTurretGUI);
+
+            turretGUIP2.transform.SetParent(p2Mask.transform);
         }
     }
 	

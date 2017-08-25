@@ -14,6 +14,7 @@ public class GameObjectManager : MonoBehaviour
 
     [HideInInspector] public GameObject endPos;
     [HideInInspector] public GameObject civilianDestination;
+    [HideInInspector] public GameObject HUD;
     public List<GameObject> playerStarts;
     public List<GameObject> players;
     public List<GameObject> cameras;
@@ -24,7 +25,7 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> barricades;
     public List<GameObject> vitalBarricades;
     public List<GameObject> turrets;
-    
+
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
     [Tooltip("Time in seconds until certain bulkhead doors open")]
@@ -115,17 +116,17 @@ public class GameObjectManager : MonoBehaviour
             GameOver();
 
         if (players.Count > 0)
-        if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
-        {
-            HPBar1.fillAmount = 0;
-            healthCount1.text = "0";
-        }
+            if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
+            {
+                HPBar1.fillAmount = 0;
+                healthCount1.text = "0";
+            }
         if (players.Count > 1)
-        if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
-        {
-            HPBar2.fillAmount = 0;
-            healthCount2.text = "0";
-        }
+            if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
+            {
+                HPBar2.fillAmount = 0;
+                healthCount2.text = "0";
+            }
     }
 
     IEnumerator GetInitialCivilians()
@@ -248,13 +249,24 @@ public class GameObjectManager : MonoBehaviour
 
     public void SpawnHUD()
     {
-        GameObject HUD = Instantiate(HUDPrefab);
+        HUD = Instantiate(HUDPrefab);
         HUD.GetComponent<HUDScript>().manager = this;
     }
 
     public void GetTurrets()
     {
         turrets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Turret"));
+    }
+
+    public void CheckCivilianCount()
+    {
+        int totalCivilians = civiliansEscaped;
+        totalCivilians += civilians.Count;
+        for (int i = 0; i < civilianSpawners.Count; i++)
+            totalCivilians += civilianSpawners[i].GetComponent<CivilianSource>().currentCivilians;
+
+        if (totalCivilians < initialCivilians * (civiliansRequired / 100))
+            GameOver();
     }
 
     public bool GetWin()

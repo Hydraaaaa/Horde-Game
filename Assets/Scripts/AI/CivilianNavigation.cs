@@ -15,6 +15,7 @@ public class CivilianNavigation : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
+        GetComponent<Health>().OnDie = OnDie;
 	}
 	
 	void Update ()
@@ -47,5 +48,11 @@ public class CivilianNavigation : MonoBehaviour
             manager.civilians.Remove(gameObject);
             Destroy(gameObject);
         }
+    }
+
+    void OnDie()
+    {
+        manager.civilians.Remove(gameObject);
+        manager.CheckCivilianCount();
     }
 }

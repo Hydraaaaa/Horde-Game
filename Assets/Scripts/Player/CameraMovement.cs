@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
     public float cameraDistance;
     public float mouseOffsetScale;
 
-	void Update ()
+	void LateUpdate ()
     {
         UpdatePosition();
 	}
