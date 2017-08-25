@@ -288,13 +288,10 @@ public class GameObjectManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (playing == true)
-        {
-            if (GetWin())
-                Instantiate(WinGUIPrefab);
-            else
-                Instantiate(LoseGUIPrefab);
-        }
+        if (GetWin())
+            Instantiate(WinGUIPrefab);
+        else
+            Instantiate(LoseGUIPrefab);
 
         playing = false;
     }
