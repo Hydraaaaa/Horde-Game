@@ -24,7 +24,17 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-
+        if (health <= 0)
+        {
+            if (Player)
+            {
+                StartReviveSystem();
+            }
+            else
+            {
+                OnDie();
+            }
+        }
     }
 
     public void Damage(int damage)
@@ -33,13 +43,16 @@ public class Health : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
 
-        if (health <= 0 && Player == false)
+        if (health <= 0)
         {
-            OnDie();
-        }
-        else if (health <= 0 && Player == true)
-        {
-            StartReviveSystem();
+            if (Player)
+            {
+                StartReviveSystem();
+            }
+            else
+            {
+                OnDie();
+            }
         }
     }
 

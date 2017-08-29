@@ -41,6 +41,7 @@ public class ChargerNavigation : MonoBehaviour
     public GameObject player;
     public GameObject survivor;
     public GameObject barricade;
+    public GameObject ChargeBarrier;
 
     // Transforms
     public Transform HoldingPos;
@@ -49,6 +50,7 @@ public class ChargerNavigation : MonoBehaviour
     public float turningSpeed = 4.0f;
     public float acceleration = 4.0f;
     public float speed = 4.0f;
+    public float chargeTurningSpeed = 0;
     public float chargeAcceleration = 7f;
     public float chargeSpeed = 10f;
 
@@ -94,6 +96,7 @@ public class ChargerNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
 
+        ChargeBarrier = transform.GetChild(1).gameObject;
         //player = GameObject.FindGameObjectWithTag("Player 1");
     }
 
@@ -109,6 +112,14 @@ public class ChargerNavigation : MonoBehaviour
             anim.SetBool("Moving", false);
         }
 
+        if (charging)
+        {
+            ChargeBarrier.SetActive(true);
+        }
+        else
+        {
+            ChargeBarrier.SetActive(false);
+        }
         // Attack Cooldown
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
@@ -203,7 +214,7 @@ public class ChargerNavigation : MonoBehaviour
     {
         anim.SetBool("Charging", true);
         // Setting speed and turning speed
-        agent.angularSpeed = 0.5f;
+        agent.angularSpeed = chargeTurningSpeed;
         agent.acceleration = chargeAcceleration;
         agent.speed = chargeSpeed;
         
@@ -224,7 +235,7 @@ public class ChargerNavigation : MonoBehaviour
     {
         currentChargeCooldown = chargeCooldown;
 
-        agent.angularSpeed = 0.5f;
+        agent.angularSpeed = chargeTurningSpeed;
         agent.acceleration = chargeAcceleration;
         agent.speed = chargeSpeed;
 
@@ -240,18 +251,16 @@ public class ChargerNavigation : MonoBehaviour
         // If the player is still alive
         if (player.GetComponent<Health>().health > 0)
         {
-            //int chance = UnityEngine.Random.Range(0, 101);
-            //if (chance <= chargeChancePercentage)
-            //{
-            //    charging = true;
-            //}
-
             RaycastHit hit;
             Vector3 direction = player.transform.position - transform.position;
 
             // Find the closest point on the navmesh to charge to
-            
-            Physics.Raycast(transform.position, direction, out hit, chargeDistance, LayerMask.NameToLayer("SeeThrough"));
+
+            int layermask = 1 << LayerMask.NameToLayer("Terrain");
+            // layermask = ~layermask;
+
+            Physics.Raycast(transform.position, direction, out hit, chargeDistance, layermask);
+            Physics.Raycast(hit.point, direction, out hit, chargeDistance, layermask);
             Debug.DrawLine(transform.position, hit.point);
 
             NavMeshHit navHit;
@@ -439,78 +448,33 @@ public class ChargerNavigation : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (charging)
-        {
-            // if the zombie charges into a player
-            if (col.gameObject.tag == "Player")
-            {
-                col.gameObject.transform.position = HoldingPos.position;
-                col.gameObject.transform.rotation = HoldingPos.rotation;
-                Debug.Log("Grabbed");
-
-                //
-                //
-                //
-                //
-                //      DONT WANT TO MESS WITH AI JUST BEFORE I LEAVE, NEED TO MAKE THE PLAYER GET GRABBED BY CHARGER
-                //
-                //
-                //
-                //       
-            }
-        }
-    }
-
-    void OnCollisionStay(Collision col)
-    {
-        if (charging)
-        {
-            // if the zombie charges into a player
-            if (col.gameObject.tag == "Player")
-            {
-                col.gameObject.transform.position = HoldingPos.position;
-                col.gameObject.transform.rotation = HoldingPos.rotation;
-                Debug.Log("Grabbed");
-
-                //
-                //
-                //
-                //
-                //      DONT WANT TO MESS WITH AI JUST BEFORE I LEAVE, NEED TO MAKE THE PLAYER GET GRABBED BY CHARGER
-                //
-                //
-                //
-                //       
-            }
-        }
-    }
-
     void OnTriggerStay(Collider col)
     {
-        // If they ran into another enemy, dont bother continuing
-        if (col.tag == "Enemy")
+        if (!charging)
         {
-            return;
-        }
-        //// If they found a barricade
-        //if (col.tag == TypeTags.BarricadeTag)
-        //{
-        //    CheckForBarricade(col);
-        //    return;
-        //}
-        // IF they found a player
-        if (col.tag == TypeTags.PlayerTag)
-        {
-            CheckForPlayer(col);
-            return;
-        }
-        // If they found a survivor
-        if (col.tag == TypeTags.SurvivorTag)
-        {
-            CheckForSurvivor(col);
-            return;
+            // If they ran into another enemy, dont bother continuing
+            if (col.tag == "Enemy")
+            {
+                return;
+            }
+            //// If they found a barricade
+            //if (col.tag == TypeTags.BarricadeTag)
+            //{
+            //    CheckForBarricade(col);
+            //    return;
+            //}
+            // IF they found a player
+            if (col.tag == TypeTags.PlayerTag)
+            {
+                CheckForPlayer(col);
+                return;
+            }
+            // If they found a survivor
+            if (col.tag == TypeTags.SurvivorTag)
+            {
+                CheckForSurvivor(col);
+                return;
+            }
         }
     }
 

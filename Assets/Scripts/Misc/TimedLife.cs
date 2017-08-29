@@ -8,7 +8,7 @@ public class TimedLife : MonoBehaviour
     [HideInInspector] public float life;
 
     public bool fade;
-    Renderer renderer;
+    new Renderer renderer;
     
 	void Start ()
     {

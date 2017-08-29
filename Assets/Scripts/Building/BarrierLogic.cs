@@ -57,6 +57,9 @@ public class BarrierLogic : MonoBehaviour
     public Text CostRepair2;
     public Text CostUpgrade2;
 
+    public float interactTime = 0.01f;
+    public float currentTime = 0;
+
     // Use this for initialization
     void Start ()
     {
@@ -109,6 +112,10 @@ public class BarrierLogic : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if (currentTime < interactTime)
+            currentTime += Time.deltaTime;
+
+
         //float dist1 = 0;
         P1UI.GetComponent<Canvas>().worldCamera = manager.cameras[0].GetComponent<Camera>();
         P2UI.GetComponent<Canvas>().worldCamera = manager.cameras[1].GetComponent<Camera>();
@@ -199,13 +206,16 @@ public class BarrierLogic : MonoBehaviour
                 {
                     P1UI.SetActive(true);
 
-                    if (Input.GetButtonDown("Joy1XButton"))
+                    if (currentTime >= interactTime)
                     {
-                        RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
-                    }
-                    if (Input.GetButtonDown("Joy1YButton"))
-                    {
-                        UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                        if (Input.GetButtonUp("Joy1XButton"))
+                        {
+                            RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                        }
+                        if (Input.GetButtonUp("Joy1YButton"))
+                        {
+                            UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                        }
                     }
                 }
 
@@ -219,13 +229,16 @@ public class BarrierLogic : MonoBehaviour
                 {
                     P2UI.SetActive(true);
 
-                    if (Input.GetButtonDown("Joy2XButton"))
+                    if (currentTime >= interactTime)
                     {
-                        RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
-                    }
-                    if (Input.GetButtonDown("Joy2YButton"))
-                    {
-                        UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                        if (Input.GetButtonDown("Joy2XButton"))
+                        {
+                            RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                        }
+                        if (Input.GetButtonDown("Joy2YButton"))
+                        {
+                            UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                        }
                     }
                 }
             }
@@ -234,11 +247,12 @@ public class BarrierLogic : MonoBehaviour
 
     public void UpgradeBarrier(BarrierPlayersideLogic playerRes)
     {
-        Debug.Log("Upgrading!");
+        Debug.Log("Upgrading! " + Cost);
 
         if (playerRes.Resources >= Cost)
         {
             playerRes.Resources -= Cost;
+            currentTime = 0;
 
             Level++;
             switch (Level)
@@ -247,27 +261,27 @@ public class BarrierLogic : MonoBehaviour
                     Cost = Information.Cost.Level1;
                     GetComponent<Health>().health = Information.Health.Level1;
                     GetComponent<Health>().maxHealth = Information.Health.Level1;
-                    break;
+                    return;
                 case 1:
                     Cost = Information.Cost.Level2;
                     GetComponent<Health>().health = Information.Health.Level2;
                     GetComponent<Health>().maxHealth = Information.Health.Level2;
-                    break;
+                    return;
                 case 2:
                     Cost = Information.Cost.Level3;
                     GetComponent<Health>().health = Information.Health.Level3;
                     GetComponent<Health>().maxHealth = Information.Health.Level3;
-                    break;
+                    return;
                 case 3:
                     Cost = Information.Cost.Level4;
                     GetComponent<Health>().health = Information.Health.Level4;
                     GetComponent<Health>().maxHealth = Information.Health.Level4;
-                    break;
+                    return;
                 case 4:
                     Cost = Information.Cost.Level5;
                     GetComponent<Health>().health = Information.Health.Level5;
                     GetComponent<Health>().maxHealth = Information.Health.Level5;
-                    break;
+                    return;
             }
         }
     }
@@ -279,6 +293,7 @@ public class BarrierLogic : MonoBehaviour
         if (playerRes.Resources >= (Cost / 2))
         {
             playerRes.Resources -= (Cost / 2);
+            currentTime = 0;
 
             switch (Level)
             {
