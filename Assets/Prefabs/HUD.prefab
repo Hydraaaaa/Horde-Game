@@ -765,8 +765,18 @@ MonoBehaviour:
   p2Mask: {fileID: 1296715548569930}
   barricadeHealthBarPrefab: {fileID: 1949755700816658, guid: 92798abd1cedcb84cb04cc00fee287fc,
     type: 2}
+  barricadeHealthBarsP1: []
+  barricadeHealthBarsP2: []
   turretTimeBarPrefab: {fileID: 1017951825463972, guid: 48fcbbb7f7a2e9b47855742c1cedc577,
     type: 2}
+  turretTimeBarsP1: []
+  turretTimeBarsP2: []
+  controllerTurretGUI: {fileID: 1887250268850508, guid: c3c408388d7487d4592a7da36e78567e,
+    type: 2}
+  PCTurretGUI: {fileID: 1887250268850508, guid: c3c408388d7487d4592a7da36e78567e,
+    type: 2}
+  turretGUIP1: []
+  turretGUIP2: []
 --- !u!114 &114591027751796172
 MonoBehaviour:
   m_ObjectHideFlags: 1

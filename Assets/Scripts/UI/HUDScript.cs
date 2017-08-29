@@ -14,144 +14,254 @@ public class HUDScript : MonoBehaviour
     public GameObject p2Mask;
 
     public GameObject barricadeHealthBarPrefab;    // Not Implemented
-    List<GameObject> barricadeHealthBarsP1;        // Not Implemented
-    List<GameObject> barricadeHealthBarsP2;        // Not Implemented
+
+    public List<GameObject> barricadeHealthBarsP1;        // Not Implemented
+    public List<GameObject> barricadeHealthBarsP2;        // Not Implemented
 
     public GameObject turretTimeBarPrefab;
-    List<GameObject> turretTimeBarsP1;
-    List<GameObject> turretTimeBarsP2;
+
+    public List<GameObject> turretTimeBarsP1;
+    public List<GameObject> turretTimeBarsP2;
 
     public GameObject controllerTurretGUI;
     public GameObject PCTurretGUI;
-    GameObject turretGUIP1;
-    GameObject turretGUIP2;
+
+    public List<GameObject> turretGUIP1;
+    public List<GameObject> turretGUIP2;
 
 
 
     void Start ()
     {
+        // Make the barricade UI
+        InstantiateBarricadeUI();
+
+        // Make the Turret UI
+        InstantiateTurretUI();        
+    }
+	
+    void InstantiateBarricadeUI()
+    {
+        // Create two new lists
         barricadeHealthBarsP1 = new List<GameObject>();
         barricadeHealthBarsP2 = new List<GameObject>();
+
+        // Iterate through each barricade in the managers list
         for (int i = 0; i < manager.barricades.Count; i++)
         {
+            // Instantiate a new healthbar for the barricades
             GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            // Add to player 1's layer mask
             newHealthBar.layer = LayerMask.NameToLayer("P1UI");
             newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
             newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+
+            // Set as a child of the player1 mask 
             newHealthBar.transform.SetParent(p1Mask.transform);
             newHealthBar.transform.SetAsFirstSibling();
+
+            // Add a referance to the barricade in the local list
             barricadeHealthBarsP1.Add(newHealthBar);
 
+            // Instantiate a new healthbar for the barricades
             newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            // Add to player 2's layer mask
             newHealthBar.layer = LayerMask.NameToLayer("P2UI");
             newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
             newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
+
+            // Set as a child of the player1 mask 
             newHealthBar.transform.SetParent(p2Mask.transform);
             newHealthBar.transform.SetAsFirstSibling();
-            barricadeHealthBarsP2.Add(newHealthBar);
-        }
 
+            // Add a referance to the barricade in the local list
+            barricadeHealthBarsP2.Add(newHealthBar);
+
+        }
+        return;
+    }
+
+    void InstantiateTurretUI()
+    {
+        // Instantiate new turret lists
         turretTimeBarsP1 = new List<GameObject>();
         turretTimeBarsP2 = new List<GameObject>();
+
+        // Iterate through the managers list of turrets
         for (int i = 0; i < manager.turrets.Count; i++)
         {
+            // Create a new timer
             GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            // Add it to player 1's layer mask
             newTimeBar.layer = LayerMask.NameToLayer("P1UI");
             newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
             newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+
+            // Set as a child of the player1 mask
             newTimeBar.transform.SetParent(p1Mask.transform);
             newTimeBar.transform.SetAsFirstSibling();
+
+            // Add a referance to the barricade in the local list
             turretTimeBarsP1.Add(newTimeBar);
 
+            // Create a new timer
             newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            // Add it to player 1's layer mask
             newTimeBar.layer = LayerMask.NameToLayer("P2UI");
             newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
             newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
+
+            // Set as a child of the player1 mask
             newTimeBar.transform.SetParent(p2Mask.transform);
             newTimeBar.transform.SetAsFirstSibling();
+
+            // Add a referance to the barricade in the local list
             turretTimeBarsP2.Add(newTimeBar);
         }
 
-        if (manager.players[0].GetComponent<PlayerMovScript>().useController)
-            turretGUIP1 = Instantiate(controllerTurretGUI);
-        else
-            turretGUIP1 = Instantiate(PCTurretGUI);
+        // Instantiate new turret lists
+        turretGUIP1 = new List<GameObject>();
+        turretGUIP2 = new List<GameObject>();
 
-        turretGUIP1.transform.SetParent(p1Mask.transform);
-
-        if (manager.players.Count > 1)
+        // Iterate through the managers turret list
+        for (int i = 0; i < manager.turrets.Count; i++)
         {
-            if (manager.players[1].GetComponent<PlayerMovScript>().useController)
-                turretGUIP2 = Instantiate(controllerTurretGUI);
+            // Instantiate the correct GUI for the controller type used for player 1
+            if (manager.players[0].GetComponent<PlayerMovScript>().useController)
+                turretGUIP1.Add(Instantiate(controllerTurretGUI));
             else
-                turretGUIP2 = Instantiate(PCTurretGUI);
+                turretGUIP1.Add(Instantiate(PCTurretGUI));
 
-            turretGUIP2.transform.SetParent(p2Mask.transform);
+            // Child to the player 1 mask
+            turretGUIP1[i].transform.SetParent(p1Mask.transform);
+
+            // If there is more than 1 player alive, instantiate the correct GUI for player 2
+            if (manager.players.Count > 1)
+            {
+                if (manager.players[1].GetComponent<PlayerMovScript>().useController)
+                    turretGUIP2.Add(Instantiate(controllerTurretGUI));
+                else
+                    turretGUIP2.Add(Instantiate(PCTurretGUI));
+
+                turretGUIP2[i].transform.SetParent(p2Mask.transform);
+            }
+
+            manager.turrets[i].GetComponent<TurretAI>().P1UIPiece = turretGUIP1[i];
+            manager.turrets[i].GetComponent<TurretAI>().P2UIPiece = turretGUIP2[i];
         }
+        return;
     }
-	
+
 	void Update ()
     {
-
+        // If the timer for the exit bulkhead is still above 60 seconds
         if (manager.timer > 60)
         {
+            // Put the minute on the left of the semicolon, otherwise leave it empty
             if (manager.timer % 60 < 10)
                 timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":0" + Mathf.FloorToInt(manager.timer % 60).ToString();
             else
                 timer.text = " " + (Mathf.FloorToInt(manager.timer) / 60).ToString() + ":" + Mathf.FloorToInt(manager.timer % 60).ToString();
         }
+        // If the time for the exit bulkhead is less then 60
         else if (manager.timer > 0)
         {
+            // Just put the time in exactly
             timer.text = Mathf.FloorToInt(manager.timer).ToString();
         }
+        // Otherwise, if the timer is less than or equal to 0
         else
             timer.text = "Door Open";
 
+        // If the amount of civilians needed to escape has been reached
         if (manager.civiliansEscaped < (manager.civiliansRequired / 100.0f) * manager.initialCivilians)
             notEnoughCivilians.enabled = true;
+        // Otherwise just ignore it
         else
             notEnoughCivilians.enabled = false;
 
+        // Display the civilian saved count to the screen
         civiliansSaved.text = manager.civiliansEscaped.ToString() + " ";
 
+        // For each barricade in the list
         for (int i = 0; i < manager.barricades.Count; i++)
         {
+            // Grab the health script of the barricade
             Health healthScript = manager.barricades[i].GetComponent<Health>();
+
+            // If the barricade's health is equal to or below 0
             if (healthScript.health <= 0)
             {
+                // Disable the UI
                 barricadeHealthBarsP1[i].SetActive(false);
                 barricadeHealthBarsP2[i].SetActive(false);
             }
+            // Otherwise
             else
             {
+                // Turn on the UI
                 barricadeHealthBarsP1[i].SetActive(true);
                 barricadeHealthBarsP2[i].SetActive(true);
             }
+
+            // Update the Barricade's position on player 1's screen
             barricadeHealthBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
             
+            // Update the Barricade's position on player 2's screen
             barricadeHealthBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
         }
 
+        // For each turret in the list
         for (int i = 0; i < manager.turrets.Count; i++)
         {
-            TurretAIScript turretScript = manager.turrets[i].GetComponent<TurretAIScript>();
-            if (turretScript.timeLeft <= 0)
+            // Get the turret's script
+            TurretAI turretScript = manager.turrets[i].GetComponent<TurretAI>();
+
+            // If the turrent's Lifetime is less than or equal to 0
+            if (turretScript.curActiveTime <= 0)
             {
+                // Disable the UI
                 turretTimeBarsP1[i].SetActive(false);
                 turretTimeBarsP2[i].SetActive(false);
             }
+            // Otherwise
             else
             {
+                // Enable the UI
                 turretTimeBarsP1[i].SetActive(true);
                 turretTimeBarsP2[i].SetActive(true);
             }
+
+            // Update the Turret's position on player 1's screen
             turretTimeBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
-            turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
-            
+            turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
+
+            turretGUIP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretGUIP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+
+
+            // Update the Turret's position on player 2's screen
             turretTimeBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
-            turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.timeLeft / (float)turretScript.turretRef.TurInformation[turretScript.TurretNo - 1].activeTime;
+            turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
+        }
+    }
+
+    public void GrabTurretsUI(GameObject turret)
+    {
+        for(int i = 0; i < manager.turrets.Count; i++)
+        {
+            if (manager.turrets[i] == turret)
+            {
+                turret.GetComponent<TurretAI>().P1UIPiece = turretGUIP1[i];
+                turret.GetComponent<TurretAI>().P2UIPiece = turretGUIP2[i];
+                return;
+            }
         }
     }
 }
