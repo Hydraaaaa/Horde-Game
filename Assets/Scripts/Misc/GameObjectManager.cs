@@ -15,6 +15,8 @@ public class Player
 
 public class GameObjectManager : MonoBehaviour
 {
+    public static GameObjectManager instance;
+
     public GameObject cameraPrefab;
     public GameObject playerPrefab;
     public GameObject HUDPrefab;
@@ -74,7 +76,7 @@ public class GameObjectManager : MonoBehaviour
         GetTurrets();
         GetCivilianDestination();
         GetEndPos();
-        SetStaticManagers();
+        instance = this;
 
         if (players.Count > 0)
             if (players[0].gameObject.GetComponent<Health>().health <= 0)
@@ -222,10 +224,7 @@ public class GameObjectManager : MonoBehaviour
         foreach (GameObject civilianSpawner in localCivilianSpawners)
         {
             if (civilianSpawner.GetComponent<CivilianSource>() != null)
-            {
-                civilianSpawner.GetComponent<CivilianSource>().manager = this;
                 civilianSpawners.Add(civilianSpawner);
-            }
         }
     }
 
@@ -248,16 +247,6 @@ public class GameObjectManager : MonoBehaviour
     void GetEndPos()
     {
         endPos = GameObject.FindGameObjectWithTag("End Position");
-        GameObject.FindGameObjectWithTag("End Position").GetComponent<Endpoint>().manager = this;
-    }
-
-    void SetStaticManagers()
-    {
-        EnemyNavigation.manager = this;
-        PlayerInit.manager = this;
-        CivilianNavigation.manager = this;
-        CivilianSpawner.manager = this;
-        CivilianSource.manager = this;
     }
 
     void GetCivilianDestination()
@@ -268,7 +257,6 @@ public class GameObjectManager : MonoBehaviour
     public void SpawnHUD()
     {
         HUD = Instantiate(HUDPrefab);
-        HUD.GetComponent<HUDScript>().manager = this;
     }
 
     public void GetTurrets()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInit : MonoBehaviour
 {
     public GameObject aimRaycastBoxPrefab;
-    public static GameObjectManager manager;
 
 	void Start ()
     {
@@ -18,11 +17,11 @@ public class PlayerInit : MonoBehaviour
 
     public void PlayerDie()
     {
-        for (int i = 0; i < manager.players.Count; i++)
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
         {
-            if (manager.players[i].gameObject == gameObject)
+            if (GameObjectManager.instance.players[i].gameObject == gameObject)
             {
-                manager.players[i].gameObject = null;
+                GameObjectManager.instance.players[i].gameObject = null;
             }
         }
         Destroy(gameObject);

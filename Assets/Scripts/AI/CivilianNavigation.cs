@@ -6,7 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CivilianNavigation : MonoBehaviour
 {
-    public static GameObjectManager manager;
     NavMeshAgent agent;
 
     public float speed;
@@ -31,9 +30,9 @@ public class CivilianNavigation : MonoBehaviour
             );
         }
 
-        if (manager != null)
+        if (GameObjectManager.instance != null)
         {
-            agent.SetDestination(manager.civilianDestination.transform.position);
+            agent.SetDestination(GameObjectManager.instance.civilianDestination.transform.position);
         }
     }
 
@@ -43,17 +42,17 @@ public class CivilianNavigation : MonoBehaviour
         {
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Health>().enabled = false;
-            manager.civiliansEscaped++;
+            GameObjectManager.instance.civiliansEscaped++;
 
-            manager.civilians.Remove(gameObject);
+            GameObjectManager.instance.civilians.Remove(gameObject);
             Destroy(gameObject);
         }
     }
 
     void OnDie()
     {
-        manager.civilians.Remove(gameObject);
-        manager.CheckCivilianCount();
+        GameObjectManager.instance.civilians.Remove(gameObject);
+        GameObjectManager.instance.CheckCivilianCount();
         Destroy(gameObject);
     }
 }

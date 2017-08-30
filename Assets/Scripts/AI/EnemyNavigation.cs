@@ -6,8 +6,6 @@ using System;
 
 public class EnemyNavigation : MonoBehaviour
 {
-    public static GameObjectManager manager;
-
     public enum Type { SURVIVOR, PLAYER, BARRICADE, DEFENSES, TERRAIN, NULL };
 
     public Animator anim;
@@ -72,7 +70,7 @@ public class EnemyNavigation : MonoBehaviour
         agent.CalculatePath(TargetPos, path);
 
         //player = GameObject.FindGameObjectWithTag("Player 1");
-        Physics.IgnoreCollision(GetComponent<SphereCollider>(), manager.endPos.GetComponent<BoxCollider>());
+        Physics.IgnoreCollision(GetComponent<SphereCollider>(), GameObjectManager.instance.endPos.GetComponent<BoxCollider>());
     }
 
     void Update()

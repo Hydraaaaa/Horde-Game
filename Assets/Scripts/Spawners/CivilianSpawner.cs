@@ -5,14 +5,13 @@ using UnityEngine;
 public class CivilianSpawner : MonoBehaviour
 {
     [HideInInspector]
-    public static GameObjectManager manager;
     public GameObject spawnPrefab;
     
     public int amount;
 
     void Update ()
     {
-        if (manager != null)
+        if (GameObjectManager.instance != null)
         {
             for (int i = 0; i < amount; i++)
             {
@@ -23,7 +22,7 @@ public class CivilianSpawner : MonoBehaviour
                     transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
                 );
                 GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
-                manager.civilians.Add(newlySpawned);
+                GameObjectManager.instance.civilians.Add(newlySpawned);
             }
 
             Destroy(gameObject);

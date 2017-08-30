@@ -5,7 +5,6 @@ using UnityEngine;
 public class CivilianSource : MonoBehaviour
 {
     public GameObject civilianPrefab;
-    public static GameObjectManager manager;
 
     public int civilians;
     [HideInInspector] public int currentCivilians;
@@ -24,7 +23,7 @@ public class CivilianSource : MonoBehaviour
 	
 	void Update ()
     {
-        if (active && manager != null)
+        if (active && GameObjectManager.instance != null)
         {
             spawnTimer -= Time.deltaTime;
 
