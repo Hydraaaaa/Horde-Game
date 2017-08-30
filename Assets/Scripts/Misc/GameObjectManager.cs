@@ -123,19 +123,15 @@ public class GameObjectManager : MonoBehaviour
             }
         }
 
-        //int playerCount = 0;
-        //for (int i = 0; i < players.Count; i++)
-        //{
-        //    if (players[i].gameObject != null && !players[i].gameObject.GetComponent<ReviveSystem>().NeedRes) // When player 2 is dead, player 1 doesn't pass the second test
-        //        playerCount++;
-        //}
-
-        if (playing &&
-            players[0].gameObject.GetComponent<ReviveSystem>().NeedRes &&
-            players[1].gameObject.GetComponent<ReviveSystem>().NeedRes)
+        int playerCount = 0;
+        for (int i = 0; i < players.Count; i++)
         {
-            Debug.Log(players[0].gameObject.GetComponent<PlayerInfoScript>().PlayerNo);
-            Debug.Log(players[1].gameObject.GetComponent<PlayerInfoScript>().PlayerNo);
+            if (players[i].gameObject != null && !players[i].gameObject.GetComponent<ReviveSystem>().NeedRes) // When player 2 is dead, player 1 doesn't pass the second test
+                playerCount++;
+        }
+
+        if (playerCount <= 0)
+        {
             GameOver();
         }
 

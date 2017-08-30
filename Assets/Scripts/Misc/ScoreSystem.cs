@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -18,13 +19,13 @@ public class TagScore
 [System.Serializable]
 public class ScriptScore
 {
-    public ScriptScore(MonoBehaviour a_script = null)
+    public ScriptScore(MonoScript a_script = null)
     {
         script = a_script;
         score = 0;
     }
 
-    public MonoBehaviour script;
+    public MonoScript script;
     public int score;
 }
 
@@ -57,22 +58,32 @@ public class ScoreSystem : MonoBehaviour
 
     public void Death(GameObject dead)
     {
-        TagScore score = null;
         for (int i = 0; i < tagScores.Count; i++)
         {
             if (tagScores[i].tag == dead.tag)
             {
-                score = tagScores[i];
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                {
+                    GameObjectManager.instance.players[j].score += tagScores[i].score;
+                }
                 break;
             }
         }
 
-        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+        MonoBehaviour[] components = dead.GetComponents<MonoBehaviour>();
+        for (int i = 0; i < scriptScores.Count; i++)
         {
-            if (score != null)
-                GameObjectManager.instance.players[i].score += score.score;
-
-
+            for (int j = 0; j < components.Length; j++)
+            {
+                if (scriptScores[i].script == MonoScript.FromMonoBehaviour(components[j]))
+                {
+                    for (int k = 0; k < GameObjectManager.instance.players.Count; k++)
+                    {
+                        GameObjectManager.instance.players[k].score += scriptScores[i].score;
+                    }
+                    break;
+                }
+            }
         }
     }
 

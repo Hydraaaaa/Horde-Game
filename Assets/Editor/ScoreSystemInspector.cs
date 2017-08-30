@@ -16,7 +16,7 @@ public class ScoreSystemInspector : Editor
     public override void OnInspectorGUI()
     {
         myScoreSystem = (ScoreSystem)target;
-
+        
         tagsScoreFoldout = EditorGUILayout.Foldout(tagsScoreFoldout, "Score On Death By Tag");
 
         EditorGUI.indentLevel++;
@@ -38,20 +38,20 @@ public class ScoreSystemInspector : Editor
 
         EditorGUI.indentLevel++;
 
-        scriptsScoreCount = EditorGUILayout.IntField(myScoreSystem.scriptScores.Count);
-
-        while (scriptsScoreCount > myScoreSystem.scriptScores.Count)
-            myScoreSystem.scriptScores.Add(new ScriptScore());
-
-        while (scriptsScoreCount < myScoreSystem.scriptScores.Count)
-            myScoreSystem.scriptScores.RemoveAt(myScoreSystem.scriptScores.Count - 1);
-
         if (scriptsScoreFoldout)
         {
+            scriptsScoreCount = EditorGUILayout.IntField("Size", myScoreSystem.scriptScores.Count);
+
+            while (scriptsScoreCount > myScoreSystem.scriptScores.Count)
+                myScoreSystem.scriptScores.Add(new ScriptScore());
+
+            while (scriptsScoreCount < myScoreSystem.scriptScores.Count)
+                myScoreSystem.scriptScores.RemoveAt(myScoreSystem.scriptScores.Count - 1);
+
             for (int i = 0; i < myScoreSystem.scriptScores.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                myScoreSystem.scriptScores[i].script = EditorGUILayout.ObjectField(myScoreSystem.scriptScores[i].script, typeof(MonoBehaviour), false) as MonoBehaviour;
+                myScoreSystem.scriptScores[i].script = EditorGUILayout.ObjectField(myScoreSystem.scriptScores[i].script, typeof(MonoScript), false, GUILayout.Width(185)) as MonoScript;
                 myScoreSystem.scriptScores[i].score = EditorGUILayout.IntField(myScoreSystem.scriptScores[i].score);
                 EditorGUILayout.EndHorizontal();
             }
@@ -73,6 +73,11 @@ public class ScoreSystemInspector : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Score On Scrap Pickup", GUILayout.Width(200));
         myScoreSystem.scoreOnScrapPickup = EditorGUILayout.IntField(myScoreSystem.scoreOnScrapPickup);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Score On Player Revive", GUILayout.Width(200));
+        myScoreSystem.scoreOnPlayerRevive = EditorGUILayout.IntField(myScoreSystem.scoreOnPlayerRevive);
         EditorGUILayout.EndHorizontal();
     }
 }
