@@ -245,7 +245,7 @@ public class ChargerNavigation : MonoBehaviour
         agent.speed = chargeSpeed;
 
         // If the player needs to be revived
-        if (player.GetComponent<Health>().NeedRes == true)
+        if (player.GetComponent<ReviveSystem>().NeedRes == true)
         {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
@@ -350,7 +350,7 @@ public class ChargerNavigation : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
         {
             // If the player needs to be revived
-            if (player.GetComponent<Health>().NeedRes == true)
+            if (player.GetComponent<ReviveSystem>().NeedRes == true)
             {
                 // then remove the player reference so it dosent keep tracking to them
                 followPlayer = false;
@@ -502,7 +502,7 @@ public class ChargerNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        if (col.GetComponent<Health>().NeedRes != true)
+        if (col.GetComponent<ReviveSystem>().NeedRes != true)
         {
             int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
             layermask = 1 << LayerMask.NameToLayer("Enemy");

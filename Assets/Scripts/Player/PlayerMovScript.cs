@@ -109,7 +109,7 @@ public class PlayerMovScript : MonoBehaviour
 
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        if (!GetComponent<Health>().NeedRes)
+        if (!GetComponent<ReviveSystem>().NeedRes)
         {
 
             if (useController)

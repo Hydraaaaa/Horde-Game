@@ -116,7 +116,7 @@ public class GameObjectManager : MonoBehaviour
         int playerCount = 0;
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].gameObject != null && !players[i].gameObject.GetComponent<Health>().NeedRes)
+            if (players[i].gameObject != null && !players[i].gameObject.GetComponent<ReviveSystem>().NeedRes)
                 playerCount++;
         }
 
