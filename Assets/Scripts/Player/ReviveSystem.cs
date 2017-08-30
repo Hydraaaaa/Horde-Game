@@ -10,16 +10,19 @@ public class ReviveSystem : MonoBehaviour
 
     public GameObject InteractGUI;
 
-	// Use this for initialization
-	void Start ()
+    public bool NeedRes = false;
+
+    // Use this for initialization
+    void Start ()
     {
         InteractGUI = transform.GetChild(1).gameObject;
+        GetComponent<Health>().OnDie = StartReviveSystem;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (GetComponent<Health>().NeedRes)
+        if (NeedRes)
         {
             InteractGUI.SetActive(true);
         }
@@ -29,13 +32,18 @@ public class ReviveSystem : MonoBehaviour
         }
 
         InteractGUI.transform.rotation = Quaternion.Euler(45, 45, 0);
-	}
+    }
+
+    public void StartReviveSystem()
+    {
+        NeedRes = true;
+    }
 
     private void OnTriggerStay(Collider col)
     {
         if (col.tag == "Player")
         {
-            if (col.GetComponent<Health>().NeedRes == true)
+            if (col.GetComponent<ReviveSystem>().NeedRes == true)
             {
                 if (Input.GetButton("Joy" + GetComponent<PlayerMovScript>().playerNumber + "XButton") || (!GetComponent<PlayerMovScript>().useController && Input.GetKey(KeyCode.E)))
                 {
@@ -46,7 +54,7 @@ public class ReviveSystem : MonoBehaviour
                     if (curReviveTime >= ReviveTime)
                     {
                         col.GetComponent<Health>().health = col.GetComponent<Health>().maxHealth;
-                        col.GetComponent<Health>().NeedRes = false;
+                        col.GetComponent<ReviveSystem>().NeedRes = false;
                     }
                 }
                 else

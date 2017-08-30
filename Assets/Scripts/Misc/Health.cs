@@ -11,7 +11,6 @@ public class Health : MonoBehaviour
 
     public bool Enemy = false;
     public bool Player = false;
-    public bool NeedRes = false;
     public GameObject Attacker = null;
 
     void Awake()
@@ -23,14 +22,7 @@ public class Health : MonoBehaviour
     {
         if (health <= 0)
         {
-            if (Player)
-            {
-                StartReviveSystem();
-            }
-            else
-            {
-                OnDie();
-            }
+            OnDie();
         }
     }
 
@@ -42,20 +34,8 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if (Player)
-            {
-                StartReviveSystem();
-            }
-            else
-            {
-                OnDie();
-            }
+            OnDie();
         }
-    }
-
-    public void StartReviveSystem()
-    {
-        NeedRes = true;
     }
 
     public void Die()
