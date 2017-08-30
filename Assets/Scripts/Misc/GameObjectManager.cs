@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Player
 {
+    public Player()
+    {
+        score = 0;
+    }
+
     public GameObject gameObject;
     public GameObject camera;
     public GameObject UIMask;

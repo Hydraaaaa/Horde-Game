@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     {
         if (health <= 0)
         {
+            ScoreSystem.instance.Death(tag);
             OnDie();
         }
     }

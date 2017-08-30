@@ -45,6 +45,7 @@ public class CivilianNavigation : MonoBehaviour
             GameObjectManager.instance.civiliansEscaped++;
 
             GameObjectManager.instance.civilians.Remove(gameObject);
+            ScoreSystem.instance.CivilianRescue();
             Destroy(gameObject);
         }
     }

@@ -19,6 +19,7 @@ public class Endpoint : MonoBehaviour
                     }
                 }
                 GameObjectManager.instance.playersEscaped++;
+                ScoreSystem.instance.PlayerEscape(other.gameObject);
                 Destroy(other.gameObject);
             }
         }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4633097215938290}
   - component: {fileID: 114225659590822462}
   - component: {fileID: 114788100348366930}
+  - component: {fileID: 114189161229877810}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Game Manager
@@ -41,6 +42,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114189161229877810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112002458870338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0137d0c3af19045afa9dec68f5a9a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsScore:
+  - tag: Untagged
+    score: 0
+  - tag: Respawn
+    score: 0
+  - tag: Finish
+    score: 0
+  - tag: EditorOnly
+    score: 0
+  - tag: MainCamera
+    score: 0
+  - tag: Player
+    score: 0
+  - tag: GameController
+    score: 0
+  - tag: Enemy
+    score: 2
+  - tag: Player Start
+    score: 0
+  - tag: Barricade
+    score: 0
+  - tag: Game Manager
+    score: 0
+  - tag: End Position
+    score: 0
+  - tag: Enemy Spawner
+    score: 0
+  - tag: Civilian Spawner
+    score: 0
+  - tag: Civilian
+    score: 0
+  - tag: CivilianDestination
+    score: 0
+  - tag: Turret
+    score: 0
+  scoreOnPlayerEscape: 5
+  scoreOnCivilianRescue: 4
+  scoreOnScrapPickup: 1
 --- !u!114 &114225659590822462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,9 +137,9 @@ MonoBehaviour:
     type: 2}
   LoseGUIPrefab: {fileID: 1110093772081564, guid: d396972a3d26c0f49aa2167ace395b1b,
     type: 2}
-  camera: {fileID: 0}
   endPos: {fileID: 0}
   civilianDestination: {fileID: 0}
+  HUD: {fileID: 0}
   playerStarts: []
   players: []
   enemySpawners: []
@@ -106,3 +156,4 @@ MonoBehaviour:
   civiliansEscaped: 0
   playersEscaped: 0
   playing: 0
+  trySplitScreen: 1
