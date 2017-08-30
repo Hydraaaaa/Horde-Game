@@ -55,6 +55,7 @@ public class ReviveSystem : MonoBehaviour
                     {
                         col.GetComponent<Health>().health = col.GetComponent<Health>().maxHealth;
                         col.GetComponent<ReviveSystem>().NeedRes = false;
+                        ScoreSystem.instance.PlayerRevived(gameObject);
                     }
                 }
                 else

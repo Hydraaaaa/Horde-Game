@@ -16,6 +16,8 @@ public class Player
     public GameObject camera;
     public GameObject UIMask;
     public int score;
+    public int regularKills;
+    public int chargerKills;
 }
 
 public class GameObjectManager : MonoBehaviour
@@ -121,15 +123,19 @@ public class GameObjectManager : MonoBehaviour
             }
         }
 
-        int playerCount = 0;
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (players[i].gameObject != null && !players[i].gameObject.GetComponent<ReviveSystem>().NeedRes)
-                playerCount++;
-        }
+        //int playerCount = 0;
+        //for (int i = 0; i < players.Count; i++)
+        //{
+        //    if (players[i].gameObject != null && !players[i].gameObject.GetComponent<ReviveSystem>().NeedRes) // When player 2 is dead, player 1 doesn't pass the second test
+        //        playerCount++;
+        //}
 
-        if (playerCount == 0 && playing)
+        if (playing &&
+            players[0].gameObject.GetComponent<ReviveSystem>().NeedRes &&
+            players[1].gameObject.GetComponent<ReviveSystem>().NeedRes)
         {
+            Debug.Log(players[0].gameObject.GetComponent<PlayerInfoScript>().PlayerNo);
+            Debug.Log(players[1].gameObject.GetComponent<PlayerInfoScript>().PlayerNo);
             GameOver();
         }
 
@@ -168,10 +174,10 @@ public class GameObjectManager : MonoBehaviour
 
         if (playerStarts.Count != 0)
         {
-            Player newPlayer = new Player();
-
             for (int i = 0; i < playerCount; i++)
             {
+                Player newPlayer = new Player();
+
                 int playerStartIndex = i % playerStarts.Count;
 
                 GameObject playerInstance = Instantiate(playerPrefab,
