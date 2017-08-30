@@ -65,7 +65,6 @@ public class BarrierLogic : MonoBehaviour
         GameObjectManager.instance = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         currentIntervalTime = IntervalLengthInSeconds;
 
-        GameObject UIOrigin = UI;
         UI = Instantiate(UI);
         UI = UI.transform.GetChild(0).gameObject;
         UI = UI.transform.GetChild(0).gameObject;

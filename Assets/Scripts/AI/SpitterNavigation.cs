@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class ChargerNavigation : MonoBehaviour
+public class SpitterNavigation : MonoBehaviour
 {
     public enum Type { SURVIVOR, PLAYER, BARRICADE, DEFENSES, TERRAIN, NULL };
 
@@ -31,52 +31,49 @@ public class ChargerNavigation : MonoBehaviour
     // Follow Bools
     public bool followPlayer = false;
     public bool followSurvivor = false;
-    public bool charging = false;
-    public bool canCharge = false;
-    public bool needWindup = true;
-
-    public bool holdingPlayer = false;
+    public bool playerGrabbed = false;
 
     // Gameobject Target Refs
     public GameObject player;
     public GameObject survivor;
     public GameObject barricade;
-    public GameObject ChargeBarrier;
+    public GameObject Tongue;
+    public GameObject HoldPoint;
+    public AcidScript spitRef;
 
     // Transforms
-    public Transform HoldingPos;
+    //public Transform HoldingPos;
 
     // Speeds
     public float turningSpeed = 4.0f;
     public float acceleration = 4.0f;
     public float speed = 4.0f;
-    public float chargeTurningSpeed = 0;
-    public float chargeAcceleration = 7f;
-    public float chargeSpeed = 10f;
-
 
     // Damages
     public int damage;
-    public int chargeDamage;
-    public int impactDamage;
+    public int grabDamage;
+    public int acidDamage;
 
     // Attack Ranges
     public float attackRange;
-    public float chargeRange;
-    public float chargeDistance;
+    public float maxGrabRange;
     public float currentDist;
 
     // Cooldowns
     [Tooltip("Time in seconds between shots")]
     public float cooldown;
     public float currentCooldown;
-    public float chargeWindupTime = 1f;
-    public float currentChargeWindupTime;
-    public float chargeCooldown = 20f;
-    public float currentChargeCooldown;
-    public float chargeChancePercentage = 20;
+
+    public float grabCooldown;
+    public float currentGrabCooldown;
+
+    public float acidAOECooldown;
+    public float currentAcidAOECooldown;
 
     public bool EnvironmentZombie = false;
+
+    Vector3 pDir;
+
 
     void Start()
     {
@@ -97,14 +94,22 @@ public class ChargerNavigation : MonoBehaviour
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
-
-        ChargeBarrier = transform.GetChild(1).gameObject;
-        //player = GameObject.FindGameObjectWithTag("Player 1");
-        currentChargeWindupTime = chargeWindupTime;
     }
 
     void Update()
     {
+        // Update the time for the acid attack
+        if (currentAcidAOECooldown > 0)
+        {
+            currentAcidAOECooldown -= Time.deltaTime;
+        }
+        // Deal AOE Acid damage
+        else
+        {
+            currentAcidAOECooldown = acidAOECooldown;
+            spitRef.AttackAllInRange(acidDamage);
+        }
+
         Debug.DrawLine(transform.position, TargetPos);
 
         if (Mathf.Abs(GetComponent<NavMeshAgent>().velocity.x) > 0 &&
@@ -117,205 +122,82 @@ public class ChargerNavigation : MonoBehaviour
             anim.SetBool("Moving", false);
         }
 
-        if (charging)
-        {
-            ChargeBarrier.SetActive(true);
-        }
-        else
-        {
-            ChargeBarrier.SetActive(false);
-        }
-
         // Attack Cooldown
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
 
-        if (currentChargeCooldown > 0)
-            currentChargeCooldown -= Time.deltaTime;
-
-        if (currentChargeCooldown <= 0)
-            canCharge = true;
-
         if (agent != null)
         {
-            // If they're not charging the player
-            if (!charging)
+            if (!playerGrabbed)
             {
-                anim.SetBool("Charging", false);
+                // anim.SetBool("Charging", false);
 
                 // Setting speed and turning speed
                 agent.angularSpeed = turningSpeed;
                 agent.acceleration = acceleration;
                 agent.speed = speed;
 
-                // if the charger can charge check and ...
-                if (canCharge)
+                // Rotating towards movement direction
+                Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
+
+                // If the agent is moving
+                if (dir != Vector3.zero)
                 {
-                    if (UnityEngine.Random.Range(0, 101) >= chargeChancePercentage)
-                        StartCharge();
+                    // Rotate in the direction of the velocity
+                    transform.rotation = Quaternion.Slerp(
+                        transform.rotation,
+                        Quaternion.LookRotation(dir),
+                        Time.deltaTime * (turningSpeed * 2)
+                    );
                 }
 
-                // If the charger didnt start charging yet
-                if (!charging)
+                // If the agent dosent have a path to follow
+                if (!agent.hasPath)
                 {
+                    //TargetPos = EndPos.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
+                // If the agent isnt under attack
+                if (GetComponent<Health>().Attacker == null)
+                {
+                    // If the agent is following a player
+                    if (player != null)
+                        PlayerNotNull();
 
-                    // Rotating towards movement direction
-                    Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
+                    // If the agent is following a Survivor
+                    else if (survivor != null)
+                        SurvivorNotNull();
 
-                    // If the agent is moving
-                    if (dir != Vector3.zero)
-                    {
-                        // Rotate in the direction of the velocity
-                        transform.rotation = Quaternion.Slerp(
-                            transform.rotation,
-                            Quaternion.LookRotation(dir),
-                            Time.deltaTime * (turningSpeed * 2)
-                        );
-                    }
+                    // If the agent is following a Barricade
+                    else if (barricade != null)
+                        BarricadeNotNull();
 
-                    // If the agent dosent have a path to follow
-                    if (!agent.hasPath)
-                    {
-                        //TargetPos = EndPos.transform.position;
-                        agent.SetDestination(TargetPos);
-                    }
-                    // If the agent isnt under attack
-                    if (GetComponent<Health>().Attacker == null)
-                    {
-                        // If the agent is following a player
-                        if (player != null)
-                            PlayerNotNull();
-
-                        // If the agent is following a Survivor
-                        else if (survivor != null)
-                            SurvivorNotNull();
-
-                        // If the agent is following a Barricade
-                        else if (barricade != null)
-                            BarricadeNotNull();
-
-                        // If the agent isnt following anything
-                        else
-                        {
-                            TargetPos = EndPos.transform.position;
-                            agent.SetDestination(TargetPos);
-                        }
-                    }
+                    // If the agent isnt following anything
                     else
                     {
-                        BeingAttacked();
+                        TargetPos = EndPos.transform.position;
+                        agent.SetDestination(TargetPos);
                     }
                 }
-
-                // If the agent has a path to follow
-                if (agent.hasPath)
+                else
                 {
-                    agent.SetDestination(TargetPos);
-                    currentDist = Vector3.Distance(transform.position, TargetPos);
+                    BeingAttacked();
                 }
+                // Set Start
+                Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+                // Set End
+                Tongue.GetComponent<LineRenderer>().SetPosition(1, transform.position);
             }
-            // They're charging the player
             else
             {
-                Charging();
+                ContinueGrab();
             }
         }
-    }
-    Vector3 pDir;
-
-    void Charging()
-    {
-        anim.SetBool("Charging", true);
-        // Setting speed and turning speed
-        agent.angularSpeed = chargeTurningSpeed;
-        agent.acceleration = chargeAcceleration;
-        agent.speed = chargeSpeed;
-
         // If the agent has a path to follow
         if (agent.hasPath)
         {
-            TargetPos = transform.position + (pDir * 3);
-
-            //NavMeshHit navhit;
-            //NavMesh.SamplePosition(TargetPos, out navhit, 1000, 0);
-            //TargetPos = navhit.position;
-
             agent.SetDestination(TargetPos);
             currentDist = Vector3.Distance(transform.position, TargetPos);
-
-            int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
-            layermask = ~layermask;
-            layermask = 1 << LayerMask.NameToLayer("Terrain");
-
-            if (Physics.Linecast(transform.position, TargetPos, layermask, QueryTriggerInteraction.Ignore))
-            {
-                TargetPos = transform.position;
-                agent.SetDestination(TargetPos);
-                player = null;
-                charging = false;
-                // Finished charging, wait a second before you continue attacking
-                currentCooldown = cooldown * 2;
-                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<Health>().Damage(impactDamage);
-            }
-        }
-
-        if (currentDist < 1.1f)
-        {
-            charging = false;
-            player = null;
-        }
-    }
-
-    void StartCharge()
-    {
-        currentChargeCooldown = chargeCooldown;
-
-        agent.angularSpeed = chargeTurningSpeed;
-        agent.acceleration = chargeAcceleration;
-        agent.speed = chargeSpeed;
-
-        if (player == null)
-        {
-            // then remove the player reference so it dosent keep tracking to them
-            followPlayer = false;
-            player = null;
-            return;
-        }
-
-        // If the player needs to be revived
-        if (player.GetComponent<ReviveSystem>().NeedRes == true)
-        {
-            // then remove the player reference so it dosent keep tracking to them
-            followPlayer = false;
-            player = null;
-            return;
-        }
-        Vector3 direction = player.transform.position - transform.position;
-
-        // If the player is still alive
-        if (player.GetComponent<Health>().health > 0)
-        {
-            direction.Normalize();
-
-            int layermask = 0;
-            pDir = direction;
-            NavMeshHit navHit;
-            NavMesh.SamplePosition(transform.position + direction, out navHit, 1, layermask);
-            agent.SetDestination(transform.position + direction);
-            TargetPos = agent.destination;
-            charging = true;
-            canCharge = false;
-            needWindup = true;
-        }
-        // If the player is dead
-        else
-        {
-            // then remove the player reference so it dosent keep tracking to them
-            followPlayer = false;
-            player = null;
-            TargetPos = EndPos.transform.position;
-            agent.SetDestination(TargetPos);
-            return;
         }
     }
 
@@ -373,8 +255,24 @@ public class ChargerNavigation : MonoBehaviour
             TargetPos = player.transform.position;
             agent.SetDestination(TargetPos);
         }
+
+        // if the player is in range for a spit attack
+        if (Vector3.Distance(transform.position, player.transform.position) < maxGrabRange 
+            && playerGrabbed == false)
+        {
+            int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+            layermask = 1 << LayerMask.NameToLayer("Enemy");
+            layermask = ~layermask;
+
+            // If the player is visible
+            if (Physics.Linecast(transform.position, player.transform.position, layermask))
+            {
+                StartGrab();
+                playerGrabbed = true;
+            }
+        }
         // If the player is within attack range
-        if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+        else if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
         {
             // If the player needs to be revived
             if (player.GetComponent<ReviveSystem>().NeedRes == true)
@@ -413,20 +311,6 @@ public class ChargerNavigation : MonoBehaviour
             }
         }
 
-        // If the player is within charge range
-        if (Vector3.Distance(transform.position, player.transform.position) < chargeRange && !canCharge)
-        {
-            // If the charger is ready to charge
-            if (currentChargeCooldown <= 0)
-            {
-                canCharge = true;
-            }
-            else
-            {
-                currentChargeCooldown -= Time.deltaTime;
-            }
-        }
-
         // if the player object is turned off
         if (player.activeSelf == false)
         {
@@ -437,6 +321,107 @@ public class ChargerNavigation : MonoBehaviour
             followPlayer = false;
             player = null;
             return;
+        }
+    }
+
+    void StartGrab()
+    {
+        // Set Start
+        Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+        // Set End
+        Tongue.GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
+
+        // Stop the agent from moving
+        TargetPos = transform.position;
+        agent.SetDestination(TargetPos);
+    }
+
+    void ContinueGrab()
+    {
+        int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+        //layermask = 1 << LayerMask.NameToLayer("Enemy");
+        //layermask = ~layermask;
+
+        Debug.DrawLine(transform.position, player.transform.position - (player.transform.position - transform.position).normalized * 2, Color.red);
+        // If the player is visible
+        if (!Physics.Linecast(transform.position, player.transform.position - ((player.transform.position - transform.position).normalized / 2) * 1.1f))
+        {
+
+            Debug.Log("Can still see them");
+            // Set Start
+            Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+            // Set End
+            Tongue.GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
+
+            // Stop the agent from moving
+            TargetPos = transform.position;
+            agent.SetDestination(TargetPos);
+
+            if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) > 1f)
+            {
+                player.transform.position = Vector3.Lerp(player.transform.position, HoldPoint.transform.position, Time.deltaTime);
+                player.transform.LookAt(transform.position);
+            }
+            else
+            {
+                player.transform.position = HoldPoint.transform.position;
+
+                // If the player is within attack range
+                if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+                {
+                    // If the player needs to be revived
+                    if (player.GetComponent<ReviveSystem>().NeedRes == true)
+                    {
+                        // then remove the player reference so it dosent keep tracking to them
+                        followPlayer = false;
+                        player = null;
+                        playerGrabbed = false;
+                        return;
+                    }
+
+                    // If the player is still alive
+                    if (player.GetComponent<Health>().health > 0)
+                    {
+                        Attack(player);
+
+                        // If the player dies from the attack
+                        if (player.GetComponent<Health>().health <= 0)
+                        {
+                            // then remove the player reference so it dosent keep tracking to them
+                            followPlayer = false;
+                            player = null;
+                            playerGrabbed = false;
+                            TargetPos = EndPos.transform.position;
+                            agent.SetDestination(TargetPos);
+                            return;
+                        }
+                    }
+                    // If the player is dead
+                    else
+                    {
+                        // then remove the player reference so it dosent keep tracking to them
+                        followPlayer = false;
+                        player = null;
+                        playerGrabbed = false;
+                        TargetPos = EndPos.transform.position;
+                        agent.SetDestination(TargetPos);
+                        return;
+                    }
+                }
+
+                // if the player object is turned off
+                if (player.activeSelf == false)
+                {
+                    // Tell the AI to travel where the player was so it can track to last known position
+                    TargetPos = player.transform.position;
+
+                    // then remove the player reference so it dosent keep tracking to them
+                    followPlayer = false;
+                    playerGrabbed = false;
+                    player = null;
+                    return;
+                }
+            }
         }
     }
 
@@ -485,31 +470,28 @@ public class ChargerNavigation : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (!charging)
+        // If they ran into another enemy, dont bother continuing
+        if (col.tag == "Enemy")
         {
-            // If they ran into another enemy, dont bother continuing
-            if (col.tag == "Enemy")
-            {
-                return;
-            }
-            //// If they found a barricade
-            //if (col.tag == TypeTags.BarricadeTag)
-            //{
-            //    CheckForBarricade(col);
-            //    return;
-            //}
-            // IF they found a player
-            if (col.tag == TypeTags.PlayerTag)
-            {
-                CheckForPlayer(col);
-                return;
-            }
-            // If they found a survivor
-            if (col.tag == TypeTags.SurvivorTag)
-            {
-                CheckForSurvivor(col);
-                return;
-            }
+            return;
+        }
+        //// If they found a barricade
+        //if (col.tag == TypeTags.BarricadeTag)
+        //{
+        //    CheckForBarricade(col);
+        //    return;
+        //}
+        // If they found a player
+        if (col.tag == TypeTags.PlayerTag)
+        {
+            CheckForPlayer(col);
+            return;
+        }
+        // If they found a survivor
+        if (col.tag == TypeTags.SurvivorTag)
+        {
+            CheckForSurvivor(col);
+            return;
         }
     }
 
@@ -602,14 +584,11 @@ public class ChargerNavigation : MonoBehaviour
     {
         if (obj != null)
         {
-            if (!charging)
+            if (currentCooldown <= 0)
             {
-                if (currentCooldown <= 0)
-                {
-                    Debug.Log("Attacked");
-                    currentCooldown = cooldown;
-                    obj.GetComponent<Health>().Damage(damage);
-                }
+                Debug.Log("Attacked");
+                currentCooldown = cooldown;
+                obj.GetComponent<Health>().Damage(damage);
             }
         }
     }
