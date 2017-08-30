@@ -1554,6 +1554,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.size
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1630,6 +1635,91 @@ Prefab:
       value: 
       objectReference: {fileID: 1949336687010526, guid: c3e35b7937652b843871b82d73b20e17,
         type: 2}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[0].tag
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[1].tag
+      value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[2].tag
+      value: Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[3].tag
+      value: EditorOnly
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[4].tag
+      value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[5].tag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[6].tag
+      value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[7].tag
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[8].tag
+      value: Player Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[9].tag
+      value: Barricade
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[10].tag
+      value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[11].tag
+      value: End Position
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[12].tag
+      value: Enemy Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[13].tag
+      value: Civilian Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[14].tag
+      value: Civilian
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[15].tag
+      value: CivilianDestination
+      objectReference: {fileID: 0}
+    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+        type: 2}
+      propertyPath: tagScores.Array.data[16].tag
+      value: Turret
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
   m_IsPrefabParent: 0
@@ -1719,6 +1809,10 @@ Prefab:
     - target: {fileID: 4347930795107770, guid: c0cd47e9223f2d6479a048514a886e49, type: 2}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384582842138790, guid: c0cd47e9223f2d6479a048514a886e49, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0cd47e9223f2d6479a048514a886e49, type: 2}
