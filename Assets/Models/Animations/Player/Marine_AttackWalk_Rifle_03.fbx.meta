@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 32a99ac4e97a4af408579bf15eabd7f0
-timeCreated: 1503637029
+guid: 0aad78ecc14ca014e9f0ea29cca6861f
+timeCreated: 1504050043
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -131,10 +131,10 @@ ModelImporter:
     100246: marine_GEO
     100248: neck
     100250: neck 1
-    100252: pCylinder1
-    100254: pCylinder2
-    100256: pCylinder3
-    100258: Rifle_01
+    100252: Rifle_02:pCylinder1
+    100254: Rifle_02:pCylinder2
+    100256: Rifle_02:pCylinder3
+    100258: Rifle_02:Rifle_01
     100260: ROOT
     100262: ROOT 1
     100264: toe_L_IK
@@ -273,10 +273,10 @@ ModelImporter:
     400246: marine_GEO
     400248: neck
     400250: neck 1
-    400252: pCylinder1
-    400254: pCylinder2
-    400256: pCylinder3
-    400258: Rifle_01
+    400252: Rifle_02:pCylinder1
+    400254: Rifle_02:pCylinder2
+    400256: Rifle_02:pCylinder3
+    400258: Rifle_02:Rifle_01
     400260: ROOT
     400262: ROOT 1
     400264: toe_L_IK
@@ -289,20 +289,20 @@ ModelImporter:
     400278: wrist_L 1
     400280: wrist_R
     400282: wrist_R 1
-    2300000: pCylinder1
-    2300002: pCylinder2
-    2300004: pCylinder3
-    2300006: Rifle_01
-    3300000: pCylinder1
-    3300002: pCylinder2
-    3300004: pCylinder3
-    3300006: Rifle_01
-    4300000: Rifle_01
-    4300002: pCylinder3
-    4300004: pCylinder2
-    4300006: pCylinder1
-    4300008: head_GEO
-    4300010: body_GEO
+    2300000: Rifle_02:pCylinder1
+    2300002: Rifle_02:pCylinder2
+    2300004: Rifle_02:pCylinder3
+    2300006: Rifle_02:Rifle_01
+    3300000: Rifle_02:pCylinder1
+    3300002: Rifle_02:pCylinder2
+    3300004: Rifle_02:pCylinder3
+    3300006: Rifle_02:Rifle_01
+    4300000: head_GEO
+    4300002: body_GEO
+    4300004: Rifle_02:Rifle_01
+    4300006: Rifle_02:pCylinder3
+    4300008: Rifle_02:pCylinder2
+    4300010: Rifle_02:pCylinder1
     7400000: Take 001
     9500000: //RootNode
     13700000: body_GEO

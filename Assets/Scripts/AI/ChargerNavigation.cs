@@ -102,6 +102,8 @@ public class ChargerNavigation : MonoBehaviour
 
     void Update()
     {
+        Debug.DrawLine(transform.position, TargetPos);
+
         if (Mathf.Abs(GetComponent<NavMeshAgent>().velocity.x) > 0 &&
             Mathf.Abs(GetComponent<NavMeshAgent>().velocity.z) > 0)
         {
@@ -123,6 +125,9 @@ public class ChargerNavigation : MonoBehaviour
         // Attack Cooldown
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
+
+        if (currentCooldown <= 0)
+            canCharge = true;
 
         if (agent != null)
         {
@@ -253,13 +258,16 @@ public class ChargerNavigation : MonoBehaviour
         {
             RaycastHit hit;
             Vector3 direction = player.transform.position - transform.position;
-
+            // direction.Normalize();
             // Find the closest point on the navmesh to charge to
 
             int layermask = 1 << LayerMask.NameToLayer("Terrain");
-            // layermask = ~layermask;
+            layermask = ~layermask;
 
+            // Get the position of the player
             Physics.Raycast(transform.position, direction, out hit, chargeDistance, layermask);
+            
+            // Get a position beyond the player
             Physics.Raycast(hit.point, direction, out hit, chargeDistance, layermask);
             Debug.DrawLine(transform.position, hit.point);
 

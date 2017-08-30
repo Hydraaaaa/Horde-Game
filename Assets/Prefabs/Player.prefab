@@ -2665,7 +2665,7 @@ MonoBehaviour:
   energy: 0
   EnergyPerTick: 0.25
   Guns:
-  - {fileID: 1804009417822600}
+  - {fileID: 1429828883217498}
   camera: {fileID: 0}
 --- !u!114 &114895826296244610
 MonoBehaviour:

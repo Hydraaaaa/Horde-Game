@@ -62,8 +62,16 @@ public class PlayerMovScript : MonoBehaviour
 
         for(int i = 0; i < Guns.Length; i++)
         {
-            Guns[i].transform.rotation = transform.rotation;
-            Guns[i].transform.Rotate(0, -90, 0);
+            if (Guns[i].name == "Rifle_01")
+            {
+                Guns[i].transform.rotation = transform.rotation;
+                Guns[i].transform.Rotate(0, 90, 0);
+            }
+            else
+            {
+                Guns[i].transform.rotation = transform.rotation;
+                Guns[i].transform.Rotate(0, -90, 0);
+            }
         }
     }
 
