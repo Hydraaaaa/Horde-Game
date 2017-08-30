@@ -26,7 +26,6 @@ public class TurretAI : MonoBehaviour
     public List<GameObject> playersInRange;
 
     // References
-    private GameObjectManager manager;
     public GameObject HorizontalRotator;
     public GameObject VerticalRotator;
     public GameObject[] TurretBarrels;
@@ -70,7 +69,6 @@ public class TurretAI : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {       
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
     }
     
@@ -110,11 +108,11 @@ public class TurretAI : MonoBehaviour
 
     void FirstRun()
     {
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
+        GameObjectManager.instance = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
 
         if (P1UIPiece == null || P2UIPiece == null)
         {
-            manager.HUD.GetComponent<HUDScript>().GrabTurretsUI(gameObject);
+            GameObjectManager.instance.HUD.GetComponent<HUDScript>().GrabTurretsUI(gameObject);
         }
 
         //                                  InteractUI           Active
@@ -153,7 +151,7 @@ public class TurretAI : MonoBehaviour
             }
         }
 
-        if (manager.players[0].camera != null)
+        if (GameObjectManager.instance.players[0].camera != null)
         {
             // P1UIPiece.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -178,7 +176,7 @@ public class TurretAI : MonoBehaviour
                     ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
             }
         }
-        if (manager.players[1].camera != null)
+        if (GameObjectManager.instance.players[1].camera != null)
         {
             // P1UIPiece.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -451,7 +449,7 @@ public class TurretAI : MonoBehaviour
             }
 
             // If there is a referance to the manager and there is still players alive
-            if (manager != null && manager.players.Count > 0)
+            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
             {
                 // If the interacting player presses the X button
                 if (Input.GetButtonDown(LocalMovRef.playerBeginning + "XButton"))
@@ -462,9 +460,9 @@ public class TurretAI : MonoBehaviour
                         if (P1Interacting)
                         {
                             if (P1RepairPage)
-                                RepairBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                             else
-                                UpgradeBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         else
                         {
@@ -477,9 +475,9 @@ public class TurretAI : MonoBehaviour
                         if (P2Interacting)
                         {
                             if (P2RepairPage)
-                                RepairBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                             else
-                                UpgradeBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         else
                         {

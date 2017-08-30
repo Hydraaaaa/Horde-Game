@@ -17,12 +17,9 @@ public class BarricadeBuilder : MonoBehaviour
     public GameObject Holo;
     public Health health;
 
-    public GameObjectManager manager;
-
     // Use this for initialization
     void Start()
     {
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         EndHeight = Barrier.transform.localPosition.y;
         Barrier.transform.localPosition = new Vector3(Barrier.transform.localPosition.x, StartHeight, Barrier.transform.localPosition.z);
         health = GetComponent<Health>();
@@ -60,7 +57,7 @@ public class BarricadeBuilder : MonoBehaviour
     {
         if (col.tag == "Player" && Built == false)
         {
-            if (manager != null && manager.players.Count > 0)
+            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
             {
                 if (Input.GetButtonDown("Joy1XButton"))
                 {

@@ -36,7 +36,6 @@ public class BarrierLogic : MonoBehaviour
     public int Level = 0;
 
     public LevelInformation Information;
-    private GameObjectManager manager;
 
     public bool vital;
 
@@ -63,7 +62,7 @@ public class BarrierLogic : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
+        GameObjectManager.instance = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         currentIntervalTime = IntervalLengthInSeconds;
 
         GameObject UIOrigin = UI;
@@ -117,8 +116,8 @@ public class BarrierLogic : MonoBehaviour
 
 
         //float dist1 = 0;
-        P1UI.GetComponent<Canvas>().worldCamera = manager.players[0].camera.GetComponent<Camera>();
-        P2UI.GetComponent<Canvas>().worldCamera = manager.players[1].camera.GetComponent<Camera>();
+        P1UI.GetComponent<Canvas>().worldCamera = GameObjectManager.instance.players[0].camera.GetComponent<Camera>();
+        P2UI.GetComponent<Canvas>().worldCamera = GameObjectManager.instance.players[1].camera.GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
@@ -159,18 +158,18 @@ public class BarrierLogic : MonoBehaviour
 
                 if (GetComponent<Health>().health <= 0)
                 {
-                    if (manager.enemySpawners.Count > 0)
+                    if (GameObjectManager.instance.enemySpawners.Count > 0)
                     {
-                        manager.enemySpawners[0].SetActive(true);
-                        manager.enemySpawners[0].GetComponent<EnemySpawner>().enabled = true;
+                        GameObjectManager.instance.enemySpawners[0].SetActive(true);
+                        GameObjectManager.instance.enemySpawners[0].GetComponent<EnemySpawner>().enabled = true;
                     }
                 }
                 else
                 {
-                    if (manager.enemySpawners.Count > 0)
+                    if (GameObjectManager.instance.enemySpawners.Count > 0)
                     {
-                        manager.enemySpawners[0].SetActive(false);
-                        manager.enemySpawners[0].GetComponent<EnemySpawner>().enabled = false;
+                        GameObjectManager.instance.enemySpawners[0].SetActive(false);
+                        GameObjectManager.instance.enemySpawners[0].GetComponent<EnemySpawner>().enabled = false;
                     }
                 }
             }
@@ -182,12 +181,12 @@ public class BarrierLogic : MonoBehaviour
         if (col.tag == "Player")
         {
             // If player 1 interacts
-            if (col.gameObject == manager.players[0].gameObject)
+            if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
             {
                 P1UI.SetActive(false);
             }
             // If player 2 interacts
-            if (col.gameObject == manager.players[1].gameObject)
+            if (col.gameObject == GameObjectManager.instance.players[1].gameObject)
             {
                 P2UI.SetActive(false);
             }
@@ -199,10 +198,10 @@ public class BarrierLogic : MonoBehaviour
         if (col.tag == "Player")
         {
             // If there is atleased one player
-            if (manager != null && manager.players.Count > 0)
+            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
             {                
                 // If player 1 interacts
-                if (col.gameObject == manager.players[0].gameObject)
+                if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
                 {
                     P1UI.SetActive(true);
 
@@ -210,11 +209,11 @@ public class BarrierLogic : MonoBehaviour
                     {
                         if (Input.GetButtonUp("Joy1XButton"))
                         {
-                            RepairBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         if (Input.GetButtonUp("Joy1YButton"))
                         {
-                            UpgradeBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                     }
                 }
@@ -222,10 +221,10 @@ public class BarrierLogic : MonoBehaviour
             }
             
             // If there is more than one player
-            if (manager != null && manager.players.Count > 1)
+            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 1)
             {
                 // If player 2 interacts
-                if (col.gameObject == manager.players[1].gameObject)
+                if (col.gameObject == GameObjectManager.instance.players[1].gameObject)
                 {
                     P2UI.SetActive(true);
 
@@ -233,11 +232,11 @@ public class BarrierLogic : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Joy2XButton"))
                         {
-                            RepairBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         if (Input.GetButtonDown("Joy2YButton"))
                         {
-                            UpgradeBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                     }
                 }
