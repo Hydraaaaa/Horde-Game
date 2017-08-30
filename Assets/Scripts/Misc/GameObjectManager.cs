@@ -74,6 +74,7 @@ public class GameObjectManager : MonoBehaviour
         GetTurrets();
         GetCivilianDestination();
         GetEndPos();
+        EnemyNavigation.manager = this;
 
         if (players.Count > 0)
             if (players[0].gameObject.GetComponent<Health>().health <= 0)
