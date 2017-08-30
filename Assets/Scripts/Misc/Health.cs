@@ -11,29 +11,18 @@ public class Health : MonoBehaviour
 
     public bool Enemy = false;
     public bool Player = false;
-    public bool NeedRes = false;
     public GameObject Attacker = null;
 
     void Awake()
     {
-        if (transform.CompareTag("Player"))
-            OnDie = PlayerDie;
-        else
-            OnDie = Die;
+        OnDie = Die;
     }
 
     void Update()
     {
         if (health <= 0)
         {
-            if (Player)
-            {
-                StartReviveSystem();
-            }
-            else
-            {
-                OnDie();
-            }
+            OnDie();
         }
     }
 
@@ -45,20 +34,8 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if (Player)
-            {
-                StartReviveSystem();
-            }
-            else
-            {
-                OnDie();
-            }
+            OnDie();
         }
-    }
-
-    public void StartReviveSystem()
-    {
-        NeedRes = true;
     }
 
     public void Die()
@@ -66,9 +43,9 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void PlayerDie()
-    {
-        GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
-        Destroy(gameObject);
-    }
+    //public void PlayerDie()
+    //{
+    //    GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
+    //    Destroy(gameObject);
+    //}
 }

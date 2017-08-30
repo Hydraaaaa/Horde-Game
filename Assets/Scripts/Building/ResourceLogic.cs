@@ -66,12 +66,12 @@ public class ResourceLogic : MonoBehaviour
 
         if (trackingPlayer == null && col.tag == "Player")
         {
-            if (col.gameObject == manager.players[0])
+            if (col.gameObject == manager.players[0].gameObject)
             {
                 trackingPlayer = col.gameObject;
                 TrackingTo = 1;
             }
-            else if (col.gameObject == manager.players[1])
+            else if (col.gameObject == manager.players[1].gameObject)
             {
                 trackingPlayer = col.gameObject;
                 TrackingTo = 2;

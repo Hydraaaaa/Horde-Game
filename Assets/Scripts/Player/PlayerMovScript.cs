@@ -37,6 +37,7 @@ public class PlayerMovScript : MonoBehaviour
     public GameObject[] Guns;
 
     [HideInInspector] public Camera camera;
+    [HideInInspector] public bool escaped;
 
     // Use this for initialization
     void Start ()

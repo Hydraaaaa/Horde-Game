@@ -117,8 +117,8 @@ public class BarrierLogic : MonoBehaviour
 
 
         //float dist1 = 0;
-        P1UI.GetComponent<Canvas>().worldCamera = manager.cameras[0].GetComponent<Camera>();
-        P2UI.GetComponent<Canvas>().worldCamera = manager.cameras[1].GetComponent<Camera>();
+        P1UI.GetComponent<Canvas>().worldCamera = manager.players[0].camera.GetComponent<Camera>();
+        P2UI.GetComponent<Canvas>().worldCamera = manager.players[1].camera.GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
@@ -182,12 +182,12 @@ public class BarrierLogic : MonoBehaviour
         if (col.tag == "Player")
         {
             // If player 1 interacts
-            if (col.gameObject == manager.players[0])
+            if (col.gameObject == manager.players[0].gameObject)
             {
                 P1UI.SetActive(false);
             }
             // If player 2 interacts
-            if (col.gameObject == manager.players[1])
+            if (col.gameObject == manager.players[1].gameObject)
             {
                 P2UI.SetActive(false);
             }
@@ -202,7 +202,7 @@ public class BarrierLogic : MonoBehaviour
             if (manager != null && manager.players.Count > 0)
             {                
                 // If player 1 interacts
-                if (col.gameObject == manager.players[0])
+                if (col.gameObject == manager.players[0].gameObject)
                 {
                     P1UI.SetActive(true);
 
@@ -210,11 +210,11 @@ public class BarrierLogic : MonoBehaviour
                     {
                         if (Input.GetButtonUp("Joy1XButton"))
                         {
-                            RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                            RepairBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         if (Input.GetButtonUp("Joy1YButton"))
                         {
-                            UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                            UpgradeBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                     }
                 }
@@ -225,7 +225,7 @@ public class BarrierLogic : MonoBehaviour
             if (manager != null && manager.players.Count > 1)
             {
                 // If player 2 interacts
-                if (col.gameObject == manager.players[1])
+                if (col.gameObject == manager.players[1].gameObject)
                 {
                     P2UI.SetActive(true);
 
@@ -233,11 +233,11 @@ public class BarrierLogic : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Joy2XButton"))
                         {
-                            RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                            RepairBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         if (Input.GetButtonDown("Joy2YButton"))
                         {
-                            UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                            UpgradeBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                     }
                 }

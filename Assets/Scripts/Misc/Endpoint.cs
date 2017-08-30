@@ -12,7 +12,13 @@ public class Endpoint : MonoBehaviour
         {
             if (manager.timer <= 0)
             {
-                manager.players.Remove(other.gameObject);
+                for (int i = 0; i < manager.players.Count; i++)
+                {
+                    if (manager.players[i].gameObject == other.gameObject)
+                    {
+                        Destroy(manager.players[i].gameObject);
+                    }
+                }
                 manager.playersEscaped++;
                 Destroy(other.gameObject);
             }
