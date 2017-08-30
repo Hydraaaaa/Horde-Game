@@ -644,7 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4050111927582798}
   - component: {fileID: 65558867234253338}
-  - component: {fileID: 114948263508038014}
+  - component: {fileID: 114459447619005178}
   - component: {fileID: 114911188617100732}
   m_Layer: 10
   m_Name: GrabRadius
@@ -1222,15 +1222,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1104852500813878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0175062, y: 0.99, z: -35.21828}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -1.0175062, y: 0.99, z: -7.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4959516546853208}
   - {fileID: 4050111927582798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4795448869355346
 Transform:
   m_ObjectHideFlags: 1
@@ -1425,6 +1425,7 @@ MonoBehaviour:
   followSurvivor: 0
   charging: 0
   canCharge: 0
+  needWindup: 1
   holdingPlayer: 0
   player: {fileID: 0}
   survivor: {fileID: 0}
@@ -1467,8 +1468,18 @@ MonoBehaviour:
   health: 100
   Enemy: 1
   Player: 0
-  NeedRes: 0
   Attacker: {fileID: 0}
+--- !u!114 &114459447619005178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1824847274984392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114911188617100732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1484,20 +1495,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   nav: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
---- !u!114 &114948263508038014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1824847274984392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9646da974b8c0604686aacd43b2ffa69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Grabbed: 0
-  Player: {fileID: 0}
-  nav: {fileID: 0}
 --- !u!135 &135094463704807770
 SphereCollider:
   m_ObjectHideFlags: 1

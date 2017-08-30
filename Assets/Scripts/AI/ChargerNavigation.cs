@@ -34,6 +34,7 @@ public class ChargerNavigation : MonoBehaviour
     public bool followSurvivor = false;
     public bool charging = false;
     public bool canCharge = false;
+    public bool needWindup = true;
 
     public bool holdingPlayer = false;
 
@@ -98,6 +99,7 @@ public class ChargerNavigation : MonoBehaviour
 
         ChargeBarrier = transform.GetChild(1).gameObject;
         //player = GameObject.FindGameObjectWithTag("Player 1");
+        currentChargeWindupTime = chargeWindupTime;
     }
 
     void Update()
@@ -126,7 +128,10 @@ public class ChargerNavigation : MonoBehaviour
         if (currentCooldown > 0)
             currentCooldown -= Time.deltaTime;
 
-        if (currentCooldown <= 0)
+        if (currentChargeCooldown > 0)
+            currentChargeCooldown -= Time.deltaTime;
+
+        if (currentChargeCooldown <= 0)
             canCharge = true;
 
         if (agent != null)
@@ -214,6 +219,7 @@ public class ChargerNavigation : MonoBehaviour
             }
         }
     }
+    Vector3 pDir;
 
     void Charging()
     {
@@ -222,12 +228,34 @@ public class ChargerNavigation : MonoBehaviour
         agent.angularSpeed = chargeTurningSpeed;
         agent.acceleration = chargeAcceleration;
         agent.speed = chargeSpeed;
-        
+
         // If the agent has a path to follow
         if (agent.hasPath)
         {
+            Vector3 direction = player.transform.position - transform.position;
+
+            TargetPos = transform.position + (pDir * 3);
+
+            //NavMeshHit navhit;
+            //NavMesh.SamplePosition(TargetPos, out navhit, 1000, 0);
+            //TargetPos = navhit.position;
+
             agent.SetDestination(TargetPos);
             currentDist = Vector3.Distance(transform.position, TargetPos);
+
+            int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+            layermask = ~layermask;
+            layermask = 1 << LayerMask.NameToLayer("Terrain");
+
+            if (Physics.Linecast(transform.position, TargetPos, layermask, QueryTriggerInteraction.Ignore))
+            {
+                TargetPos = transform.position;
+                agent.SetDestination(TargetPos);
+                charging = false;
+                // Finished charging, wait a second before you continue attacking
+                currentCooldown = cooldown * 2;
+                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<Health>().Damage(impactDamage);
+            }
         }
 
         if (currentDist < 1.1f)
@@ -244,6 +272,14 @@ public class ChargerNavigation : MonoBehaviour
         agent.acceleration = chargeAcceleration;
         agent.speed = chargeSpeed;
 
+        if (player == null)
+        {
+            // then remove the player reference so it dosent keep tracking to them
+            followPlayer = false;
+            player = null;
+            return;
+        }
+
         // If the player needs to be revived
         if (player.GetComponent<ReviveSystem>().NeedRes == true)
         {
@@ -252,33 +288,23 @@ public class ChargerNavigation : MonoBehaviour
             player = null;
             return;
         }
-
+        Vector3 direction = player.transform.position - transform.position;
+        
         // If the player is still alive
         if (player.GetComponent<Health>().health > 0)
         {
             RaycastHit hit;
-            Vector3 direction = player.transform.position - transform.position;
-            // direction.Normalize();
-            // Find the closest point on the navmesh to charge to
+            direction.Normalize();
 
-            int layermask = 1 << LayerMask.NameToLayer("Terrain");
-            layermask = ~layermask;
-
-            // Get the position of the player
-            Physics.Raycast(transform.position, direction, out hit, chargeDistance, layermask);
-            
-            // Get a position beyond the player
-            Physics.Raycast(hit.point, direction, out hit, chargeDistance, layermask);
-            Debug.DrawLine(transform.position, hit.point);
-
+            int layermask = 0;
+            pDir = direction;
             NavMeshHit navHit;
-            NavMesh.SamplePosition(hit.point, out navHit, 1, NavMesh.AllAreas);
-            Debug.DrawLine(transform.position, navHit.position);
-            
-            TargetPos = hit.point;
-            agent.SetDestination(TargetPos);
+            NavMesh.SamplePosition(transform.position + direction, out navHit, 1, layermask);
+            agent.SetDestination(transform.position + direction);
+            TargetPos = agent.destination;
             charging = true;
             canCharge = false;
+            needWindup = true;
         }
         // If the player is dead
         else
@@ -575,10 +601,14 @@ public class ChargerNavigation : MonoBehaviour
     {
         if (obj != null)
         {
-            if (currentCooldown <= 0)
+            if (!charging)
             {
-                currentCooldown = cooldown;
-                obj.GetComponent<Health>().Damage(damage);
+                if (currentCooldown <= 0)
+                {
+                    Debug.Log("Attacked");
+                    currentCooldown = cooldown;
+                    obj.GetComponent<Health>().Damage(damage);
+                }
             }
         }
     }

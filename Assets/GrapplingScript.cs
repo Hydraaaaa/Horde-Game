@@ -8,7 +8,7 @@ public class GrapplingScript : MonoBehaviour
     public GameObject Player;
     public ChargerNavigation nav;
     public Vector3 pos;
-
+    public bool firstHit = false;
     // Use this for initialization
     void Start()
     {
@@ -25,13 +25,21 @@ public class GrapplingScript : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider col)
+    {
+        if (nav.charging && firstHit == false)
+        {
+            Debug.Log("Attacked");
+            col.GetComponent<Health>().Damage(nav.chargeDamage);
+            firstHit = true;
+        }
+    }
+
     void OnTriggerStay(Collider col)
     {
         // if the zombie charges into a player
         if (col.gameObject.tag == "Player")
         {
-            col.GetComponent<Health>().Damage(nav.chargeDamage);
-
             if (Player == null)
             {
                 if (Vector3.Distance(transform.position, col.transform.position) < 2f)
