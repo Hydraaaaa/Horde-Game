@@ -153,7 +153,7 @@ public class TurretAI : MonoBehaviour
             }
         }
 
-        if (manager.cameras[0] != null)
+        if (manager.players[0].camera != null)
         {
             // P1UIPiece.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -178,7 +178,7 @@ public class TurretAI : MonoBehaviour
                     ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
             }
         }
-        if (manager.cameras[1] != null)
+        if (manager.players[1].camera != null)
         {
             // P1UIPiece.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -462,9 +462,9 @@ public class TurretAI : MonoBehaviour
                         if (P1Interacting)
                         {
                             if (P1RepairPage)
-                                RepairBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                                RepairBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                             else
-                                UpgradeBarrier(manager.players[0].GetComponent<BarrierPlayersideLogic>());
+                                UpgradeBarrier(manager.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         else
                         {
@@ -477,9 +477,9 @@ public class TurretAI : MonoBehaviour
                         if (P2Interacting)
                         {
                             if (P2RepairPage)
-                                RepairBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                                RepairBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                             else
-                                UpgradeBarrier(manager.players[1].GetComponent<BarrierPlayersideLogic>());
+                                UpgradeBarrier(manager.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                         }
                         else
                         {

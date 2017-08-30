@@ -21,7 +21,7 @@ public class CameraLogic : MonoBehaviour
             Vector3 avgPos = Vector3.zero;
 
             for (int i = 0; i < gameObjectManager.players.Count; i++)
-                avgPos += gameObjectManager.players[i].transform.position;
+                avgPos += gameObjectManager.players[i].gameObject.transform.position;
 
             avgPos /= gameObjectManager.players.Count;
 
@@ -29,8 +29,8 @@ public class CameraLogic : MonoBehaviour
 
             for (int i = 0; i < gameObjectManager.players.Count; i++)
             {
-                if (Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position) > longestDistance)
-                    longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position);
+                if (Vector3.Distance(avgPos, gameObjectManager.players[i].gameObject.transform.position) > longestDistance)
+                    longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].gameObject.transform.position);
             }
 
             float cameraDistance = Mathf.Clamp(longestDistance * zoomOutMultiplier, minDistance, maxDistance);
@@ -48,7 +48,7 @@ public class CameraLogic : MonoBehaviour
             Vector3 avgPos = Vector3.zero;
 
             for (int i = 0; i < gameObjectManager.players.Count; i++)
-                avgPos += gameObjectManager.players[i].transform.position;
+                avgPos += gameObjectManager.players[i].gameObject.transform.position;
 
             avgPos /= gameObjectManager.players.Count;
 
@@ -56,8 +56,8 @@ public class CameraLogic : MonoBehaviour
 
             for (int i = 0; i < gameObjectManager.players.Count; i++)
             {
-                if (Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position) > longestDistance)
-                    longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].transform.position);
+                if (Vector3.Distance(avgPos, gameObjectManager.players[i].gameObject.transform.position) > longestDistance)
+                    longestDistance = Vector3.Distance(avgPos, gameObjectManager.players[i].gameObject.transform.position);
             }
 
             float cameraDistance = Mathf.Clamp(longestDistance * zoomOutMultiplier, minDistance, maxDistance);

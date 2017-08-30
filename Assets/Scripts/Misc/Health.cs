@@ -16,10 +16,7 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
-        if (transform.CompareTag("Player"))
-            OnDie = PlayerDie;
-        else
-            OnDie = Die;
+        OnDie = Die;
     }
 
     void Update()
@@ -66,9 +63,9 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void PlayerDie()
-    {
-        GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
-        Destroy(gameObject);
-    }
+    //public void PlayerDie()
+    //{
+    //    GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
+    //    Destroy(gameObject);
+    //}
 }

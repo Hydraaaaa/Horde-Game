@@ -131,7 +131,7 @@ public class HUDScript : MonoBehaviour
         for (int i = 0; i < manager.turrets.Count; i++)
         {
             // Instantiate the correct GUI for the controller type used for player 1
-            if (manager.players[0].GetComponent<PlayerMovScript>().useController)
+            if (manager.players[0].gameObject.GetComponent<PlayerMovScript>().useController)
                 turretGUIP1.Add(Instantiate(controllerTurretGUI));
             else
                 turretGUIP1.Add(Instantiate(PCTurretGUI));
@@ -142,7 +142,7 @@ public class HUDScript : MonoBehaviour
             // If there is more than 1 player alive, instantiate the correct GUI for player 2
             if (manager.players.Count > 1)
             {
-                if (manager.players[1].GetComponent<PlayerMovScript>().useController)
+                if (manager.players[1].gameObject.GetComponent<PlayerMovScript>().useController)
                     turretGUIP2.Add(Instantiate(controllerTurretGUI));
                 else
                     turretGUIP2.Add(Instantiate(PCTurretGUI));
@@ -209,11 +209,11 @@ public class HUDScript : MonoBehaviour
             }
 
             // Update the Barricade's position on player 1's screen
-            barricadeHealthBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP1[i].transform.position = manager.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
             
             // Update the Barricade's position on player 2's screen
-            barricadeHealthBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
+            barricadeHealthBarsP2[i].transform.position = manager.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(manager.barricades[i].transform.position);
             barricadeHealthBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
         }
 
@@ -239,15 +239,15 @@ public class HUDScript : MonoBehaviour
             }
 
             // Update the Turret's position on player 1's screen
-            turretTimeBarsP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP1[i].transform.position = manager.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
             turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
 
-            turretGUIP1[i].transform.position = manager.cameras[0].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
-            turretGUIP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretGUIP1[i].transform.position = manager.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretGUIP2[i].transform.position = manager.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
 
 
             // Update the Turret's position on player 2's screen
-            turretTimeBarsP2[i].transform.position = manager.cameras[1].GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
+            turretTimeBarsP2[i].transform.position = manager.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(manager.turrets[i].transform.position);
             turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
         }
     }

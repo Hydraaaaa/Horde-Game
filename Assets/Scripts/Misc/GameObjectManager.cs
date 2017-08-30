@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class Player
+{
+    public GameObject gameObject;
+    public GameObject camera;
+    public GameObject UIMask;
+    public int score;
+}
+
 public class GameObjectManager : MonoBehaviour
 {
     public GameObject cameraPrefab;
@@ -16,8 +25,7 @@ public class GameObjectManager : MonoBehaviour
     [HideInInspector] public GameObject civilianDestination;
     [HideInInspector] public GameObject HUD;
     public List<GameObject> playerStarts;
-    public List<GameObject> players;
-    public List<GameObject> cameras;
+    public List<Player> players;
     public List<GameObject> enemySpawners;
     public List<GameObject> enemies;
     public List<GameObject> civilianSpawners;
@@ -68,13 +76,13 @@ public class GameObjectManager : MonoBehaviour
         GetEndPos();
 
         if (players.Count > 0)
-            if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
+            if (players[0].gameObject.GetComponent<Health>().health <= 0)
             {
                 HPBar1 = GameObject.Find("HPBar" + 1).GetComponent<Image>();
                 healthCount1 = GameObject.Find("HealthCount" + 1).GetComponent<Text>();
             }
         if (players.Count > 1)
-            if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
+            if (players[1].gameObject.GetComponent<Health>().health <= 0)
             {
                 HPBar2 = GameObject.Find("HPBar" + 2).GetComponent<Image>();
                 healthCount2 = GameObject.Find("HealthCount" + 2).GetComponent<Text>();
@@ -106,9 +114,9 @@ public class GameObjectManager : MonoBehaviour
         }
 
         int playerCount = 0;
-        foreach (GameObject player in players)
+        for (int i = 0; i < players.Count; i++)
         {
-            if (player != null && !player.GetComponent<Health>().NeedRes)
+            if (players[i].gameObject != null && !players[i].gameObject.GetComponent<Health>().NeedRes)
                 playerCount++;
         }
 
@@ -118,13 +126,13 @@ public class GameObjectManager : MonoBehaviour
         }
 
         if (players.Count > 0)
-            if (players[0].GetComponent<Health>().health <= 0 || players[0] != null)
+            if (players[0].gameObject.GetComponent<Health>().health <= 0)
             {
                 HPBar1.fillAmount = 0;
                 healthCount1.text = "0";
             }
         if (players.Count > 1)
-            if (players[1].GetComponent<Health>().health <= 0 || players[1] != null)
+            if (players[1].gameObject.GetComponent<Health>().health <= 0)
             {
                 HPBar2.fillAmount = 0;
                 healthCount2.text = "0";
@@ -146,12 +154,14 @@ public class GameObjectManager : MonoBehaviour
     {
         int playerCount = GetComponent<GameManager>().playerCount;
 
-        players = new List<GameObject>();
+        players = new List<Player>();
 
         // CameraLogic cameraScript = camera.GetComponent<CameraLogic>();
 
         if (playerStarts.Count != 0)
         {
+            Player newPlayer = new Player();
+
             for (int i = 0; i < playerCount; i++)
             {
                 int playerStartIndex = i % playerStarts.Count;
@@ -172,29 +182,28 @@ public class GameObjectManager : MonoBehaviour
                 if (i == 3)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 1, 1, 1);
 
-                players.Add(playerInstance);
+                newPlayer.gameObject = playerInstance;
+                
+                GameObject camera = Instantiate(cameraPrefab);
+
+                camera.GetComponent<Camera>().rect = new Rect
+                                                     (
+                                                         i / (float)playerCount,
+                                                         0,
+                                                         1 / (float)playerCount,
+                                                         1
+                                                     );
+
+                camera.GetComponent<CameraMovement>().player = newPlayer.gameObject;
+                newPlayer.gameObject.GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
+
+                newPlayer.camera = camera;
+
+                players.Add(newPlayer);
             }
         }
         else
             Debug.Log("No player starts found");
-
-        for (int i = 0; i < players.Count; i++)
-        {
-            GameObject camera = Instantiate(cameraPrefab);
-
-            camera.GetComponent<Camera>().rect = new Rect
-                                                 (
-                                                     i / (float)players.Count,
-                                                     0,
-                                                     1 / (float)players.Count,
-                                                     1
-                                                 );
-
-            camera.GetComponent<CameraMovement>().player = players[i];
-            players[i].GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
-
-            cameras.Add(camera);
-        }
     }
 
     public void GetEnemySpawners()
