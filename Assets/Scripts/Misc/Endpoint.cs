@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class Endpoint : MonoBehaviour
 {
-    [HideInInspector] public GameObjectManager manager;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (manager.timer <= 0)
+            if (GameObjectManager.instance.timer <= 0)
             {
-                for (int i = 0; i < manager.players.Count; i++)
+                for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
                 {
-                    if (manager.players[i].gameObject == other.gameObject)
+                    if (GameObjectManager.instance.players[i].gameObject == other.gameObject)
                     {
-                        Destroy(manager.players[i].gameObject);
+                        Destroy(GameObjectManager.instance.players[i].gameObject);
                     }
                 }
-                manager.playersEscaped++;
+                GameObjectManager.instance.playersEscaped++;
                 Destroy(other.gameObject);
             }
         }
@@ -27,7 +26,7 @@ public class Endpoint : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Game Over: Enemy reached end");
-            manager.Lose();
+            GameObjectManager.instance.Lose();
         }
     }
 }

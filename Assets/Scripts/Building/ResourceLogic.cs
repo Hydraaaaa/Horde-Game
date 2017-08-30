@@ -16,12 +16,10 @@ public class ResourceLogic : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
 
-    GameObjectManager manager;
-
     // Use this for initialization
     void Start ()
     {
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
+        
     }
 	
 	// Update is called once per frame
@@ -66,12 +64,12 @@ public class ResourceLogic : MonoBehaviour
 
         if (trackingPlayer == null && col.tag == "Player")
         {
-            if (col.gameObject == manager.players[0].gameObject)
+            if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
             {
                 trackingPlayer = col.gameObject;
                 TrackingTo = 1;
             }
-            else if (col.gameObject == manager.players[1].gameObject)
+            else if (col.gameObject == GameObjectManager.instance.players[1].gameObject)
             {
                 trackingPlayer = col.gameObject;
                 TrackingTo = 2;

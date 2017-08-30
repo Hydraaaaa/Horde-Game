@@ -9,7 +9,6 @@ public class TurretAIScript : MonoBehaviour
     public Attack turretAttack;
 
     public float maxTargetRange = 5f;
-    public GameObjectManager manager;
     public GameObject Target;
     public float targetsDistance;
 
@@ -28,7 +27,6 @@ public class TurretAIScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
     }
 
