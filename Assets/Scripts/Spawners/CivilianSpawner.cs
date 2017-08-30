@@ -5,7 +5,7 @@ using UnityEngine;
 public class CivilianSpawner : MonoBehaviour
 {
     [HideInInspector]
-    public GameObjectManager manager;
+    public static GameObjectManager manager;
     public GameObject spawnPrefab;
     
     public int amount;
@@ -24,9 +24,6 @@ public class CivilianSpawner : MonoBehaviour
                 );
                 GameObject newlySpawned = Instantiate(spawnPrefab, spawnPos, transform.rotation);
                 manager.civilians.Add(newlySpawned);
-
-                if (newlySpawned.GetComponent<CivilianNavigation>() != null)
-                    newlySpawned.GetComponent<CivilianNavigation>().manager = manager;
             }
 
             Destroy(gameObject);

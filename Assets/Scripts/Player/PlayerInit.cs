@@ -5,16 +5,14 @@ using UnityEngine;
 public class PlayerInit : MonoBehaviour
 {
     public GameObject aimRaycastBoxPrefab;
-    GameObjectManager manager;
+    public static GameObjectManager manager;
 
 	void Start ()
     {
         GameObject aimRaycastBox = Instantiate(aimRaycastBoxPrefab);
         aimRaycastBox.GetComponent<SetPosition>().target = gameObject;
         GetComponent<Health>().OnDie = PlayerDie;
-
-        manager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
-
+        
         Destroy(this);
 	}
 

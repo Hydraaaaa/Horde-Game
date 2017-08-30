@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CivilianNavigation : MonoBehaviour
 {
-    public GameObjectManager manager;
+    public static GameObjectManager manager;
     NavMeshAgent agent;
 
     public float speed;

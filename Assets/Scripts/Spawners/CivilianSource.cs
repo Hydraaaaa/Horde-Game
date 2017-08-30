@@ -5,7 +5,7 @@ using UnityEngine;
 public class CivilianSource : MonoBehaviour
 {
     public GameObject civilianPrefab;
-    public GameObjectManager manager;
+    public static GameObjectManager manager;
 
     public int civilians;
     [HideInInspector] public int currentCivilians;
@@ -34,8 +34,6 @@ public class CivilianSource : MonoBehaviour
                 currentCivilians--;
 
                 GameObject newlySpawned = Instantiate(civilianPrefab, transform.position, transform.rotation);
-                if (newlySpawned.GetComponent<CivilianNavigation>() != null)
-                    newlySpawned.GetComponent<CivilianNavigation>().manager = manager;
             }
         }
     }

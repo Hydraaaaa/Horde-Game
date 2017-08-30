@@ -74,7 +74,7 @@ public class GameObjectManager : MonoBehaviour
         GetTurrets();
         GetCivilianDestination();
         GetEndPos();
-        EnemyNavigation.manager = this;
+        SetStaticManagers();
 
         if (players.Count > 0)
             if (players[0].gameObject.GetComponent<Health>().health <= 0)
@@ -221,9 +221,6 @@ public class GameObjectManager : MonoBehaviour
         List<GameObject> localCivilianSpawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Civilian Spawner"));
         foreach (GameObject civilianSpawner in localCivilianSpawners)
         {
-            if (civilianSpawner.GetComponent<CivilianSpawner>() != null)
-                civilianSpawner.GetComponent<CivilianSpawner>().manager = this;
-
             if (civilianSpawner.GetComponent<CivilianSource>() != null)
             {
                 civilianSpawner.GetComponent<CivilianSource>().manager = this;
@@ -252,6 +249,15 @@ public class GameObjectManager : MonoBehaviour
     {
         endPos = GameObject.FindGameObjectWithTag("End Position");
         GameObject.FindGameObjectWithTag("End Position").GetComponent<Endpoint>().manager = this;
+    }
+
+    void SetStaticManagers()
+    {
+        EnemyNavigation.manager = this;
+        PlayerInit.manager = this;
+        CivilianNavigation.manager = this;
+        CivilianSpawner.manager = this;
+        CivilianSource.manager = this;
     }
 
     void GetCivilianDestination()
