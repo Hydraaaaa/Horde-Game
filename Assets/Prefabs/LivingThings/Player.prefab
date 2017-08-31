@@ -2490,6 +2490,7 @@ MonoBehaviour:
   PlayerNo: -1
   ScrapCount: {fileID: 0}
   HealthCount: {fileID: 0}
+  ScoreCount: {fileID: 0}
   HealthSlider: {fileID: 0}
   EnergySlider: {fileID: 0}
   playerHP: {fileID: 0}
@@ -2871,7 +2872,7 @@ MonoBehaviour:
   moveSpeedShooting: 2.5
   Shooting: 0
   incapacitated: 0
-  useController: 0
+  useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}

@@ -1327,6 +1327,7 @@ ModelImporter:
     102638: Selection_06
     102640: pCylinder27
     102642: pCylinder28
+    102644: pCube155
     400000: //RootNode
     400002: group1
     400004: pasted__pCube127
@@ -2649,6 +2650,7 @@ ModelImporter:
     402638: Selection_06
     402640: pCylinder27
     402642: pCylinder28
+    402644: pCube155
     2300000: pasted__pCube127
     2300002: pasted__pCube128
     2300004: pasted__pCube129
@@ -3957,6 +3959,7 @@ ModelImporter:
     2302610: pPlane999
     2302612: pCylinder27
     2302614: pCylinder28
+    2302616: pCube155
     3300000: pasted__pCube127
     3300002: pasted__pCube128
     3300004: pasted__pCube129
@@ -5265,6 +5268,7 @@ ModelImporter:
     3302610: pPlane999
     3302612: pCylinder27
     3302614: pCylinder28
+    3302616: pCube155
     4300000: pPlane794
     4300002: pPlane844
     4300004: pPlane796
@@ -6573,6 +6577,7 @@ ModelImporter:
     4302610: pPlane1303
     4302612: pCylinder27
     4302614: pCylinder28
+    4302616: pCube155
     9500000: //RootNode
   materials:
     importMaterials: 1

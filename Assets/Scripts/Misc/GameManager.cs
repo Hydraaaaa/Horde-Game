@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (buttonNo == 0)
                     {
-                        LoadScene("Josh'sScene");
+                        LoadScene("FullScene");
                         atMenu = false;
                     }
                     if (buttonNo == 1)
@@ -88,6 +88,15 @@ public class GameManager : MonoBehaviour
                     }
 
                     hasShot = true;
+                }
+
+                if (Input.GetButton("Joy1YButton") && !hasShot)
+                {
+                    if (buttonNo == 0)
+                    {
+                        LoadScene("Josh'sScene");
+                        atMenu = false;
+                    }
                 }
 
                 if (arrow != null)
