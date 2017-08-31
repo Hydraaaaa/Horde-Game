@@ -79,5 +79,7 @@ public class ScoreSystemInspector : Editor
         EditorGUILayout.LabelField("Score On Player Revive", GUILayout.Width(200));
         myScoreSystem.scoreOnPlayerRevive = EditorGUILayout.IntField(myScoreSystem.scoreOnPlayerRevive);
         EditorGUILayout.EndHorizontal();
+
+        EditorUtility.SetDirty(target);
     }
 }

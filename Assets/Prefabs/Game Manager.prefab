@@ -83,16 +83,20 @@ MonoBehaviour:
   - tag: Civilian Spawner
     score: 0
   - tag: Civilian
-    score: 0
+    score: -5
   - tag: CivilianDestination
     score: 0
   - tag: Turret
     score: 0
-  scriptScores: []
+  scriptScores:
+  - script: {fileID: 11500000, guid: 2a13538795e70ef46a67a9d066cd4672, type: 3}
+    score: 10
+  - script: {fileID: 11500000, guid: a8454a5c09f3a8a4cb83c50c37fcc1f9, type: 3}
+    score: 10
   scoreOnPlayerEscape: 5
   scoreOnCivilianRescue: 4
   scoreOnScrapPickup: 1
-  scoreOnPlayerRevive: 0
+  scoreOnPlayerRevive: 3
 --- !u!114 &114225659590822462
 MonoBehaviour:
   m_ObjectHideFlags: 1

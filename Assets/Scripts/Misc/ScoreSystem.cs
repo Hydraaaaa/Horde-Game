@@ -46,13 +46,18 @@ public class ScoreSystem : MonoBehaviour
     {
         instance = this;
 
-        tagScores = new List<TagScore>();
+        Debug.Log("Awake");
 
-        for (int i = 0; i < UnityEditorInternal.InternalEditorUtility.tags.Length; i++)
+        if (tagScores == null)
         {
-            TagScore deathEvent = new TagScore();
-            deathEvent.tag = UnityEditorInternal.InternalEditorUtility.tags[i];
-            tagScores.Add(deathEvent);
+            Debug.Log("TagScores == null");
+            tagScores = new List<TagScore>();
+            for (int i = 0; i < UnityEditorInternal.InternalEditorUtility.tags.Length; i++)
+            {
+                TagScore tagScore = new TagScore();
+                tagScore.tag = UnityEditorInternal.InternalEditorUtility.tags[i];
+                tagScores.Add(tagScore);
+            }
         }
     }
 
