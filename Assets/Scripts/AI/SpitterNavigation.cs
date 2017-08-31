@@ -571,7 +571,7 @@ public class SpitterNavigation : MonoBehaviour
 
                 if (survivor == null && barricade == null)
                 {
-                    if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+                    if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
                     {
                         //Debug.Log("Can see player");
                         // If this player is closer than the other player in the scene
