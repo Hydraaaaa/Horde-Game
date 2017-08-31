@@ -1472,7 +1472,7 @@ MonoBehaviour:
   anim: {fileID: 95786561975618296}
   TypeTags:
     BarricadeTag: Barricade
-    SurvivorTag: Survivor
+    SurvivorTag: Civilian
     PlayerTag: Player
     DefensesTag: Defense
     TerrainTag: Terrain

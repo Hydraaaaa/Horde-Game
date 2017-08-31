@@ -1413,7 +1413,7 @@ MonoBehaviour:
   anim: {fileID: 95961251159944576}
   TypeTags:
     BarricadeTag: Barricade
-    SurvivorTag: Survivor
+    SurvivorTag: Civilian
     PlayerTag: Player
     DefensesTag: Defense
     TerrainTag: Terrain
