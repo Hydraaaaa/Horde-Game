@@ -2496,7 +2496,6 @@ MonoBehaviour:
   health: 100
   Enemy: 0
   Player: 1
-  NeedRes: 0
   Attacker: {fileID: 0}
 --- !u!114 &114287895095296774
 MonoBehaviour:
@@ -2655,7 +2654,7 @@ MonoBehaviour:
   moveSpeed: 4
   moveSpeedShooting: 2.5
   Shooting: 0
-  useController: 1
+  useController: 0
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   lookDir: {x: 0, y: 0, z: 0}
@@ -2702,6 +2701,7 @@ MonoBehaviour:
   ReviveTime: 5
   curReviveTime: 0
   InteractGUI: {fileID: 0}
+  NeedRes: 0
 --- !u!114 &114969896260128928
 MonoBehaviour:
   m_ObjectHideFlags: 1

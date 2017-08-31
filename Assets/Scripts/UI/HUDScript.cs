@@ -12,10 +12,10 @@ public class HUDScript : MonoBehaviour
     public GameObject p1Mask;
     public GameObject p2Mask;
 
-    public GameObject barricadeHealthBarPrefab;    // Not Implemented
+    public GameObject barricadeHealthBarPrefab;
 
-    public List<GameObject> barricadeHealthBarsP1;        // Not Implemented
-    public List<GameObject> barricadeHealthBarsP2;        // Not Implemented
+    public List<GameObject> barricadeHealthBarsP1;
+    public List<GameObject> barricadeHealthBarsP2;
 
     public GameObject turretTimeBarPrefab;
 
