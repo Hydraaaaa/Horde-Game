@@ -177,7 +177,7 @@ public class BarrierLogic : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             // If player 1 interacts
             if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
@@ -194,7 +194,7 @@ public class BarrierLogic : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             // If there is atleased one player
             if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)

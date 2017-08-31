@@ -134,7 +134,7 @@ public class TurretAIScript : MonoBehaviour
     private void OnTriggerStay(Collider col)
     {
         // If the object that entered the collider is an enemy
-        if (col.tag == "Enemy")
+        if (col.CompareTag("Enemy"))
         {
             // If there is no target currently
             if (Target == null)

@@ -55,7 +55,7 @@ public class BarricadeBuilder : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player" && Built == false)
+        if (col.CompareTag("Player") && Built == false)
         {
             if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
             {

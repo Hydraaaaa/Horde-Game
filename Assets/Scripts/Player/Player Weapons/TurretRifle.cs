@@ -103,8 +103,8 @@ public class TurretRifle : MonoBehaviour
                     hit.transform.GetComponent<Health>().Damage(damage);
 
                     // If the attacked target is an enemy
-                    if (hit.transform.GetComponent<Health>().Enemy && this.tag == "Player")
-                        hit.transform.GetComponent<Health>().Attacker = this.gameObject;
+                    if (hit.transform.GetComponent<Health>().Enemy && CompareTag("Player"))
+                        hit.transform.GetComponent<Health>().Attacker = gameObject;
                 }
             }
             else

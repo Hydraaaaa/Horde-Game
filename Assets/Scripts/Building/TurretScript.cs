@@ -294,7 +294,7 @@ public class TurretScript : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
         // If a player interacts with the trigger
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             Debug.DrawLine(transform.position, col.transform.position, Color.red);
 
@@ -509,7 +509,7 @@ public class TurretScript : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             playersInRange.Remove(col.gameObject);
             ActivePiece.SetActive(false);

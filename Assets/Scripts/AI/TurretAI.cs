@@ -352,12 +352,12 @@ public class TurretAI : MonoBehaviour
         }
 
         // If the object that entered the collider is an enemy
-        if (col.tag == "Enemy")
+        if (col.CompareTag("Enemy"))
         {
             EnemyConnects(col);
         }
         // If a player interacts with the trigger
-        else if (col.tag == "Player")
+        else if (col.CompareTag("Player"))
         {
             if (Vector3.Distance(col.transform.position, gameObject.transform.position) < 3f)
                 PlayerConnects(col);
@@ -637,7 +637,7 @@ public class TurretAI : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             playersInRange.Remove(col.gameObject);
 

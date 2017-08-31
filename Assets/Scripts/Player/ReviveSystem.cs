@@ -46,7 +46,7 @@ public class ReviveSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player" && !NeedRes)
+        if (col.CompareTag("Player") && !NeedRes)
         {
             if (col.GetComponent<ReviveSystem>().NeedRes == true)
             {
@@ -74,7 +74,7 @@ public class ReviveSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             col.GetComponent<ReviveSystem>().curReviveTime = 0f;
         }

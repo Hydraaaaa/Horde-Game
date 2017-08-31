@@ -63,7 +63,7 @@ public class ResourceLogic : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
 
-        if (trackingPlayer == null && col.tag == "Player")
+        if (trackingPlayer == null && col.CompareTag("Player"))
         {
             if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
             {

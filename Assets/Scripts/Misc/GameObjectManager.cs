@@ -134,19 +134,6 @@ public class GameObjectManager : MonoBehaviour
         {
             GameOver();
         }
-
-        if (players.Count > 0)
-            if (players[0].gameObject.GetComponent<Health>().health <= 0)
-            {
-                HPBar1.fillAmount = 0;
-                healthCount1.text = "0";
-            }
-        if (players.Count > 1)
-            if (players[1].gameObject.GetComponent<Health>().health <= 0)
-            {
-                HPBar2.fillAmount = 0;
-                healthCount2.text = "0";
-            }
     }
 
     IEnumerator GetInitialCivilians()

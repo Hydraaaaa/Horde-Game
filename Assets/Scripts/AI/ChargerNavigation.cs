@@ -518,24 +518,24 @@ public class ChargerNavigation : MonoBehaviour
         if (!charging)
         {
             // If they ran into another enemy, dont bother continuing
-            if (col.tag == "Enemy")
+            if (col.CompareTag("Enemy"))
             {
                 return;
             }
             //// If they found a barricade
-            //if (col.tag == TypeTags.BarricadeTag)
+            //if (col.CompareTag(TypeTags.BarricadeTag))
             //{
             //    CheckForBarricade(col);
             //    return;
             //}
             // IF they found a player
-            if (col.tag == TypeTags.PlayerTag)
+            if (col.CompareTag(TypeTags.PlayerTag))
             {
                 CheckForPlayer(col);
                 return;
             }
             // If they found a survivor
-            if (col.tag == TypeTags.SurvivorTag)
+            if (col.CompareTag(TypeTags.SurvivorTag))
             {
                 CheckForSurvivor(col);
                 return;

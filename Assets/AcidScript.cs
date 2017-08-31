@@ -22,7 +22,7 @@ public class AcidScript : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             //bool notAdded = true;
 

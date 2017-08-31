@@ -43,7 +43,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1224466138322840
 GameObject:
@@ -705,6 +705,8 @@ MonoBehaviour:
   CostUpgrade1: {fileID: 0}
   CostRepair2: {fileID: 0}
   CostUpgrade2: {fileID: 0}
+  interactTime: 0.01
+  currentTime: 0
 --- !u!114 &114052605167780648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -969,6 +971,7 @@ MonoBehaviour:
   maxHealth: 100000
   health: 100000
   Enemy: 0
+  Player: 0
   Attacker: {fileID: 0}
 --- !u!114 &114447124637497088
 MonoBehaviour:
