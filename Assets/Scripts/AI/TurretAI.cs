@@ -30,10 +30,11 @@ public class TurretAI : MonoBehaviour
     public GameObject VerticalRotator;
     public GameObject[] TurretBarrels;
 
-    // UI Referances
+    // UI References
     public GameObject P1UIPiece;
     public GameObject P2UIPiece;
 
+    // Controller References
     public GameObject ActivePiece1;
     public GameObject InactivePiece1;
     public GameObject UIPieceThumbstick1;
@@ -41,7 +42,6 @@ public class TurretAI : MonoBehaviour
     public GameObject ActivePiece2;
     public GameObject InactivePiece2;
     public GameObject UIPieceThumbstick2;
-
 
     public GameObject Target;
 
@@ -66,10 +66,17 @@ public class TurretAI : MonoBehaviour
 
     bool firstRun = true;
 
+    bool[] useController;
+
 	// Use this for initialization
 	void Start ()
     {       
         turretAttack = VerticalRotator.GetComponent<TurretRifle>().Attack;
+        useController = new bool[]
+        {
+            GameObjectManager.instance.players[0].gameObject.GetComponent<PlayerMovScript>().useController,
+            GameObjectManager.instance.players[1].gameObject.GetComponent<PlayerMovScript>().useController
+        };
     }
     
     void Awake()
@@ -96,7 +103,7 @@ public class TurretAI : MonoBehaviour
             CurrentLevelStats.TotalResourceCost = AllLevelStats[0].TotalResourceCost;
         }
 
-        // Show the nessicary barrels for the current level of the gun
+        // Show the necessary barrels for the current level of the gun
         ShowBarrels();
 
         // Run the Turret's AI
@@ -108,8 +115,6 @@ public class TurretAI : MonoBehaviour
 
     void FirstRun()
     {
-        GameObjectManager.instance = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
-
         if (P1UIPiece == null || P2UIPiece == null)
         {
             GameObjectManager.instance.HUD.GetComponent<HUDScript>().GrabTurretsUI(gameObject);
@@ -125,8 +130,10 @@ public class TurretAI : MonoBehaviour
         //                                 InteractUI           Inactive
         InactivePiece2 = P2UIPiece.transform.GetChild(1).gameObject;
 
-        UIPieceThumbstick1 = ActivePiece1.transform.GetChild(4).gameObject;
-        UIPieceThumbstick2 = ActivePiece2.transform.GetChild(4).gameObject;
+        if (useController[0])
+            UIPieceThumbstick1 = ActivePiece1.transform.GetChild(4).gameObject;
+        if (useController[1])
+            UIPieceThumbstick2 = ActivePiece2.transform.GetChild(4).gameObject;
 
         // Disable all Active UI
         ActivePiece1.SetActive(false);
@@ -157,23 +164,38 @@ public class TurretAI : MonoBehaviour
 
             if (P1Interacting)
             {
-                // Update whether or not the turret is active
-                if (isActive)
-                    ActivePiece1.transform.GetChild(1).GetComponent<Text>().text = "Active";
-                else
-                    ActivePiece1.transform.GetChild(1).GetComponent<Text>().text = "Inactive";
+                if (useController[0])
+                {
+                    // Update whether or not the turret is active
+                    if (isActive)
+                        ActivePiece1.transform.GetChild(1).GetComponent<Text>().text = "Active";
+                    else
+                        ActivePiece1.transform.GetChild(1).GetComponent<Text>().text = "Inactive";
 
-                // Update the Page the player is on
-                if (P1RepairPage)
-                    ActivePiece1.transform.GetChild(2).GetComponent<Text>().text = "Repairing";
-                else
-                    ActivePiece1.transform.GetChild(2).GetComponent<Text>().text = "Upgrading";
+                    // Update the Page the player is on
+                    if (P1RepairPage)
+                        ActivePiece1.transform.GetChild(2).GetComponent<Text>().text = "Repairing";
+                    else
+                        ActivePiece1.transform.GetChild(2).GetComponent<Text>().text = "Upgrading";
 
-                // Update the UI costs
-                if (P1RepairPage)
-                    ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    // Update the UI costs
+                    if (P1RepairPage)
+                        ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    else
+                        ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                }
                 else
-                    ActivePiece1.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                {
+                    // Update whether or not the turret is active
+                    if (isActive)
+                        ActivePiece1.transform.GetChild(0).GetComponent<Text>().text = "Active";
+                    else
+                        ActivePiece1.transform.GetChild(0).GetComponent<Text>().text = "Inactive";
+                    
+                    // Update prices
+                    ActivePiece1.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    ActivePiece1.transform.GetChild(2).GetChild(2).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                }
             }
         }
         if (GameObjectManager.instance.players[1].camera != null)
@@ -182,23 +204,38 @@ public class TurretAI : MonoBehaviour
 
             if (P2Interacting)
             {
-                // Update whether or not the turret is active
-                if (isActive)
-                    ActivePiece2.transform.GetChild(1).GetComponent<Text>().text = "Active";
-                else
-                    ActivePiece2.transform.GetChild(1).GetComponent<Text>().text = "Inactive";
+                if (useController[1])
+                {
+                    // Update whether or not the turret is active
+                    if (isActive)
+                        ActivePiece2.transform.GetChild(1).GetComponent<Text>().text = "Active";
+                    else
+                        ActivePiece2.transform.GetChild(1).GetComponent<Text>().text = "Inactive";
 
-                // Update the Page the player is on
-                if (P2RepairPage)
-                    ActivePiece2.transform.GetChild(2).GetComponent<Text>().text = "Repairing";
-                else
-                    ActivePiece2.transform.GetChild(2).GetComponent<Text>().text = "Upgrading";
+                    // Update the Page the player is on
+                    if (P2RepairPage)
+                        ActivePiece2.transform.GetChild(2).GetComponent<Text>().text = "Repairing";
+                    else
+                        ActivePiece2.transform.GetChild(2).GetComponent<Text>().text = "Upgrading";
 
-                // Update the UI costs
-                if (P2RepairPage)
-                    ActivePiece2.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    // Update the UI costs
+                    if (P2RepairPage)
+                        ActivePiece2.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    else
+                        ActivePiece2.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                }
                 else
-                    ActivePiece2.transform.GetChild(3).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                {
+                    // Update whether or not the turret is active
+                    if (isActive)
+                        ActivePiece2.transform.GetChild(0).GetComponent<Text>().text = "Active";
+                    else
+                        ActivePiece2.transform.GetChild(0).GetComponent<Text>().text = "Inactive";
+
+                    // Update prices
+                    ActivePiece2.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "Cost: " + (CurrentLevelStats.TotalResourceCost / 2);
+                    ActivePiece2.transform.GetChild(2).GetChild(2).GetComponent<Text>().text = "Cost: " + CurrentLevelStats.TotalResourceCost;
+                }
             }
         }
     }
@@ -448,72 +485,127 @@ public class TurretAI : MonoBehaviour
                 }
             }
 
-            // If there is a referance to the manager and there is still players alive
+            // If there is a referance to the manager and there are still players alive
             if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
             {
-                // If the interacting player presses the X button
-                if (Input.GetButtonDown(LocalMovRef.playerBeginning + "XButton"))
+                // If controller
+                if (GameObjectManager.instance.players[LocalMovRef.playerNumber - 1].gameObject.GetComponent<PlayerMovScript>().useController)
                 {
-                    // Then if they are player 1
-                    if (LocalMovRef.playerNumber == 1)
+                    // If the interacting player presses the X button
+                    if (Input.GetButtonDown(LocalMovRef.playerBeginning + "XButton"))
                     {
-                        if (P1Interacting)
+                        // Then if they are player 1
+                        if (LocalMovRef.playerNumber == 1)
                         {
-                            if (P1RepairPage)
+                            if (P1Interacting)
+                            {
+                                if (P1RepairPage)
+                                    RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                else
+                                    UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            }
+                            else
+                            {
+                                P1Interacting = true;
+                            }
+                        }
+                        // If they're player 2
+                        if (LocalMovRef.playerNumber == 2)
+                        {
+                            if (P2Interacting)
+                            {
+                                if (P2RepairPage)
+                                    RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                                else
+                                    UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            }
+                            else
+                            {
+                                P2Interacting = true;
+                            }
+                        }
+                    }
+                    else if (Input.GetButtonDown(LocalMovRef.playerBeginning + "BButton"))
+                    {
+                        if (LocalMovRef.playerNumber == 1)
+                        {
+                            P1Interacting = false;
+                        }
+                        else if (LocalMovRef.playerNumber == 2)
+                        {
+                            P2Interacting = false;
+                        }
+                    }
+                    // if the dpad is being pressed vertically
+                    else if (Mathf.Abs(Input.GetAxis(LocalMovRef.playerBeginning + "DVertical")) > 0.75f)
+                    {
+                        // If pressed up
+                        if (Input.GetAxis(LocalMovRef.playerBeginning + "DVertical") > 0.75f)
+                        {
+                            if (LocalMovRef.playerNumber == 1)
+                                P1RepairPage = true;
+                            else
+                                P2RepairPage = true;
+                        }
+                        // Otherwise its pressed down
+                        else
+                        {
+                            if (LocalMovRef.playerNumber == 1)
+                                P1RepairPage = false;
+                            else
+                                P2RepairPage = false;
+                        }
+                    }
+                }
+                else
+                {
+                    // PC Control
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        // Then if they are player 1
+                        if (LocalMovRef.playerNumber == 1)
+                        {
+                            if (P1Interacting)
+                            {
                                 RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            }
                             else
-                                UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            {
+                                P1Interacting = true;
+                            }
                         }
-                        else
+                        // If they're player 2
+                        if (LocalMovRef.playerNumber == 2)
                         {
-                            P1Interacting = true;
-                        }
-                    }
-                    // If they're player 2
-                    if (LocalMovRef.playerNumber == 2)
-                    {
-                        if (P2Interacting)
-                        {
-                            if (P2RepairPage)
+                            if (P2Interacting)
+                            {
                                 RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            }
                             else
-                                UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            {
+                                P2Interacting = true;
+                            }
                         }
-                        else
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Q))
+                    {
+                        if (LocalMovRef.playerNumber == 1)
                         {
-                            P2Interacting = true;
+                            P1Interacting = false;
+                        }
+                        else if (LocalMovRef.playerNumber == 2)
+                        {
+                            P2Interacting = false;
                         }
                     }
-                }
-                else if (Input.GetButtonDown(LocalMovRef.playerBeginning + "BButton"))
-                {
-                    if (LocalMovRef.playerNumber == 1)
-                    {
-                        P1Interacting = false;
-                    }
-                    else if (LocalMovRef.playerNumber == 2)
-                    {
-                        P2Interacting = false;
-                    }
-                }
-                // if the dpad is being pressed vertically
-                else if (Mathf.Abs(Input.GetAxis(LocalMovRef.playerBeginning + "DVertical")) > 0.75f)
-                {
-                    // If pressed up
-                    if (Input.GetAxis(LocalMovRef.playerBeginning + "DVertical") > 0.75f)
+                    // if the dpad is being pressed vertically
+                    else if (Input.GetKeyDown(KeyCode.F))
                     {
                         if (LocalMovRef.playerNumber == 1)
-                            P1RepairPage = true;
-                        else
-                            P2RepairPage = true;
-                    }
-                    // Otherwise its pressed down
-                    else
-                    {
-                        if (LocalMovRef.playerNumber == 1)
-                            P1RepairPage = false;
-                        else
-                            P2RepairPage = false;
+                            UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                        if (LocalMovRef.playerNumber == 2)
+                            UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
                     }
                 }
             }

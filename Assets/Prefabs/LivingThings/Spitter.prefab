@@ -1489,13 +1489,13 @@ MonoBehaviour:
   HoldPoint: {fileID: 1620890220944726}
   spitRef: {fileID: 114468801971222820}
   turningSpeed: 4
-  acceleration: 4
-  speed: 4
+  acceleration: 2
+  speed: 2
   damage: 10
   grabDamage: 15
   acidDamage: 5
   attackRange: 2
-  maxGrabRange: 20
+  maxGrabRange: 10
   currentDist: 0
   cooldown: 1
   currentCooldown: 0

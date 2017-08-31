@@ -9,6 +9,7 @@ public class GrapplingScript : MonoBehaviour
     public ChargerNavigation nav;
     public Vector3 pos;
     public bool firstHit = false;
+
     // Use this for initialization
     void Start()
     {
@@ -18,6 +19,10 @@ public class GrapplingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeSelf)
+        {
+            Player = null;
+        }
         if (Player != null)
         {
             Player.transform.position = nav.HoldingPos.position;
@@ -29,9 +34,25 @@ public class GrapplingScript : MonoBehaviour
     {
         if (nav.charging && firstHit == false)
         {
-            Debug.Log("Attacked");
-            col.GetComponent<Health>().Damage(nav.chargeDamage);
-            firstHit = true;
+            if (col.tag == "Player")
+            {
+                // Ignore see through things
+                int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+                layermask = ~layermask;
+
+                // Dont ignore terrain
+                layermask = 1 << LayerMask.NameToLayer("Terrain");
+                                
+                if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+                {
+                    Debug.Log("Hit In Charge");
+                    col.GetComponent<Health>().Damage(nav.chargeDamage);
+                    firstHit = true;
+
+                    // Stop player from moving during tackle
+                    col.GetComponent<PlayerMovScript>().incapacitated = true;
+                }
+            }
         }
     }
 
@@ -42,14 +63,19 @@ public class GrapplingScript : MonoBehaviour
         {
             if (Player == null)
             {
-                if (Vector3.Distance(transform.position, col.transform.position) < 2f)
+                if (col.GetComponent<ReviveSystem>().NeedRes != true ||
+                    col.GetComponent<Health>().health > 0)
                 {
-                    col.gameObject.transform.position = nav.HoldingPos.position;
-                    col.gameObject.transform.rotation = nav.HoldingPos.rotation;
-                    Debug.Log("Grabbed");
 
-                    Player = col.gameObject;
-                    Grabbed = true;
+                    if (Vector3.Distance(transform.position, col.transform.position) < 2f)
+                    {
+                        col.gameObject.transform.position = nav.HoldingPos.position;
+                        col.gameObject.transform.rotation = nav.HoldingPos.rotation;
+                        Debug.Log("Grabbed");
+
+                        Player = col.gameObject;
+                        Grabbed = true;
+                    }
                 }
             }
         }

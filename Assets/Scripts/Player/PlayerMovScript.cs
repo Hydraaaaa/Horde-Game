@@ -18,6 +18,7 @@ public class PlayerMovScript : MonoBehaviour
     public float moveSpeed = 3;
     public float moveSpeedShooting = 2;
     public bool Shooting = false;
+    public bool incapacitated = false;
 
     public bool useController = true;
 
@@ -57,6 +58,11 @@ public class PlayerMovScript : MonoBehaviour
 
     void LateUpdate()
     {
+        //if (incapacitated)
+        //{
+        //    return;
+        //}
+
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         Shooting = false;
 
@@ -78,6 +84,10 @@ public class PlayerMovScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if (incapacitated)
+        {
+            return;
+        }
         // transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
 
         localVelocity = transform.InverseTransformDirection(GetComponent<CharacterController>().velocity);

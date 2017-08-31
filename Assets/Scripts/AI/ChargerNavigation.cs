@@ -123,7 +123,16 @@ public class ChargerNavigation : MonoBehaviour
         }
         else
         {
+            // If there was a player held
+            if (ChargeBarrier.GetComponent<GrapplingScript>().Player != null)
+                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitated = false;
+
             ChargeBarrier.SetActive(false);
+        }
+
+        if (ChargeBarrier.activeSelf == false)
+        {
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
         }
 
         // Attack Cooldown
@@ -151,7 +160,7 @@ public class ChargerNavigation : MonoBehaviour
                 // if the charger can charge check and ...
                 if (canCharge)
                 {
-                    if (UnityEngine.Random.Range(0, 101) >= chargeChancePercentage)
+                    if (UnityEngine.Random.Range(0, 101) <= chargeChancePercentage)
                         StartCharge();
                 }
 
@@ -247,21 +256,32 @@ public class ChargerNavigation : MonoBehaviour
             layermask = ~layermask;
             layermask = 1 << LayerMask.NameToLayer("Terrain");
 
+
             if (Physics.Linecast(transform.position, TargetPos, layermask, QueryTriggerInteraction.Ignore))
             {
-                TargetPos = transform.position;
+                TargetPos = transform.position + (pDir * 1.5f);
                 agent.SetDestination(TargetPos);
-                player = null;
-                charging = false;
-                // Finished charging, wait a second before you continue attacking
-                currentCooldown = cooldown * 2;
-                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<Health>().Damage(impactDamage);
+
+                if (Physics.Linecast(transform.position, TargetPos, layermask, QueryTriggerInteraction.Ignore))
+                {
+                    if (ChargeBarrier.GetComponent<GrapplingScript>().Player != null)
+                    {
+                        ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<Health>().Damage(impactDamage);
+                        ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
+                    }
+
+                    player = null;
+                    charging = false;
+                    // Finished charging, wait a second before you continue attacking
+                    currentCooldown = cooldown * 2;
+                }
             }
         }
 
         if (currentDist < 1.1f)
         {
             charging = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
         }
     }
@@ -278,6 +298,7 @@ public class ChargerNavigation : MonoBehaviour
         {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             return;
         }
@@ -287,6 +308,7 @@ public class ChargerNavigation : MonoBehaviour
         {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             return;
         }
@@ -312,6 +334,7 @@ public class ChargerNavigation : MonoBehaviour
         {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             TargetPos = EndPos.transform.position;
             agent.SetDestination(TargetPos);
@@ -332,6 +355,7 @@ public class ChargerNavigation : MonoBehaviour
                 {
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
+                    ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                     player = null;
                     TargetPos = EndPos.transform.position;
                     agent.SetDestination(TargetPos);
@@ -342,6 +366,7 @@ public class ChargerNavigation : MonoBehaviour
             {
                 // then remove the player reference so it dosent keep tracking to them
                 followPlayer = false;
+                ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                 player = null;
                 TargetPos = EndPos.transform.position;
                 agent.SetDestination(TargetPos);
@@ -364,6 +389,7 @@ public class ChargerNavigation : MonoBehaviour
         {
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             return;
         }
@@ -381,6 +407,7 @@ public class ChargerNavigation : MonoBehaviour
             {
                 // then remove the player reference so it dosent keep tracking to them
                 followPlayer = false;
+                ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                 player = null;
                 return;
             }
@@ -395,6 +422,7 @@ public class ChargerNavigation : MonoBehaviour
                 {
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
+                    ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                     player = null;
                     TargetPos = EndPos.transform.position;
                     agent.SetDestination(TargetPos);
@@ -406,6 +434,7 @@ public class ChargerNavigation : MonoBehaviour
             {
                 // then remove the player reference so it dosent keep tracking to them
                 followPlayer = false;
+                ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                 player = null;
                 TargetPos = EndPos.transform.position;
                 agent.SetDestination(TargetPos);
@@ -435,6 +464,7 @@ public class ChargerNavigation : MonoBehaviour
 
             // then remove the player reference so it dosent keep tracking to them
             followPlayer = false;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             return;
         }
@@ -518,6 +548,7 @@ public class ChargerNavigation : MonoBehaviour
         if (barricade == null)
         {
             barricade = col.gameObject;
+            ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
             player = null;
             survivor = null;
             followPlayer = false;
@@ -574,6 +605,7 @@ public class ChargerNavigation : MonoBehaviour
             if (survivor == null)
             {
                 // Remove any prior priority to player tracking
+                ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                 player = null;
                 followPlayer = false;
 
