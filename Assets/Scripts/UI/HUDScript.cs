@@ -36,7 +36,10 @@ public class HUDScript : MonoBehaviour
         InstantiateBarricadeUI();
 
         // Make the Turret UI
-        InstantiateTurretUI();        
+        InstantiateTurretUI();
+
+        GameObjectManager.instance.players[0].UIMask = p1Mask;
+        GameObjectManager.instance.players[1].UIMask = p2Mask;
     }
 	
     void InstantiateBarricadeUI()
