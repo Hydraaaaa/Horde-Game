@@ -98,6 +98,9 @@ public class SpitterNavigation : MonoBehaviour
 
     void Update()
     {
+        if (currentGrabCooldown > 0)
+            currentGrabCooldown -= Time.deltaTime;
+        
         // Update the time for the acid attack
         if (currentAcidAOECooldown > 0)
         {
@@ -251,9 +254,18 @@ public class SpitterNavigation : MonoBehaviour
         }
         else
         {
-            // Set the target position of the AI to the position of the player
-            TargetPos = player.transform.position;
-            agent.SetDestination(TargetPos);
+            if (Vector3.Distance(transform.position, player.transform.position) > (GetComponent<SphereCollider>().radius / 4) * 3)
+            {
+                // Set the target position of the AI to the position of the player
+                TargetPos = player.transform.position;
+                agent.SetDestination(TargetPos);
+            }
+            else
+            {
+                // Set the target position so the AI stands still when in range
+                TargetPos = transform.position;
+                agent.SetDestination(TargetPos);
+            }
         }
 
         // if the player is in range for a spit attack
@@ -267,8 +279,11 @@ public class SpitterNavigation : MonoBehaviour
             // If the player is visible
             if (Physics.Linecast(transform.position, player.transform.position, layermask))
             {
-                StartGrab();
-                playerGrabbed = true;
+                if (currentGrabCooldown <= 0)
+                {
+                    StartGrab();
+                    playerGrabbed = true;
+                }
             }
         }
         // If the player is within attack range
@@ -326,6 +341,8 @@ public class SpitterNavigation : MonoBehaviour
 
     void StartGrab()
     {
+        currentGrabCooldown = grabCooldown;
+
         // Set Start
         Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
         // Set End
@@ -339,13 +356,14 @@ public class SpitterNavigation : MonoBehaviour
     void ContinueGrab()
     {
         int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
-        //layermask = 1 << LayerMask.NameToLayer("Enemy");
+        layermask = 1 << LayerMask.NameToLayer("Enemy");
         //layermask = ~layermask;
 
         Debug.DrawLine(transform.position, player.transform.position - (player.transform.position - transform.position).normalized * 2, Color.red);
         // If the player is visible
         if (!Physics.Linecast(transform.position, player.transform.position - ((player.transform.position - transform.position).normalized / 2) * 1.1f))
         {
+            player.GetComponent<PlayerMovScript>().incapacitated = true;
 
             Debug.Log("Can still see them");
             // Set Start
@@ -357,6 +375,22 @@ public class SpitterNavigation : MonoBehaviour
             TargetPos = transform.position;
             agent.SetDestination(TargetPos);
 
+            // Is the player further away from the agent than the last frame?
+            if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) - currentDist > 0.1f)
+            {
+                if (currentDist != 0)
+                {
+                    float dise = Vector3.Distance(HoldPoint.transform.position, player.transform.position);
+                    float oth = Vector3.Distance(HoldPoint.transform.position, player.transform.position) - currentDist;
+                    // then remove the player reference so it dosent keep tracking to them
+                    followPlayer = false;
+                    player.GetComponent<PlayerMovScript>().incapacitated = false;
+                    player = null;
+                    playerGrabbed = false;
+                    currentGrabCooldown = grabCooldown;
+                    return;
+                }
+            }
             if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) > 1f)
             {
                 player.transform.position = Vector3.Lerp(player.transform.position, HoldPoint.transform.position, Time.deltaTime);
@@ -374,8 +408,10 @@ public class SpitterNavigation : MonoBehaviour
                     {
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
+                        player.GetComponent<PlayerMovScript>().incapacitated = false;
                         player = null;
                         playerGrabbed = false;
+                        currentGrabCooldown = grabCooldown;
                         return;
                     }
 
@@ -389,10 +425,12 @@ public class SpitterNavigation : MonoBehaviour
                         {
                             // then remove the player reference so it dosent keep tracking to them
                             followPlayer = false;
+                            player.GetComponent<PlayerMovScript>().incapacitated = false;
                             player = null;
                             playerGrabbed = false;
                             TargetPos = EndPos.transform.position;
                             agent.SetDestination(TargetPos);
+                            currentGrabCooldown = grabCooldown;
                             return;
                         }
                     }
@@ -401,10 +439,12 @@ public class SpitterNavigation : MonoBehaviour
                     {
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
+                        player.GetComponent<PlayerMovScript>().incapacitated = false;
                         player = null;
                         playerGrabbed = false;
                         TargetPos = EndPos.transform.position;
                         agent.SetDestination(TargetPos);
+                        currentGrabCooldown = grabCooldown;
                         return;
                     }
                 }
@@ -417,12 +457,17 @@ public class SpitterNavigation : MonoBehaviour
 
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
-                    playerGrabbed = false;
+                    player.GetComponent<PlayerMovScript>().incapacitated = false;
                     player = null;
+                    playerGrabbed = false;
+                    TargetPos = EndPos.transform.position;
+                    agent.SetDestination(TargetPos);
+                    currentGrabCooldown = grabCooldown;
                     return;
                 }
             }
         }
+        currentDist = Vector3.Distance(HoldPoint.transform.position, player.transform.position);
     }
 
     void SurvivorNotNull()
@@ -511,32 +556,40 @@ public class SpitterNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
-        if (col.GetComponent<ReviveSystem>().NeedRes != true)
+        if (col.GetComponent<ReviveSystem>().NeedRes != true && col.GetComponent<Health>().health > 0)
         {
+            // Ignore see through things
             int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
             layermask = 1 << LayerMask.NameToLayer("Enemy");
             layermask = ~layermask;
 
-            if (survivor == null && barricade == null)
+            // Dont ignore terrain
+            layermask = 1 << LayerMask.NameToLayer("Terrain");
+
+            if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
             {
-                if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+
+                if (survivor == null && barricade == null)
                 {
-                    //Debug.Log("Can see player");
-                    // If this player is closer than the other player in the scene
-                    if (player == null)
+                    if (Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
                     {
-                        player = col.gameObject;
-                        followPlayer = true;
-                        TargetPos = col.transform.position;
-                        agent.SetDestination(TargetPos);
-                    }
-                    else if (Vector3.Distance(this.transform.position, player.transform.position) >
-                            Vector3.Distance(this.transform.position, col.transform.position))
-                    {
-                        player = col.gameObject;
-                        followPlayer = true;
-                        TargetPos = col.transform.position;
-                        agent.SetDestination(TargetPos);
+                        //Debug.Log("Can see player");
+                        // If this player is closer than the other player in the scene
+                        if (player == null)
+                        {
+                            player = col.gameObject;
+                            followPlayer = true;
+                            TargetPos = col.transform.position;
+                            agent.SetDestination(TargetPos);
+                        }
+                        else if (Vector3.Distance(this.transform.position, player.transform.position) >
+                                Vector3.Distance(this.transform.position, col.transform.position))
+                        {
+                            player = col.gameObject;
+                            followPlayer = true;
+                            TargetPos = col.transform.position;
+                            agent.SetDestination(TargetPos);
+                        }
                     }
                 }
             }
