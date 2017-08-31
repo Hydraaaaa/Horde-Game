@@ -320,4 +320,12 @@ public class GameObjectManager : MonoBehaviour
         Instantiate(LoseGUIPrefab);
         playing = false;
     }
+
+    public Player GetPlayer(GameObject player)
+    {
+        for (int i = 0; i < players.Count; i++)
+            if (players[i].gameObject == player)
+                return players[i];
+        return null;
+    }
 }
