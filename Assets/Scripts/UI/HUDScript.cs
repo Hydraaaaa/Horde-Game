@@ -12,10 +12,10 @@ public class HUDScript : MonoBehaviour
     public GameObject p1Mask;
     public GameObject p2Mask;
 
-    public GameObject barricadeHealthBarPrefab;    // Not Implemented
+    public GameObject barricadeHealthBarPrefab;
 
-    public List<GameObject> barricadeHealthBarsP1;        // Not Implemented
-    public List<GameObject> barricadeHealthBarsP2;        // Not Implemented
+    public List<GameObject> barricadeHealthBarsP1;
+    public List<GameObject> barricadeHealthBarsP2;
 
     public GameObject turretTimeBarPrefab;
 
@@ -36,7 +36,10 @@ public class HUDScript : MonoBehaviour
         InstantiateBarricadeUI();
 
         // Make the Turret UI
-        InstantiateTurretUI();        
+        InstantiateTurretUI();
+
+        GameObjectManager.instance.players[0].UIMask = p1Mask;
+        GameObjectManager.instance.players[1].UIMask = p2Mask;
     }
 	
     void InstantiateBarricadeUI()

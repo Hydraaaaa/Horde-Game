@@ -94,7 +94,7 @@ public class Rifle : MonoBehaviour
                     hit.transform.GetComponent<Health>().Damage(damage);
 
                     // If the attacked target is an enemy
-                    if (hit.transform.GetComponent<Health>().Enemy && this.tag == "Player")
+                    if (hit.transform.GetComponent<Health>().Enemy && this.CompareTag("Player"))
                         hit.transform.GetComponent<Health>().Attacker = this.gameObject;
                 }
             }

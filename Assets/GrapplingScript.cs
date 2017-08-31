@@ -34,7 +34,7 @@ public class GrapplingScript : MonoBehaviour
     {
         if (nav.charging && firstHit == false)
         {
-            if (col.tag == "Player")
+            if (col.CompareTag("Player"))
             {
                 // Ignore see through things
                 int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
@@ -59,7 +59,7 @@ public class GrapplingScript : MonoBehaviour
     void OnTriggerStay(Collider col)
     {
         // if the zombie charges into a player
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.CompareTag("Player"))
         {
             if (Player == null)
             {

@@ -8,14 +8,14 @@ public class ReviveSystem : MonoBehaviour
     public float ReviveTime = 5f;
     public float curReviveTime = 0f;
 
-    public GameObject InteractGUI;
+    public GameObject InteractGUIController;
+    public GameObject InteractGUIKeyboard;
 
     public bool NeedRes = false;
 
     // Use this for initialization
     void Start ()
     {
-        InteractGUI = transform.GetChild(1).gameObject;
         GetComponent<Health>().OnDie = StartReviveSystem;
 	}
 	
@@ -24,14 +24,19 @@ public class ReviveSystem : MonoBehaviour
     {
         if (NeedRes)
         {
-            InteractGUI.SetActive(true);
+            if (GetComponent<PlayerMovScript>().useController)
+                InteractGUIController.SetActive(true);
+            else
+                InteractGUIKeyboard.SetActive(true);
         }
         else
         {
-            InteractGUI.SetActive(false);
+            InteractGUIController.SetActive(false);
+            InteractGUIKeyboard.SetActive(false);
         }
 
-        InteractGUI.transform.rotation = Quaternion.Euler(45, 45, 0);
+        InteractGUIController.transform.rotation = Quaternion.Euler(45, 45, 0);
+        InteractGUIKeyboard.transform.rotation = Quaternion.Euler(45, 45, 0);
     }
 
     public void StartReviveSystem()
@@ -41,7 +46,7 @@ public class ReviveSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.tag == "Player" && !NeedRes)
+        if (col.CompareTag("Player") && !NeedRes)
         {
             if (col.GetComponent<ReviveSystem>().NeedRes == true)
             {
@@ -49,7 +54,8 @@ public class ReviveSystem : MonoBehaviour
                 {
                     curReviveTime += Time.deltaTime;
 
-                    col.GetComponent<ReviveSystem>().InteractGUI.transform.GetChild(1).GetComponent<Image>().fillAmount = curReviveTime / ReviveTime;
+                    col.GetComponent<ReviveSystem>().InteractGUIController.transform.GetChild(1).GetComponent<Image>().fillAmount = curReviveTime / ReviveTime;
+                    col.GetComponent<ReviveSystem>().InteractGUIKeyboard.transform.GetChild(1).GetComponent<Image>().fillAmount = curReviveTime / ReviveTime;
 
                     if (curReviveTime >= ReviveTime)
                     {
@@ -68,7 +74,7 @@ public class ReviveSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
             col.GetComponent<ReviveSystem>().curReviveTime = 0f;
         }
