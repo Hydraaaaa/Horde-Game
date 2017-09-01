@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8240a39cdea4d584389288dd2ef78c08
-timeCreated: 1504242404
+guid: b1839b36e7b40504ebbd7d5771e8c057
+timeCreated: 1504245908
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -168,7 +168,7 @@ ModelImporter:
     400158: Toetap_Lft
     400160: ToeTap_Rgt
     4300000: brute_LOW:brute
-    7400000: Walk
+    7400000: Charge
     9500000: //RootNode
     13700000: brute_LOW:brute
   materials:
@@ -196,7 +196,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk
+      name: Charge
       takeName: Take 001
       firstFrame: 0
       lastFrame: 24

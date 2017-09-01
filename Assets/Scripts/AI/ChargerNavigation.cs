@@ -257,7 +257,6 @@ public class ChargerNavigation : MonoBehaviour
             int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
             layermask = ~layermask;
             layermask = 1 << LayerMask.NameToLayer("Terrain");
-            layermask = 1 << LayerMask.NameToLayer("Barricade");
             
             if (Physics.Linecast(transform.position, TargetPos, layermask, QueryTriggerInteraction.Ignore))
             {

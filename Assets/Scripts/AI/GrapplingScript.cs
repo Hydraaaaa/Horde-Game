@@ -28,7 +28,7 @@ public class GrapplingScript : MonoBehaviour
             //Player.transform.position = nav.HoldingPos.position;
             //Player.transform.rotation = nav.HoldingPos.rotation;
 
-            Player.transform.position = GetComponent<BoxCollider>().transform.position;
+            Player.transform.position = nav.HoldingPos.position;
             Player.transform.rotation = nav.HoldingPos.rotation;
 
             // Stop player from moving during tackle
