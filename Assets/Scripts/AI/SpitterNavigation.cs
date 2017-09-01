@@ -354,6 +354,9 @@ public class SpitterNavigation : MonoBehaviour
 
         transform.rotation = rot;
 
+        player.GetComponent<PlayerMovScript>().incapacitated = true;
+        Debug.Log("Incapacitated the player");
+
         // Stop the agent from moving
         TargetPos = transform.position;
         agent.SetDestination(TargetPos);
@@ -369,9 +372,7 @@ public class SpitterNavigation : MonoBehaviour
         // If the player is visible
         if (!Physics.Linecast(transform.position, player.transform.position - ((player.transform.position - transform.position).normalized / 2) * 1.1f))
         {
-            player.GetComponent<PlayerMovScript>().incapacitated = true;
 
-            Debug.Log("Can still see them");
             // Set Start
             Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
             // Set End
@@ -391,6 +392,8 @@ public class SpitterNavigation : MonoBehaviour
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
                     player.GetComponent<PlayerMovScript>().incapacitated = false;
+                    Debug.Log("Removed Incapacitated from the player");
+
                     player = null;
                     playerGrabbed = false;
                     currentGrabCooldown = grabCooldown;
@@ -415,6 +418,8 @@ public class SpitterNavigation : MonoBehaviour
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
                         player.GetComponent<PlayerMovScript>().incapacitated = false;
+                        Debug.Log("Removed Incapacitated from the player");
+
                         player = null;
                         playerGrabbed = false;
                         currentGrabCooldown = grabCooldown;
@@ -432,6 +437,8 @@ public class SpitterNavigation : MonoBehaviour
                             // then remove the player reference so it dosent keep tracking to them
                             followPlayer = false;
                             player.GetComponent<PlayerMovScript>().incapacitated = false;
+                            Debug.Log("Removed Incapacitated from the player");
+
                             player = null;
                             playerGrabbed = false;
                             TargetPos = EndPos.transform.position;
@@ -446,6 +453,8 @@ public class SpitterNavigation : MonoBehaviour
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
                         player.GetComponent<PlayerMovScript>().incapacitated = false;
+                        Debug.Log("Removed Incapacitated from the player");
+
                         player = null;
                         playerGrabbed = false;
                         TargetPos = EndPos.transform.position;
@@ -464,6 +473,8 @@ public class SpitterNavigation : MonoBehaviour
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
                     player.GetComponent<PlayerMovScript>().incapacitated = false;
+                    Debug.Log("Removed Incapacitated from the player");
+
                     player = null;
                     playerGrabbed = false;
                     TargetPos = EndPos.transform.position;

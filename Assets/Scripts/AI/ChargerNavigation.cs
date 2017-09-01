@@ -125,7 +125,10 @@ public class ChargerNavigation : MonoBehaviour
         {
             // If there was a player held
             if (ChargeBarrier.GetComponent<GrapplingScript>().Player != null)
+            {
                 ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitated = false;
+                Debug.Log("Removed Incapacitated from the player");
+            }
 
             ChargeBarrier.SetActive(false);
         }
@@ -167,7 +170,6 @@ public class ChargerNavigation : MonoBehaviour
                 // If the charger didnt start charging yet
                 if (!charging)
                 {
-
                     // Rotating towards movement direction
                     Vector3 dir = this.GetComponent<NavMeshAgent>().velocity;
 

@@ -178,7 +178,7 @@ public class GameObjectManager : MonoBehaviour
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 1, 1);
                 if (i == 3)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 1, 1, 1);
-
+                
                 newPlayer.gameObject = playerInstance;
                 
                 GameObject camera = Instantiate(cameraPrefab);
@@ -191,6 +191,10 @@ public class GameObjectManager : MonoBehaviour
                                                          1
                                                      );
 
+                if (i > 0)
+                {
+                    camera.GetComponent<AudioListener>().enabled = false;
+                }
                 camera.GetComponent<CameraMovement>().player = newPlayer.gameObject;
                 newPlayer.gameObject.GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
 
