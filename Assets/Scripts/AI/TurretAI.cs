@@ -102,7 +102,7 @@ public class TurretAI : MonoBehaviour
 
             CurrentLevelStats.TotalResourceCost = AllLevelStats[0].TotalResourceCost;
         }
-
+        
         // Show the necessary barrels for the current level of the gun
         ShowBarrels();
 
@@ -145,18 +145,18 @@ public class TurretAI : MonoBehaviour
     void TurretsUI()
     {
         // Make sure the referances to the player are still useable
-        foreach (GameObject player in playersInRange)
-        {
-            if (player == null)
-                playersInRange.Remove(player);
-        }
         for (int i = 0; i < playersInRange.Count; i++)
         {
-            if (playersInRange[i] == null)
+            if (playersInRange[i] == null || playersInRange[i].GetComponent<ReviveSystem>().NeedRes)
             {
                 playersInRange.RemoveAt(i);
             }
         }
+        //foreach (GameObject player in playersInRange)
+        //{
+        //    if (player == null || player.GetComponent<ReviveSystem>().NeedRes)
+        //        playersInRange.Remove(player);
+        //}
 
         if (GameObjectManager.instance.players[0].camera != null)
         {
@@ -359,24 +359,27 @@ public class TurretAI : MonoBehaviour
         // If a player interacts with the trigger
         else if (col.CompareTag("Player"))
         {
-            if (Vector3.Distance(col.transform.position, gameObject.transform.position) < 3f)
-                PlayerConnects(col);
-            else
+            if (col.GetComponent<ReviveSystem>().NeedRes == false)
             {
-                if (col.GetComponent<PlayerMovScript>().playerNumber == 1)
+                if (Vector3.Distance(col.transform.position, gameObject.transform.position) < 3f)
+                    PlayerConnects(col);
+                else
                 {
-                    ActivePiece1.SetActive(false);
-                    InactivePiece1.SetActive(false);
-                    P1Interacting = false;
-                    P1RepairPage = true;
+                    if (col.GetComponent<PlayerMovScript>().playerNumber == 1)
+                    {
+                        ActivePiece1.SetActive(false);
+                        InactivePiece1.SetActive(false);
+                        P1Interacting = false;
+                        P1RepairPage = true;
 
-                }
-                if (col.GetComponent<PlayerMovScript>().playerNumber == 2)
-                {
-                    ActivePiece2.SetActive(false);
-                    InactivePiece2.SetActive(false);
-                    P2Interacting = false;
-                    P2RepairPage = true;
+                    }
+                    if (col.GetComponent<PlayerMovScript>().playerNumber == 2)
+                    {
+                        ActivePiece2.SetActive(false);
+                        InactivePiece2.SetActive(false);
+                        P2Interacting = false;
+                        P2RepairPage = true;
+                    }
                 }
             }
         }

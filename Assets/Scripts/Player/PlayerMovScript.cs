@@ -19,6 +19,7 @@ public class PlayerMovScript : MonoBehaviour
     public float moveSpeedShooting = 2;
     public bool Shooting = false;
     public bool incapacitated = false;
+    public bool Talking = false;
 
     public bool useController = true;
 
@@ -58,11 +59,6 @@ public class PlayerMovScript : MonoBehaviour
 
     void LateUpdate()
     {
-        //if (incapacitated)
-        //{
-        //    return;
-        //}
-
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         Shooting = false;
 
@@ -84,6 +80,12 @@ public class PlayerMovScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if (Input.GetKeyDown(KeyCode.Insert))
+        {
+            Debug.Log("You just pressed the kill switch");
+            GetComponent<Health>().Damage(10000);
+        }
+
         if (incapacitated)
         {
             return;

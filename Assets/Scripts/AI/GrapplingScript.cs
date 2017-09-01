@@ -30,6 +30,9 @@ public class GrapplingScript : MonoBehaviour
 
             Player.transform.position = GetComponent<BoxCollider>().transform.position;
             Player.transform.rotation = nav.HoldingPos.rotation;
+
+            // Stop player from moving during tackle
+            Player.GetComponent<PlayerMovScript>().incapacitated = true;
         }
     }
 
@@ -38,20 +41,35 @@ public class GrapplingScript : MonoBehaviour
         if (nav.charging && firstHit == false)
         {
             if (col.CompareTag("Player"))
-            {                
-                // Ignore see through things
-                int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
-                layermask = ~layermask;
-
-                // Dont ignore terrain
-                layermask = 1 << LayerMask.NameToLayer("Terrain");
-                                
-                if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+            {
+                if (col.GetComponent<ReviveSystem>().NeedRes != true)
                 {
-                    Debug.Log("Hit In Charge");
-                    col.GetComponent<Health>().Damage(nav.chargeDamage);
-                    firstHit = true;
+
+                    // Ignore see through things
+                    int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+                    layermask = ~layermask;
+
+                    // Dont ignore terrain
+                    layermask = 1 << LayerMask.NameToLayer("Terrain");
+
+                    if (!Physics.Linecast(transform.position, col.transform.position, layermask, QueryTriggerInteraction.Ignore))
+                    {
+                        Debug.Log("Hit In Charge");
+                        col.GetComponent<Health>().Damage(nav.chargeDamage);
+                        firstHit = true;
+                    }
                 }
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Player")
+        {
+            if (col == Player)
+            {
+                Player = null;
             }
         }
     }
@@ -74,9 +92,6 @@ public class GrapplingScript : MonoBehaviour
                         Debug.Log("Grabbed");
 
                         Player = col.gameObject;
-
-                        // Stop player from moving during tackle
-                        col.GetComponent<PlayerMovScript>().incapacitated = true;
 
                         Grabbed = true;
                     }

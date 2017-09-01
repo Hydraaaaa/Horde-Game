@@ -1,0 +1,276 @@
+fileFormatVersion: 2
+guid: 8240a39cdea4d584389288dd2ef78c08
+timeCreated: 1504242404
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: BallRoll_L
+    100002: BallRoll_R
+    100004: brute_LOW:brute
+    100006: //RootNode
+    100008: CNTRL_Elbw_LFT
+    100010: CNTRL_Elbw_RGT
+    100012: CNTRL_Foot_Lft
+    100014: CNTRL_Foot_RGT
+    100016: CNTRL_Hand_LFT
+    100018: CNTRL_Hand_RGT
+    100020: CNTRL_Head
+    100022: CNTRL_Hip
+    100024: CNTRL_Knee_LFT
+    100026: CNTRL_Knee_RGT
+    100028: CNTRL_Neck_01
+    100030: CNTRL_Origin
+    100032: CNTRL_Shdlr_LFT
+    100034: CNTRL_Shdlr_RGT
+    100036: CNTRL_Spine_01
+    100038: CNTRL_Spine_02
+    100040: CNTRL_Spine_03
+    100042: CNTRL_Wrst_LFT
+    100044: CNTRL_Wrst_RGT
+    100046: Cog
+    100048: curve1
+    100050: curve10
+    100052: curve11
+    100054: curve12
+    100056: curve12 1
+    100058: curve13
+    100060: curve13 1
+    100062: curve14
+    100064: curve2
+    100066: curve3
+    100068: curve4
+    100070: curve4 1
+    100072: curve5
+    100074: curve6
+    100076: curve6 1
+    100078: curve7
+    100080: curve8
+    100082: curve9
+    100084: curve9 1
+    100086: IK_Arm_LFT
+    100088: IK_Arm_RGT
+    100090: IK_Leg_LFT
+    100092: IK_Leg_RGT
+    100094: ikHandle1
+    100096: ikHandle2
+    100098: ikHandle3
+    100100: ikHandle4
+    100102: Jnt_ANKL_LFT
+    100104: Jnt_ANKL_RGT
+    100106: Jnt_BALL_LFT
+    100108: Jnt_BALL_RGT
+    100110: Jnt_COLLAR_LFT
+    100112: Jnt_COLLAR_RGT
+    100114: Jnt_ELBW_LFT
+    100116: Jnt_ELBW_RGT
+    100118: JNT_HEAD
+    100120: Jnt_HIP_LFT
+    100122: Jnt_HIP_RGT
+    100124: JNT_HND_LFT
+    100126: JNT_HND_RGT
+    100128: Jnt_KNEE_LFT
+    100130: Jnt_KNEE_RGT
+    100132: JNT_NCK_01
+    100134: JNT_NCK_02
+    100136: Jnt_SHLDR
+    100138: Jnt_SHLDR 1
+    100140: Jnt_SPN_01
+    100142: JNT_SPN_02
+    100144: JNT_SPN_03
+    100146: JNT_SPN_04
+    100148: Jnt_TOE_LFT
+    100150: Jnt_TOE_RGT
+    100152: Jnt_WRST_LFT
+    100154: Jnt_WRST_RGT
+    100156: Origin
+    100158: Toetap_Lft
+    100160: ToeTap_Rgt
+    400000: BallRoll_L
+    400002: BallRoll_R
+    400004: brute_LOW:brute
+    400006: //RootNode
+    400008: CNTRL_Elbw_LFT
+    400010: CNTRL_Elbw_RGT
+    400012: CNTRL_Foot_Lft
+    400014: CNTRL_Foot_RGT
+    400016: CNTRL_Hand_LFT
+    400018: CNTRL_Hand_RGT
+    400020: CNTRL_Head
+    400022: CNTRL_Hip
+    400024: CNTRL_Knee_LFT
+    400026: CNTRL_Knee_RGT
+    400028: CNTRL_Neck_01
+    400030: CNTRL_Origin
+    400032: CNTRL_Shdlr_LFT
+    400034: CNTRL_Shdlr_RGT
+    400036: CNTRL_Spine_01
+    400038: CNTRL_Spine_02
+    400040: CNTRL_Spine_03
+    400042: CNTRL_Wrst_LFT
+    400044: CNTRL_Wrst_RGT
+    400046: Cog
+    400048: curve1
+    400050: curve10
+    400052: curve11
+    400054: curve12
+    400056: curve12 1
+    400058: curve13
+    400060: curve13 1
+    400062: curve14
+    400064: curve2
+    400066: curve3
+    400068: curve4
+    400070: curve4 1
+    400072: curve5
+    400074: curve6
+    400076: curve6 1
+    400078: curve7
+    400080: curve8
+    400082: curve9
+    400084: curve9 1
+    400086: IK_Arm_LFT
+    400088: IK_Arm_RGT
+    400090: IK_Leg_LFT
+    400092: IK_Leg_RGT
+    400094: ikHandle1
+    400096: ikHandle2
+    400098: ikHandle3
+    400100: ikHandle4
+    400102: Jnt_ANKL_LFT
+    400104: Jnt_ANKL_RGT
+    400106: Jnt_BALL_LFT
+    400108: Jnt_BALL_RGT
+    400110: Jnt_COLLAR_LFT
+    400112: Jnt_COLLAR_RGT
+    400114: Jnt_ELBW_LFT
+    400116: Jnt_ELBW_RGT
+    400118: JNT_HEAD
+    400120: Jnt_HIP_LFT
+    400122: Jnt_HIP_RGT
+    400124: JNT_HND_LFT
+    400126: JNT_HND_RGT
+    400128: Jnt_KNEE_LFT
+    400130: Jnt_KNEE_RGT
+    400132: JNT_NCK_01
+    400134: JNT_NCK_02
+    400136: Jnt_SHLDR
+    400138: Jnt_SHLDR 1
+    400140: Jnt_SPN_01
+    400142: JNT_SPN_02
+    400144: JNT_SPN_03
+    400146: JNT_SPN_04
+    400148: Jnt_TOE_LFT
+    400150: Jnt_TOE_RGT
+    400152: Jnt_WRST_LFT
+    400154: Jnt_WRST_RGT
+    400156: Origin
+    400158: Toetap_Lft
+    400160: ToeTap_Rgt
+    4300000: brute_LOW:brute
+    7400000: Charge
+    9500000: //RootNode
+    13700000: brute_LOW:brute
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Charge
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
