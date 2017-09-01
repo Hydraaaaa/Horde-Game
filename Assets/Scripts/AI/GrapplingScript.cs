@@ -25,7 +25,10 @@ public class GrapplingScript : MonoBehaviour
         }
         if (Player != null)
         {
-            Player.transform.position = nav.HoldingPos.position;
+            //Player.transform.position = nav.HoldingPos.position;
+            //Player.transform.rotation = nav.HoldingPos.rotation;
+
+            Player.transform.position = GetComponent<BoxCollider>().transform.position;
             Player.transform.rotation = nav.HoldingPos.rotation;
         }
     }
@@ -35,7 +38,7 @@ public class GrapplingScript : MonoBehaviour
         if (nav.charging && firstHit == false)
         {
             if (col.CompareTag("Player"))
-            {
+            {                
                 // Ignore see through things
                 int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
                 layermask = ~layermask;
@@ -48,9 +51,6 @@ public class GrapplingScript : MonoBehaviour
                     Debug.Log("Hit In Charge");
                     col.GetComponent<Health>().Damage(nav.chargeDamage);
                     firstHit = true;
-
-                    // Stop player from moving during tackle
-                    col.GetComponent<PlayerMovScript>().incapacitated = true;
                 }
             }
         }
@@ -74,6 +74,10 @@ public class GrapplingScript : MonoBehaviour
                         Debug.Log("Grabbed");
 
                         Player = col.gameObject;
+
+                        // Stop player from moving during tackle
+                        col.GetComponent<PlayerMovScript>().incapacitated = true;
+
                         Grabbed = true;
                     }
                 }
