@@ -16,6 +16,9 @@ public class ItemPickup : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Inventory>() != null)
+        {
             other.GetComponent<Inventory>().PickUp(item);
+            Destroy(gameObject);
+        }
     }
 }
