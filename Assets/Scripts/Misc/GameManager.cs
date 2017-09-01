@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public GameObject MainHUD;
     public GameObject ControlsHUD;
 
+    [HideInInspector]
+    public bool UsingKbrd;
+
     void Awake()
     {
         List<GameObject> managers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Game Manager"));
@@ -157,7 +160,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName = "TestScene")
     {
+        UsingKbrd = true;
+        atMenu = false;
+        SceneManager.LoadScene(sceneName);
+    }
 
+    public void LoadSceneKeyboard(string sceneName = "TestScene")
+    {
+        UsingKbrd = false;
         atMenu = false;
         SceneManager.LoadScene(sceneName);
     }

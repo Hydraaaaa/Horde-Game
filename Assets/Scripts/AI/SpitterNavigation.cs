@@ -348,6 +348,12 @@ public class SpitterNavigation : MonoBehaviour
         // Set End
         Tongue.GetComponent<LineRenderer>().SetPosition(1, player.transform.position);
 
+        Vector3 dir = player.transform.position - transform.position;
+        Quaternion rot = transform.rotation;
+        rot.SetLookRotation(new Vector3(dir.x, rot.eulerAngles.y, dir.z));
+
+        transform.rotation = rot;
+
         // Stop the agent from moving
         TargetPos = transform.position;
         agent.SetDestination(TargetPos);

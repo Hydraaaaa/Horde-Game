@@ -152,9 +152,9 @@ public class GameObjectManager : MonoBehaviour
         int playerCount = GetComponent<GameManager>().playerCount;
 
         players = new List<Player>();
-
+                
         // CameraLogic cameraScript = camera.GetComponent<CameraLogic>();
-
+        
         if (playerStarts.Count != 0)
         {
             for (int i = 0; i < playerCount; i++)
@@ -195,6 +195,8 @@ public class GameObjectManager : MonoBehaviour
                 newPlayer.gameObject.GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
 
                 newPlayer.camera = camera;
+
+                newPlayer.gameObject.GetComponent<PlayerMovScript>().useController = GetComponent<GameManager>().UsingKbrd;
 
                 players.Add(newPlayer);
             }
