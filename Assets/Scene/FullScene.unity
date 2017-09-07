@@ -757,6 +757,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
   m_IsPrefabParent: 0
@@ -6535,6 +6540,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
   m_IsPrefabParent: 0
@@ -7726,6 +7736,11 @@ Prefab:
     - target: {fileID: 1530999098926334, guid: 93632159495b16146954683a3ae2ad43, type: 2}
       propertyPath: m_Name
       value: Enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
@@ -32495,6 +32510,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
   m_IsPrefabParent: 0
@@ -33652,6 +33672,11 @@ Prefab:
     - target: {fileID: 1530999098926334, guid: 93632159495b16146954683a3ae2ad43, type: 2}
       propertyPath: m_Name
       value: Enemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
@@ -34998,6 +35023,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
   m_IsPrefabParent: 0
@@ -35545,6 +35575,11 @@ Prefab:
     - target: {fileID: 1530999098926334, guid: 93632159495b16146954683a3ae2ad43, type: 2}
       propertyPath: m_Name
       value: Enemy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
@@ -36248,6 +36283,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}
   m_IsPrefabParent: 0
@@ -36902,12 +36942,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550fdd4ddaecdff46ba6337891f26a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   Quest: 0
   questDialogueNo: 0
   talkDistance: 3
   popupTime: 3
   MissionAvailable: 1
+  ObjectiveCompleted: 0
   MissionCompleted: 0
+  Talking: 0
   startDialogue:
   - Sup?
   endDialogue: []
@@ -39059,6 +39102,11 @@ Prefab:
     - target: {fileID: 1530999098926334, guid: 93632159495b16146954683a3ae2ad43, type: 2}
       propertyPath: m_Name
       value: Enemy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114116348195285130, guid: 93632159495b16146954683a3ae2ad43,
+        type: 2}
+      propertyPath: EnvironmentZombie
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93632159495b16146954683a3ae2ad43, type: 2}

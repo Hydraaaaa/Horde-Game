@@ -541,17 +541,22 @@ public class SpitterNavigation : MonoBehaviour
         //    CheckForBarricade(col);
         //    return;
         //}
-        // If they found a player
-        if (col.CompareTag(TypeTags.PlayerTag))
+
+        // If the grabber isnt pre occupied with grabbing someone
+        if (!playerGrabbed)
         {
-            CheckForPlayer(col);
-            return;
-        }
-        // If they found a survivor
-        if (col.CompareTag(TypeTags.SurvivorTag))
-        {
-            CheckForSurvivor(col);
-            return;
+            // If they found a player
+            if (col.CompareTag(TypeTags.PlayerTag))
+            {
+                CheckForPlayer(col);
+                return;
+            }
+            // If they found a survivor
+            if (col.CompareTag(TypeTags.SurvivorTag))
+            {
+                CheckForSurvivor(col);
+                return;
+            }
         }
     }
 
