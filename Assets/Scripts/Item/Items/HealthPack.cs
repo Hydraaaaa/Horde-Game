@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestActive : Item
+public class HealthPack : Item
 {
     public override void Activate()
     {
-        Debug.Log("Activate");
+        GetComponent<Health>().Damage(-40);
     }
 }
