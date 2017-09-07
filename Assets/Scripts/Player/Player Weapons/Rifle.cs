@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Rifle : MonoBehaviour
 {
-    public GameObject testObj;
-    public GameObject tracer;
+    public Bullet bulletPrefab;
 
     [Tooltip("Time in seconds between shots")]
     public float cooldown;
@@ -17,7 +16,7 @@ public class Rifle : MonoBehaviour
 
     public float laserLength;
 
-    public float range;
+    public float projectileSpeed;
 
     public float energyCost;
 
@@ -72,39 +71,14 @@ public class Rifle : MonoBehaviour
             currentCooldown = cooldown;
             energy -= energyCost;
 
-            Vector3 aimDir = laserStartPoint.transform.right + Random.insideUnitSphere * accuracy;
+            Vector3 aimDir = (laserStartPoint.transform.right + Random.insideUnitSphere * accuracy) * projectileSpeed;
 
-            Ray shootRay = new Ray(laserStartPoint.transform.position, aimDir);
-            RaycastHit hit;
-
-
-            int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
-
-            if (Physics.Raycast(shootRay, out hit, range, mask))
-            {
-                GameObject newTracer = Instantiate(tracer);
-                LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
-                tracerRenderer.SetPosition(0, laserStartPoint.transform.position);
-                tracerRenderer.SetPosition(1, hit.point);
-
-                Instantiate(testObj, hit.point, transform.rotation);
-
-                if (hit.transform.GetComponent<Health>() != null)
-                {
-                    hit.transform.GetComponent<Health>().Damage(damage);
-
-                    // If the attacked target is an enemy
-                    if (hit.transform.GetComponent<Health>().Enemy && this.CompareTag("Player"))
-                        hit.transform.GetComponent<Health>().Attacker = this.gameObject;
-                }
-            }
-            else
-            {
-                GameObject newTracer = Instantiate(tracer);
-                LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();
-                tracerRenderer.SetPosition(0, laserStartPoint.transform.position);
-                tracerRenderer.SetPosition(1, laserStartPoint.transform.position + aimDir * range);
-            }
+            GameObject bullet = Instantiate(bulletPrefab.gameObject, laserStartPoint.transform.position, laserStartPoint.transform.rotation);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.velocity = aimDir;
+            bulletScript.damage = damage;
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<SphereCollider>());
+            Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<CapsuleCollider>());
 
             if (gunshot != null)
                 gunshot.Play();

@@ -2535,13 +2535,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5868896416ec95468ab84585d6f9563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
-  tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
+  bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
+    type: 2}
   cooldown: 0.1
   accuracy: 0.02
   damage: 10
   laserLength: 30
-  range: 40
+  projectileSpeed: 10
   energyCost: 2
   laserStartPoint: {fileID: 1008923965842268}
   gunshot: {fileID: 0}
@@ -2695,15 +2695,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0244693a419dc7a49b65c9d7c14ce02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testObj: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f, type: 2}
-  tracer: {fileID: 1619596951552026, guid: efb2287e4544c574694958253003691d, type: 2}
+  bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
+    type: 2}
   cooldown: 0.65
   accuracy: 0.2
   damage: 25
-  pellets: 5
   laserLength: 30
-  range: 30
+  projectileSpeed: 10
   energyCost: 20
+  pellets: 5
   laserStartPoint: {fileID: 1943170100614640}
   gunshot: {fileID: 0}
 --- !u!114 &114531686482068708
@@ -2717,8 +2717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e2c0878a1ae2e4a8edef7c07cc5bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveItem: {fileID: 0}
-  activeItem: {fileID: 0}
   pickupCooldown: 5
   currentPickupCooldown: 0
 --- !u!114 &114555256336410790
@@ -2888,6 +2886,7 @@ MonoBehaviour:
   moveSpeedShooting: 2.5
   Shooting: 0
   incapacitated: 0
+  Talking: 0
   useController: 1
   controller: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
