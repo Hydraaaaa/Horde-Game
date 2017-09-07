@@ -3835,8 +3835,8 @@ MonoBehaviour:
   chargeAcceleration: 14
   chargeSpeed: 10
   damage: 25
-  chargeDamage: 30
-  impactDamage: 50
+  chargeDamage: 15
+  impactDamage: 30
   attackRange: 2
   chargeRange: 20
   chargeDistance: 100
@@ -3860,8 +3860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a036a5efd55f344874f4b9065e7697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
+  maxHealth: 500
+  health: 500
   Enemy: 1
   Player: 0
   Attacker: {fileID: 0}
