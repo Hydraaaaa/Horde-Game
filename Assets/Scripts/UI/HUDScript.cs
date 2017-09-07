@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HUDScript : MonoBehaviour
 {
     public Text timer;
+    public Text QuestText;
     public Text civiliansSaved;
     public Text notEnoughCivilians;
 
@@ -27,7 +28,6 @@ public class HUDScript : MonoBehaviour
 
     public List<GameObject> turretGUIP1;
     public List<GameObject> turretGUIP2;
-
 
 
     void Start ()

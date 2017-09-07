@@ -1263,16 +1263,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1808665065379356, guid: 793e877e2e9d1744797a087dff268682, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114583167020914964, guid: 793e877e2e9d1744797a087dff268682,
-        type: 2}
-      propertyPath: PCTurretGUI
-      value: 
-      objectReference: {fileID: 1478125966312688, guid: 7ac9827296c75684dafeb4e6a4279f0f,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793e877e2e9d1744797a087dff268682, type: 2}
   m_IsPrefabParent: 0

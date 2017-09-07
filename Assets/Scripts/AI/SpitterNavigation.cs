@@ -372,7 +372,7 @@ public class SpitterNavigation : MonoBehaviour
         // If the player is visible
         if (!Physics.Linecast(transform.position, player.transform.position - ((player.transform.position - transform.position).normalized / 2) * 1.1f))
         {
-
+            player.GetComponent<PlayerMovScript>().incapacitated = true;
             // Set Start
             Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
             // Set End
@@ -387,8 +387,6 @@ public class SpitterNavigation : MonoBehaviour
             {
                 if (currentDist != 0)
                 {
-                    float dise = Vector3.Distance(HoldPoint.transform.position, player.transform.position);
-                    float oth = Vector3.Distance(HoldPoint.transform.position, player.transform.position) - currentDist;
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
                     player.GetComponent<PlayerMovScript>().incapacitated = false;
