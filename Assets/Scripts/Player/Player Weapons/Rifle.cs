@@ -49,7 +49,9 @@ public class Rifle : MonoBehaviour
         RaycastHit hit;
         Physics.queriesHitTriggers = false;
 
-        int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
+        int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
+        mask += 1 << LayerMask.NameToLayer("Projectile");
+        mask = ~mask;
 
         if (Physics.Raycast(aimRay, out hit, laserLength, mask))
             laserEndPoint = hit.point;
