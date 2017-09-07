@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
         else
             Debug.Log("Not NULL");
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && activeItem != null)
             activeItem.Activate();
     }
 
