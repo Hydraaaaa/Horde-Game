@@ -565,8 +565,8 @@ GameObject:
   - component: {fileID: 114543607663160766}
   - component: {fileID: 195720985817749754}
   - component: {fileID: 114785275246519696}
-  - component: {fileID: 114525859178876380}
   - component: {fileID: 54214273744874250}
+  - component: {fileID: 114565281292436454}
   m_Layer: 9
   m_Name: Inactive Civilian
   m_TagString: Civilian
@@ -1290,7 +1290,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868058079688614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.749573, y: 11.948122, z: -32.001995}
+  m_LocalPosition: {x: 13.271024, y: 0.959, z: 21.189285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4444577396307494}
@@ -1348,27 +1348,14 @@ Animator:
   m_GameObject: {fileID: 1912363003913332}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 56aebda17743f7949a3154e9b296e2e9, type: 3}
-  m_Controller: {fileID: 9100000, guid: 809af3c0e47aaf84488b5e191249676f, type: 2}
+  m_Controller: {fileID: 9100000, guid: c4de9b80c8b7ac946b75f39b2da2c44d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114525859178876380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1868058079688614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cef73f4ce39974eab9e34a1e4786b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeMaterial: {fileID: 2100000, guid: a60d24c22f93f6d44a550cbf905087ee, type: 2}
-  range: 6
 --- !u!114 &114543607663160766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1385,6 +1372,33 @@ MonoBehaviour:
   Enemy: 0
   Player: 0
   Attacker: {fileID: 0}
+--- !u!114 &114565281292436454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868058079688614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550fdd4ddaecdff46ba6337891f26a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 95098507691287222}
+  Quest: 0
+  questDialogueNo: 0
+  talkDistance: 4
+  popupTime: 5
+  MissionAvailable: 1
+  ObjectiveCompleted: 0
+  MissionCompleted: 0
+  Talking: 0
+  startDialogue:
+  - Oi lad, grab me some bevvies for me and the boys. I'll Leave the ship if you do!
+  endDialogue:
+  - Good Lad, here's a crisp hundo for you to spend in return.
+  todoListInfo:
+  - wow
+  playersInRange: []
 --- !u!114 &114785275246519696
 MonoBehaviour:
   m_ObjectHideFlags: 1

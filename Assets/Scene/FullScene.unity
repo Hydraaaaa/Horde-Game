@@ -5463,66 +5463,70 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1868058079688614, guid: 90999c4b7f4f98f45909e6ea95ef4bc8, type: 2}
-      propertyPath: m_Name
-      value: Inactive Civilian
-      objectReference: {fileID: 0}
-    - target: {fileID: 114525859178876380, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
         type: 2}
-      propertyPath: activeMaterial
+      propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
-    - target: {fileID: 114525859178876380, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 95098507691287222, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
         type: 2}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114525859178876380, guid: 90999c4b7f4f98f45909e6ea95ef4bc8, type: 2}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137753846538917550, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137753846538917550, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137753846538917550, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137753846538917550, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137290755517395280, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    - target: {fileID: 137753846538917550, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+        type: 2}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1885e310f704b044fbca4aca3b29f692, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90999c4b7f4f98f45909e6ea95ef4bc8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &630884426 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1868058079688614, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
-    type: 2}
-  m_PrefabInternal: {fileID: 630884425}
---- !u!114 &630884427
+--- !u!114 &630884427 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 630884426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550fdd4ddaecdff46ba6337891f26a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 630884428}
-  Quest: 0
-  questDialogueNo: 0
-  talkDistance: 4
-  popupTime: 5
-  MissionAvailable: 1
-  ObjectiveCompleted: 0
-  MissionCompleted: 0
-  Talking: 0
-  startDialogue:
-  - Oi lad, grab me some bevvies for me and the boys. I'll Leave the ship if you do!
-  endDialogue:
-  - Good Lad, here's a crisp hundo for you to spend in return.
-  todoListInfo:
-  - wow
-  playersInRange: []
---- !u!95 &630884428 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 95098507691287222, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
+  m_PrefabParentObject: {fileID: 114565281292436454, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
     type: 2}
   m_PrefabInternal: {fileID: 630884425}
+  m_Script: {fileID: 11500000, guid: 550fdd4ddaecdff46ba6337891f26a81, type: 3}
 --- !u!1 &634591189
 GameObject:
   m_ObjectHideFlags: 0
@@ -35985,8 +35989,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114525859178876380, guid: 90999c4b7f4f98f45909e6ea95ef4bc8,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: activeMaterial
       value: 
       objectReference: {fileID: 2100000, guid: c01ca2d33e64b5b48b0dd1db03a8b47a, type: 2}

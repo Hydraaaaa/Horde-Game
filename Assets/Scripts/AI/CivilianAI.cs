@@ -54,41 +54,53 @@ public class CivilianAI : MonoBehaviour
         anim.SetBool("MissionCompleted", MissionCompleted);
         anim.SetBool("Talking", Talking);
 
-        // Make sure the referances to the player are still useable
-        for (int i = 0; i < playersInRange.Count; i++)
+        if (MissionCompleted != true)
         {
-            if (playersInRange[i] == null)
-            {
-                playersInRange.RemoveAt(i);
-                break;
-            }
-            if (Vector3.Distance(playersInRange[i].transform.position, transform.position) > talkDistance)
-            {
-                playersInRange.RemoveAt(i);
-                break;
-            }
 
-            if (MissionAvailable)
+            // Make sure the referances to the player are still useable
+            for (int i = 0; i < playersInRange.Count; i++)
             {
-                currentPopupTime = popupTime;
-    
-                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogue[questDialogueNo];
-                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
-                Talking = true;
-                MissionAvailable = false;
-            }
+                if (playersInRange[i] == null)
+                {
+                    playersInRange.RemoveAt(i);
+                    break;
+                }
+                if (Vector3.Distance(playersInRange[i].transform.position, transform.position) > talkDistance)
+                {
+                    playersInRange.RemoveAt(i);
+                    break;
+                }
 
-            if (ObjectiveCompleted)
-            {
-                MissionCompleted = true;
-                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = endDialogue[questDialogueNo];
-                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
-                Talking = true;
-                GetComponent<CivilianNavigation>().enabled = true;
+                if (i == 0)
+                {
+                    Vector3 dir = playersInRange[i].transform.position - transform.position;
+                    Quaternion rot = transform.rotation;
+                    rot.SetLookRotation(new Vector3(dir.x, dir.y, dir.z));
+
+                    transform.rotation = rot;
+                }
+                if (MissionAvailable)
+                {
+                    currentPopupTime = popupTime;
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogue[questDialogueNo];
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
+                    Talking = true;
+                    MissionAvailable = false;
+                }
+
+                if (ObjectiveCompleted && !MissionCompleted)
+                {
+                    currentPopupTime = popupTime;
+                    MissionCompleted = true;
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = endDialogue[questDialogueNo];
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
+                    Talking = true;
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
             }
         }
 
-        if (MissionAvailable == false && ObjectiveCompleted == false)
+        if (currentPopupTime > 0)
         {
             currentPopupTime -= Time.deltaTime;
 
