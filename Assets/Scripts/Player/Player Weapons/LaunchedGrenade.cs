@@ -29,8 +29,12 @@ public class LaunchedGrenade : MonoBehaviour
         foreach (GameObject particleEffect in particleEffects)
             Instantiate(particleEffect, transform.position, Quaternion.identity);
 
-        foreach (Collider col in Physics.OverlapSphere(transform.position, range / 2))
+        Collider[] cols = Physics.OverlapSphere(transform.position, range / 2);
+        foreach (Collider col in cols)
         {
+            if (col.isTrigger)
+                continue;
+
             if (col.GetComponent<Health>() != null)
             {
                 int calculatedDamage = Mathf.FloorToInt((range - Vector3.Distance(transform.position, col.ClosestPoint(transform.position))) / range * damage);
