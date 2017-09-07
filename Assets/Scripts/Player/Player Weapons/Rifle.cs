@@ -20,7 +20,6 @@ public class Rifle : MonoBehaviour
 
     public float laserLength;
 
-
     public float range;
     public float projectileSpeed;
 

@@ -2758,12 +2758,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0244693a419dc7a49b65c9d7c14ce02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileToggle: 0
+  HitIndicatorPrefab: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f,
+    type: 2}
+  tracerPrefab: {fileID: 120301551843738986, guid: efb2287e4544c574694958253003691d,
+    type: 2}
   bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
     type: 2}
   cooldown: 0.9
   accuracy: 0.2
   damage: 25
   laserLength: 30
+  range: 40
   projectileSpeed: 20
   energyCost: 20
   pellets: 5
