@@ -32,7 +32,7 @@ public class GrapplingScript : MonoBehaviour
             Player.transform.rotation = nav.HoldingPos.rotation;
 
             // Stop player from moving during tackle
-            Player.GetComponent<PlayerMovScript>().incapacitated = true;
+            Player.GetComponent<PlayerMovScript>().incapacitationLevel = 2;
         }
     }
 

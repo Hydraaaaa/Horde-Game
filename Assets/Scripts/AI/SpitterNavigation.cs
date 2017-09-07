@@ -61,6 +61,7 @@ public class SpitterNavigation : MonoBehaviour
 
     // Cooldowns
     [Tooltip("Time in seconds between shots")]
+    public float pullSpeed;
     public float cooldown;
     public float currentCooldown;
 
@@ -71,6 +72,7 @@ public class SpitterNavigation : MonoBehaviour
     public float currentAcidAOECooldown;
 
     public bool EnvironmentZombie = false;
+    public bool OldSpitter = false;
 
     Vector3 pDir;
 
@@ -254,16 +256,25 @@ public class SpitterNavigation : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > (GetComponent<SphereCollider>().radius / 4) * 3)
+            if (OldSpitter)
             {
-                // Set the target position of the AI to the position of the player
-                TargetPos = player.transform.position;
-                agent.SetDestination(TargetPos);
+                if (Vector3.Distance(transform.position, player.transform.position) > (GetComponent<SphereCollider>().radius / 4) * 3)
+                {
+                    // Set the target position of the AI to the position of the player
+                    TargetPos = player.transform.position;
+                    agent.SetDestination(TargetPos);
+                }
+                else
+                {
+                    // Set the target position so the AI stands still when in range
+                    TargetPos = transform.position;
+                    agent.SetDestination(TargetPos);
+                }
             }
             else
             {
-                // Set the target position so the AI stands still when in range
-                TargetPos = transform.position;
+                // Set the target position of the AI to the position of the player
+                TargetPos = player.transform.position;
                 agent.SetDestination(TargetPos);
             }
         }
@@ -354,8 +365,8 @@ public class SpitterNavigation : MonoBehaviour
 
         transform.rotation = rot;
 
-        player.GetComponent<PlayerMovScript>().incapacitated = true;
-        Debug.Log("Incapacitated the player");
+        //player.GetComponent<PlayerMovScript>().incapacitated = true;
+        //Debug.Log("Incapacitated the player");
 
         // Stop the agent from moving
         TargetPos = transform.position;
@@ -372,7 +383,6 @@ public class SpitterNavigation : MonoBehaviour
         // If the player is visible
         if (!Physics.Linecast(transform.position, player.transform.position - ((player.transform.position - transform.position).normalized / 2) * 1.1f))
         {
-            player.GetComponent<PlayerMovScript>().incapacitated = true;
             // Set Start
             Tongue.GetComponent<LineRenderer>().SetPosition(0, transform.position);
             // Set End
@@ -389,7 +399,7 @@ public class SpitterNavigation : MonoBehaviour
                 {
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
-                    player.GetComponent<PlayerMovScript>().incapacitated = false;
+                    player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                     Debug.Log("Removed Incapacitated from the player");
 
                     player = null;
@@ -400,41 +410,62 @@ public class SpitterNavigation : MonoBehaviour
             }
             if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) > 1f)
             {
-                player.transform.position = Vector3.Lerp(player.transform.position, HoldPoint.transform.position, Time.deltaTime);
-                player.transform.LookAt(transform.position);
+                player.transform.position = Vector3.Lerp(player.transform.position, HoldPoint.transform.position, Time.deltaTime * pullSpeed);
+                player.GetComponent<PlayerMovScript>().incapacitationLevel = 1;
             }
             else
             {
-                player.transform.position = HoldPoint.transform.position;
-
-                // If the player is within attack range
-                if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
+                if (OldSpitter)
                 {
-                    // If the player needs to be revived
-                    if (player.GetComponent<ReviveSystem>().NeedRes == true)
+                    player.transform.LookAt(transform);
+
+                    player.GetComponent<PlayerMovScript>().incapacitationLevel = 2;
+                    player.transform.position = HoldPoint.transform.position;
+
+                    // If the player is within attack range
+                    if (Vector3.Distance(transform.position, player.transform.position) < attackRange)
                     {
-                        // then remove the player reference so it dosent keep tracking to them
-                        followPlayer = false;
-                        player.GetComponent<PlayerMovScript>().incapacitated = false;
-                        Debug.Log("Removed Incapacitated from the player");
-
-                        player = null;
-                        playerGrabbed = false;
-                        currentGrabCooldown = grabCooldown;
-                        return;
-                    }
-
-                    // If the player is still alive
-                    if (player.GetComponent<Health>().health > 0)
-                    {
-                        Attack(player);
-
-                        // If the player dies from the attack
-                        if (player.GetComponent<Health>().health <= 0)
+                        // If the player needs to be revived
+                        if (player.GetComponent<ReviveSystem>().NeedRes == true)
                         {
                             // then remove the player reference so it dosent keep tracking to them
                             followPlayer = false;
-                            player.GetComponent<PlayerMovScript>().incapacitated = false;
+                            player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
+                            Debug.Log("Removed Incapacitated from the player");
+
+                            player = null;
+                            playerGrabbed = false;
+                            currentGrabCooldown = grabCooldown;
+                            return;
+                        }
+
+                        // If the player is still alive
+                        if (player.GetComponent<Health>().health > 0)
+                        {
+                            Attack(player);
+
+                            // If the player dies from the attack
+                            if (player.GetComponent<Health>().health <= 0)
+                            {
+                                // then remove the player reference so it dosent keep tracking to them
+                                followPlayer = false;
+                                player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
+                                Debug.Log("Removed Incapacitated from the player");
+
+                                player = null;
+                                playerGrabbed = false;
+                                TargetPos = EndPos.transform.position;
+                                agent.SetDestination(TargetPos);
+                                currentGrabCooldown = grabCooldown;
+                                return;
+                            }
+                        }
+                        // If the player is dead
+                        else
+                        {
+                            // then remove the player reference so it dosent keep tracking to them
+                            followPlayer = false;
+                            player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                             Debug.Log("Removed Incapacitated from the player");
 
                             player = null;
@@ -445,12 +476,16 @@ public class SpitterNavigation : MonoBehaviour
                             return;
                         }
                     }
-                    // If the player is dead
-                    else
+
+                    // if the player object is turned off
+                    if (player.activeSelf == false)
                     {
+                        // Tell the AI to travel where the player was so it can track to last known position
+                        TargetPos = player.transform.position;
+
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
-                        player.GetComponent<PlayerMovScript>().incapacitated = false;
+                        player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                         Debug.Log("Removed Incapacitated from the player");
 
                         player = null;
@@ -461,24 +496,15 @@ public class SpitterNavigation : MonoBehaviour
                         return;
                     }
                 }
-
-                // if the player object is turned off
-                if (player.activeSelf == false)
+                else
                 {
-                    // Tell the AI to travel where the player was so it can track to last known position
-                    TargetPos = player.transform.position;
-
                     // then remove the player reference so it dosent keep tracking to them
                     followPlayer = false;
-                    player.GetComponent<PlayerMovScript>().incapacitated = false;
+                    player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                     Debug.Log("Removed Incapacitated from the player");
 
-                    player = null;
                     playerGrabbed = false;
-                    TargetPos = EndPos.transform.position;
-                    agent.SetDestination(TargetPos);
                     currentGrabCooldown = grabCooldown;
-                    return;
                 }
             }
         }

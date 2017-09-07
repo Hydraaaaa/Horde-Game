@@ -126,7 +126,7 @@ public class ChargerNavigation : MonoBehaviour
             // If there was a player held
             if (ChargeBarrier.GetComponent<GrapplingScript>().Player != null)
             {
-                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitated = false;
+                ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                 Debug.Log("Removed Incapacitated from the player");
             }
 
@@ -268,7 +268,7 @@ public class ChargerNavigation : MonoBehaviour
                     if (ChargeBarrier.GetComponent<GrapplingScript>().Player != null)
                     {
                         ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<Health>().Damage(impactDamage);
-                        ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitated = false;
+                        ChargeBarrier.GetComponent<GrapplingScript>().Player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
                         ChargeBarrier.GetComponent<GrapplingScript>().Player = null;
                     }
 

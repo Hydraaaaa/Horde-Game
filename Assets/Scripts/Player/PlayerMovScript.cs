@@ -18,7 +18,7 @@ public class PlayerMovScript : MonoBehaviour
     public float moveSpeed = 3;
     public float moveSpeedShooting = 2;
     public bool Shooting = false;
-    public bool incapacitated = false;
+    public int incapacitationLevel = 0;
     public bool Talking = false;
 
     public bool useController = true;
@@ -86,10 +86,6 @@ public class PlayerMovScript : MonoBehaviour
             GetComponent<Health>().Damage(10000);
         }
 
-        if (incapacitated)
-        {
-            return;
-        }
         // transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
 
         localVelocity = transform.InverseTransformDirection(GetComponent<CharacterController>().velocity);
@@ -120,48 +116,52 @@ public class PlayerMovScript : MonoBehaviour
 
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        if (!GetComponent<ReviveSystem>().NeedRes)
+
+        // If not a full body incapacitation
+        if (incapacitationLevel < 2)
         {
-
-            if (useController)
+            if (!GetComponent<ReviveSystem>().NeedRes)
             {
-                CheckKeys();
-            }
-            else
-            {
-                // Mouse
-                RaycastHit hit;
 
-                int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
-
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
+                if (useController)
                 {
-                    transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                    CheckKeys();
                 }
+                else
+                {
+                    // Mouse
+                    RaycastHit hit;
 
-                if (Input.GetMouseButton(0) && playerAttack != null)
-                    playerAttack(ref energy);
+                    int mask = 1 << LayerMask.NameToLayer("CursorRaycast");
+
+                    if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 100, mask))
+                    {
+                        transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                    }
+
+                    if (Input.GetMouseButton(0) && playerAttack != null)
+                        playerAttack(ref energy);
 
 
-                // Keyboard
-                direction = Vector3.zero;
-                Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
+                    // Keyboard
+                    direction = Vector3.zero;
+                    Vector3 forward = Vector3.Cross(camera.transform.right, Vector3.up);
 
-                if (Input.GetKey(KeyCode.W))
-                    direction += forward * moveSpeed * Time.deltaTime;
-                if (Input.GetKey(KeyCode.S))
-                    direction -= forward * moveSpeed * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.W))
+                        direction += forward * moveSpeed * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.S))
+                        direction -= forward * moveSpeed * Time.deltaTime;
 
-                if (Input.GetKey(KeyCode.A))
-                    direction -= camera.transform.right * moveSpeed * Time.deltaTime;
-                if (Input.GetKey(KeyCode.D))
-                    direction += camera.transform.right * moveSpeed * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.A))
+                        direction -= camera.transform.right * moveSpeed * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.D))
+                        direction += camera.transform.right * moveSpeed * Time.deltaTime;
 
-                controller.Move(direction);
+                    controller.Move(direction);
+                }
             }
+            anim.SetBool("Shooting", Shooting);
         }
-
-        anim.SetBool("Shooting", Shooting);
 
         energy += EnergyPerTick;
         if (energy > maxEnergy)
@@ -194,22 +194,27 @@ public class PlayerMovScript : MonoBehaviour
         foreach (string axis in axisEndings)
         {
             string stringCombo = playerBeginning + axis;
-            if (Input.GetAxis(stringCombo) > 0.2f ||
-                Input.GetAxis(stringCombo) < -0.2f)
+
+            // If not an incapacitation at all
+            if (incapacitationLevel < 1)
             {
-                if (axis == "Horizontal")
+                if (Input.GetAxis(stringCombo) > 0.2f ||
+                    Input.GetAxis(stringCombo) < -0.2f)
                 {
-                    if (Shooting)
-                        direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
-                    else
-                        direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
-                }
-                else if (axis == "Vertical")
-                {
-                    if (Shooting)
-                        direction -= forward * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
-                    else
-                        direction -= forward * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                    if (axis == "Horizontal")
+                    {
+                        if (Shooting)
+                            direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
+                        else
+                            direction += (camera.transform.right) * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                    }
+                    else if (axis == "Vertical")
+                    {
+                        if (Shooting)
+                            direction -= forward * Input.GetAxis(stringCombo) * moveSpeedShooting * Time.deltaTime;
+                        else
+                            direction -= forward * Input.GetAxis(stringCombo) * moveSpeed * Time.deltaTime;
+                    }
                 }
             }
 
