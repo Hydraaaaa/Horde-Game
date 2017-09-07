@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114225659590822462}
   - component: {fileID: 114788100348366930}
   - component: {fileID: 114189161229877810}
+  - component: {fileID: 114913428826362956}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Game Manager
@@ -123,6 +124,7 @@ MonoBehaviour:
   arrow: {fileID: 0}
   MainHUD: {fileID: 0}
   ControlsHUD: {fileID: 0}
+  UsingKbrd: 0
 --- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,3 +165,15 @@ MonoBehaviour:
   playersEscaped: 0
   playing: 0
   trySplitScreen: 1
+--- !u!114 &114913428826362956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112002458870338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c8e7979e9e01f408000faaae7ebc37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 114913428826362956}

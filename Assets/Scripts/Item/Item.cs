@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveItem
+public class Item : MonoBehaviour
 {
-    public GameObject pickupPrefab;
+    public bool active;
 
     public virtual void Activate()
     {

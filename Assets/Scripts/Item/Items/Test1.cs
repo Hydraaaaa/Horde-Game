@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Test : PassiveItem
+    public class Test1 : Item
     {
-        
         void Start()
         {
-
+            active = false;
         }
-        
+
         void Update()
         {
 
