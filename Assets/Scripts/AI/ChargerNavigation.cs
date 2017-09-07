@@ -342,6 +342,11 @@ public class ChargerNavigation : MonoBehaviour
             agent.SetDestination(TargetPos);
             return;
         }
+        
+        Quaternion rot = transform.rotation;
+        rot.SetLookRotation(new Vector3(direction.x, rot.eulerAngles.y, direction.z));
+
+        transform.rotation = rot;
     }
 
     void BeingAttacked()

@@ -100,6 +100,12 @@ public class GameObjectManager : MonoBehaviour
 
         StartCoroutine(GetInitialCivilians());
 
+        for (int i = 0; i < 4; i++)
+            Instantiate(ItemManager.instance.items[0].pickup, new Vector3(Random.Range(-5f, 5), 1.5f, Random.Range(-15f, -20)), Quaternion.identity);
+
+        for (int i = 0; i < 4; i++)
+            Instantiate(ItemManager.instance.items[1].pickup, new Vector3(Random.Range(-5f, 5), 1.5f, Random.Range(-15f, -20)), Quaternion.identity);
+
         playing = true;
     }
 

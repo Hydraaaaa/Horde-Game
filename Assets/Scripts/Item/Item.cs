@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassiveItem : MonoBehaviour
+public class Item : MonoBehaviour
 {
-    public GameObject pickupPrefab;
+    public virtual void Activate()
+    {
+
+    }
 }

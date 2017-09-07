@@ -44,9 +44,10 @@ public class ScoreSystem : MonoBehaviour
 
     void Awake ()
     {
-        instance = this;
+        if (scriptScores == null)
+            scriptScores = new List<ScriptScore>();
 
-        Debug.Log("Awake");
+        instance = this;
 
         if (tagScores == null)
         {

@@ -9,13 +9,10 @@ public class ScoreSystemInspector : Editor
     bool tagsScoreFoldout = false;
     bool scriptsScoreFoldout = false;
     int scriptsScoreCount;
-    ScoreSystem myScoreSystem;
-    
-
 
     public override void OnInspectorGUI()
     {
-        myScoreSystem = (ScoreSystem)target;
+        ScoreSystem myScoreSystem = (ScoreSystem)target;
         
         tagsScoreFoldout = EditorGUILayout.Foldout(tagsScoreFoldout, "Score On Death By Tag");
 

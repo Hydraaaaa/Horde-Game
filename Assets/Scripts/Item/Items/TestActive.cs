@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveItem
+public class TestActive : Item
 {
-    public GameObject pickupPrefab;
-
-    public virtual void Activate()
+    public override void Activate()
     {
-
+        Debug.Log("Activate");
     }
 }
