@@ -8,10 +8,9 @@ public class LaunchedGrenade : MonoBehaviour
     public float time;
 
     public int damage;
+    public float range;
 
     public GameObject[] particleEffects;
-
-    List<GameObject> targets;
 
 	void Start ()
     {
@@ -30,20 +29,15 @@ public class LaunchedGrenade : MonoBehaviour
         foreach (GameObject particleEffect in particleEffects)
             Instantiate(particleEffect, transform.position, Quaternion.identity);
 
-        foreach (GameObject target in targets)
-            target.GetComponent<Health>().Damage(damage);
+        foreach (Collider col in Physics.OverlapSphere(transform.position, range / 2))
+        {
+            if (col.GetComponent<Health>() != null)
+            {
+                int calculatedDamage = Mathf.FloorToInt((range - Vector3.Distance(transform.position, col.ClosestPoint(transform.position))) / range * damage);
+                col.GetComponent<Health>().Damage(calculatedDamage);
+            }
+        }
 
         Destroy(gameObject);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Health>())
-            targets.Add(other.gameObject);
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        targets.Remove(other.gameObject);
     }
 }
