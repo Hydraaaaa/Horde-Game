@@ -103,7 +103,7 @@ public class Rifle : MonoBehaviour
 
                 int mask = ~(1 << LayerMask.NameToLayer("CursorRaycast"));
 
-                if (Physics.Raycast(shootRay, out hit, range, mask))
+                if (Physics.Raycast(shootRay, out hit, range, mask, QueryTriggerInteraction.Ignore))
                 {
                     GameObject newTracer = Instantiate(tracerPrefab.gameObject);
                     LineRenderer tracerRenderer = newTracer.GetComponent<LineRenderer>();

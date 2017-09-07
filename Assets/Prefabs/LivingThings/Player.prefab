@@ -2592,12 +2592,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5868896416ec95468ab84585d6f9563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileToggle: 0
+  HitIndicatorPrefab: {fileID: 1150254131932368, guid: d0d25f1dd26fb2c478328ee31f40473f,
+    type: 2}
+  tracerPrefab: {fileID: 120301551843738986, guid: efb2287e4544c574694958253003691d,
+    type: 2}
   bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
     type: 2}
   cooldown: 0.2
   accuracy: 0.02
   damage: 10
   laserLength: 30
+  range: 40
   projectileSpeed: 15
   energyCost: 12
   laserStartPoint: {fileID: 1008923965842268}
@@ -2942,7 +2948,7 @@ MonoBehaviour:
   moveSpeed: 4
   moveSpeedShooting: 2.5
   Shooting: 0
-  incapacitated: 0
+  incapacitationLevel: 0
   Talking: 0
   useController: 1
   controller: {fileID: 0}
