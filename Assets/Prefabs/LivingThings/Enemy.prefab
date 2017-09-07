@@ -1405,7 +1405,7 @@ MonoBehaviour:
   attackRange: 2
   currentDist: 0
   cooldown: 0.65
-  EnvironmentZombie: 0
+  EnvironmentZombie: 1
 --- !u!135 &135552592746051830
 SphereCollider:
   m_ObjectHideFlags: 1

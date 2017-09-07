@@ -2595,12 +2595,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
     type: 2}
-  cooldown: 0.1
+  cooldown: 0.2
   accuracy: 0.02
   damage: 10
   laserLength: 30
-  projectileSpeed: 25
-  energyCost: 2
+  projectileSpeed: 15
+  energyCost: 12
   laserStartPoint: {fileID: 1008923965842268}
   gunshot: {fileID: 0}
 --- !u!114 &114144563488592258
@@ -2755,7 +2755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 114047431724310516, guid: 724bfc4f2ca514e4d9a7ce6f6ee054e2,
     type: 2}
-  cooldown: 0.65
+  cooldown: 0.9
   accuracy: 0.2
   damage: 25
   laserLength: 30
@@ -2777,8 +2777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupCooldown: 5
   currentPickupCooldown: 0
-  Holster: {fileID: 1380862427820066}
-  Angle: {fileID: 1429461113471898}
 --- !u!114 &114555256336410790
 MonoBehaviour:
   m_ObjectHideFlags: 1
