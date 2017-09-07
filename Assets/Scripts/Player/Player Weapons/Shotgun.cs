@@ -83,8 +83,10 @@ public class Shotgun : MonoBehaviour
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.velocity = aimDir;
                 bulletScript.damage = damage;
-                Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<SphereCollider>());
-                Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<CapsuleCollider>());
+
+                Collider[] playerColliders = GetComponents<Collider>();
+                for (int j = 0; j < playerColliders.Length; j++)
+                    Physics.IgnoreCollision(bullet.GetComponent<Collider>(), playerColliders[j]);
             }
 
             if (gunshot != null)
