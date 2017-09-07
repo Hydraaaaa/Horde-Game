@@ -6,7 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class ItemInfo
 {
-    public string name;
     public Pickup pickup;
     public MonoScript script;
     public bool active;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,24 +9,30 @@ public class Inventory : MonoBehaviour
     [HideInInspector]
     public float currentPickupCooldown;
 
-    ItemInfo passiveItem;
-    ItemInfo activeItem;
+    ItemInfo passiveItemInfo;
+    ItemInfo activeItemInfo;
+    Item passiveItem;
+    Item activeItem;
+
+    List<GameObject> pickupsInRange; // Not Implemented
 
     private void Start()
     {
         currentPickupCooldown = 0;
-        passiveItem = null;
-        activeItem = null;
+        passiveItemInfo = null;
+        activeItemInfo = null;
     }
 
     void Update()
     {
         currentPickupCooldown -= Time.deltaTime;
-        if (passiveItem == null)
+        if (passiveItemInfo == null)
             Debug.Log("NULL");
         else
             Debug.Log("Not NULL");
 
+        if (Input.GetKeyDown(KeyCode.Q))
+            activeItem.Activate();
     }
 
     public bool PickUp(ItemInfo item)
@@ -35,17 +42,27 @@ public class Inventory : MonoBehaviour
             currentPickupCooldown = 0.5f;
             if (item.active)
             {
-                if (activeItem != null)
-                    Instantiate(activeItem.pickup.gameObject, transform.position, transform.rotation);
+                if (activeItemInfo != null)
+                {
+                    Instantiate(activeItemInfo.pickup.gameObject, transform.position, transform.rotation);
+                    Destroy(GetComponent(activeItemInfo.script.GetClass()));
+                }
 
-            activeItem = item;
+                activeItemInfo = ItemManager.instance.GetItem(item.index);
+                gameObject.AddComponent(activeItemInfo.script.GetClass());
+                activeItem = GetComponent(activeItemInfo.script.GetClass()) as Item;
             }
             else
             {
-                if (passiveItem != null)
-                    Instantiate(passiveItem.pickup.gameObject, transform.position, transform.rotation);
+                if (passiveItemInfo != null)
+                {
+                    Instantiate(passiveItemInfo.pickup.gameObject, transform.position, transform.rotation);
+                    Destroy(GetComponent(passiveItemInfo.script.GetClass()));
+                }
 
-                passiveItem = ItemManager.instance.GetItem(item.index);
+                passiveItemInfo = ItemManager.instance.GetItem(item.index);
+                gameObject.AddComponent(passiveItemInfo.script.GetClass());
+                passiveItem = GetComponent(passiveItemInfo.script.GetClass()) as Item;
             }
             return true;
         }

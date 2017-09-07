@@ -4,16 +4,15 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Test1 : Item
+    public class OPEnergy : Item
     {
         void Start()
         {
-            active = false;
         }
 
         void Update()
         {
-
+            GetComponent<PlayerMovScript>().energy += 100 * Time.deltaTime;
         }
     }
 }

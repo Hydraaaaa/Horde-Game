@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class TestActive : Item
 {
-    public virtual void Activate()
+    public override void Activate()
     {
-
+        Debug.Log("Activate");
     }
 }

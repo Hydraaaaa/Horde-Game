@@ -29,7 +29,6 @@ public class ItemManagerInspector : Editor
             for (int i = 0; i < itemManager.items.Count; i++)
             {
                 EditorGUILayout.Space();
-                itemManager.items[i].name = EditorGUILayout.TextField("Name", itemManager.items[i].name);
                 itemManager.items[i].pickup = EditorGUILayout.ObjectField("Pickup", itemManager.items[i].pickup, typeof(Pickup), false) as Pickup;
                 itemManager.items[i].script = EditorGUILayout.ObjectField("Script", itemManager.items[i].script, typeof(MonoScript), false) as MonoScript;
                 itemManager.items[i].active = EditorGUILayout.Toggle("Active", itemManager.items[i].active);
