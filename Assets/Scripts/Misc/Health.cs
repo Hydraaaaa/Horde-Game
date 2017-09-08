@@ -21,10 +21,7 @@ public class Health : MonoBehaviour
     void Update()
     {
         if (health <= 0)
-        {
-            ScoreSystem.instance.Death(gameObject);
             OnDie();
-        }
     }
 
     public void Damage(int damage)
@@ -34,10 +31,7 @@ public class Health : MonoBehaviour
             health = maxHealth;
 
         if (health <= 0)
-        {
-            ScoreSystem.instance.Death(gameObject);
             OnDie();
-        }
     }
 
     public void Die()

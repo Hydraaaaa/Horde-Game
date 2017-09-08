@@ -2,70 +2,103 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
+using System.Reflection;
 
+public enum Items
+{
+    energyBoost,
+    damageBoost,
+    runBoost,
+    medkit,
+    grenade
+}
+
+[RequireComponent(typeof(Actives))]
 public class Inventory : MonoBehaviour
 {
     public float pickupCooldown;
     [HideInInspector]
     public float currentPickupCooldown;
 
-    ItemInfo passiveItemInfo;
-    ItemInfo activeItemInfo;
-    public Item passiveItem;
-    public Item activeItem;
+    Actives actives;
+    public Items passive;
+    public delegate void ItemActive();
+    public ItemActive active;
 
-    List<GameObject> pickupsInRange; // Not Implemented
+    GameObject passivePickup;
+    GameObject activePickup;
 
-    private void Start()
+    void Start()
     {
         currentPickupCooldown = 0;
-        passiveItemInfo = null;
-        activeItemInfo = null;
+        actives = GetComponent<Actives>();
+        active = null;
     }
 
     void Update()
     {
         currentPickupCooldown -= Time.deltaTime;
-        if (passiveItemInfo == null)
-            Debug.Log("NULL");
-        else
-            Debug.Log("Not NULL");
 
-        if (Input.GetKeyDown(KeyCode.Q) && activeItem != null && !GetComponent<PlayerMovScript>().useController)
-            activeItem.Activate();
+        if (Input.GetKeyDown(KeyCode.Q) && active != null && !GetComponent<PlayerMovScript>().useController)
+            active();
     }
 
-    public bool PickUp(ItemInfo item)
+    public void PickUp(GameObject pickup, Items item)
     {
         if (currentPickupCooldown <= 0)
         {
-            currentPickupCooldown = 0.5f;
-            if (item.active)
+            switch (item)
             {
-                if (activeItemInfo != null)
-                {
-                    Instantiate(activeItemInfo.pickup.gameObject, transform.position, transform.rotation);
-                    Destroy(GetComponent(activeItemInfo.script.GetClass()));
-                }
-
-                activeItemInfo = ItemManager.instance.GetItem(item.index);
-                gameObject.AddComponent(activeItemInfo.script.GetClass());
-                activeItem = GetComponent(activeItemInfo.script.GetClass()) as Item;
+                case Items.energyBoost:
+                    passive = Items.energyBoost;
+                    if (passivePickup != null)
+                    {
+                        passivePickup.transform.position = transform.position;
+                        passivePickup.SetActive(true);
+                    }
+                    passivePickup = pickup;
+                    break;
+                case Items.damageBoost:
+                    passive = Items.damageBoost;
+                    if (passivePickup != null)
+                    {
+                        passivePickup.transform.position = transform.position;
+                        passivePickup.SetActive(true);
+                    }
+                    passivePickup = pickup;
+                    break;
+                case Items.runBoost:
+                    passive = Items.runBoost;
+                    if (passivePickup != null)
+                    {
+                        passivePickup.transform.position = transform.position;
+                        passivePickup.SetActive(true);
+                    }
+                    passivePickup = pickup;
+                    break;
+                case Items.medkit:
+                    active = actives.Medkit;
+                    if (activePickup != null)
+                    {
+                        activePickup.transform.position = transform.position;
+                        activePickup.SetActive(true);
+                    }
+                    activePickup = pickup;
+                    break;
+                case Items.grenade:
+                    active = actives.Grenade;
+                    if (activePickup != null)
+                    {
+                        activePickup.transform.position = transform.position;
+                        activePickup.SetActive(true);
+                    }
+                    activePickup = pickup;
+                    break;
             }
-            else
-            {
-                if (passiveItemInfo != null)
-                {
-                    Instantiate(passiveItemInfo.pickup.gameObject, transform.position, transform.rotation);
-                    Destroy(GetComponent(passiveItemInfo.script.GetClass()));
-                }
 
-                passiveItemInfo = ItemManager.instance.GetItem(item.index);
-                gameObject.AddComponent(passiveItemInfo.script.GetClass());
-                passiveItem = GetComponent(passiveItemInfo.script.GetClass()) as Item;
-            }
-            return true;
+            pickup.SetActive(false);
+            currentPickupCooldown = pickupCooldown;
         }
-        return false;
     }
 }
