@@ -106,12 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f3b8b2fc7370e448423cd00dc473a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    name: asdf
-    pickup: {fileID: 114882382773588304}
-    script: {fileID: 11500000, guid: 3b383d8aa25515449b145118fa6a3f02, type: 3}
-    active: 0
-    index: 0
+  item: 3
 --- !u!135 &135856981610580492
 SphereCollider:
   m_ObjectHideFlags: 1

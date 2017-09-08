@@ -163,7 +163,11 @@ public class PlayerMovScript : MonoBehaviour
             anim.SetBool("Shooting", Shooting);
         }
 
-        energy += EnergyPerTick;
+        if (GetComponent<Inventory>().passive == Items.energyBoost)
+            energy += EnergyPerTick * 2;
+        else
+            energy += EnergyPerTick;
+
         if (energy > maxEnergy)
             energy = maxEnergy;
     }
@@ -190,6 +194,11 @@ public class PlayerMovScript : MonoBehaviour
             }
             else if (Input.GetAxis(stringCombo) <= -0.5)
             {
+<<<<<<< HEAD
+=======
+                if (axis == "Shoot")
+                    GetComponent<Inventory>().active();
+>>>>>>> 50b7d0b96526e26974beb816fd9795c806370ee4
             }
         }
 

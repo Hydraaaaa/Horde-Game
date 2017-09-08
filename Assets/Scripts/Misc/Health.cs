@@ -21,9 +21,11 @@ public class Health : MonoBehaviour
     void Update()
     {
         if (health <= 0)
+<<<<<<< HEAD
         {
+=======
+>>>>>>> 50b7d0b96526e26974beb816fd9795c806370ee4
             OnDie();
-        }
     }
 
     public void Damage(int damage)
@@ -33,10 +35,12 @@ public class Health : MonoBehaviour
             health = maxHealth;
 
         if (health <= 0)
+<<<<<<< HEAD
         {
 
+=======
+>>>>>>> 50b7d0b96526e26974beb816fd9795c806370ee4
             OnDie();
-        }
     }
 
     public void Die()

@@ -353,7 +353,6 @@ GameObject:
   - component: {fileID: 143391138108412064}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114504510429051004}
-  - component: {fileID: 114158662444876308}
   - component: {fileID: 114736662164450560}
   - component: {fileID: 120885250459197078}
   - component: {fileID: 114887641942699286}
@@ -364,6 +363,7 @@ GameObject:
   - component: {fileID: 135421644463376414}
   - component: {fileID: 114969896260128928}
   - component: {fileID: 114531686482068708}
+  - component: {fileID: 114729172578770638}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2655,26 +2655,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114158662444876308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1309b99584f5614780904ac318ca944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grenade: {fileID: 1323575115956990, guid: 8f1e9df4699867743a8e43ac98481f7b, type: 2}
-  cooldown: 2
-  accuracy: 0.1
-  force: 20
-  damage: 10
-  laserLength: 30
-  energyCost: 20
-  laserStartPoint: {fileID: 0}
-  gunshot: {fileID: 0}
 --- !u!114 &114190491810406482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2786,8 +2766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e2c0878a1ae2e4a8edef7c07cc5bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupCooldown: 5
+  pickupCooldown: 2
   currentPickupCooldown: 0
+  passive: 0
 --- !u!114 &114555256336410790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2862,6 +2843,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &114729172578770638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b46cb47eef5bb43aebef808accdfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medkitHealth: 40
+  grenade: {fileID: 1323575115956990, guid: 8f1e9df4699867743a8e43ac98481f7b, type: 2}
 --- !u!114 &114736662164450560
 MonoBehaviour:
   m_ObjectHideFlags: 1

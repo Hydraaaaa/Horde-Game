@@ -1274,6 +1274,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 793e877e2e9d1744797a087dff268682, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &749212049 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1231569685718394, guid: a1dc348726cf9e543a389da2d97211d7,
+    type: 2}
+  m_PrefabInternal: {fileID: 440112165}
+--- !u!114 &749212060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 749212049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b46cb47eef5bb43aebef808accdfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medkitHealth: 40
+  grenade: {fileID: 1323575115956990, guid: 8f1e9df4699867743a8e43ac98481f7b, type: 2}
 --- !u!1001 &944942271
 Prefab:
   m_ObjectHideFlags: 0
@@ -1600,10 +1618,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
+    - target: {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
-      propertyPath: tagScores.Array.size
-      value: 17
+      propertyPath: items.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4633097215938290, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1652,120 +1670,24 @@ Prefab:
       propertyPath: ControlsHUD
       value: 
       objectReference: {fileID: 334091381}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
+    - target: {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
-      propertyPath: camera1
+      propertyPath: items.Array.data[2].pickup
       value: 
-      objectReference: {fileID: 1272841908738476, guid: f8c58cf5d78e7c24a8de4a071242e4b8,
+      objectReference: {fileID: 114923173769988788, guid: da22405dc14b1ff48a15cd528c062cdd,
         type: 2}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
+    - target: {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
-      propertyPath: camera2
+      propertyPath: items.Array.data[2].script
       value: 
-      objectReference: {fileID: 1949336687010526, guid: c3e35b7937652b843871b82d73b20e17,
+      objectReference: {fileID: 11500000, guid: a1309b99584f5614780904ac318ca944,
+        type: 3}
+    - target: {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: trySplitScreen
-      value: 1
+      propertyPath: items.Array.data[2].index
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: camera1prefab
-      value: 
-      objectReference: {fileID: 1272841908738476, guid: f8c58cf5d78e7c24a8de4a071242e4b8,
-        type: 2}
-    - target: {fileID: 114788100348366930, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: camera2prefab
-      value: 
-      objectReference: {fileID: 1949336687010526, guid: c3e35b7937652b843871b82d73b20e17,
-        type: 2}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[0].tag
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[1].tag
-      value: Respawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[2].tag
-      value: Finish
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[3].tag
-      value: EditorOnly
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[4].tag
-      value: MainCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[5].tag
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[6].tag
-      value: GameController
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[7].tag
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[8].tag
-      value: Player Start
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[9].tag
-      value: Barricade
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[10].tag
-      value: Game Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[11].tag
-      value: End Position
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[12].tag
-      value: Enemy Spawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[13].tag
-      value: Civilian Spawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[14].tag
-      value: Civilian
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[15].tag
-      value: CivilianDestination
-      objectReference: {fileID: 0}
-    - target: {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709,
-        type: 2}
-      propertyPath: tagScores.Array.data[16].tag
-      value: Turret
-      objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709,
         type: 2}
       propertyPath: items.Array.data[1].pickup
@@ -1779,6 +1701,11 @@ Prefab:
       objectReference: {fileID: 114118758163211276, guid: 67d6b6bc66aac8647b2ed780e86fce69,
         type: 2}
     m_RemovedComponents: []
+=======
+    m_RemovedComponents:
+    - {fileID: 114189161229877810, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
+    - {fileID: 114913428826362956, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
+>>>>>>> 50b7d0b96526e26974beb816fd9795c806370ee4
   m_ParentPrefab: {fileID: 100100000, guid: eefda4730db720b4fae7a6277fc43709, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1269794082 stripped
