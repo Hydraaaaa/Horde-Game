@@ -185,7 +185,3 @@ MonoBehaviour:
     script: {fileID: 11500000, guid: 581e6ea623a6b5246a4a4508128aa349, type: 3}
     active: 1
     index: 1
-  - pickup: {fileID: 0}
-    script: {fileID: 0}
-    active: 0
-    index: 0
