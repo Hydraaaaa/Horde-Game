@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114047431724310516}
   m_Layer: 15
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
+  shooter: {fileID: 0}
   damage: 0
 --- !u!135 &135110672512179528
 SphereCollider:

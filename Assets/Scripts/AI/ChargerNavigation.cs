@@ -380,7 +380,7 @@ public class ChargerNavigation : MonoBehaviour
                 GetComponent<Health>().Attacker = null;
             }
         }
-
+        // if there is still an attacker alive and nearby
         if (GetComponent<Health>().Attacker != null)
         {
             // Target pos becomes the attackers position

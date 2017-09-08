@@ -194,6 +194,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23178566970834070
 MeshRenderer:
@@ -225,6 +226,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23432527789964168
 MeshRenderer:
@@ -256,6 +258,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33217837456287914
 MeshFilter:
@@ -309,9 +312,9 @@ MonoBehaviour:
   trackingPlayer: {fileID: 0}
   ResourceGain: 10
   TrackingTo: -1
-  TrackSpeed: 5
-  ScaleSpeed: 0.1
-  rotationSpeed: 1
+  TrackSpeed: 4
+  ScaleSpeed: 0.025
+  rotationSpeed: 0.2
   p1: {fileID: 1091844985548122}
   p2: {fileID: 1365559613391802}
 --- !u!135 &135417946827634884

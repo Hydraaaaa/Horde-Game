@@ -909,6 +909,16 @@ MonoBehaviour:
     type: 2}
   turretGUIP1: []
   turretGUIP2: []
+  StruggleBarPrefab: {fileID: 1666168662915828, guid: c72c58233ef19ed4c8cfd3c6c51ef76b,
+    type: 2}
+  StruggleBarsP1: {fileID: 0}
+  P1Struggling: 0
+  minSP1: 0
+  maxSP1: 0
+  StruggleBarsP2: {fileID: 0}
+  P2Struggling: 0
+  minSP2: 0
+  maxSP2: 0
 --- !u!114 &114591027751796172
 MonoBehaviour:
   m_ObjectHideFlags: 1

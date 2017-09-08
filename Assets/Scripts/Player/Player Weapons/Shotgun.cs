@@ -88,6 +88,7 @@ public class Shotgun : MonoBehaviour
 
                     GameObject bullet = Instantiate(bulletPrefab.gameObject, laserStartPoint.transform.position, laserStartPoint.transform.rotation);
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
+                    bulletScript.shooter = this.gameObject;
                     bulletScript.velocity = aimDir;
                     bulletScript.damage = damage;
 

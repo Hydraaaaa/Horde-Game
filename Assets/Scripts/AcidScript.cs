@@ -16,6 +16,7 @@ public class AcidScript : MonoBehaviour
     {
         for (int i = 0; i < AllNear.Count; i++)
         {
+            if (AllNear[i].GetComponent<Health>() != null)
             AllNear[i].GetComponent<Health>().Damage(damage);
         }
     }

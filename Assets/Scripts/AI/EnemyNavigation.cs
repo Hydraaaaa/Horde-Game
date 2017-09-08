@@ -341,6 +341,10 @@ public class EnemyNavigation : MonoBehaviour
 
     void CheckForPlayer(Collider col)
     {
+        if (col.GetComponent<ReviveSystem>() == null)
+        {
+            return;
+        }
         if (col.GetComponent<ReviveSystem>().NeedRes != true)
         {
             int layermask = 1 << LayerMask.NameToLayer("SeeThrough");

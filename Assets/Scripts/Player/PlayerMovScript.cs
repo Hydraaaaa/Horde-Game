@@ -190,8 +190,6 @@ public class PlayerMovScript : MonoBehaviour
             }
             else if (Input.GetAxis(stringCombo) <= -0.5)
             {
-                if (axis == "Shoot")
-                    GetComponent<Inventory>().activeItem.Activate();
             }
         }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public Vector3 velocity;
+    public GameObject shooter;
     public int damage;
     float timer;
 
@@ -29,8 +30,12 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<Health>() != null)
+        {
             other.gameObject.GetComponent<Health>().Damage(damage);
 
+            if (other.transform.GetComponent<Health>().Enemy && shooter.tag == "Player")
+                other.transform.GetComponent<Health>().Attacker = shooter;
+        }
         Destroy(gameObject);
     }
 }

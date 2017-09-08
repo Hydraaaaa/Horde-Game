@@ -59,6 +59,11 @@ public class SpitterNavigation : MonoBehaviour
     public float maxGrabRange;
     public float currentDist;
 
+    public float struggleVal;
+    public float strugglePerHit = 1.5f;
+    public float struggleLossPerFrame = 0.1f;
+    public float struggleMax = 10;
+
     // Cooldowns
     [Tooltip("Time in seconds between shots")]
     public float pullSpeed;
@@ -408,7 +413,7 @@ public class SpitterNavigation : MonoBehaviour
                     return;
                 }
             }
-            if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) > 1f)
+            if (Vector3.Distance(HoldPoint.transform.position, player.transform.position) > 1.1f)
             {
                 player.transform.position = Vector3.Lerp(player.transform.position, HoldPoint.transform.position, Time.deltaTime * pullSpeed);
                 player.GetComponent<PlayerMovScript>().incapacitationLevel = 1;
@@ -417,6 +422,55 @@ public class SpitterNavigation : MonoBehaviour
             {
                 if (OldSpitter)
                 {
+                    player.GetComponent<PlayerMovScript>().incapacitationLevel = 2;
+
+                    if (struggleVal > 0)
+                        struggleVal -= struggleLossPerFrame;
+
+                    // If the player is struggling
+                    if (Input.GetButtonDown(player.GetComponent<PlayerMovScript>().playerBeginning + "XButton"))
+                    {
+                        Debug.Log("Struggling");
+                        struggleVal += strugglePerHit;
+                    }                    
+
+                    if (player.GetComponent<PlayerMovScript>().playerNumber == 1)
+                    {
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().P1Struggling = true;
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().minSP1 = struggleVal;
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().maxSP1 = struggleMax;
+                    }
+                    if (player.GetComponent<PlayerMovScript>().playerNumber == 2)
+                    {
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().P2Struggling = true;
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().minSP2 = struggleVal;
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().maxSP2 = struggleMax;
+                    }
+
+                    if (struggleVal >= struggleMax)
+                    {
+                        if (player.GetComponent<PlayerMovScript>().playerNumber == 1)
+                        {
+                            GameObjectManager.instance.HUD.GetComponent<HUDScript>().P1Struggling = false;
+                        }
+                        if (player.GetComponent<PlayerMovScript>().playerNumber == 2)
+                        {
+                            GameObjectManager.instance.HUD.GetComponent<HUDScript>().P2Struggling = false;
+                        }
+
+                        // then remove the player reference so it dosent keep tracking to them
+                        followPlayer = false;
+                        player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
+                        Debug.Log("Player Broke Free: Removed Incapacitated from the player");
+
+                        player = null;
+                        playerGrabbed = false;
+                        currentGrabCooldown = grabCooldown;
+                        struggleVal = 0;
+                        
+                        return;
+                    }
+
                     player.transform.LookAt(transform);
 
                     player.GetComponent<PlayerMovScript>().incapacitationLevel = 2;
@@ -431,7 +485,7 @@ public class SpitterNavigation : MonoBehaviour
                             // then remove the player reference so it dosent keep tracking to them
                             followPlayer = false;
                             player.GetComponent<PlayerMovScript>().incapacitationLevel = 0;
-                            Debug.Log("Removed Incapacitated from the player");
+                            Debug.Log("Player needs Revive: Removed Incapacitated from the player");
 
                             player = null;
                             playerGrabbed = false;

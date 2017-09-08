@@ -1567,6 +1567,10 @@ MonoBehaviour:
   attackRange: 2
   maxGrabRange: 10
   currentDist: 0
+  struggleVal: 0
+  strugglePerHit: 1.5
+  struggleLossPerFrame: 0.05
+  struggleMax: 10
   pullSpeed: 4
   cooldown: 1
   currentCooldown: 0
@@ -1575,7 +1579,7 @@ MonoBehaviour:
   acidAOECooldown: 1
   currentAcidAOECooldown: 0
   EnvironmentZombie: 1
-  OldSpitter: 0
+  OldSpitter: 1
 --- !u!114 &114701689438061898
 MonoBehaviour:
   m_ObjectHideFlags: 1

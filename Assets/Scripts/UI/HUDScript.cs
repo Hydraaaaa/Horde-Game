@@ -29,7 +29,15 @@ public class HUDScript : MonoBehaviour
     public List<GameObject> turretGUIP1;
     public List<GameObject> turretGUIP2;
 
+    public GameObject StruggleBarPrefab;
 
+    public GameObject StruggleBarsP1;
+    public bool P1Struggling;
+    public float minSP1, maxSP1;
+    public GameObject StruggleBarsP2;
+    public bool P2Struggling;
+    public float minSP2, maxSP2;
+    
     void Start ()
     {
         // Make the barricade UI
@@ -37,6 +45,9 @@ public class HUDScript : MonoBehaviour
 
         // Make the Turret UI
         InstantiateTurretUI();
+
+        // Make struggle UI
+        InstantiateStruggleUI();
 
         GameObjectManager.instance.players[0].UIMask = p1Mask;
         GameObjectManager.instance.players[1].UIMask = p2Mask;
@@ -158,6 +169,60 @@ public class HUDScript : MonoBehaviour
         return;
     }
 
+    void InstantiateStruggleUI()
+    {
+        // Iterate through each barricade in the managers list
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+        {
+            if (i == 0)
+            {
+                // Instantiate a new healthbar for the barricades
+                GameObject newStruggleBar = Instantiate(StruggleBarPrefab, transform.position, Quaternion.identity) as GameObject;
+                
+                // Add to player 1's layer mask
+                newStruggleBar.layer = LayerMask.NameToLayer("P1UI");
+                //  > Active
+                newStruggleBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+
+                // > Active > Child: 1, 2, & 3
+                newStruggleBar.transform.GetChild(0).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                newStruggleBar.transform.GetChild(0).transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                newStruggleBar.transform.GetChild(0).transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("P1UI");
+
+                // Set as a child of the player 1 mask 
+                newStruggleBar.transform.SetParent(p1Mask.transform);
+                newStruggleBar.transform.SetAsFirstSibling();
+
+                // Add a referance to the barricade in the local list
+                StruggleBarsP1 = newStruggleBar;
+            }
+            else if (i == 1)
+            {
+
+                // Instantiate a new healthbar for the barricades
+                GameObject newStruggleBar = Instantiate(StruggleBarPrefab, transform.position, Quaternion.identity) as GameObject;
+
+                // Add to player 2's layer mask
+                newStruggleBar.layer = LayerMask.NameToLayer("P2UI");
+                //  > Active
+                newStruggleBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
+
+                // > Active > Child: 1, 2, & 3
+                newStruggleBar.transform.GetChild(0).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
+                newStruggleBar.transform.GetChild(0).transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
+                newStruggleBar.transform.GetChild(0).transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("P2UI");
+
+                // Set as a child of the player 2 mask 
+                newStruggleBar.transform.SetParent(p2Mask.transform);
+                newStruggleBar.transform.SetAsFirstSibling();
+
+                // Add a referance to the barricade in the local list
+                StruggleBarsP2 = newStruggleBar;
+            }
+        }
+        return;
+    }
+
 	void Update ()
     {
         // If the timer for the exit bulkhead is still above 60 seconds
@@ -188,6 +253,32 @@ public class HUDScript : MonoBehaviour
 
         // Display the civilian saved count to the screen
         civiliansSaved.text = GameObjectManager.instance.civiliansEscaped.ToString() + " ";
+
+        if (P1Struggling)
+        {
+            StruggleBarsP1.SetActive(true);
+
+            // Update the Barricade's position on player 1's screen
+            StruggleBarsP1.transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.players[0].gameObject.transform.position);
+            StruggleBarsP1.transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().fillAmount = minSP1 / maxSP1;
+        }
+        else
+        {
+            StruggleBarsP1.SetActive(false);
+        }
+
+        if (P2Struggling)
+        {
+            StruggleBarsP2.SetActive(true);
+
+            // Update the Barricade's position on player 2's screen
+            StruggleBarsP2.transform.position = GameObjectManager.instance.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.players[1].gameObject.transform.position);
+            StruggleBarsP2.transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().fillAmount = minSP2 / maxSP2;
+        }
+        else
+        {
+            StruggleBarsP2.SetActive(false);
+        }
 
         // For each barricade in the list
         for (int i = 0; i < GameObjectManager.instance.barricades.Count; i++)
