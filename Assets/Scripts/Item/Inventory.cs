@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour
 
     ItemInfo passiveItemInfo;
     ItemInfo activeItemInfo;
-    Item passiveItem;
-    Item activeItem;
+    public Item passiveItem;
+    public Item activeItem;
 
     List<GameObject> pickupsInRange; // Not Implemented
 
@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
         else
             Debug.Log("Not NULL");
 
-        if (Input.GetKeyDown(KeyCode.Q) && activeItem != null)
+        if (Input.GetKeyDown(KeyCode.Q) && activeItem != null && !GetComponent<PlayerMovScript>().useController)
             activeItem.Activate();
     }
 

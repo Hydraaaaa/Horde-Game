@@ -188,6 +188,11 @@ public class PlayerMovScript : MonoBehaviour
                     Shooting = true;
                 }
             }
+            else if (Input.GetAxis(stringCombo) <= -0.5)
+            {
+                if (axis == "Shoot")
+                    GetComponent<Inventory>().activeItem.Activate();
+            }
         }
 
         // Check all axis movements

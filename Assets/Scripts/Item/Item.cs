@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public float currentCooldown;
+
     public virtual void Activate()
     {
 
