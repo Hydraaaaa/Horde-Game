@@ -39,8 +39,12 @@ public class ReviveSystem : MonoBehaviour
         InteractGUIKeyboard.transform.rotation = Quaternion.Euler(45, 45, 0);
     }
 
-    public void StartReviveSystem()
+    public void StartReviveSystem(GameObject source = null)
     {
+        ScoreManager.instance.PlayerDeath(gameObject);
+
+        if (source.CompareTag("Player"))
+            ScoreManager.instance.PlayerKill(source);
         NeedRes = true;
     }
 
@@ -61,6 +65,7 @@ public class ReviveSystem : MonoBehaviour
                     {
                         col.GetComponent<Health>().health = col.GetComponent<Health>().maxHealth;
                         col.GetComponent<ReviveSystem>().NeedRes = false;
+                        ScoreManager.instance.PlayerRevive(gameObject);
                     }
                 }
                 else

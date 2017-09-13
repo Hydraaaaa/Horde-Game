@@ -46,7 +46,7 @@ public class BulkheadLogic : MonoBehaviour
         }
     }
 
-    public void Open()
+    public void Open(GameObject source = null)
     {
         IsOpen = true;
         GetComponent<NavMeshObstacle>().enabled = false;

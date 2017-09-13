@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4633097215938290}
   - component: {fileID: 114225659590822462}
   - component: {fileID: 114788100348366930}
+  - component: {fileID: 114628454531170016}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Game Manager
@@ -68,6 +69,29 @@ MonoBehaviour:
   MainHUD: {fileID: 0}
   ControlsHUD: {fileID: 0}
   UsingKbrd: 0
+--- !u!114 &114628454531170016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112002458870338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de62c148d29189345a42d7b343883f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularKillScore: 1
+  spitterKillScore: 3
+  chargerKillScore: 6
+  civilianKillScore: -3
+  playerKillScore: -5
+  playerDeathScore: -3
+  playerReviveScore: 3
+  civilianEscapeScore: 2
+  scrapPickupScore: 1
+  turretUpgradeScore: 0
+  turretRepairScore: 0
+  civilianDeathScore: -1
 --- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1

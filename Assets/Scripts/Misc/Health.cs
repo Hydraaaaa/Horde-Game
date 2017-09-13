@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     public int maxHealth;
     public int health;
-    public delegate void NoHealth();
+    public delegate void NoHealth(GameObject source = null);
     public NoHealth OnDie;
 
     public bool Enemy = false;
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Damage(int damage)
+    public void Damage(int damage, GameObject source = null)
     {
         health -= damage;
         if (health > maxHealth)
@@ -34,12 +34,11 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-
-            OnDie();
+            OnDie(source);
         }
     }
 
-    public void Die()
+    public void Die(GameObject source = null)
     {
         Destroy(gameObject);
     }

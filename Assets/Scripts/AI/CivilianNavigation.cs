@@ -38,21 +38,23 @@ public class CivilianNavigation : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("CivilianDestination"))
+        if (other.CompareTag("CivilianDestination")) // Escape
         {
-            GetComponent<CapsuleCollider>().enabled = false;
-            GetComponent<Health>().enabled = false;
             GameObjectManager.instance.civiliansEscaped++;
 
             GameObjectManager.instance.civilians.Remove(gameObject);
+            ScoreManager.instance.CivilianEscape();
             Destroy(gameObject);
         }
     }
 
-    void OnDie()
+    void OnDie(GameObject source = null)
     {
         GameObjectManager.instance.civilians.Remove(gameObject);
         GameObjectManager.instance.CheckCivilianCount();
+        ScoreManager.instance.CivilianDeath();
+        if (source.CompareTag("Player"))
+            ScoreManager.instance.CivilianKill(source);
         Destroy(gameObject);
     }
 }

@@ -46,6 +46,7 @@ public class ResourceLogic : MonoBehaviour
                 if (trackingPlayer.GetComponent<BarrierPlayersideLogic>().ResourceCap >= trackingPlayer.GetComponent<BarrierPlayersideLogic>().Resources + ResourceGain)
                 {
                     trackingPlayer.GetComponent<BarrierPlayersideLogic>().Resources += ResourceGain;
+                    ScoreManager.instance.ScrapPickup(trackingPlayer);
                 }
                 DestroyImmediate(this.gameObject);
             }
