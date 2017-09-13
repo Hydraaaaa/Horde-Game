@@ -81,6 +81,7 @@ public class SpitterNavigation : MonoBehaviour
 
     Vector3 pDir;
 
+    bool dead;
 
     void Start()
     {
@@ -103,6 +104,7 @@ public class SpitterNavigation : MonoBehaviour
         agent.CalculatePath(TargetPos, path);
 
         GetComponent<Health>().OnDie = Die;
+        dead = false;
     }
 
     void Update()
@@ -750,8 +752,12 @@ public class SpitterNavigation : MonoBehaviour
 
     void Die(GameObject source = null)
     {
-        if (source != null && source.CompareTag("Player"))
-            ScoreManager.instance.SpitterKill(source);
-        Destroy(gameObject);
+        if (!dead)
+        {
+            dead = true;
+            if (source != null && source.CompareTag("Player"))
+                ScoreManager.instance.SpitterKill(source);
+            Destroy(gameObject);
+        }
     }
 }

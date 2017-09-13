@@ -78,6 +78,8 @@ public class ChargerNavigation : MonoBehaviour
 
     public bool EnvironmentZombie = false;
 
+    bool dead;
+
     void Start()
     {
         Physics.IgnoreCollision(GetComponent<SphereCollider>(), GameObjectManager.instance.endPos.GetComponent<BoxCollider>());
@@ -103,6 +105,7 @@ public class ChargerNavigation : MonoBehaviour
         currentChargeWindupTime = chargeWindupTime;
 
         GetComponent<Health>().OnDie = Die;
+        dead = false;
     }
 
     void Update()
@@ -657,8 +660,12 @@ public class ChargerNavigation : MonoBehaviour
 
     void Die(GameObject source = null)
     {
-        if (source != null && source.CompareTag("Player"))
-            ScoreManager.instance.ChargerKill(source);
-        Destroy(gameObject);
+        if (!dead)
+        {
+            dead = true;
+            if (source != null && source.CompareTag("Player"))
+                ScoreManager.instance.ChargerKill(source);
+            Destroy(gameObject);
+        }
     }
 }

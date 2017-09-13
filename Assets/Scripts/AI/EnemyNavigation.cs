@@ -51,6 +51,8 @@ public class EnemyNavigation : MonoBehaviour
 
     public bool EnvironmentZombie = false;
 
+    bool dead;
+
     void Start()
     {
         path = new NavMeshPath();
@@ -71,9 +73,9 @@ public class EnemyNavigation : MonoBehaviour
 
         //player = GameObject.FindGameObjectWithTag("Player 1");
         Physics.IgnoreCollision(GetComponent<SphereCollider>(), GameObjectManager.instance.endPos.GetComponent<BoxCollider>());
-
-        if (GetComponent<ChargerNavigation>() == null && GetComponent<SpitterNavigation>() == null)
-            GetComponent<Health>().OnDie = Die;
+        
+        GetComponent<Health>().OnDie = Die;
+        dead = false;
     }
 
     void Update()
@@ -431,8 +433,12 @@ public class EnemyNavigation : MonoBehaviour
 
     void Die(GameObject source = null)
     {
-        if (source != null && source.CompareTag("Player"))
-            ScoreManager.instance.RegularKill(source);
-        Destroy(gameObject);
+        if (!dead)
+        {
+            dead = true;
+            if (source != null && source.CompareTag("Player"))
+                ScoreManager.instance.RegularKill(source);
+            Destroy(gameObject);
+        }
     }
 }

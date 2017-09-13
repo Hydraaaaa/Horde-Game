@@ -130,9 +130,9 @@ public class Shotgun : MonoBehaviour
                             if (GetComponent<ReviveSystem>() == null || !GetComponent<ReviveSystem>().NeedRes)
                             {
                                 if (GetComponent<Inventory>().passive == Items.damageBoost)
-                                    hit.transform.GetComponent<Health>().Damage(Mathf.RoundToInt(damage * 1.3f));
+                                    hit.transform.GetComponent<Health>().Damage(Mathf.RoundToInt(damage * 1.3f), gameObject);
                                 else
-                                    hit.transform.GetComponent<Health>().Damage(damage);
+                                    hit.transform.GetComponent<Health>().Damage(damage, gameObject);
                             }
 
                             // If the attacked target is an enemy
