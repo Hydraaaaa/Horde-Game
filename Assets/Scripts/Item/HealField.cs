@@ -31,10 +31,8 @@ public class HealField : MonoBehaviour
         {
             Health health = colliders[i].gameObject.GetComponent<Health>();
             if (health != null && !health.Enemy)
-            {
                 health.Damage(-Mathf.FloorToInt(healing));
-                healing = healing % 1;
-            }
         }
+        healing = healing % 1;
     }
 }
