@@ -32,7 +32,7 @@ public class CivilianSource : MonoBehaviour
                 spawnTimer = spawnInterval;
                 currentCivilians--;
 
-                GameObject newlySpawned = Instantiate(civilianPrefab, transform.position, transform.rotation);
+                Instantiate(civilianPrefab, transform.position, transform.rotation);
             }
         }
     }
