@@ -42,8 +42,8 @@ public class ReviveSystem : MonoBehaviour
     public void StartReviveSystem(GameObject source = null)
     {
         ScoreManager.instance.PlayerDeath(gameObject);
-
-        if (source.CompareTag("Player"))
+        
+        if (source != null && source.CompareTag("Player"))
             ScoreManager.instance.PlayerKill(source);
         NeedRes = true;
     }

@@ -53,7 +53,7 @@ public class CivilianNavigation : MonoBehaviour
         GameObjectManager.instance.civilians.Remove(gameObject);
         GameObjectManager.instance.CheckCivilianCount();
         ScoreManager.instance.CivilianDeath();
-        if (source.CompareTag("Player"))
+        if (source != null && source.CompareTag("Player"))
             ScoreManager.instance.CivilianKill(source);
         Destroy(gameObject);
     }
