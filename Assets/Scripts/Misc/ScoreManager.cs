@@ -22,16 +22,16 @@ public class ScoreManager : MonoBehaviour
     public int civilianDeathScore;
     public int civilianEscapeScore;
 	
-	public void RegularKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += regularKillScore; }
-    public void SpitterKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += spitterKillScore; }
-    public void ChargerKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += chargerKillScore; }
-    public void CivilianKill (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += civilianKillScore; }
-    public void PlayerKill   (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerKillScore; }
-    public void PlayerDeath  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerDeathScore; }
-    public void PlayerRevive (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerReviveScore; }
-    public void ScrapPickup  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += scrapPickupScore; }
-    public void TurretUpgrade(GameObject player) { GameObjectManager.instance.GetPlayer(player).score += turretUpgradeScore; }
-    public void TurretRepair (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += turretRepairScore; }
+	public void RegularKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += regularKillScore;  Debug.Log("RegularKill"); }
+    public void SpitterKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += spitterKillScore;  Debug.Log("SpitterKill");}
+    public void ChargerKill  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += chargerKillScore;  Debug.Log("ChargerKill");}
+    public void CivilianKill (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += civilianKillScore; Debug.Log("CivilianKill");}
+    public void PlayerKill   (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerKillScore;   Debug.Log("PlayerKill");}
+    public void PlayerDeath  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerDeathScore;  Debug.Log("PlayerDeath");}
+    public void PlayerRevive (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += playerReviveScore; Debug.Log("PlayerRevive");}
+    public void ScrapPickup  (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += scrapPickupScore;  Debug.Log("ScrapPickup");}
+    public void TurretUpgrade(GameObject player) { GameObjectManager.instance.GetPlayer(player).score += turretUpgradeScore;Debug.Log("TurretUpgrade"); }
+    public void TurretRepair (GameObject player) { GameObjectManager.instance.GetPlayer(player).score += turretRepairScore; Debug.Log("TurretRepair");}
 
     void Start()
     {
@@ -42,11 +42,13 @@ public class ScoreManager : MonoBehaviour
     {
         for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
             GameObjectManager.instance.players[i].score += civilianDeathScore;
+        Debug.Log("CivilianDeath");
     }
 
     public void CivilianEscape()
     {
         for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
             GameObjectManager.instance.players[i].score += civilianEscapeScore;
+        Debug.Log("CivilianEscape");
     }
 }
