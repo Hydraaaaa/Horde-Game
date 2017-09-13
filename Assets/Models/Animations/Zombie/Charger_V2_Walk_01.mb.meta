@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: f537c7cd56caecb4aad661a7ff53254e
 timeCreated: 1505275972
 licenseType: Pro
-=======
-guid: 753bcf7cdc90e19489d7423332fa5928
-timeCreated: 1505276559
-licenseType: Free
->>>>>>> 08a0921074d49c786252d9f578627f7e9b2ef55c
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -207,11 +201,7 @@ ModelImporter:
     4300002: bruteZombie_02:mask
     4300004: bruteZombie_02:eyes
     4300006: bruteZombie_02:teeth
-<<<<<<< HEAD
     7400000: Walk 2
-=======
-    7400000: Take 001
->>>>>>> 08a0921074d49c786252d9f578627f7e9b2ef55c
     9500000: //RootNode
     13700000: bruteZombie_02:body
     13700002: bruteZombie_02:eyes
@@ -240,7 +230,6 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-<<<<<<< HEAD
     clipAnimations:
     - serializedVersion: 16
       name: Walk 2
@@ -274,13 +263,6 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 0.01
-=======
-    clipAnimations: []
-    isReadable: 1
-  meshes:
-    lODScreenPercentages: []
-    globalScale: 1
->>>>>>> 08a0921074d49c786252d9f578627f7e9b2ef55c
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
