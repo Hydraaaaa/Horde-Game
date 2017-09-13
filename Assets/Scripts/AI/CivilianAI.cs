@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class CivilianAI : MonoBehaviour
 {
@@ -91,12 +92,27 @@ public class CivilianAI : MonoBehaviour
         // Generate the Quest Text
         switch (Quest)
         {
+            // If escort mission
             case QuestList.ESCORT:
+                // Grab random line
                 questDialogueNo = Random.Range(0, startDialogueEscort.Length);
                 currentPopupTime = popupTime;
-                if (MissionCompleted == true && MissionAvailable == false)
+
+                // Initialize variables
+                Vector3 pos = new Vector3(10000, 10000, 10000);
+                float ClosestDist = 10000;
+
+                // Go through each civilian spawner
+                for (int i = 0; i < GameObjectManager.instance.civilianSpawners.Count; i++)
                 {
-                    GetComponent<CivilianNavigation>().enabled = true;
+                    // Find the closest one to the civilian
+                    if (Vector3.Distance(this.transform.position, GameObjectManager.instance.civilianSpawners[i].transform.position) < ClosestDist)
+                    {
+                        // Set its position to the civilian spawner
+                        ClosestDist = Vector3.Distance(this.transform.position, GameObjectManager.instance.civilianSpawners[i].transform.position);
+                        pos = GameObjectManager.instance.civilianSpawners[i].transform.position;
+                        GetComponent<NavMeshAgent>().SetDestination(pos);
+                    }
                 }
                 break;
             case QuestList.FIND_QITEM:
@@ -128,6 +144,67 @@ public class CivilianAI : MonoBehaviour
 	
     void EscortType()
     {
+        anim.SetBool("MissionAvailable", MissionAvailable);
+        anim.SetBool("MissionCompleted", MissionCompleted);
+        anim.SetBool("Talking", Talking);
+
+        for (int i = 0; i < playersInRange.Count; i++)
+        {
+            if (playersInRange[i] == null)
+            {
+                playersInRange.RemoveAt(i);
+                break;
+            }
+            if (Vector3.Distance(playersInRange[i].transform.position, transform.position) > talkDistance)
+            {
+                playersInRange.RemoveAt(i);
+                break;
+            }
+        }
+
+        if (playersInRange.Count > 0)
+        {
+            // Initial dialogue has not been done
+            if (MissionAvailable == true)
+            {
+                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogueEscort[questDialogueNo];
+                GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
+
+                currentPopupTime = popupTime;
+                Talking = true;
+                MissionAvailable = false;
+            }
+            // Mission had been accepted but not finished
+            if (MissionAvailable == false)
+            {
+                // If the talk time has not finished
+                if (currentPopupTime >= 0)
+                {
+                    currentPopupTime -= Time.deltaTime;
+
+                    // If they finished talking
+                    if (currentPopupTime <= 0)
+                    {
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = false;
+                        ObjectiveCompleted = true;
+                        Talking = false;
+                    }
+                }
+            }
+            // If they have finished talking
+            if (ObjectiveCompleted)
+            {
+                Debug.Log("Onwards");
+                GetComponent<NavMeshAgent>().enabled = true;
+                GetComponent<CivilianNavigation>().enabled = true;
+
+            }
+        }
+        else
+        {
+            GetComponent<CivilianNavigation>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
+        }
     }
     public GameObject rthi;
     void FindType()

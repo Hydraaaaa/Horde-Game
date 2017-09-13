@@ -15,7 +15,12 @@ public class CivilianNavigation : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
         GetComponent<Health>().OnDie = OnDie;
-	}
+
+        if (GameObjectManager.instance != null)
+        {
+            agent.SetDestination(GameObjectManager.instance.civilianDestination.transform.position);
+        }
+    }
 	
 	void Update ()
     {
@@ -28,11 +33,6 @@ public class CivilianNavigation : MonoBehaviour
                 Quaternion.LookRotation(dir),
                 Time.deltaTime
             );
-        }
-
-        if (GameObjectManager.instance != null)
-        {
-            agent.SetDestination(GameObjectManager.instance.civilianDestination.transform.position);
         }
     }
 
