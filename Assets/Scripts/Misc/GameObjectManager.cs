@@ -18,6 +18,7 @@ public class Player
     public int score;
     public int regularKills;
     public int chargerKills;
+    public int spitterKills;
 }
 
 public class GameObjectManager : MonoBehaviour

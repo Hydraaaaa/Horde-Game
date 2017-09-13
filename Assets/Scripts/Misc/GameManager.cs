@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     void CheckAxis()
     {
-        if (MainHUD.active)
+        if (MainHUD.activeInHierarchy)
         {
             p1Axis = new Vector2(Input.GetAxis("Joy1Horizontal"), Input.GetAxis("Joy1Vertical"));
             p1Trigg = (Input.GetAxis("Joy1Shoot"));
@@ -190,6 +190,8 @@ public class GameManager : MonoBehaviour
         {
             GetComponent<GameObjectManager>().enabled = false;
             GetComponent<GameObjectManager>().enabled = true;
+            GetComponent<ScoreManager>().enabled = false;
+            GetComponent<ScoreManager>().enabled = true;
         }
     }
 

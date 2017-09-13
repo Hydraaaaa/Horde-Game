@@ -39,7 +39,8 @@ public class Rifle : MonoBehaviour
 //        gunshot = Instantiate(gunshot);
 
         laser = GetComponent<LineRenderer>();
-        laser.SetWidth(0.02f, 0.02f);
+        laser.startWidth = 0.02f;
+        laser.endWidth = 0.02f;
     }
 
     void Update()

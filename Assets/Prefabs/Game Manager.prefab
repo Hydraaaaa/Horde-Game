@@ -75,14 +75,11 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112002458870338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de62c148d29189345a42d7b343883f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularKillScore: 1
-  spitterKillScore: 3
-  chargerKillScore: 6
   civilianKillScore: -3
   playerKillScore: -5
   playerDeathScore: -3
@@ -94,6 +91,15 @@ MonoBehaviour:
   barrierRepairScore: 4
   civilianDeathScore: -1
   civilianEscapeScore: 2
+  regularKillScore: 1
+  spitterKillScore: 3
+  chargerKillScore: 6
+  killstreakAddedMultiplier: 0.01
+  killstreakMaxMultiplier: 10
+  killstreakResetTime: 5
+  currentMultiplier: []
+  currentResetTime: []
+  multiplierScore: []
 --- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +132,8 @@ MonoBehaviour:
   barricades: []
   vitalBarricades: []
   turrets: []
+  cameras: []
+  questItemSpawnLocs: []
   civiliansRequired: 75
   time: 120
   timer: 0
