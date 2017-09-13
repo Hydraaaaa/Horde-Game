@@ -23,7 +23,7 @@ public class Actives : MonoBehaviour
             Physics.IgnoreCollision(spawnedGrenade.GetComponent<Collider>(), colliders[i]);
     }
 
-    public void HealField()
+    public void PlaceHealField()
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         

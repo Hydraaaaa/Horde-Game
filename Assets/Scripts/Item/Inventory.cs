@@ -105,7 +105,7 @@ public class Inventory : MonoBehaviour
                     activePickup = pickup;
                     break;
                 case Items.healField:
-                    active = actives.HealField;
+                    active = actives.PlaceHealField;
                     if (activePickup != null)
                     {
                         activePickup.transform.position = transform.position;
