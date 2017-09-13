@@ -25,11 +25,13 @@ public class CivilianAI : MonoBehaviour
     public string[] startDialogueCollect;
     public string[] endDialogueCollect;
     public string[] todoListInfoCollect;
+    public GameObject[] UniqueItems;
 
     [Header("Give Dialogue")]
     public string[] startDialogueGive;
     public string[] endDialogueGive;
     public string[] todoListInfoGive;
+    public GameObject[] GunType;
 
     [Header("Rescue Dialogue")]
     public string[] startDialogueRescue;
@@ -54,17 +56,37 @@ public class CivilianAI : MonoBehaviour
 
     // The row of dialogue used for the npc
     public int questDialogueNo;
+    public int uniqueItemNo;
+
+    // Camera planes
+    Plane[] planesCam1;
+    Plane[] planesCam2;
 
     // Use this for initialization
     void Start ()
     {
+        // Grab Camera, Retrieve planes
+        planesCam1 = GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[0].GetComponent<Camera>());
+        // Grab Camera, Retrieve planes
+        planesCam2 = GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[1].GetComponent<Camera>());
+
         // If the mission type is undefined
         if (Quest == QuestList.DECIDE_ON_STARTUP)
         {
             Quest = (QuestList)Random.Range(1, 4);
         }
 
-        // anim = transform.GetChild(0).GetComponent<Animator>();
+        switch (Quest)
+        {
+            case QuestList.ESCORT:
+                uniqueItemNo = Random.Range(0, UniqueItems.Length - 1);
+                break;
+            case QuestList.FIND_QITEM:
+                uniqueItemNo = Random.Range(0, GunType.Length - 1);
+                break;
+        }
+
+        anim = transform.GetChild(0).GetComponent<Animator>();
 
         // Generate the Quest Text
         switch (Quest)
@@ -102,17 +124,14 @@ public class CivilianAI : MonoBehaviour
                 }
                 break;
         }
-
-
 	}
 	
     void EscortType()
     {
     }
-
+    public GameObject rthi;
     void FindType()
     {
-        Debug.Log("UPD");
         anim.SetBool("MissionAvailable", MissionAvailable);
         anim.SetBool("MissionCompleted", MissionCompleted);
         anim.SetBool("Talking", Talking);
@@ -144,8 +163,11 @@ public class CivilianAI : MonoBehaviour
                 if (MissionAvailable)
                 {
                     currentPopupTime = popupTime;
+                    startDialogueCollect[questDialogueNo] = startDialogueCollect[questDialogueNo].Replace("%item%", UniqueItems[uniqueItemNo].name);
                     GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogueCollect[questDialogueNo];
                     GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
+                    rthi = Instantiate(UniqueItems[uniqueItemNo], GameObjectManager.instance.questItemSpawnLocs[Random.Range(0, GameObjectManager.instance.questItemSpawnLocs.Capacity - 1)].transform);
+                    rthi.GetComponent<QuestItemHandle>().Manager = this;
                     Talking = true;
                     MissionAvailable = false;
                 }
@@ -194,6 +216,22 @@ public class CivilianAI : MonoBehaviour
             case QuestList.RESCUE:
                 break;
         }
+
+        if (MissionCompleted)
+        {
+            if (!GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[0].GetComponent<Camera>()), GetComponent<Collider>().bounds))
+            {
+                if (!GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[1].GetComponent<Camera>()), GetComponent<Collider>().bounds))
+                {
+                    Debug.Log("Can't See Me O 3 O");
+
+                    GameObjectManager.instance.civiliansEscaped++;
+
+                    // Delete this gameobject from the scene
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -210,6 +248,11 @@ public class CivilianAI : MonoBehaviour
     }
 
     void OnTriggerExit(Collider col)
+    {
+
+    }
+
+    void OnBecameInvisible()
     {
     }
 }

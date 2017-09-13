@@ -42,6 +42,8 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> barricades;
     public List<GameObject> vitalBarricades;
     public List<GameObject> turrets;
+    public List<GameObject> cameras;
+    public List<GameObject> questItemSpawnLocs;
 
     [Tooltip("This is a percentage")][Range(0, 100)]
     public float civiliansRequired;
@@ -82,6 +84,7 @@ public class GameObjectManager : MonoBehaviour
         SpawnHUD();
         GetTurrets();
         GetCivilianDestination();
+        GetQuestItemSpawnLocations();
         GetEndPos();
         instance = this;
 
@@ -147,6 +150,11 @@ public class GameObjectManager : MonoBehaviour
         }
     }
 
+    public void GetQuestItemSpawnLocations()
+    {
+        questItemSpawnLocs = new List<GameObject>(GameObject.FindGameObjectsWithTag("QuestItemSpawn"));
+    }
+
     public void SpawnPlayers()
     {
         int playerCount = GetComponent<GameManager>().playerCount;
@@ -196,6 +204,7 @@ public class GameObjectManager : MonoBehaviour
                     camera.GetComponent<AudioListener>().enabled = false;
                 }
                 camera.GetComponent<CameraMovement>().player = newPlayer.gameObject;
+                cameras.Add(camera);
                 newPlayer.gameObject.GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
 
                 newPlayer.camera = camera;

@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 38abb78e96bb7924e8161a129d32ee06, type: 2}
+  - {fileID: 2100000, guid: ba95dc2b0fea2c44985d7c5621fa1d28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa49673370a01840bb9d26b1cfbce20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 20, z: 0}
+  rotation: {x: 0, y: 30, z: 0}
 --- !u!135 &135726361884157452
 SphereCollider:
   m_ObjectHideFlags: 1

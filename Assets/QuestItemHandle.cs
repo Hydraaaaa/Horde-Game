@@ -18,7 +18,7 @@ public class QuestItemHandle : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player")
+        if (col.tag == "Player" && col.GetComponent<ReviveSystem>() != null)
         {
             Manager.ObjectiveCompleted = true;
             Destroy(gameObject);

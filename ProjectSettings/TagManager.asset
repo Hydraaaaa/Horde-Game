@@ -14,6 +14,7 @@ TagManager:
   - Civilian
   - CivilianDestination
   - Turret
+  - QuestItemSpawn
   layers:
   - Default
   - TransparentFX
