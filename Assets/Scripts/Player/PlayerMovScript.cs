@@ -38,7 +38,7 @@ public class PlayerMovScript : MonoBehaviour
 
     public GameObject[] Guns;
 
-    [HideInInspector] public Camera camera;
+    [HideInInspector] public new Camera camera;
     Inventory inventory;
 
     // Use this for initialization

@@ -209,10 +209,12 @@ public class BarrierLogic : MonoBehaviour
                         if (Input.GetButtonUp("Joy1XButton"))
                         {
                             RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            ScoreManager.instance.BarrierRepair(GameObjectManager.instance.players[0].gameObject);
                         }
                         if (Input.GetButtonUp("Joy1YButton"))
                         {
                             UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            ScoreManager.instance.BarrierUpgrade(GameObjectManager.instance.players[0].gameObject);
                         }
                     }
                 }
@@ -232,10 +234,12 @@ public class BarrierLogic : MonoBehaviour
                         if (Input.GetButtonDown("Joy2XButton"))
                         {
                             RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            ScoreManager.instance.BarrierRepair(GameObjectManager.instance.players[1].gameObject);
                         }
                         if (Input.GetButtonDown("Joy2YButton"))
                         {
                             UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
+                            ScoreManager.instance.BarrierUpgrade(GameObjectManager.instance.players[1].gameObject);
                         }
                     }
                 }

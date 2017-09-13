@@ -680,6 +680,7 @@ public class TurretAI : MonoBehaviour
         {
             if (playerRes.Resources >= AllLevelStats[Level + 1].TotalResourceCost)
             {
+                ScoreManager.instance.TurretUpgrade(playerRes.gameObject);
                 playerRes.Resources -= AllLevelStats[Level + 1].TotalResourceCost;
 
                 Level++;
@@ -706,6 +707,7 @@ public class TurretAI : MonoBehaviour
         {
             // Half the total resource cost
             playerRes.Resources -= (CurrentLevelStats.TotalResourceCost / 2);
+            ScoreManager.instance.TurretRepair(playerRes.gameObject);
 
             // Set Current Lifetime back to max lifetime
             CurrentLevelStats.TotalLifetime = AllLevelStats[Level].TotalLifetime;
