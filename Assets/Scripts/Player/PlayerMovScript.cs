@@ -39,6 +39,7 @@ public class PlayerMovScript : MonoBehaviour
     public GameObject[] Guns;
 
     [HideInInspector] public Camera camera;
+    Inventory inventory;
 
     // Use this for initialization
     void Start ()
@@ -51,6 +52,7 @@ public class PlayerMovScript : MonoBehaviour
         playerAttack = GetComponent<Rifle>().Attack;
 
         energy = maxEnergy;
+        inventory = GetComponent<Inventory>();
     }
     void Awake()
     {
@@ -162,8 +164,11 @@ public class PlayerMovScript : MonoBehaviour
             }
             anim.SetBool("Shooting", Shooting);
         }
+        if (inventory.passive == Items.energyBoost)
+            energy += EnergyPerTick * 1.3f;
+        else
+            energy += EnergyPerTick;
 
-        energy += EnergyPerTick;
         if (energy > maxEnergy)
             energy = maxEnergy;
     }

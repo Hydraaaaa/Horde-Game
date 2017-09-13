@@ -7,11 +7,15 @@ using System.Reflection;
 
 public enum Items
 {
+    none,
     energyBoost,
     damageBoost,
     runBoost,
+    blowTorch,
+    wrench,
     medkit,
-    grenade
+    grenade,
+    healField,
 }
 
 [RequireComponent(typeof(Actives))]
@@ -33,6 +37,7 @@ public class Inventory : MonoBehaviour
     {
         currentPickupCooldown = 0;
         actives = GetComponent<Actives>();
+        passive = Items.none;
         active = null;
     }
 
@@ -41,7 +46,11 @@ public class Inventory : MonoBehaviour
         currentPickupCooldown -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Q) && active != null && !GetComponent<PlayerMovScript>().useController)
+        {
             active();
+            active = null;
+            activePickup = null;
+        }
     }
 
     public void PickUp(GameObject pickup, Items item)
@@ -88,6 +97,15 @@ public class Inventory : MonoBehaviour
                     break;
                 case Items.grenade:
                     active = actives.Grenade;
+                    if (activePickup != null)
+                    {
+                        activePickup.transform.position = transform.position;
+                        activePickup.SetActive(true);
+                    }
+                    activePickup = pickup;
+                    break;
+                case Items.healField:
+                    active = actives.HealField;
                     if (activePickup != null)
                     {
                         activePickup.transform.position = transform.position;

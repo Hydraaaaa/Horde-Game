@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 135421644463376414}
   - component: {fileID: 114969896260128928}
   - component: {fileID: 114531686482068708}
+  - component: {fileID: 114973356842614250}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2783,11 +2784,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1231569685718394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86e2c0878a1ae2e4a8edef7c07cc5bbd, type: 3}
+  m_Script: {fileID: 11500000, guid: c102bf9b9dda4914ebfac18de50125f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupCooldown: 5
+  pickupCooldown: 1
   currentPickupCooldown: 0
+  passive: 0
 --- !u!114 &114555256336410790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3067,6 +3069,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114973356842614250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b46cb47eef5bb43aebef808accdfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medkitHealth: 40
+  grenade: {fileID: 1323575115956990, guid: 8f1e9df4699867743a8e43ac98481f7b, type: 2}
+  healField: {fileID: 1614673735242638, guid: 794b0d34efeaf824c9d62700c459cdcb, type: 2}
 --- !u!120 &120885250459197078
 LineRenderer:
   m_ObjectHideFlags: 1

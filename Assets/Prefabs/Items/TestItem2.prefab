@@ -103,15 +103,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165584738007030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f3b8b2fc7370e448423cd00dc473a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 92a286c38b998de4bae34da827b70a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    name: asdf
-    pickup: {fileID: 114882382773588304}
-    script: {fileID: 11500000, guid: 3b383d8aa25515449b145118fa6a3f02, type: 3}
-    active: 0
-    index: 0
+  item: 8
 --- !u!135 &135856981610580492
 SphereCollider:
   m_ObjectHideFlags: 1
