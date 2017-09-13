@@ -159,7 +159,10 @@ public class PlayerMovScript : MonoBehaviour
                     if (Input.GetKey(KeyCode.D))
                         direction += camera.transform.right * moveSpeed * Time.deltaTime;
 
-                    controller.Move(direction);
+                    if (inventory.passive == Items.runBoost)
+                        controller.Move(direction * 1.2f);
+                    else
+                        controller.Move(direction);
                 }
             }
             anim.SetBool("Shooting", Shooting);
