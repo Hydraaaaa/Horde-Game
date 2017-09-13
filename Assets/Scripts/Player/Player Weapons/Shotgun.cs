@@ -90,10 +90,13 @@ public class Shotgun : MonoBehaviour
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
                     bulletScript.shooter = this.gameObject;
                     bulletScript.velocity = aimDir;
-                    if (GetComponent<Inventory>().passive == Items.damageBoost)
-                        bulletScript.damage = Mathf.RoundToInt(damage * 1.3f);
-                    else
-                        bulletScript.damage = damage;
+                    if (GetComponent<ReviveSystem>() == null || !GetComponent<ReviveSystem>().NeedRes)
+                    {
+                        if (GetComponent<Inventory>().passive == Items.damageBoost)
+                            bulletScript.damage = Mathf.RoundToInt(damage * 1.3f);
+                        else
+                            bulletScript.damage = damage;
+                    }
 
                     Collider[] playerColliders = GetComponents<Collider>();
                     for (int j = 0; j < playerColliders.Length; j++)
@@ -124,10 +127,13 @@ public class Shotgun : MonoBehaviour
 
                         if (hit.transform.GetComponent<Health>() != null)
                         {
-                            if (GetComponent<Inventory>().passive == Items.damageBoost)
-                                hit.transform.GetComponent<Health>().Damage(Mathf.RoundToInt(damage * 1.3f));
-                            else
-                                hit.transform.GetComponent<Health>().Damage(damage);
+                            if (GetComponent<ReviveSystem>() == null || !GetComponent<ReviveSystem>().NeedRes)
+                            {
+                                if (GetComponent<Inventory>().passive == Items.damageBoost)
+                                    hit.transform.GetComponent<Health>().Damage(Mathf.RoundToInt(damage * 1.3f));
+                                else
+                                    hit.transform.GetComponent<Health>().Damage(damage);
+                            }
 
                             // If the attacked target is an enemy
                             if (hit.transform.GetComponent<Health>().Enemy && this.CompareTag("Player"))

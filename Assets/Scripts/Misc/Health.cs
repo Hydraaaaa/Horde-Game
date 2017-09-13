@@ -5,26 +5,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int maxHealth;
-    int currentHealth;
-    public int health
-    {
-        get
-        {
-            return currentHealth;
-        }
-        set
-        {
-            currentHealth = value;
+    public int health;
 
-            if (currentHealth > maxHealth)
-                currentHealth = maxHealth;
-
-            if (currentHealth <= 0)
-            {
-                OnDie();
-            }
-        }
-    }
     public delegate void NoHealth(GameObject source = null);
     public NoHealth OnDie;
 
@@ -37,27 +19,28 @@ public class Health : MonoBehaviour
         OnDie = Die;
     }
 
+    void Update()
+    {
+        if (health > maxHealth)
+            health = maxHealth;
+
+        if (health <= 0)
+            OnDie();
+    }
+
     public void Damage(int damage, GameObject source = null)
     {
         health -= damage;
 
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        if (health > maxHealth)
+            health = maxHealth;
 
-        if (currentHealth <= 0)
-        {
+        if (health <= 0)
             OnDie(source);
-        }
     }
 
     public void Die(GameObject source = null)
     {
         Destroy(gameObject);
     }
-
-    //public void PlayerDie()
-    //{
-    //    GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>().players.Remove(gameObject);
-    //    Destroy(gameObject);
-    //}
 }

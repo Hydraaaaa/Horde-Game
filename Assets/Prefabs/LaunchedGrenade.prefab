@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 1.2
   damage: 120
-  range: 2
+  range: 3
   particleEffects:
   - {fileID: 1730440160272812, guid: 7ed25e1b63a428545a2dcc634f56ada8, type: 2}
   - {fileID: 1750743237893896, guid: b2befe33f2740bd46b36ab2c22e06506, type: 2}
