@@ -312,7 +312,7 @@ MonoBehaviour:
   trackingPlayer: {fileID: 0}
   ResourceGain: 10
   TrackingTo: -1
-  TrackSpeed: 4
+  TrackSpeed: 5
   ScaleSpeed: 0.025
   rotationSpeed: 0.2
   p1: {fileID: 1091844985548122}
