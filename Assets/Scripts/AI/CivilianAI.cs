@@ -1,19 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CivilianAI : MonoBehaviour
 {
-    public enum QuestList { FIND_QITEM, GIVE_GUN, RESCUE, ESCORT }
+    public enum QuestList { DECIDE_ON_STARTUP, FIND_QITEM, GIVE_GUN, RESCUE, ESCORT }
 
     public Animator anim;
 
     // Enum for the type of quest
     public QuestList Quest;
-
-    // The row of dialogue used for the npc
-    public int questDialogueNo;
 
     public float talkDistance;
 
@@ -21,42 +18,107 @@ public class CivilianAI : MonoBehaviour
     public float popupTime;
     float currentPopupTime;
 
+
+
+    [Header("Collection Dialogue")]
+    // All dialogue that can be used by the npc
+    public string[] startDialogueCollect;
+    public string[] endDialogueCollect;
+    public string[] todoListInfoCollect;
+
+    [Header("Give Dialogue")]
+    public string[] startDialogueGive;
+    public string[] endDialogueGive;
+    public string[] todoListInfoGive;
+
+    [Header("Rescue Dialogue")]
+    public string[] startDialogueRescue;
+    public string[] endDialogueRescue;
+    public string[] todoListInfoRescue;
+
+    [Header("Escort Dialogue")]
+    public string[] startDialogueEscort;
+    public string[] endDialogueEscort;
+    public string[] todoListInfoEscort;
+
+
+    [Header("Debug Information")]
+    // Public list of all players in range of the npc
+    public List<GameObject> playersInRange;
+
     // bools
     public bool MissionAvailable;
     public bool ObjectiveCompleted;
     public bool MissionCompleted;
     public bool Talking;
 
-    // All dialogue that can be used by the npc
-    public string[] startDialogue;
-    public string[] endDialogue;
-    public string[] todoListInfo;
-
-
-    // Public list of all players in range of the npc
-    public List<GameObject> playersInRange;
+    // The row of dialogue used for the npc
+    public int questDialogueNo;
 
     // Use this for initialization
     void Start ()
     {
-        questDialogueNo = Random.Range(0, startDialogue.Length);
-        currentPopupTime = popupTime;
-        if (MissionCompleted == true && MissionAvailable == false)
+        // If the mission type is undefined
+        if (Quest == QuestList.DECIDE_ON_STARTUP)
         {
-            GetComponent<CivilianNavigation>().enabled = true;
+            Quest = (QuestList)Random.Range(1, 4);
         }
+
+        // anim = transform.GetChild(0).GetComponent<Animator>();
+
+        // Generate the Quest Text
+        switch (Quest)
+        {
+            case QuestList.ESCORT:
+                questDialogueNo = Random.Range(0, startDialogueEscort.Length);
+                currentPopupTime = popupTime;
+                if (MissionCompleted == true && MissionAvailable == false)
+                {
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
+                break;
+            case QuestList.FIND_QITEM:
+                questDialogueNo = Random.Range(0, startDialogueCollect.Length);
+                currentPopupTime = popupTime;
+                if (MissionCompleted == true && MissionAvailable == false)
+                {
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
+                break;
+            case QuestList.GIVE_GUN:
+                questDialogueNo = Random.Range(0, startDialogueGive.Length);
+                currentPopupTime = popupTime;
+                if (MissionCompleted == true && MissionAvailable == false)
+                {
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
+                break;
+            case QuestList.RESCUE:
+                questDialogueNo = Random.Range(0, startDialogueRescue.Length);
+                currentPopupTime = popupTime;
+                if (MissionCompleted == true && MissionAvailable == false)
+                {
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
+                break;
+        }
+
+
 	}
 	
-	// Update is called once per frame
-	void Update ()
+    void EscortType()
     {
+    }
+
+    void FindType()
+    {
+        Debug.Log("UPD");
         anim.SetBool("MissionAvailable", MissionAvailable);
         anim.SetBool("MissionCompleted", MissionCompleted);
         anim.SetBool("Talking", Talking);
 
         if (MissionCompleted != true)
         {
-
             // Make sure the referances to the player are still useable
             for (int i = 0; i < playersInRange.Count; i++)
             {
@@ -82,7 +144,7 @@ public class CivilianAI : MonoBehaviour
                 if (MissionAvailable)
                 {
                     currentPopupTime = popupTime;
-                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogue[questDialogueNo];
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = startDialogueCollect[questDialogueNo];
                     GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
                     Talking = true;
                     MissionAvailable = false;
@@ -92,10 +154,9 @@ public class CivilianAI : MonoBehaviour
                 {
                     currentPopupTime = popupTime;
                     MissionCompleted = true;
-                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = endDialogue[questDialogueNo];
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.text = endDialogueCollect[questDialogueNo];
                     GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = true;
                     Talking = true;
-                    GetComponent<CivilianNavigation>().enabled = true;
                 }
             }
         }
@@ -108,7 +169,30 @@ public class CivilianAI : MonoBehaviour
             {
                 GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = false;
                 Talking = false;
+
+                if (MissionCompleted)
+                {
+                    GetComponent<CivilianNavigation>().enabled = true;
+                }
             }
+        }
+    }
+
+	// Update is called once per frame
+	void Update ()
+    {
+        switch (Quest)
+        {
+            case QuestList.ESCORT:
+                EscortType();
+                break;
+            case QuestList.FIND_QITEM:
+                FindType();
+                break;
+            case QuestList.GIVE_GUN:
+                break;
+            case QuestList.RESCUE:
+                break;
         }
     }
 
