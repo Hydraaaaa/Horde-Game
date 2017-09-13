@@ -384,8 +384,8 @@ public class SpitterNavigation : MonoBehaviour
 
     void ContinueGrab()
     {
-        int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
-        layermask = 1 << LayerMask.NameToLayer("Enemy");
+        //int layermask = 1 << LayerMask.NameToLayer("SeeThrough");
+        //layermask = 1 << LayerMask.NameToLayer("Enemy");
         //layermask = ~layermask;
 
         Debug.DrawLine(transform.position, player.transform.position - (player.transform.position - transform.position).normalized * 2, Color.red);

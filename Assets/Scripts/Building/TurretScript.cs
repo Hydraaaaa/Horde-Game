@@ -160,7 +160,7 @@ public class TurretScript : MonoBehaviour
 
         if (Camera.main != null)
         {
-            if (InactivePiece.active)
+            if (InactivePiece.activeInHierarchy)
             {
                 UIPiece.transform.position = Camera.main.WorldToScreenPoint(GamepadTransform.transform.position);
             }
@@ -540,6 +540,7 @@ public class TurretScript : MonoBehaviour
             if (playerRes.Resources >= TurInformation[turretNumber].Cost)
             {
                 playerRes.Resources = playerRes.Resources - TurInformation[turretNumber].Cost;
+                ScoreManager.instance.TurretUpgrade(playerRes.gameObject);
 
                 switch (TurInformation[turretNumber].Level)
                 {
@@ -666,6 +667,7 @@ public class TurretScript : MonoBehaviour
         if (playerRes.Resources >= (TurInformation[turretNumber].Cost / 2))
         {
             playerRes.Resources = playerRes.Resources - (TurInformation[turretNumber].Cost / 2);
+            ScoreManager.instance.TurretRepair(playerRes.gameObject);
 
             // Set Current Lifetime back to max lifetime
             TurInformation[turretNumber].curActiveTime = TurInformation[turretNumber].activeTime;

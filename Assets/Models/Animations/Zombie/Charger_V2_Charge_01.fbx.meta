@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: 7cf165d98e307644cb4aafdc549a523e
+timeCreated: 1505276560
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Ankle_LFT_JNT
+    100002: Ankle_Pivot_LFT
+    100004: Ankle_Pivot_RGT
+    100006: Ankle_RGT_JNT
+    100008: Arm_IK_LFT
+    100010: Arm_IK_RGT
+    100012: Arm_LFT
+    100014: Arm_RGT
+    100016: Ball_JNT_LFT
+    100018: Ball_JNT_RGT
+    100020: BallRoll_LFT
+    100022: BallRoll_RGT
+    100024: bruteZombie_02:body
+    100026: bruteZombie_02:eyes
+    100028: bruteZombie_02:mask
+    100030: bruteZombie_02:teeth
+    100032: Charger_GEO
+    100034: //RootNode
+    100036: CNTRL_Root_JNT
+    100038: Cog
+    100040: Cog 1
+    100042: Collar_LFT_JNT
+    100044: Collar_RGT_JNT
+    100046: curve11
+    100048: curve12
+    100050: curve13
+    100052: curve14
+    100054: curve15
+    100056: curve16
+    100058: curve17
+    100060: curve18
+    100062: curve19
+    100064: curve20
+    100066: curve21
+    100068: curve22
+    100070: curve23
+    100072: curve24
+    100074: curve25
+    100076: curve26
+    100078: curve27
+    100080: curve28
+    100082: curve29
+    100084: curve30
+    100086: Elbow_LFT_JNT
+    100088: Elbow_RGT_JNT
+    100090: FINGERS_LFT_JNT
+    100092: FINGERS_RGT_JNT
+    100094: Foot_CNTRL_LFT
+    100096: Foot_CNTRL_LFT 1
+    100098: Foot_CNTRL_RGT
+    100100: Foot_CNTRL_RGT 1
+    100102: Hand_CNTRL_LFT
+    100104: Hand_CNTRL_RGT
+    100106: HAND_LFT_JNT
+    100108: HAND_RGT_JNT
+    100110: Head_CNTRL
+    100112: Head_JNT
+    100114: Hip_LFT_JNT
+    100116: Hip_RGT_JNT
+    100118: IK_Ankle_LFT
+    100120: IK_ANKLE_RGT
+    100122: IK_Toe_LFT
+    100124: IK_Toe_RGT
+    100126: Knee_LFT_JNT
+    100128: Knee_RGT_JNT
+    100130: Leg_IK_LFT
+    100132: Leg_IK_RGT
+    100134: Leg_LFT
+    100136: Leg_RG
+    100138: Mask_CNTRL
+    100140: Neck_01_JNT
+    100142: Neck_02_JNT
+    100144: Neck_CNTRL
+    100146: Root
+    100148: Shoulder_LFT_CNTRL
+    100150: Shoulder_LFT_JNT
+    100152: Shoulder_RGT_CNTRL
+    100154: Shoulder_RGT_JNT
+    100156: Spine_01_CNTRL
+    100158: Spine_01_JNT
+    100160: Spine_02_CNTRL
+    100162: Spine_02_JNT
+    100164: Spine_03_CNTRL
+    100166: Spine_03_JNT
+    100168: Spine_04_CNTRL
+    100170: Spine_04_JNT
+    100172: Toe_JNT_LFT
+    100174: Toe_JNT_RGT
+    100176: ToeTap_LFT
+    100178: ToeTap_RGT
+    100180: Waist_CNTRL
+    100182: Waist_JNT
+    100184: Wrist_CNTRL_LFT
+    100186: Wrist_CNTRL_RGT
+    100188: Wrist_LFT_JNT
+    100190: Wrist_RGT_JNT
+    400000: Ankle_LFT_JNT
+    400002: Ankle_Pivot_LFT
+    400004: Ankle_Pivot_RGT
+    400006: Ankle_RGT_JNT
+    400008: Arm_IK_LFT
+    400010: Arm_IK_RGT
+    400012: Arm_LFT
+    400014: Arm_RGT
+    400016: Ball_JNT_LFT
+    400018: Ball_JNT_RGT
+    400020: BallRoll_LFT
+    400022: BallRoll_RGT
+    400024: bruteZombie_02:body
+    400026: bruteZombie_02:eyes
+    400028: bruteZombie_02:mask
+    400030: bruteZombie_02:teeth
+    400032: Charger_GEO
+    400034: //RootNode
+    400036: CNTRL_Root_JNT
+    400038: Cog
+    400040: Cog 1
+    400042: Collar_LFT_JNT
+    400044: Collar_RGT_JNT
+    400046: curve11
+    400048: curve12
+    400050: curve13
+    400052: curve14
+    400054: curve15
+    400056: curve16
+    400058: curve17
+    400060: curve18
+    400062: curve19
+    400064: curve20
+    400066: curve21
+    400068: curve22
+    400070: curve23
+    400072: curve24
+    400074: curve25
+    400076: curve26
+    400078: curve27
+    400080: curve28
+    400082: curve29
+    400084: curve30
+    400086: Elbow_LFT_JNT
+    400088: Elbow_RGT_JNT
+    400090: FINGERS_LFT_JNT
+    400092: FINGERS_RGT_JNT
+    400094: Foot_CNTRL_LFT
+    400096: Foot_CNTRL_LFT 1
+    400098: Foot_CNTRL_RGT
+    400100: Foot_CNTRL_RGT 1
+    400102: Hand_CNTRL_LFT
+    400104: Hand_CNTRL_RGT
+    400106: HAND_LFT_JNT
+    400108: HAND_RGT_JNT
+    400110: Head_CNTRL
+    400112: Head_JNT
+    400114: Hip_LFT_JNT
+    400116: Hip_RGT_JNT
+    400118: IK_Ankle_LFT
+    400120: IK_ANKLE_RGT
+    400122: IK_Toe_LFT
+    400124: IK_Toe_RGT
+    400126: Knee_LFT_JNT
+    400128: Knee_RGT_JNT
+    400130: Leg_IK_LFT
+    400132: Leg_IK_RGT
+    400134: Leg_LFT
+    400136: Leg_RG
+    400138: Mask_CNTRL
+    400140: Neck_01_JNT
+    400142: Neck_02_JNT
+    400144: Neck_CNTRL
+    400146: Root
+    400148: Shoulder_LFT_CNTRL
+    400150: Shoulder_LFT_JNT
+    400152: Shoulder_RGT_CNTRL
+    400154: Shoulder_RGT_JNT
+    400156: Spine_01_CNTRL
+    400158: Spine_01_JNT
+    400160: Spine_02_CNTRL
+    400162: Spine_02_JNT
+    400164: Spine_03_CNTRL
+    400166: Spine_03_JNT
+    400168: Spine_04_CNTRL
+    400170: Spine_04_JNT
+    400172: Toe_JNT_LFT
+    400174: Toe_JNT_RGT
+    400176: ToeTap_LFT
+    400178: ToeTap_RGT
+    400180: Waist_CNTRL
+    400182: Waist_JNT
+    400184: Wrist_CNTRL_LFT
+    400186: Wrist_CNTRL_RGT
+    400188: Wrist_LFT_JNT
+    400190: Wrist_RGT_JNT
+    4300000: bruteZombie_02:body
+    4300002: bruteZombie_02:mask
+    4300004: bruteZombie_02:eyes
+    4300006: bruteZombie_02:teeth
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: bruteZombie_02:body
+    13700002: bruteZombie_02:eyes
+    13700004: bruteZombie_02:mask
+    13700006: bruteZombie_02:teeth
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

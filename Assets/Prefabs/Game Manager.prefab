@@ -87,11 +87,13 @@ MonoBehaviour:
   playerKillScore: -5
   playerDeathScore: -3
   playerReviveScore: 3
-  civilianEscapeScore: 2
   scrapPickupScore: 1
-  turretUpgradeScore: 0
-  turretRepairScore: 0
+  turretUpgradeScore: 6
+  turretRepairScore: 4
+  barrierUpgradeScore: 6
+  barrierRepairScore: 4
   civilianDeathScore: -1
+  civilianEscapeScore: 2
 --- !u!114 &114788100348366930
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
                 CheckAxis();
             }
 
-            if (MainHUD.active)
+            if (MainHUD.activeInHierarchy)
             {
                 // Right Trigger
                 if (!Input.GetButton("Joy1AButton"))
@@ -174,8 +174,8 @@ public class GameManager : MonoBehaviour
 
     public void ToggleControlsHUD()
     {
-        MainHUD.SetActive(!MainHUD.active);
-        ControlsHUD.SetActive(!ControlsHUD.active);
+        MainHUD.SetActive(!MainHUD.activeInHierarchy);
+        ControlsHUD.SetActive(!ControlsHUD.activeInHierarchy);
     }
 
     public void QuitScene()

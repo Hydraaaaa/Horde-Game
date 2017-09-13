@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject camera;
+    public new GameObject camera;
     public float moveSpeed;
 
     CharacterController controller;

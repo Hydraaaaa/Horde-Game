@@ -40,7 +40,7 @@ public class ScrapSpawner : MonoBehaviour
                     transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
                     transform.position.z + Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
                 );
-                GameObject newlySpawned = Instantiate(ResourcePrefab, spawnPos, transform.rotation);
+                Instantiate(ResourcePrefab, spawnPos, transform.rotation);
             }
         }
     }
