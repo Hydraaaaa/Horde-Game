@@ -5,7 +5,26 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int maxHealth;
-    public int health;
+    int currentHealth;
+    public int health
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            currentHealth = value;
+
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
+
+            if (currentHealth <= 0)
+            {
+                OnDie();
+            }
+        }
+    }
     public delegate void NoHealth(GameObject source = null);
     public NoHealth OnDie;
 
@@ -18,21 +37,14 @@ public class Health : MonoBehaviour
         OnDie = Die;
     }
 
-    void Update()
-    {
-        if (health <= 0)
-        {
-            OnDie();
-        }
-    }
-
     public void Damage(int damage, GameObject source = null)
     {
         health -= damage;
-        if (health > maxHealth)
-            health = maxHealth;
 
-        if (health <= 0)
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        if (currentHealth <= 0)
         {
             OnDie(source);
         }

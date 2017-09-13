@@ -101,6 +101,8 @@ public class SpitterNavigation : MonoBehaviour
         // Get reference to the zombies agent
         agent = GetComponent<NavMeshAgent>();
         agent.CalculatePath(TargetPos, path);
+
+        GetComponent<Health>().OnDie = Die;
     }
 
     void Update()
@@ -744,5 +746,12 @@ public class SpitterNavigation : MonoBehaviour
                 obj.GetComponent<Health>().Damage(damage);
             }
         }
+    }
+
+    void Die(GameObject source = null)
+    {
+        if (source != null && source.CompareTag("Player"))
+            ScoreManager.instance.SpitterKill(source);
+        Destroy(gameObject);
     }
 }

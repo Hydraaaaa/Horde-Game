@@ -101,6 +101,8 @@ public class ChargerNavigation : MonoBehaviour
         ChargeBarrier = transform.GetChild(1).gameObject;
         //player = GameObject.FindGameObjectWithTag("Player 1");
         currentChargeWindupTime = chargeWindupTime;
+
+        GetComponent<Health>().OnDie = Die;
     }
 
     void Update()
@@ -651,5 +653,12 @@ public class ChargerNavigation : MonoBehaviour
                 }
             }
         }
+    }
+
+    void Die(GameObject source = null)
+    {
+        if (source != null && source.CompareTag("Player"))
+            ScoreManager.instance.ChargerKill(source);
+        Destroy(gameObject);
     }
 }

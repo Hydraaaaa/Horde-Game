@@ -71,6 +71,9 @@ public class EnemyNavigation : MonoBehaviour
 
         //player = GameObject.FindGameObjectWithTag("Player 1");
         Physics.IgnoreCollision(GetComponent<SphereCollider>(), GameObjectManager.instance.endPos.GetComponent<BoxCollider>());
+
+        if (GetComponent<ChargerNavigation>() == null && GetComponent<SpitterNavigation>() == null)
+            GetComponent<Health>().OnDie = Die;
     }
 
     void Update()
@@ -424,5 +427,12 @@ public class EnemyNavigation : MonoBehaviour
                 obj.GetComponent<Health>().Damage(damage);
             }
         }
+    }
+
+    void Die(GameObject source = null)
+    {
+        if (source != null && source.CompareTag("Player"))
+            ScoreManager.instance.RegularKill(source);
+        Destroy(gameObject);
     }
 }
