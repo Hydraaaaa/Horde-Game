@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 4633097215938290}
   - component: {fileID: 114225659590822462}
   - component: {fileID: 114788100348366930}
-  - component: {fileID: 114189161229877810}
-  - component: {fileID: 114913428826362956}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Game Manager
@@ -43,61 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114189161229877810
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112002458870338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0137d0c3af19045afa9dec68f5a9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagScores:
-  - tag: Untagged
-    score: 0
-  - tag: Respawn
-    score: 0
-  - tag: Finish
-    score: 0
-  - tag: EditorOnly
-    score: 0
-  - tag: MainCamera
-    score: 0
-  - tag: Player
-    score: 0
-  - tag: GameController
-    score: 0
-  - tag: Enemy
-    score: 2
-  - tag: Player Start
-    score: 0
-  - tag: Barricade
-    score: 0
-  - tag: Game Manager
-    score: 0
-  - tag: End Position
-    score: 0
-  - tag: Enemy Spawner
-    score: 0
-  - tag: Civilian Spawner
-    score: 0
-  - tag: Civilian
-    score: -5
-  - tag: CivilianDestination
-    score: 0
-  - tag: Turret
-    score: 0
-  scriptScores:
-  - script: {fileID: 11500000, guid: 2a13538795e70ef46a67a9d066cd4672, type: 3}
-    score: 10
-  - script: {fileID: 11500000, guid: a8454a5c09f3a8a4cb83c50c37fcc1f9, type: 3}
-    score: 10
-  scoreOnPlayerEscape: 5
-  scoreOnCivilianRescue: 4
-  scoreOnScrapPickup: 1
-  scoreOnPlayerRevive: 3
 --- !u!114 &114225659590822462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,23 +108,3 @@ MonoBehaviour:
   playersEscaped: 0
   playing: 0
   trySplitScreen: 1
---- !u!114 &114913428826362956
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1112002458870338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c8e7979e9e01f408000faaae7ebc37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - pickup: {fileID: 114757554429721766, guid: a942ac6eb37dc474dbfef5de66a49bda, type: 2}
-    script: {fileID: 11500000, guid: 3b383d8aa25515449b145118fa6a3f02, type: 3}
-    active: 0
-    index: 0
-  - pickup: {fileID: 114882382773588304, guid: d67ee0cb26d837f4d929d47c11c13ae2, type: 2}
-    script: {fileID: 11500000, guid: 581e6ea623a6b5246a4a4508128aa349, type: 3}
-    active: 1
-    index: 1

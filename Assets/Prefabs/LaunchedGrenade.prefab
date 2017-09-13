@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f2c06bf2e98e84fbf6546caa006cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 3
+  time: 1.2
   damage: 120
-  range: 1
+  range: 2
   particleEffects:
   - {fileID: 1730440160272812, guid: 7ed25e1b63a428545a2dcc634f56ada8, type: 2}
   - {fileID: 1750743237893896, guid: b2befe33f2740bd46b36ab2c22e06506, type: 2}
