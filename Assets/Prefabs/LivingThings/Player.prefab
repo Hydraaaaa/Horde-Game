@@ -2726,6 +2726,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon1: 0
   weapon2: 1
+  riflePickup: {fileID: 1313768391329406, guid: 84b78d0da68e68e49a4d9f1d32aab783,
+    type: 2}
+  shotgunPickup: {fileID: 1372249822856132, guid: aa7ce07e963a3dc43a6992d0b2965bcd,
+    type: 2}
+  fireworkPickup: {fileID: 1670521239737228, guid: f9107bee76863654186d888fec0e0570,
+    type: 2}
   rifleModel: {fileID: 1429828883217498}
   shotgunModel: {fileID: 1209725610395278}
   fireworkModel: {fileID: 1804009417822600}
