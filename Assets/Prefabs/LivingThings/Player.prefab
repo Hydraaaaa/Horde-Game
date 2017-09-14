@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 23126236530991466}
   - component: {fileID: 95578306901710166}
   m_Layer: 0
-  m_Name: gun_SKEL (1)
+  m_Name: ShotgunMDL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,6 @@ GameObject:
   - component: {fileID: 114021898860228178}
   - component: {fileID: 114928246850845566}
   - component: {fileID: 135421644463376414}
-  - component: {fileID: 114969896260128928}
   - component: {fileID: 114531686482068708}
   - component: {fileID: 114973356842614250}
   - component: {fileID: 114275037088030020}
@@ -556,7 +555,7 @@ GameObject:
   - component: {fileID: 23818629893828178}
   - component: {fileID: 95257785393239112}
   m_Layer: 0
-  m_Name: Rifle_01
+  m_Name: RifleMDL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1014,7 @@ GameObject:
   - component: {fileID: 4285804376758908}
   - component: {fileID: 95019097740669786}
   m_Layer: 0
-  m_Name: MG_03
+  m_Name: MachinegunMDL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1713,8 +1712,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4608894422720996}
+  m_Children: []
   m_Father: {fileID: 4285804376758908}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1881,14 +1879,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1943170100614640}
-  m_LocalRotation: {x: 0.000000059604616, y: -0.000000025683226, z: -0.00000003226867,
-    w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.064, z: 0}
-  m_LocalScale: {x: 1.0000014, y: 1.0000024, z: 1.0000021}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.125, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4448755783239838}
+  m_Father: {fileID: 4703873352639766}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4620472778649044
 Transform:
   m_ObjectHideFlags: 1
@@ -1954,7 +1951,8 @@ Transform:
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: -0.5}
   m_LocalPosition: {x: 0.134, y: 0.143, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4608894422720996}
   m_Father: {fileID: 4345774352605118}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
@@ -2731,6 +2729,7 @@ MonoBehaviour:
   rifleModel: {fileID: 1429828883217498}
   shotgunModel: {fileID: 1209725610395278}
   fireworkModel: {fileID: 1804009417822600}
+  SwappingWeapon: 0
 --- !u!114 &114287895095296774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3007,6 +3006,7 @@ MonoBehaviour:
   EnergyPerTick: 0.25
   Guns:
   - {fileID: 1429828883217498}
+  - {fileID: 1209725610395278}
   camera: {fileID: 0}
 --- !u!114 &114892335773279828
 MonoBehaviour:
@@ -3072,25 +3072,6 @@ MonoBehaviour:
   InteractGUIController: {fileID: 1499863844542084}
   InteractGUIKeyboard: {fileID: 1937549096579164}
   NeedRes: 0
---- !u!114 &114969896260128928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c151e3524b59e24ca8fee0c91d7f5dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RifleModel: {fileID: 1429828883217498}
-  ShotgunModel: {fileID: 1209725610395278}
-  LocalRifleScript: {fileID: 0}
-  LocalShotgunScript: {fileID: 0}
-  WeaponSlot1: 0
-  WeaponSlot2: 2
-  CurrentWeapon: 0
-  SwappingWeapon: 0
 --- !u!114 &114972063538493514
 MonoBehaviour:
   m_ObjectHideFlags: 1

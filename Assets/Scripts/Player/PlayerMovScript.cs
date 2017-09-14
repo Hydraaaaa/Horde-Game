@@ -64,12 +64,22 @@ public class PlayerMovScript : MonoBehaviour
         transform.position = new Vector3(transform.position.x, playerHeight, transform.position.z);
         Shooting = false;
 
-        for(int i = 0; i < Guns.Length; i++)
+
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        for (int i = 0; i < Guns.Length; i++)
         {
-            if (Guns[i].name == "Rifle_01")
+            if (Guns[i].name == "RifleMDL")
             {
                 Guns[i].transform.rotation = transform.rotation;
                 Guns[i].transform.Rotate(0, 90, 0);
+            }
+            else if (Guns[i].name == "ShotgunMDL")
+            {
+                Guns[i].transform.rotation = transform.rotation;
             }
             else
             {
@@ -77,11 +87,6 @@ public class PlayerMovScript : MonoBehaviour
                 Guns[i].transform.Rotate(0, -90, 0);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update ()
-    {
         if (Input.GetKeyDown(KeyCode.Insert))
         {
             Debug.Log("You just pressed the kill switch");

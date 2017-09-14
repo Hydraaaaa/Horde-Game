@@ -24,9 +24,13 @@ public class WeaponInventory : MonoBehaviour
     public GameObject shotgunModel;
     public GameObject fireworkModel;
 
+    private string AxisCombo;
+    public bool SwappingWeapon = false;
+
     void Start ()
     {
         movScript = GetComponent<PlayerMovScript>();
+        AxisCombo = movScript.playerBeginning;
 
         weaponScripts = new Weapon[]
         {
@@ -37,9 +41,9 @@ public class WeaponInventory : MonoBehaviour
 
         activeWeapon = weapon1;
         weaponScripts[(int)activeWeapon].enabled = true;
+        SelectWeapon(1);
     }
-	
-	void Update ()
+    void Update ()
     {
         if (!movScript.useController)
         {
@@ -47,6 +51,33 @@ public class WeaponInventory : MonoBehaviour
                 SelectWeapon(1);
             if (Input.GetKeyDown(KeyCode.Alpha2))
                 SelectWeapon(2);
+        }
+        else
+        {
+            if (!SwappingWeapon)
+            {
+                if (Input.GetAxis(AxisCombo + "DHorizontal") < -0.9f || (!movScript.useController && Input.GetKeyDown(KeyCode.Alpha1)))
+                {
+                    Debug.Log("Left!");
+                    SwappingWeapon = true;
+                    SelectWeapon(1);
+                }
+
+                if (Input.GetAxis(AxisCombo + "DHorizontal") > 0.9f || (!movScript.useController && Input.GetKeyDown(KeyCode.Alpha2)))
+                {
+                    Debug.Log("Right!");
+                    SwappingWeapon = true;
+
+                    SelectWeapon(2);
+                }
+            }
+            else
+            {
+                if (Input.GetAxis(AxisCombo + "DHorizontal") < 0.9f && Input.GetAxis(AxisCombo + "DHorizontal") > -0.9f)
+                {
+                    SwappingWeapon = false;
+                }
+            }
         }
     }
 
