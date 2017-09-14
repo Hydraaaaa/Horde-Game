@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135544697926440358}
   - component: {fileID: 114087111269022076}
   - component: {fileID: 114118758163211276}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PickupCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public Vector3 velocity;
     public GameObject shooter;
     public int damage;
-    float timer;
+    public float timer;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Health>() != null)
         {
-            other.gameObject.GetComponent<Health>().Damage(damage);
+            other.gameObject.GetComponent<Health>().Damage(damage, shooter);
 
             if (other.transform.GetComponent<Health>().Enemy && shooter.tag == "Player")
                 other.transform.GetComponent<Health>().Attacker = shooter;

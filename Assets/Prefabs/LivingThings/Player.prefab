@@ -351,12 +351,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4053672064050070}
   - component: {fileID: 143391138108412064}
+  - component: {fileID: 114887641942699286}
   - component: {fileID: 114118442132592400}
   - component: {fileID: 114504510429051004}
   - component: {fileID: 114158662444876308}
+  - component: {fileID: 114059485551122772}
   - component: {fileID: 114736662164450560}
   - component: {fileID: 120885250459197078}
-  - component: {fileID: 114887641942699286}
   - component: {fileID: 114344224025554006}
   - component: {fileID: 114190491810406482}
   - component: {fileID: 114021898860228178}
@@ -365,6 +366,7 @@ GameObject:
   - component: {fileID: 114969896260128928}
   - component: {fileID: 114531686482068708}
   - component: {fileID: 114973356842614250}
+  - component: {fileID: 114275037088030020}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -559,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1440508767142124
 GameObject:
   m_ObjectHideFlags: 1
@@ -2555,6 +2557,27 @@ MonoBehaviour:
   playerHP: {fileID: 0}
   playerScrap: {fileID: 0}
   playerEnergy: {fileID: 0}
+--- !u!114 &114059485551122772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9831fd822510c3e4cb6944f00968c437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 114041424167865810, guid: 4c40e3062af85c14d859f2064c7b1a05,
+    type: 2}
+  cooldown: 1
+  accuracy: 0
+  damage: 10
+  laserLength: 10
+  projectileSpeed: 5
+  energyCost: 24
+  laserStartPoint: {fileID: 1008923965842268}
+  gunshot: {fileID: 0}
 --- !u!114 &114102824082730392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2692,6 +2715,22 @@ MonoBehaviour:
   Enemy: 0
   Player: 1
   Attacker: {fileID: 0}
+--- !u!114 &114275037088030020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231569685718394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a48439c8131bd49aaf3b85d3e7a84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon1: 0
+  weapon2: 1
+  rifleModel: {fileID: 1429828883217498}
+  shotgunModel: {fileID: 1209725610395278}
+  fireworkModel: {fileID: 1804009417822600}
 --- !u!114 &114287895095296774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2787,9 +2826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c102bf9b9dda4914ebfac18de50125f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupCooldown: 1
-  currentPickupCooldown: 0
   passive: 0
+  pickupRadius: 2
 --- !u!114 &114555256336410790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3040,7 +3078,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231569685718394}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c151e3524b59e24ca8fee0c91d7f5dc, type: 3}
   m_Name: 

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135247172778529828}
   - component: {fileID: 114448270746430110}
   - component: {fileID: 114809380932664544}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PickupDamageBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}

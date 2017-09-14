@@ -64,7 +64,9 @@ public class ScoreManager : MonoBehaviour
     {
         if (player != null)
         {
-            GameObjectManager.instance.GetPlayer(player).score += regularKillScore;
+            Player currentPlayer = GameObjectManager.instance.GetPlayer(player);
+            currentPlayer.score += regularKillScore;
+            currentPlayer.regularKills++;
 
             int num = player.GetComponent<PlayerMovScript>().playerNumber - 1;
             currentMultiplier[num] += killstreakAddedMultiplier;
@@ -72,6 +74,7 @@ public class ScoreManager : MonoBehaviour
                 currentMultiplier[num] = killstreakMaxMultiplier;
             currentResetTime[num] = 0;
             currentKillstreak[num]++;
+            multiplierScore[num] += regularKillScore * currentMultiplier[num];
         }
     }
     public void SpitterKill(GameObject player)
@@ -88,6 +91,7 @@ public class ScoreManager : MonoBehaviour
                 currentMultiplier[num] = killstreakMaxMultiplier;
             currentResetTime[num] = 0;
             currentKillstreak[num]++;
+            multiplierScore[num] += spitterKillScore * currentMultiplier[num];
         }
     }
     public void ChargerKill(GameObject player)
@@ -104,6 +108,7 @@ public class ScoreManager : MonoBehaviour
                 currentMultiplier[num] = killstreakMaxMultiplier;
             currentResetTime[num] = 0;
             currentKillstreak[num]++;
+            multiplierScore[num] += chargerKillScore * currentMultiplier[num];
         }
     }
 

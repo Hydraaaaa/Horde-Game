@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Rifle : MonoBehaviour
+public class Rifle : Weapon
 {
     public bool projectileToggle;
 
@@ -72,9 +72,9 @@ public class Rifle : MonoBehaviour
         laser.SetPosition(1, laserEndPoint);
     }
 
-    public void Attack(ref float energy)
+    public override void Attack(ref float energy)
     {
-        if (currentCooldown <= 0 && energy > energyCost)
+        if (currentCooldown <= 0 && energy >= energyCost)
         {
             currentCooldown = cooldown;
             energy -= energyCost;
@@ -85,7 +85,7 @@ public class Rifle : MonoBehaviour
 
                 GameObject bullet = Instantiate(bulletPrefab.gameObject, laserStartPoint.transform.position, laserStartPoint.transform.rotation);
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.shooter = this.gameObject;
+                bulletScript.shooter = gameObject;
                 bulletScript.velocity = aimDir;
                 if (GetComponent<ReviveSystem>() == null || !GetComponent<ReviveSystem>().NeedRes)
                 {

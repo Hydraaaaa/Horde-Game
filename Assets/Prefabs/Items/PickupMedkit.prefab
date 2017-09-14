@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135671619635799318}
   - component: {fileID: 114205452096478720}
   - component: {fileID: 114379623233522946}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: PickupMedkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Shotgun : MonoBehaviour
+public class Shotgun : Weapon
 {
     public bool projectileToggle;
 
@@ -74,9 +74,9 @@ public class Shotgun : MonoBehaviour
         laser.SetPosition(1, laserEndPoint);
     }
 
-    public void Attack(ref float energy)
+    public override void Attack(ref float energy)
     {
-        if (currentCooldown <= 0 && energy > energyCost)
+        if (currentCooldown <= 0 && energy >= energyCost)
         {
             currentCooldown = cooldown;
             energy -= energyCost;
