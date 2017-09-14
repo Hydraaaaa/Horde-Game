@@ -55,20 +55,25 @@ public class Inventory : MonoBehaviour
         int mask = 1 << LayerMask.NameToLayer("Pickup");
 
         Collider[] pickups = Physics.OverlapSphere(transform.position, pickupRadius, mask, QueryTriggerInteraction.Collide);
+        if (pickups.Length == 0)
+            return;
 
-        for (int i = 0; i < pickups.Length; i++)
+        GameObject closestPickup = pickups[0].gameObject;
+        float closestDistance = Vector3.Distance(pickups[0].transform.position, transform.position);
+
+        for (int i = 1; i < pickups.Length; i++)
         {
-            if (pickups[i].GetComponent<Pickup>())
+            if (Vector3.Distance(pickups[i].transform.position, transform.position) < closestDistance)
             {
-                PickUp(pickups[i].gameObject, pickups[i].GetComponent<Pickup>().item);
-                break;
-            }
-            if (pickups[i].GetComponent<WeaponPickup>())
-            {
-                GetComponent<WeaponInventory>().PickUp(pickups[i].gameObject, pickups[i].GetComponent<WeaponPickup>().weapon);
-                break;
+                closestPickup = pickups[i].gameObject;
+                closestDistance = Vector3.Distance(pickups[i].transform.position, transform.position);
             }
         }
+        
+        if (closestPickup.GetComponent<Pickup>())
+            PickUp(closestPickup, closestPickup.GetComponent<Pickup>().item);
+        else
+            GetComponent<WeaponInventory>().PickUp(closestPickup, closestPickup.GetComponent<WeaponPickup>().weapon);
     }
 
     public void PickUp(GameObject pickup, Items item)
