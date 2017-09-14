@@ -19,7 +19,14 @@ public class WeaponInventory : MonoBehaviour
     Weapon[] weaponScripts;
 
     PlayerMovScript movScript;
-
+    ReviveSystem reviveScript;
+    
+    [Header("Pickup prefabs (For dropping initial weapons)")]
+    public GameObject riflePickup;
+    public GameObject shotgunPickup;
+    public GameObject fireworkPickup;
+    
+    [Header("Weapon models")]
     public GameObject rifleModel;
     public GameObject shotgunModel;
     public GameObject fireworkModel;
@@ -30,6 +37,7 @@ public class WeaponInventory : MonoBehaviour
     void Start ()
     {
         movScript = GetComponent<PlayerMovScript>();
+        reviveScript = GetComponent<ReviveSystem>();
         AxisCombo = movScript.playerBeginning;
 
         weaponScripts = new Weapon[]
@@ -83,25 +91,41 @@ public class WeaponInventory : MonoBehaviour
 
     public void PickUp(GameObject pickup, Weapons weapon)
     {
+        if (reviveScript.NeedRes)
+            return;
+
         weaponScripts[(int)activeWeapon].enabled = false;
         if (activeWeapon == weapon1)
         {
             weapon1 = weapon;
-            if (pickup1 != null)
+            if (pickup1 != null) // If a pickup object has been stored from last PickUp()
             {
                 pickup1.SetActive(true);
                 pickup1.transform.position = transform.position;
             }
+            else switch (activeWeapon) // If no pickup object has been stored from last PickUp() (Probably the items you start with)
+                {
+                case Weapons.rifle:     Instantiate(riflePickup, transform.position, Quaternion.identity);      break;
+                case Weapons.shotgun:   Instantiate(shotgunPickup, transform.position, Quaternion.identity);    break;
+                case Weapons.firework:  Instantiate(fireworkPickup, transform.position, Quaternion.identity);   break;
+            }
+
             pickup1 = pickup;
             pickup1.SetActive(false);
         }
-        else
+        else // if (activeWeapon == weapon2)
         {
             weapon2 = weapon;
-            if (pickup2 != null)
+            if (pickup2 != null) // If a pickup object has been stored from last PickUp()
             {
                 pickup2.SetActive(true);
                 pickup2.transform.position = transform.position;
+            }
+            else switch (activeWeapon) // If no pickup object has been stored from last PickUp() (Probably the items you start with)
+            {
+                case Weapons.rifle: Instantiate(riflePickup, transform.position, Quaternion.identity); break;
+                case Weapons.shotgun: Instantiate(shotgunPickup, transform.position, Quaternion.identity); break;
+                case Weapons.firework: Instantiate(fireworkPickup, transform.position, Quaternion.identity); break;
             }
             pickup2 = pickup;
             pickup2.SetActive(false);
