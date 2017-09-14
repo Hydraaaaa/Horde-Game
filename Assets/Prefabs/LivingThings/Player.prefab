@@ -2572,7 +2572,7 @@ MonoBehaviour:
   accuracy: 0
   damage: 10
   laserLength: 10
-  projectileSpeed: 5
+  projectileSpeed: 1
   energyCost: 24
   laserStartPoint: {fileID: 1008923965842268}
   gunshot: {fileID: 0}

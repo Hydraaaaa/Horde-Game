@@ -27,7 +27,7 @@ public class LaunchedGrenade : MonoBehaviour
     public void Explode()
     {
         foreach (GameObject particleEffect in particleEffects)
-            Instantiate(particleEffect, transform.position, Quaternion.identity);
+            Instantiate(particleEffect, transform.position, particleEffect.transform.rotation);
 
         Collider[] cols = Physics.OverlapSphere(transform.position, range / 2);
         foreach (Collider col in cols)

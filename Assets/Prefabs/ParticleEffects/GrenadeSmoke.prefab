@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4530336850232200}
   - component: {fileID: 198282022876278414}
   - component: {fileID: 199931459291033994}
+  - component: {fileID: 114562739566176180}
   m_Layer: 0
   m_Name: GrenadeSmoke
   m_TagString: Untagged
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114562739566176180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183336181964648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c7a42dd508ae5458f87547e513ac96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingLife: 5
+  life: 0
+  fade: 0
 --- !u!198 &198282022876278414
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -190,7 +205,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.022058845, g: 0.02043687, b: 0.02043687, a: 0.78431374}
+      maxColor: {r: 0.022058845, g: 0.02043687, b: 0.02043687, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

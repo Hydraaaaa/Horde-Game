@@ -51,8 +51,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244876948040218}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -114,7 +114,7 @@ MonoBehaviour:
   damage: 0
   timer: 1
   bullet: {fileID: 1274542214896138, guid: 1ca275f3d6372ef4eba25133ae876eaf, type: 2}
-  pellets: 16
+  pellets: 20
 --- !u!135 &135439105401523778
 SphereCollider:
   m_ObjectHideFlags: 1
