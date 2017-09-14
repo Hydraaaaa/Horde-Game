@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 1b24230285b8e89419b8efe9a47db422
+timeCreated: 1505350746
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: ANKLE_LFT_JNT
+    100002: armour
+    100004: back
+    100006: bag
+    100008: BALL_LFT_JNT
+    100010: belt
+    100012: body
+    100014: bottom
+    100016: COG
+    100018: COLLAR_LFT_JNT
+    100020: ELBOW_RGT_JNT
+    100022: FINGER_MID_01_LFT_JNT
+    100024: FINGER_MID_02_LFT_JNT
+    100026: FINGER_MID_03_LFT_JNT
+    100028: FINGER_PINK_01_LFT_JNT
+    100030: FINGER_PINK_02_LFT_JNT
+    100032: FINGER_PINK_03_LFT_JNT
+    100034: FINGER_POINT_01_LFT_JNT
+    100036: FINGER_POINT_02_LFT_JNT
+    100038: FINGER_POINT_02_LFT_JNT 1
+    100040: FINGER_RING_01_LFT_JNT
+    100042: FINGER_RING_02_LFT_JNT
+    100044: FINGER_RING_03_LFT_JNT
+    100046: HAND_LFT_JNT
+    100048: head
+    100050: HEAD_JNT
+    100052: HIP_JNT
+    100054: HIP_LFT
+    100056: KNEE_LFT_JNT
+    100058: left
+    100060: marine
+    100062: //RootNode
+    100064: NECK_JNT
+    100066: ORIGIN
+    100068: persp1
+    100070: shoes
+    100072: SHOULDER_LFT_JNT
+    100074: SPINE_01_JNT
+    100076: SPINE_02_JNT
+    100078: SPINE_03_JNT
+    100080: SPINE_04_JNT
+    100082: THUMB_01_LFT_JNT
+    100084: THUMB_02_LFT_JNT
+    100086: THUMB_03_LFT_JNT
+    100088: TOE_LFT_JNT
+    100090: WRIST_01_LFT_JNT
+    100092: WRIST_02_LFT_JNT
+    400000: ANKLE_LFT_JNT
+    400002: armour
+    400004: back
+    400006: bag
+    400008: BALL_LFT_JNT
+    400010: belt
+    400012: body
+    400014: bottom
+    400016: COG
+    400018: COLLAR_LFT_JNT
+    400020: ELBOW_RGT_JNT
+    400022: FINGER_MID_01_LFT_JNT
+    400024: FINGER_MID_02_LFT_JNT
+    400026: FINGER_MID_03_LFT_JNT
+    400028: FINGER_PINK_01_LFT_JNT
+    400030: FINGER_PINK_02_LFT_JNT
+    400032: FINGER_PINK_03_LFT_JNT
+    400034: FINGER_POINT_01_LFT_JNT
+    400036: FINGER_POINT_02_LFT_JNT
+    400038: FINGER_POINT_02_LFT_JNT 1
+    400040: FINGER_RING_01_LFT_JNT
+    400042: FINGER_RING_02_LFT_JNT
+    400044: FINGER_RING_03_LFT_JNT
+    400046: HAND_LFT_JNT
+    400048: head
+    400050: HEAD_JNT
+    400052: HIP_JNT
+    400054: HIP_LFT
+    400056: KNEE_LFT_JNT
+    400058: left
+    400060: marine
+    400062: //RootNode
+    400064: NECK_JNT
+    400066: ORIGIN
+    400068: persp1
+    400070: shoes
+    400072: SHOULDER_LFT_JNT
+    400074: SPINE_01_JNT
+    400076: SPINE_02_JNT
+    400078: SPINE_03_JNT
+    400080: SPINE_04_JNT
+    400082: THUMB_01_LFT_JNT
+    400084: THUMB_02_LFT_JNT
+    400086: THUMB_03_LFT_JNT
+    400088: TOE_LFT_JNT
+    400090: WRIST_01_LFT_JNT
+    400092: WRIST_02_LFT_JNT
+    2000000: back
+    2000002: bottom
+    2000004: left
+    2000006: persp1
+    2300000: armour
+    2300002: bag
+    2300004: belt
+    2300006: body
+    2300008: head
+    2300010: shoes
+    3300000: armour
+    3300002: bag
+    3300004: belt
+    3300006: body
+    3300008: head
+    3300010: shoes
+    4300000: armour
+    4300002: head
+    4300004: body
+    4300006: shoes
+    4300008: belt
+    4300010: bag
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
