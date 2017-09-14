@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class CivilianNavigation : MonoBehaviour
 {
     NavMeshAgent agent;
-
+    public Vector3 targetPos;
     public float speed;
 
     void Start ()
@@ -16,9 +16,10 @@ public class CivilianNavigation : MonoBehaviour
         agent.speed = speed;
         GetComponent<Health>().OnDie = OnDie;
 
-        if (GameObjectManager.instance != null)
+        if (GameObjectManager.instance != null && targetPos == Vector3.zero)
         {
-            agent.SetDestination(GameObjectManager.instance.civilianDestination.transform.position);
+            targetPos = GameObjectManager.instance.civilianDestination.transform.position;
+            agent.SetDestination(targetPos);
         }
     }
 	
@@ -34,6 +35,7 @@ public class CivilianNavigation : MonoBehaviour
                 Time.deltaTime
             );
         }
+        agent.SetDestination(targetPos);
     }
 
     void OnTriggerEnter(Collider other)

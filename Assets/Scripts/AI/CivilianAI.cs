@@ -111,7 +111,7 @@ public class CivilianAI : MonoBehaviour
                         // Set its position to the civilian spawner
                         ClosestDist = Vector3.Distance(this.transform.position, GameObjectManager.instance.civilianSpawners[i].transform.position);
                         pos = GameObjectManager.instance.civilianSpawners[i].transform.position;
-                        GetComponent<NavMeshAgent>().SetDestination(pos);
+                        GetComponent<CivilianNavigation>().targetPos = pos;
                     }
                 }
                 break;
@@ -145,8 +145,19 @@ public class CivilianAI : MonoBehaviour
     void EscortType()
     {
         anim.SetBool("MissionAvailable", MissionAvailable);
-        anim.SetBool("MissionCompleted", MissionCompleted);
+        anim.SetBool("MissionCompleted", ObjectiveCompleted);
         anim.SetBool("Talking", Talking);
+
+        // If the AI has reached the target position
+        if (Vector3.Distance(transform.position, GetComponent<CivilianNavigation>().targetPos) < 1.1f)
+        {
+            Debug.Log("You Escorted Me O 3 O");
+
+            GameObjectManager.instance.civiliansEscaped++;
+
+            // Delete this gameobject from the scene
+            Destroy(gameObject);
+        }
 
         for (int i = 0; i < playersInRange.Count; i++)
         {
@@ -160,6 +171,15 @@ public class CivilianAI : MonoBehaviour
                 playersInRange.RemoveAt(i);
                 break;
             }
+            //// Rotate to look at the first player in the List
+            //if (i == 0 && ObjectiveCompleted == false)
+            //{
+            //    Vector3 dir = playersInRange[i].transform.position - transform.position;
+            //    Quaternion rot = transform.rotation;
+            //    rot.SetLookRotation(new Vector3(dir.x, dir.y, dir.z));
+
+            //    transform.rotation = rot;
+            //}
         }
 
         if (playersInRange.Count > 0)
@@ -180,31 +200,44 @@ public class CivilianAI : MonoBehaviour
                 // If the talk time has not finished
                 if (currentPopupTime >= 0)
                 {
+                    Talking = true;
                     currentPopupTime -= Time.deltaTime;
 
-                    // If they finished talking
-                    if (currentPopupTime <= 0)
+                    // Rotate to look at the first player in the List
+                    if (ObjectiveCompleted == false)
                     {
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = false;
-                        ObjectiveCompleted = true;
-                        Talking = false;
+                        Vector3 dir = playersInRange[0].transform.position - transform.position;
+                        Quaternion rot = transform.rotation;
+                        rot.SetLookRotation(new Vector3(dir.x, dir.y, dir.z));
+
+                        transform.rotation = rot;
                     }
+                }
+                // If they finished talking
+                if (currentPopupTime <= 0)
+                {
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().QuestText.enabled = false;
+                    ObjectiveCompleted = true;
+                    Talking = false;
                 }
             }
             // If they have finished talking
             if (ObjectiveCompleted)
             {
-                Debug.Log("Onwards");
                 GetComponent<NavMeshAgent>().enabled = true;
                 GetComponent<CivilianNavigation>().enabled = true;
-
             }
         }
         else
         {
+            ObjectiveCompleted = false;
             GetComponent<CivilianNavigation>().enabled = false;
             GetComponent<NavMeshAgent>().enabled = false;
         }
+
+        anim.SetBool("MissionAvailable", MissionAvailable);
+        anim.SetBool("MissionCompleted", ObjectiveCompleted);
+        anim.SetBool("Talking", Talking);
     }
     public GameObject rthi;
     void FindType()
@@ -223,7 +256,7 @@ public class CivilianAI : MonoBehaviour
                     playersInRange.RemoveAt(i);
                     break;
                 }
-                if (Vector3.Distance(playersInRange[i].transform.position, transform.position) > talkDistance)
+                if (Vector3.Distance(playersInRange[i].transform.position, transform.position) > talkDistance * 1.5)
                 {
                     playersInRange.RemoveAt(i);
                     break;
@@ -314,7 +347,7 @@ public class CivilianAI : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         // If the thing that collides is the player
-        if (col.tag == "Player")
+        if (col.tag == "Player" && col.GetComponent<ReviveSystem>() != null)
         {
             // If they're in range for talking
             if (Vector3.Distance(col.transform.position, transform.position) < talkDistance)

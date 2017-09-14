@@ -648,7 +648,7 @@ public class TurretAI : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && col.GetComponent<ReviveSystem>() != null)
         {
             playersInRange.Remove(col.gameObject);
 
