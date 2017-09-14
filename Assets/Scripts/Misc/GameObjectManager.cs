@@ -244,8 +244,19 @@ public class GameObjectManager : MonoBehaviour
         vitalBarricades = new List<GameObject>();
         foreach (GameObject barricade in barricades)
         {
-            if (barricade.GetComponent<BarrierLogic>().vital)
-                vitalBarricades.Add(barricade);
+            if (barricade.GetComponent<BarrierLogic>() != null)
+            {
+                if (barricade.GetComponent<BarrierLogic>().vital)
+                    vitalBarricades.Add(barricade);
+            }
+        }
+        for (int i = 0; i < barricades.Count; i++)
+        {
+            if (barricades[i].GetComponent<BarrierLogic>() == null)
+            {
+                barricades.RemoveAt(i);
+                i--;
+            }
         }
     }
 

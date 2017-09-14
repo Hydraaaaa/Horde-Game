@@ -286,11 +286,11 @@ public class EnemyNavigation : MonoBehaviour
         // If the player is within attack range
         if (Vector3.Distance(transform.position, barricade.transform.position) < attackRange)
         {
-            Attack(barricade);
+            Attack(barricade.transform.parent.gameObject);
         }
 
         // If the barricade is dead
-        if (barricade.GetComponent<Health>().health <= 0)
+        if (barricade.transform.parent.GetComponent<Health>().health <= 0)
         {
             // Remove the barricade referance and start going to exit again
             barricade = null;
@@ -298,7 +298,7 @@ public class EnemyNavigation : MonoBehaviour
         }
         else
         {
-            TargetPos = barricade.transform.position;
+            TargetPos = barricade.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             agent.SetDestination(TargetPos);
         }
     }
@@ -316,7 +316,7 @@ public class EnemyNavigation : MonoBehaviour
             CheckForBarricade(col);
             return;
         }
-        // IF they found a player
+        // If they found a player
         if (col.CompareTag(TypeTags.PlayerTag))
         {
             CheckForPlayer(col);
@@ -338,9 +338,8 @@ public class EnemyNavigation : MonoBehaviour
             player = null;
             survivor = null;
             followPlayer = false;
-            TargetPos = col.transform.position;
+            TargetPos = col.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
             agent.SetDestination(TargetPos);
-
         }
     }
 

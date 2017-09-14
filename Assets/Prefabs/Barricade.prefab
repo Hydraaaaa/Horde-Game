@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114547545573481438}
   - component: {fileID: 114364287019792854}
   - component: {fileID: 65647615236851330}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barricade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4277378858885486}
   - component: {fileID: 33089902819887540}
   - component: {fileID: 23573433738129580}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Holograph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 65769306732801248}
   - component: {fileID: 23632720284108236}
   - component: {fileID: 208131363307584050}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barricade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4903611912609322}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307511309372190}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 7.5747705, y: 0.49, z: -21.709808}
+  m_LocalPosition: {x: 19.01, y: 0.5, z: 19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4277378858885486}
@@ -223,7 +223,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 1, z: 5}
+  m_Size: {x: 9, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65769306732801248
 BoxCollider:
@@ -251,6 +251,7 @@ MonoBehaviour:
   maxHealth: 5000
   health: 5000
   Enemy: 0
+  Player: 0
   Attacker: {fileID: 0}
 --- !u!114 &114547545573481438
 MonoBehaviour:
@@ -267,12 +268,11 @@ MonoBehaviour:
   speed: 1
   DeathHeight: -2
   Built: 0
-  wantedX: 7
+  wantedX: 9
   wantedZ: 0.5
   Barrier: {fileID: 1803371958271158}
   Holo: {fileID: 1323368697718294}
   health: {fileID: 0}
-  manager: {fileID: 0}
 --- !u!208 &208131363307584050
 NavMeshObstacle:
   m_ObjectHideFlags: 1
