@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    [HideInInspector]
+    public int playerCount;
+
     public float ControllerMenuAxisSensitivity = 0.75f;
     public float ControllerNextInputCheckTimeGap = 0.2f;
     public float timeBetweenMovement;
@@ -16,7 +21,6 @@ public class GameManager : MonoBehaviour
     public float p1Trigg;
     bool hasShot = false;
 
-    public int playerCount;
 
     public string[] ButtonLocations = { "Josh'sScene" };
     public int buttonNo;
@@ -32,15 +36,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        List<GameObject> managers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Game Manager"));
-        if (managers.Count > 1)
-        {
-            foreach (GameObject manager in managers)
-            {
-                if (manager != gameObject)
-                    Destroy(manager);
-            }
-        }
+        if (instance != null)
+            Destroy(instance.gameObject);
+
+        instance = this;
     }
 
     void Start()
@@ -158,16 +157,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SinglePlayer(string sceneName = "TestScene")
+    {
+        playerCount = 1;
+        UsingKbrd = true;
+        atMenu = false;
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void LoadScene(string sceneName = "TestScene")
     {
-        UsingKbrd = true;
+        playerCount = 2;
+        UsingKbrd = false;
         atMenu = false;
         SceneManager.LoadScene(sceneName);
     }
 
     public void LoadSceneKeyboard(string sceneName = "TestScene")
     {
-        UsingKbrd = false;
+        playerCount = 2;
+        UsingKbrd = true;
         atMenu = false;
         SceneManager.LoadScene(sceneName);
     }

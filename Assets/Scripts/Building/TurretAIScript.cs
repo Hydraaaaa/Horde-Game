@@ -96,14 +96,14 @@ public class TurretAIScript : MonoBehaviour
                 // If the target dies
                 if (Target.GetComponent<Health>().health <= 0)
                 {
-                    // Remove the referance
+                    // Remove the reference
                     Target = null;
                 }
 
                 // If the enemy goes out of range
                 if (targetsDistance > maxTargetRange)
                 {
-                    // Remove the referance
+                    // Remove the reference
                     Target = null;
                 }
 

@@ -340,7 +340,7 @@ public class TurretScript : MonoBehaviour
                     }
                 }
 
-                // If there is a referance to the manager and there is still players alive
+                // If there is a reference to the manager and there is still players alive
                 if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
                 {
                     // If player 1 interacts

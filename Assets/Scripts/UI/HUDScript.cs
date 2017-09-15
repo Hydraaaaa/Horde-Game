@@ -5,222 +5,186 @@ using UnityEngine.UI;
 
 public class HUDScript : MonoBehaviour
 {
+    [Header("References")]
     public Text timer;
     public Text QuestText;
     public Text civiliansSaved;
     public Text notEnoughCivilians;
 
-    public GameObject p1Mask;
-    public GameObject p2Mask;
-
-    public GameObject barricadeHealthBarPrefab;
-
-    public List<GameObject> barricadeHealthBarsP1;
-    public List<GameObject> barricadeHealthBarsP2;
-
-    public GameObject turretTimeBarPrefab;
-
-    public List<GameObject> turretTimeBarsP1;
-    public List<GameObject> turretTimeBarsP2;
-
+    [Header("Prefabs")]
+    public GameObject mask;
+    public GameObject barrierHealthBar;
+    public GameObject turretTimeBar;
+    public GameObject struggleBar;
     public GameObject controllerTurretGUI;
     public GameObject PCTurretGUI;
+    public GameObject P1Card, P2Card;
 
-    public List<GameObject> turretGUIP1;
-    public List<GameObject> turretGUIP2;
+    public List<GameObject>[] barrierHealthBars;
+    public List<GameObject>[] turretTimeBars;
+    public List<GameObject>[] turretGUI;
 
-    public GameObject StruggleBarPrefab;
-
-    public GameObject StruggleBarsP1;
-    public bool P1Struggling;
-    public float minSP1, maxSP1;
-    public GameObject StruggleBarsP2;
-    public bool P2Struggling;
-    public float minSP2, maxSP2;
+    
+    [HideInInspector] public GameObject[] struggleBars;
+    [HideInInspector] public bool[] struggling;
+    [HideInInspector] public float[] minSP, maxSP;
     
     void Start ()
     {
-        // Make the barricade UI
-        InstantiateBarricadeUI();
+        // Instantiate a mask for each player
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+        {
+            GameObject maskInstance = Instantiate(mask);
+            maskInstance.transform.SetParent(transform);
+            maskInstance.name = "P" + (i + 1) + "Mask";
+            maskInstance.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            maskInstance.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+
+            if (i == 0)
+            {
+                GameObject playerCard = Instantiate(P1Card);
+                playerCard.transform.SetParent(maskInstance.transform);
+            }
+            if (i == 1)
+            {
+                GameObject playerCard = Instantiate(P2Card);
+                playerCard.transform.SetParent(maskInstance.transform);
+            }
+
+            RectTransform rectTransform = maskInstance.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(1f / GameObjectManager.instance.players.Count * i, 0);
+            rectTransform.anchorMax = new Vector2(1f / GameObjectManager.instance.players.Count * (i + 1), 1);
+
+            GameObjectManager.instance.players[i].UIMask = maskInstance;
+
+            GameObjectManager.instance.players[i].gameObject.GetComponent<PlayerInfoScript>().GetUIElements();
+        }
+
+        // Make the barrier UI
+        InstantiateBarrierUI();
 
         // Make the Turret UI
         InstantiateTurretUI();
 
         // Make struggle UI
         InstantiateStruggleUI();
-
-        GameObjectManager.instance.players[0].UIMask = p1Mask;
-        GameObjectManager.instance.players[1].UIMask = p2Mask;
     }
 	
-    void InstantiateBarricadeUI()
+    void InstantiateBarrierUI()
     {
-        // Create two new lists
-        barricadeHealthBarsP1 = new List<GameObject>();
-        barricadeHealthBarsP2 = new List<GameObject>();
+        // Construct the array of lists
+        barrierHealthBars = new List<GameObject>[GameObjectManager.instance.players.Count];
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+            barrierHealthBars[i] = new List<GameObject>();
 
-        // Iterate through each barricade in the managers list
-        for (int i = 0; i < GameObjectManager.instance.barricades.Count; i++)
+        // Iterate through each barrier in the managers list
+        for (int i = 0; i < GameObjectManager.instance.barriers.Count; i++)
         {
-            // Instantiate a new healthbar for the barricades
-            GameObject newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+            {
+                // Instantiate a new healthbar for the barriers
+                GameObject newHealthBar = Instantiate(barrierHealthBar) as GameObject;
 
-            // Add to player 1's layer mask
-            newHealthBar.layer = LayerMask.NameToLayer("P1UI");
-            newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
-            newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                // Add to player[j]'s layer mask
+                //newHealthBar.layer = LayerMask.NameToLayer("P1UI");
+                //newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                //newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
 
-            // Set as a child of the player1 mask 
-            newHealthBar.transform.SetParent(p1Mask.transform);
-            newHealthBar.transform.SetAsFirstSibling();
+                // Set as a child of the player[j] mask 
+                newHealthBar.transform.SetParent(GameObjectManager.instance.players[j].UIMask.transform);
+                newHealthBar.transform.SetAsFirstSibling();
 
-            // Add a referance to the barricade in the local list
-            barricadeHealthBarsP1.Add(newHealthBar);
-
-            // Instantiate a new healthbar for the barricades
-            newHealthBar = Instantiate(barricadeHealthBarPrefab, transform.position, Quaternion.identity) as GameObject;
-
-            // Add to player 2's layer mask
-            newHealthBar.layer = LayerMask.NameToLayer("P2UI");
-            newHealthBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
-            newHealthBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
-
-            // Set as a child of the player1 mask 
-            newHealthBar.transform.SetParent(p2Mask.transform);
-            newHealthBar.transform.SetAsFirstSibling();
-
-            // Add a referance to the barricade in the local list
-            barricadeHealthBarsP2.Add(newHealthBar);
-
+                // Add a reference to the barrier in the local list
+                barrierHealthBars[j].Add(newHealthBar);
+            }
         }
-        return;
     }
 
     void InstantiateTurretUI()
     {
-        // Instantiate new turret lists
-        turretTimeBarsP1 = new List<GameObject>();
-        turretTimeBarsP2 = new List<GameObject>();
+        // Turret Time Bars
+
+        // Construct the array of lists
+        turretTimeBars = new List<GameObject>[GameObjectManager.instance.players.Count];
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+            turretTimeBars[i] = new List<GameObject>();
 
         // Iterate through the managers list of turrets
         for (int i = 0; i < GameObjectManager.instance.turrets.Count; i++)
         {
-            // Create a new timer
-            GameObject newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
+            for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+            {
+                // Create a new timer
+                GameObject newTimeBar = Instantiate(turretTimeBar) as GameObject;
 
-            // Add it to player 1's layer mask
-            newTimeBar.layer = LayerMask.NameToLayer("P1UI");
-            newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
-            newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                // Add it to player 1's layer mask
+                //newTimeBar.layer = LayerMask.NameToLayer("P1UI");
+                //newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+                //newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
 
-            // Set as a child of the player1 mask
-            newTimeBar.transform.SetParent(p1Mask.transform);
-            newTimeBar.transform.SetAsFirstSibling();
+                // Set as a child of the player1 mask
+                newTimeBar.transform.SetParent(GameObjectManager.instance.players[j].UIMask.transform);
+                newTimeBar.transform.SetAsFirstSibling();
 
-            // Add a referance to the barricade in the local list
-            turretTimeBarsP1.Add(newTimeBar);
-
-            // Create a new timer
-            newTimeBar = Instantiate(turretTimeBarPrefab, transform.position, Quaternion.identity) as GameObject;
-
-            // Add it to player 1's layer mask
-            newTimeBar.layer = LayerMask.NameToLayer("P2UI");
-            newTimeBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
-            newTimeBar.transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
-
-            // Set as a child of the player1 mask
-            newTimeBar.transform.SetParent(p2Mask.transform);
-            newTimeBar.transform.SetAsFirstSibling();
-
-            // Add a referance to the barricade in the local list
-            turretTimeBarsP2.Add(newTimeBar);
+                // Add a reference to the barrier in the local list
+                turretTimeBars[j].Add(newTimeBar);
+            }
         }
+        
+        // Turret Interaction GUI
 
-        // Instantiate new turret lists
-        turretGUIP1 = new List<GameObject>();
-        turretGUIP2 = new List<GameObject>();
-
+        // Construct the array of lists
+        turretGUI = new List<GameObject>[GameObjectManager.instance.players.Count];
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
+            turretGUI[i] = new List<GameObject>();
+        
         // Iterate through the managers turret list
         for (int i = 0; i < GameObjectManager.instance.turrets.Count; i++)
         {
-            // Instantiate the correct GUI for the controller type used for player 1
-            if (GameObjectManager.instance.players[0].gameObject.GetComponent<PlayerMovScript>().useController)
-                turretGUIP1.Add(Instantiate(controllerTurretGUI));
-            else
-                turretGUIP1.Add(Instantiate(PCTurretGUI));
-
-            // Child to the player 1 mask
-            turretGUIP1[i].transform.SetParent(p1Mask.transform);
-
-            // If there is more than 1 player alive, instantiate the correct GUI for player 2
-            if (GameObjectManager.instance.players.Count > 1)
+            for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
             {
-                if (GameObjectManager.instance.players[1].gameObject.GetComponent<PlayerMovScript>().useController)
-                    turretGUIP2.Add(Instantiate(controllerTurretGUI));
+                // Instantiate the correct GUI for the controller type used for player[j]
+                if (GameObjectManager.instance.players[j].gameObject.GetComponent<PlayerMovScript>().useController)
+                    turretGUI[j].Add(Instantiate(controllerTurretGUI));
                 else
-                    turretGUIP2.Add(Instantiate(PCTurretGUI));
+                    turretGUI[j].Add(Instantiate(PCTurretGUI));
 
-                turretGUIP2[i].transform.SetParent(p2Mask.transform);
+                // Child to the player[j] mask
+                turretGUI[j][i].transform.SetParent(GameObjectManager.instance.players[j].UIMask.transform);
+
+                GameObjectManager.instance.turrets[i].GetComponent<TurretAI>().UIPiece[j] = turretGUI[j][i];
             }
-
-            GameObjectManager.instance.turrets[i].GetComponent<TurretAI>().P1UIPiece = turretGUIP1[i];
-            GameObjectManager.instance.turrets[i].GetComponent<TurretAI>().P2UIPiece = turretGUIP2[i];
         }
-        return;
     }
 
     void InstantiateStruggleUI()
     {
-        // Iterate through each barricade in the managers list
+        struggleBars = new GameObject[GameObjectManager.instance.players.Count];
+        struggling = new bool[GameObjectManager.instance.players.Count];
+
+        // Iterate through each barrier in the managers list
         for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
         {
-            if (i == 0)
-            {
-                // Instantiate a new healthbar for the barricades
-                GameObject newStruggleBar = Instantiate(StruggleBarPrefab, transform.position, Quaternion.identity) as GameObject;
-                
-                // Add to player 1's layer mask
-                newStruggleBar.layer = LayerMask.NameToLayer("P1UI");
-                //  > Active
-                newStruggleBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
-
-                // > Active > Child: 1, 2, & 3
-                newStruggleBar.transform.GetChild(0).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
-                newStruggleBar.transform.GetChild(0).transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
-                newStruggleBar.transform.GetChild(0).transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("P1UI");
-
-                // Set as a child of the player 1 mask 
-                newStruggleBar.transform.SetParent(p1Mask.transform);
-                newStruggleBar.transform.SetAsFirstSibling();
-
-                // Add a referance to the barricade in the local list
-                StruggleBarsP1 = newStruggleBar;
-            }
-            else if (i == 1)
-            {
-
-                // Instantiate a new healthbar for the barricades
-                GameObject newStruggleBar = Instantiate(StruggleBarPrefab, transform.position, Quaternion.identity) as GameObject;
-
-                // Add to player 2's layer mask
-                newStruggleBar.layer = LayerMask.NameToLayer("P2UI");
-                //  > Active
-                newStruggleBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
-
-                // > Active > Child: 1, 2, & 3
-                newStruggleBar.transform.GetChild(0).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P2UI");
-                newStruggleBar.transform.GetChild(0).transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P2UI");
-                newStruggleBar.transform.GetChild(0).transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("P2UI");
-
-                // Set as a child of the player 2 mask 
-                newStruggleBar.transform.SetParent(p2Mask.transform);
-                newStruggleBar.transform.SetAsFirstSibling();
-
-                // Add a referance to the barricade in the local list
-                StruggleBarsP2 = newStruggleBar;
-            }
+            // Instantiate a new struggle GUI piece
+            GameObject newStruggleBar = Instantiate(struggleBar) as GameObject;
+            
+            // Add to player[i]'s layer mask
+            //newStruggleBar.layer = LayerMask.NameToLayer("P1UI");
+            //  > Active
+            //newStruggleBar.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            
+            // > Active > Child: 1, 2, & 3
+            //newStruggleBar.transform.GetChild(0).transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            //newStruggleBar.transform.GetChild(0).transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            //newStruggleBar.transform.GetChild(0).transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("P1UI");
+            
+            // Set as a child of the player[i] mask 
+            newStruggleBar.transform.SetParent(GameObjectManager.instance.players[i].UIMask.transform);
+            newStruggleBar.transform.SetAsFirstSibling();
+            
+            // Add a reference to the barrier in the local list
+            struggleBars[i] = newStruggleBar;
         }
-        return;
     }
 
 	void Update ()
@@ -243,116 +207,98 @@ public class HUDScript : MonoBehaviour
         // Otherwise, if the timer is less than or equal to 0
         else
             timer.text = "Door Open";
-
+        
         // If the amount of civilians needed to escape has been reached
         if (GameObjectManager.instance.civiliansEscaped < (GameObjectManager.instance.civiliansRequired / 100.0f) * GameObjectManager.instance.initialCivilians)
             notEnoughCivilians.enabled = true;
         // Otherwise just ignore it
         else
             notEnoughCivilians.enabled = false;
-
+        
         // Display the civilian saved count to the screen
         civiliansSaved.text = GameObjectManager.instance.civiliansEscaped.ToString() + " ";
 
-        if (P1Struggling)
+        for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
         {
-            StruggleBarsP1.SetActive(true);
+            if (struggling[i])
+            {
+                struggleBars[i].SetActive(true);
 
-            // Update the Barricade's position on player 1's screen
-            StruggleBarsP1.transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.players[0].gameObject.transform.position);
-            StruggleBarsP1.transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().fillAmount = minSP1 / maxSP1;
+                // Update the Barrier's position on player[i]'s screen
+                struggleBars[i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.players[0].gameObject.transform.position);
+                struggleBars[i].transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().fillAmount = minSP[i] / maxSP[i];
+            }
+            else
+                struggleBars[i].SetActive(false);
         }
-        else
+        
+        // For each barrier in the list
+        for (int i = 0; i < GameObjectManager.instance.barriers.Count; i++)
         {
-            StruggleBarsP1.SetActive(false);
-        }
-
-        if (P2Struggling)
-        {
-            StruggleBarsP2.SetActive(true);
-
-            // Update the Barricade's position on player 2's screen
-            StruggleBarsP2.transform.position = GameObjectManager.instance.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.players[1].gameObject.transform.position);
-            StruggleBarsP2.transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().fillAmount = minSP2 / maxSP2;
-        }
-        else
-        {
-            StruggleBarsP2.SetActive(false);
-        }
-
-        // For each barricade in the list
-        for (int i = 0; i < GameObjectManager.instance.barricades.Count; i++)
-        {
-            // Grab the health script of the barricade
-            Health healthScript = GameObjectManager.instance.barricades[i].GetComponent<Health>();
-
-            // If the barricade's health is equal to or below 0
+            // Grab the health script of the barrier
+            Health healthScript = GameObjectManager.instance.barriers[i].GetComponent<Health>();
+        
+            // If the barrier's health is equal to or below 0
             if (healthScript.health <= 0)
             {
-                // Disable the UI
-                barricadeHealthBarsP1[i].SetActive(false);
-                barricadeHealthBarsP2[i].SetActive(false);
+                // Deactivate the UI
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                    barrierHealthBars[j][i].SetActive(false);
             }
-            // Otherwise
             else
             {
-                // Turn on the UI
-                barricadeHealthBarsP1[i].SetActive(true);
-                barricadeHealthBarsP2[i].SetActive(true);
+                // Activate the UI
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                    barrierHealthBars[j][i].SetActive(true);
             }
 
-            // Update the Barricade's position on player 1's screen
-            barricadeHealthBarsP1[i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.barricades[i].transform.position);
-            barricadeHealthBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
-            
-            // Update the Barricade's position on player 2's screen
-            barricadeHealthBarsP2[i].transform.position = GameObjectManager.instance.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.barricades[i].transform.position);
-            barricadeHealthBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
+            // Update the Barrier's position on player[j]'s screen
+            for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+            {
+                barrierHealthBars[j][i].transform.position = GameObjectManager.instance.players[j].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.barriers[i].transform.position);
+                barrierHealthBars[j][i].transform.GetChild(1).GetComponent<Image>().fillAmount = healthScript.health / (float)healthScript.maxHealth;
+            }
         }
-
+        
         // For each turret in the list
         for (int i = 0; i < GameObjectManager.instance.turrets.Count; i++)
         {
             // Get the turret's script
             TurretAI turretScript = GameObjectManager.instance.turrets[i].GetComponent<TurretAI>();
-
-            // If the turrent's Lifetime is less than or equal to 0
+        
+            // If the turrent's remaining time is below 0
             if (turretScript.curActiveTime <= 0)
             {
                 // Disable the UI
-                turretTimeBarsP1[i].SetActive(false);
-                turretTimeBarsP2[i].SetActive(false);
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                    turretTimeBars[j][i].SetActive(false);
             }
-            // Otherwise
             else
             {
                 // Enable the UI
-                turretTimeBarsP1[i].SetActive(true);
-                turretTimeBarsP2[i].SetActive(true);
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                    turretTimeBars[j][i].SetActive(true);
             }
 
-            // Update the Turret's position on player 1's screen
-            turretTimeBarsP1[i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
-            turretTimeBarsP1[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
+            // Update the Turret's position on player[j]'s screen
+            for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+            {
+                turretTimeBars[j][i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
+                turretTimeBars[j][i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
 
-            turretGUIP1[i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
-            turretGUIP2[i].transform.position = GameObjectManager.instance.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
-
-
-            // Update the Turret's position on player 2's screen
-            turretTimeBarsP2[i].transform.position = GameObjectManager.instance.players[1].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
-            turretTimeBarsP2[i].transform.GetChild(1).GetComponent<Image>().fillAmount = turretScript.curActiveTime / (float)turretScript.CurrentLevelStats.TotalLifetime;
+                turretGUI[j][i].transform.position = GameObjectManager.instance.players[0].camera.GetComponent<Camera>().WorldToScreenPoint(GameObjectManager.instance.turrets[i].transform.position);
+            }
         }
     }
 
     public void GrabTurretsUI(GameObject turret)
     {
-        for(int i = 0; i < GameObjectManager.instance.turrets.Count; i++)
+        for (int i = 0; i < GameObjectManager.instance.turrets.Count; i++)
         {
             if (GameObjectManager.instance.turrets[i] == turret)
             {
-                turret.GetComponent<TurretAI>().P1UIPiece = turretGUIP1[i];
-                turret.GetComponent<TurretAI>().P2UIPiece = turretGUIP2[i];
+                for (int j = 0; j < GameObjectManager.instance.players.Count; j++)
+                    turret.GetComponent<TurretAI>().UIPiece[j] = turretGUI[j][i];
                 return;
             }
         }

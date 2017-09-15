@@ -436,31 +436,17 @@ public class SpitterNavigation : MonoBehaviour
                     {
                         Debug.Log("Struggling");
                         struggleVal += strugglePerHit;
-                    }                    
+                    }
 
-                    if (player.GetComponent<PlayerMovScript>().playerNumber == 1)
-                    {
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().P1Struggling = true;
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().minSP1 = struggleVal;
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().maxSP1 = struggleMax;
-                    }
-                    if (player.GetComponent<PlayerMovScript>().playerNumber == 2)
-                    {
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().P2Struggling = true;
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().minSP2 = struggleVal;
-                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().maxSP2 = struggleMax;
-                    }
+                    int playerNum = player.GetComponent<PlayerMovScript>().playerNumber;
+
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().struggling[playerNum] = true;
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().minSP[playerNum] = struggleVal;
+                    GameObjectManager.instance.HUD.GetComponent<HUDScript>().maxSP[playerNum] = struggleMax;
 
                     if (struggleVal >= struggleMax)
                     {
-                        if (player.GetComponent<PlayerMovScript>().playerNumber == 1)
-                        {
-                            GameObjectManager.instance.HUD.GetComponent<HUDScript>().P1Struggling = false;
-                        }
-                        if (player.GetComponent<PlayerMovScript>().playerNumber == 2)
-                        {
-                            GameObjectManager.instance.HUD.GetComponent<HUDScript>().P2Struggling = false;
-                        }
+                        GameObjectManager.instance.HUD.GetComponent<HUDScript>().struggling[playerNum] = false;
 
                         // then remove the player reference so it dosent keep tracking to them
                         followPlayer = false;
@@ -579,7 +565,7 @@ public class SpitterNavigation : MonoBehaviour
 
         if (survivor.GetComponent<Health>().health <= 0)
         {
-            // Remove the barricade referance and start going to exit again
+            // Remove the barricade reference and start going to exit again
             survivor = null;
             TargetPos = EndPos.transform.position;
         }
@@ -601,7 +587,7 @@ public class SpitterNavigation : MonoBehaviour
         // If the barricade is dead
         if (barricade.GetComponent<Health>().health <= 0)
         {
-            // Remove the barricade referance and start going to exit again
+            // Remove the barricade reference and start going to exit again
             barricade = null;
             TargetPos = EndPos.transform.position;
         }

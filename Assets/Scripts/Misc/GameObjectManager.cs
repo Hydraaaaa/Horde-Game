@@ -23,7 +23,18 @@ public class Player
 
 public class GameObjectManager : MonoBehaviour
 {
-    public static GameObjectManager instance;
+    static GameObjectManager inst;
+    public static GameObjectManager instance
+    {
+        get
+        {
+            return inst;
+        }
+        private set
+        {
+            inst = value;
+        }
+    }
 
     public GameObject cameraPrefab;
     public GameObject playerPrefab;
@@ -40,10 +51,9 @@ public class GameObjectManager : MonoBehaviour
     public List<GameObject> enemies;
     public List<GameObject> civilianSpawners;
     public List<GameObject> civilians;
-    public List<GameObject> barricades;
-    public List<GameObject> vitalBarricades;
+    public List<GameObject> barriers;
+    public List<GameObject> vitalBarriers;
     public List<GameObject> turrets;
-    public List<GameObject> cameras;
     public List<GameObject> questItemSpawnLocs;
 
     [Tooltip("This is a percentage")][Range(0, 100)]
@@ -60,12 +70,6 @@ public class GameObjectManager : MonoBehaviour
 
     public bool trySplitScreen = false;
 
-    Image HPBar1;
-    Text healthCount1;
-
-    Image HPBar2;
-    Text healthCount2;
-
     void Awake()
     {
         playing = false;
@@ -81,26 +85,13 @@ public class GameObjectManager : MonoBehaviour
         GetEnemySpawners();
         GetCivilianSpawners();
         GetCivilians();
-        GetBarricades();
+        GetBarriers();
         SpawnHUD();
         GetTurrets();
         GetCivilianDestination();
         GetQuestItemSpawnLocations();
         GetEndPos();
-        instance = this;
-
-        if (players.Count > 0)
-            if (players[0].gameObject.GetComponent<Health>().health <= 0)
-            {
-                HPBar1 = GameObject.Find("HPBar" + 1).GetComponent<Image>();
-                healthCount1 = GameObject.Find("HealthCount" + 1).GetComponent<Text>();
-            }
-        if (players.Count > 1)
-            if (players[1].gameObject.GetComponent<Health>().health <= 0)
-            {
-                HPBar2 = GameObject.Find("HPBar" + 2).GetComponent<Image>();
-                healthCount2 = GameObject.Find("HealthCount" + 2).GetComponent<Text>();
-            }
+        inst = this;
 
         StartCoroutine(GetInitialCivilians());
 
@@ -113,7 +104,7 @@ public class GameObjectManager : MonoBehaviour
 
         if (timer <= 0)
         {
-            foreach (GameObject barricade in vitalBarricades)
+            foreach (GameObject barricade in vitalBarriers)
             {
                 barricade.GetComponent<BulkheadLogic>().Open();
             }
@@ -158,7 +149,7 @@ public class GameObjectManager : MonoBehaviour
 
     public void SpawnPlayers()
     {
-        int playerCount = GetComponent<GameManager>().playerCount;
+        int playerCount = GameManager.instance.playerCount;
 
         players = new List<Player>();
                 
@@ -181,11 +172,11 @@ public class GameObjectManager : MonoBehaviour
 
                 if (i == 0)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.08f, 0.68f, 0.74f, 1);
-                if (i == 1)
+                else if (i == 1)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(0.74f, 0.08f, 0.36f, 1);
-                if (i == 2)
+                else if (i == 2)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(1, 0, 1, 1);
-                if (i == 3)
+                else if (i == 3)
                     playerInstance.GetComponent<LineRenderer>().startColor = new Color(0, 1, 1, 1);
                 
                 newPlayer.gameObject = playerInstance;
@@ -205,12 +196,11 @@ public class GameObjectManager : MonoBehaviour
                     camera.GetComponent<AudioListener>().enabled = false;
                 }
                 camera.GetComponent<CameraMovement>().player = newPlayer.gameObject;
-                cameras.Add(camera);
                 newPlayer.gameObject.GetComponent<PlayerMovScript>().camera = camera.GetComponent<Camera>();
 
                 newPlayer.camera = camera;
 
-                newPlayer.gameObject.GetComponent<PlayerMovScript>().useController = GetComponent<GameManager>().UsingKbrd;
+                newPlayer.gameObject.GetComponent<PlayerMovScript>().useController = !GameManager.instance.UsingKbrd;
 
                 players.Add(newPlayer);
             }
@@ -238,23 +228,23 @@ public class GameObjectManager : MonoBehaviour
         }
     }
 
-    void GetBarricades()
+    void GetBarriers()
     {
-        barricades = new List<GameObject>(GameObject.FindGameObjectsWithTag("Barricade"));
-        vitalBarricades = new List<GameObject>();
-        foreach (GameObject barricade in barricades)
+        barriers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Barricade"));
+        vitalBarriers = new List<GameObject>();
+        foreach (GameObject barricade in barriers)
         {
             if (barricade.GetComponent<BarrierLogic>() != null)
             {
                 if (barricade.GetComponent<BarrierLogic>().vital)
-                    vitalBarricades.Add(barricade);
+                    vitalBarriers.Add(barricade);
             }
         }
-        for (int i = 0; i < barricades.Count; i++)
+        for (int i = 0; i < barriers.Count; i++)
         {
-            if (barricades[i].GetComponent<BarrierLogic>() == null)
+            if (barriers[i].GetComponent<BarrierLogic>() == null)
             {
-                barricades.RemoveAt(i);
+                barriers.RemoveAt(i);
                 i--;
             }
         }

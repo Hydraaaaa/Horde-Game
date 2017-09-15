@@ -115,16 +115,16 @@ public class ScoreManager : MonoBehaviour
     void OnEnable()
     {
         instance = this;
-        currentKillstreak = new int[2];
-        currentMultiplier = new float[2];
-        currentResetTime = new float[2];
-        multiplierScore = new float[2];
+        currentKillstreak = new int[GameObjectManager.instance.players.Count];
+        currentMultiplier = new float[GameObjectManager.instance.players.Count];
+        currentResetTime = new float[GameObjectManager.instance.players.Count];
+        multiplierScore = new float[GameObjectManager.instance.players.Count];
     }
 
     void Update()
     {
-        currentResetTime[0] += Time.deltaTime;
-        currentResetTime[1] += Time.deltaTime;
+        for (int i = 0; i < currentResetTime.Length; i++)
+            currentResetTime[i] += Time.deltaTime;
 
         for (int i = 0; i < currentResetTime.Length; i++)
             if (currentResetTime[i] > killstreakResetTime)

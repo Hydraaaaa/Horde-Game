@@ -25,7 +25,7 @@ public class DoorScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        // Make sure the referances are still useable
+        // Make sure the references are still useable
         for (int i = 0; i < playersInRange.Count; i++)
         {
             if (playersInRange[i] == null || (Vector3.Distance(transform.position, playersInRange[i].transform.position) > 4))

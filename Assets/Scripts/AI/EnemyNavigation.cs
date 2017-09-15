@@ -270,7 +270,7 @@ public class EnemyNavigation : MonoBehaviour
 
         if (survivor.GetComponent<Health>().health <= 0)
         {
-            // Remove the barricade referance and start going to exit again
+            // Remove the barricade reference and start going to exit again
             survivor = null;
             TargetPos = EndPos.transform.position;
         }
@@ -292,7 +292,7 @@ public class EnemyNavigation : MonoBehaviour
         // If the barricade is dead
         if (barricade.transform.parent.GetComponent<Health>().health <= 0)
         {
-            // Remove the barricade referance and start going to exit again
+            // Remove the barricade reference and start going to exit again
             barricade = null;
             TargetPos = EndPos.transform.position;
         }

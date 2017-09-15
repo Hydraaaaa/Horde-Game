@@ -19,18 +19,21 @@ public class PlayerInfoScript : MonoBehaviour
 
 	void Start ()
     {
-        ScrapCount = GameObject.Find("ScrapCount" + PlayerNo.ToString()).GetComponent<Text>();
-        HealthCount = GameObject.Find("HealthCount" + PlayerNo.ToString()).GetComponent<Text>();
-        ScoreCount = GameObject.Find("ScoreCount" + PlayerNo.ToString()).GetComponent<Text>();
-        HealthSlider = GameObject.Find("HPBar" + PlayerNo.ToString()).GetComponent<Image>();
-        EnergySlider = GameObject.Find("EnergyBar" + PlayerNo.ToString()).GetComponent<Image>();
-
         playerHP = GetComponent<Health>();
         playerScrap = GetComponent<BarrierPlayersideLogic>();
         playerEnergy = GetComponent<PlayerMovScript>();
 	}
-	
-	void Update ()
+
+    public void GetUIElements()
+    {
+        ScrapCount =   GameObjectManager.instance.players[PlayerNo - 1].UIMask.transform.GetChild(0).Find("ScrapCount" + PlayerNo.ToString()).GetComponent<Text>();
+        HealthCount =  GameObjectManager.instance.players[PlayerNo - 1].UIMask.transform.GetChild(0).Find("HealthCount" + PlayerNo.ToString()).GetComponent<Text>();
+        ScoreCount =   GameObjectManager.instance.players[PlayerNo - 1].UIMask.transform.GetChild(0).Find("ScoreCount" + PlayerNo.ToString()).GetComponent<Text>();
+        HealthSlider = GameObjectManager.instance.players[PlayerNo - 1].UIMask.transform.GetChild(0).Find("HPBar" + PlayerNo.ToString()).GetComponent<Image>();
+        EnergySlider = GameObjectManager.instance.players[PlayerNo - 1].UIMask.transform.GetChild(0).Find("EnergyBar" + PlayerNo.ToString()).GetComponent<Image>();
+    }
+
+    void Update ()
     {
         HealthCount.text = playerHP.health.ToString();
         ScoreCount.text = GameObjectManager.instance.GetPlayer(gameObject).score.ToString();

@@ -59,18 +59,9 @@ public class CivilianAI : MonoBehaviour
     public int questDialogueNo;
     public int uniqueItemNo;
 
-    // Camera planes
-    Plane[] planesCam1;
-    Plane[] planesCam2;
-
     // Use this for initialization
     void Start ()
     {
-        // Grab Camera, Retrieve planes
-        planesCam1 = GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[0].GetComponent<Camera>());
-        // Grab Camera, Retrieve planes
-        planesCam2 = GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[1].GetComponent<Camera>());
-
         // If the mission type is undefined
         if (Quest == QuestList.DECIDE_ON_STARTUP)
         {
@@ -248,7 +239,7 @@ public class CivilianAI : MonoBehaviour
 
         if (MissionCompleted != true)
         {
-            // Make sure the referances to the player are still useable
+            // Make sure the references to the player are still useable
             for (int i = 0; i < playersInRange.Count; i++)
             {
                 if (playersInRange[i] == null)
@@ -329,17 +320,23 @@ public class CivilianAI : MonoBehaviour
 
         if (MissionCompleted)
         {
-            if (!GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[0].GetComponent<Camera>()), GetComponent<Collider>().bounds))
+            bool inView = false;
+            for (int i = 0; i < GameObjectManager.instance.players.Count; i++)
             {
-                if (!GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.cameras[1].GetComponent<Camera>()), GetComponent<Collider>().bounds))
+                if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(GameObjectManager.instance.players[i].camera.GetComponent<Camera>()), GetComponent<Collider>().bounds))
                 {
-                    Debug.Log("Can't See Me O 3 O");
-
-                    GameObjectManager.instance.civiliansEscaped++;
-
-                    // Delete this gameobject from the scene
-                    Destroy(gameObject);
+                    inView = true;
+                    break;
                 }
+            }
+            if (!inView)
+            {
+                Debug.Log("Can't See Me O 3 O");
+
+                GameObjectManager.instance.civiliansEscaped++;
+
+                // Delete this gameobject from the scene
+                Destroy(gameObject);
             }
         }
     }

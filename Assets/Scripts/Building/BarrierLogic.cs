@@ -44,17 +44,12 @@ public class BarrierLogic : MonoBehaviour
     public int DamageIncreasePerInterval = 5;
     public int CurrentDamagePerTick = 0;
 
-    public GameObject UI;
-    public GameObject P1UI;
-    public GameObject P2UI;
+    public GameObject controllerUI;
+    public GameObject keyboardUI;
+    public GameObject[] UI;
 
-    public Text CostRepair;
-    public Text CostUpgrade;
-
-    public Text CostRepair1;
-    public Text CostUpgrade1;
-    public Text CostRepair2;
-    public Text CostUpgrade2;
+    public Text[] costRepair;
+    public Text[] costUpgrade;
 
     public float interactTime = 0.01f;
     public float currentTime = 0;
@@ -62,25 +57,27 @@ public class BarrierLogic : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        GameObjectManager.instance = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameObjectManager>();
         currentIntervalTime = IntervalLengthInSeconds;
 
-        UI = Instantiate(UI);
-        UI = UI.transform.GetChild(0).gameObject;
-        UI = UI.transform.GetChild(0).gameObject;
-        CostRepair = UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
-        CostUpgrade = UI.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
         Cost = Information.Cost.Level1;
 
-        // Get X        UI                          X                       Text 2
-        CostRepair1 = P1UI.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
-        // Get Y        UI                          Y                       Text 2
-        CostUpgrade1 = P1UI.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+        UI = new GameObject[GameObjectManager.instance.players.Count];
+        for (int i = 0; i < UI.Length; i++)
+        {
+            UI[i] = Instantiate(controllerUI, transform.position, controllerUI.transform.rotation) as GameObject;
+            UI[i].transform.SetParent(transform);
+        }
+        
+        costRepair = new Text[GameObjectManager.instance.players.Count];
+        costUpgrade = new Text[GameObjectManager.instance.players.Count];
 
-        // Get X        UI                          X                       Text 2
-        CostRepair2 = P2UI.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
-        // Get Y        UI                          Y                       Text 2
-        CostUpgrade2 = P2UI.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+        for (int i = 0; i < UI.Length; i++)
+        {
+            // Get X        UI                          X                       Text 2
+            costRepair[i] = UI[i].transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
+            // Get Y        UI                          Y                       Text 2
+            costUpgrade[i] = UI[i].transform.GetChild(0).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+        }
 
 
         //CostRepair2 = P2UI.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>();
@@ -102,9 +99,8 @@ public class BarrierLogic : MonoBehaviour
         //P2UI.layer = LayerMask.NameToLayer("P2UI");
         //P2UI.GetComponent<Canvas>().worldCamera = manager.camera2.GetComponent<Camera>();
 
-        UI.SetActive(false);
-        P1UI.SetActive(false);
-        P2UI.SetActive(false);
+        for (int i = 0; i < UI.Length; i++)
+            UI[i].SetActive(false);
     }
 
     // Update is called once per frame
@@ -115,8 +111,8 @@ public class BarrierLogic : MonoBehaviour
 
 
         //float dist1 = 0;
-        P1UI.GetComponent<Canvas>().worldCamera = GameObjectManager.instance.players[0].camera.GetComponent<Camera>();
-        P2UI.GetComponent<Canvas>().worldCamera = GameObjectManager.instance.players[1].camera.GetComponent<Camera>();
+        for (int i = 0; i < UI.Length; i++)
+            UI[i].GetComponent<Canvas>().worldCamera = GameObjectManager.instance.players[i].camera.GetComponent<Camera>();
 
         if (UI != null && Camera.main != null)
         {
@@ -129,16 +125,15 @@ public class BarrierLogic : MonoBehaviour
             //P2UI.transform.LookAt(manager.camera2.transform.position);
             //P2UI.transform.Rotate(0, 180, 0);
 
-            Debug.DrawLine(transform.position, P1UI.transform.GetChild(0).transform.localPosition);
-            Debug.DrawLine(transform.position, P2UI.transform.GetChild(0).transform.localPosition);
+            for (int i = 0; i < UI.Length; i++)
+            {
+                Debug.DrawLine(transform.position, UI[i].transform.GetChild(0).transform.localPosition);
 
-            CostRepair.text = ("Cost: " + (Cost / 2).ToString());
-            CostUpgrade.text = ("Cost: " + Cost.ToString());
+                costRepair[i].text = ("Cost: " + (Cost / 2).ToString());
+                costUpgrade[i].text = ("Cost: " + Cost.ToString());
 
-            CostRepair1.text = ("Cost: " + (Cost / 2).ToString());
-            CostUpgrade1.text = ("Cost: " + Cost.ToString());
-            CostRepair2.text = ("Cost: " + (Cost / 2).ToString());
-            CostUpgrade2.text = ("Cost: " + Cost.ToString());
+                UI[i].transform.GetChild(0).position = GameObjectManager.instance.players[i].camera.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            }
         }
 
         if (!vital)
@@ -179,16 +174,7 @@ public class BarrierLogic : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            // If player 1 interacts
-            if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
-            {
-                P1UI.SetActive(false);
-            }
-            // If player 2 interacts
-            if (col.gameObject == GameObjectManager.instance.players[1].gameObject)
-            {
-                P2UI.SetActive(false);
-            }
+            UI[col.GetComponent<PlayerMovScript>().playerNumber - 1].SetActive(false);
         }
     }
 
@@ -196,52 +182,21 @@ public class BarrierLogic : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            // If there is atleased one player
-            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 0)
-            {                
-                // If player 1 interacts
-                if (col.gameObject == GameObjectManager.instance.players[0].gameObject)
-                {
-                    P1UI.SetActive(true);
+            int playerNum = col.GetComponent<PlayerMovScript>().playerNumber - 1;
 
-                    if (currentTime >= interactTime)
-                    {
-                        if (Input.GetButtonUp("Joy1XButton"))
-                        {
-                            RepairBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
-                            ScoreManager.instance.BarrierRepair(GameObjectManager.instance.players[0].gameObject);
-                        }
-                        if (Input.GetButtonUp("Joy1YButton"))
-                        {
-                            UpgradeBarrier(GameObjectManager.instance.players[0].gameObject.GetComponent<BarrierPlayersideLogic>());
-                            ScoreManager.instance.BarrierUpgrade(GameObjectManager.instance.players[0].gameObject);
-                        }
-                    }
-                }
+            UI[playerNum].SetActive(true);
 
-            }
-            
-            // If there is more than one player
-            if (GameObjectManager.instance != null && GameObjectManager.instance.players.Count > 1)
+            if (currentTime >= interactTime)
             {
-                // If player 2 interacts
-                if (col.gameObject == GameObjectManager.instance.players[1].gameObject)
+                if (Input.GetButtonUp("Joy" + (playerNum + 1) + "XButton"))
                 {
-                    P2UI.SetActive(true);
-
-                    if (currentTime >= interactTime)
-                    {
-                        if (Input.GetButtonDown("Joy2XButton"))
-                        {
-                            RepairBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
-                            ScoreManager.instance.BarrierRepair(GameObjectManager.instance.players[1].gameObject);
-                        }
-                        if (Input.GetButtonDown("Joy2YButton"))
-                        {
-                            UpgradeBarrier(GameObjectManager.instance.players[1].gameObject.GetComponent<BarrierPlayersideLogic>());
-                            ScoreManager.instance.BarrierUpgrade(GameObjectManager.instance.players[1].gameObject);
-                        }
-                    }
+                    RepairBarrier(GameObjectManager.instance.players[playerNum].gameObject.GetComponent<BarrierPlayersideLogic>());
+                    ScoreManager.instance.BarrierRepair(GameObjectManager.instance.players[playerNum].gameObject);
+                }
+                if (Input.GetButtonUp("Joy" + (playerNum + 1) + "YButton"))
+                {
+                    UpgradeBarrier(GameObjectManager.instance.players[playerNum].gameObject.GetComponent<BarrierPlayersideLogic>());
+                    ScoreManager.instance.BarrierUpgrade(GameObjectManager.instance.players[playerNum].gameObject);
                 }
             }
         }
