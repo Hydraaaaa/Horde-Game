@@ -40,20 +40,24 @@ public class HUDScript : MonoBehaviour
             maskInstance.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
             maskInstance.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
 
+            RectTransform rectTransform = maskInstance.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(1f / GameObjectManager.instance.players.Count * i, 0);
+            rectTransform.anchorMax = new Vector2(1f / GameObjectManager.instance.players.Count * (i + 1), 1);
+
             if (i == 0)
             {
                 GameObject playerCard = Instantiate(P1Card);
                 playerCard.transform.SetParent(maskInstance.transform);
+                playerCard.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+                playerCard.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
             }
             if (i == 1)
             {
                 GameObject playerCard = Instantiate(P2Card);
                 playerCard.transform.SetParent(maskInstance.transform);
+                playerCard.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+                playerCard.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
             }
-
-            RectTransform rectTransform = maskInstance.GetComponent<RectTransform>();
-            rectTransform.anchorMin = new Vector2(1f / GameObjectManager.instance.players.Count * i, 0);
-            rectTransform.anchorMax = new Vector2(1f / GameObjectManager.instance.players.Count * (i + 1), 1);
 
             GameObjectManager.instance.players[i].UIMask = maskInstance;
 
